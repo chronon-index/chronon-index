@@ -527,3 +527,18 @@ timestamps, before the loop existed.
   registry when the P2 ensemble lands.
 - Verifier: 5 tests; suite 128 passed; ruff+format clean.
 - Next: B-uc3-05 (correction-ledger parser + test_p10).
+
+## 2026-08-17T08:12+02:00 | B-uc3-05 | DONE
+- tly/corrections.py: ledger parser (strictly increasing C-NNNN IDs,
+  non-decreasing dates, fenced-code-aware — the ledger documents its own
+  format in a code block, which the first parser version choked on) and
+  find_restatements: ANY changed or dropped historical epoch between
+  vintages is a violation, ledger entry or not — a correction licenses the
+  forward fold, never the rewrite (DECISIONS #7 as code).
+- test_p10_correction_completeness (named per RP#X): real ledger parses
+  (C-0001 napkin correction present); entry blocks byte-identical across
+  every committed version AND into the worktree (append-only enforced
+  against git, same pattern as manifests); restatement checker exercised
+  on forward-fold/restate/drop cases; parser rejection tests.
+- Verifier: 3 tests; suite 131 passed; ruff+format clean.
+- Next: B-uc3-06 (clear the UN WPP LICENSING row — network task).
