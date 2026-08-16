@@ -1,5 +1,13 @@
 {
   "files": {
+    "WPP2024_Demographic_Indicators_Medium.csv.gz": {
+      "bytes": 16557272,
+      "in_git": false,
+      "purpose": "B-uc1-11 h1 check: World births/LEx per year",
+      "retrieved_utc": "2026-08-16T23:14:19+00:00",
+      "sha256": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
+      "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Demographic_Indicators_Medium.csv.gz"
+    },
     "WPP2024_Life_Table_Abridged_Medium_1950-2023.csv.gz": {
       "bytes": 144479958,
       "columns": [
@@ -113,6 +121,15 @@
       "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
       "units": "thousands of persons"
     },
+    "fixtures/wpp_demind_world_fixture.csv.gz": {
+      "bytes": 1800,
+      "derivation": "World rows, Time 2019-2024; header preserved; deterministic gzip (mtime=0)",
+      "derived_from": "WPP2024_Demographic_Indicators_Medium.csv.gz",
+      "derived_from_sha256": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
+      "in_git": true,
+      "rows": 6,
+      "sha256": "0d791b44b6db6c30af3db909773204cd82b8690685f796e9bc0c4513290e75b4"
+    },
     "fixtures/wpp_lt_abridged_fixture.csv.gz": {
       "bytes": 31909,
       "derivation": "rows where Location in {World, Japan, Nigeria} and Time in {2019, 2021, 2023}; header preserved; deterministic gzip (mtime=0)",
@@ -139,9 +156,17 @@
       "in_git": true,
       "rows": 606,
       "sha256": "12e0ec7f4ac04757021829d49ae0f3fcb26b1e69f468bba3451ee3949407c05e"
+    },
+    "gho_whosis_000001_global_btsx.json": {
+      "bytes": 13043,
+      "in_git": true,
+      "purpose": "B-uc1-11 h3 check: WHO life expectancy at birth (GLOBAL, BTSX)",
+      "retrieved_utc": "2026-08-16T23:14:19+00:00",
+      "sha256": "e0607c45a8b4eb0cd8822430deedbc5c9433ffa145aafcc58ea47566365bf171",
+      "source_url": "https://ghoapi.azureedge.net/api/WHOSIS_000001?$filter=SpatialDim%20eq%20%27GLOBAL%27%20and%20Dim1%20eq%20%27SEX_BTSX%27"
     }
   },
   "network_policy": "User-Agent sent; few-and-large requests; exponential backoff with jitter; World Bank API not used (WAF-blocked 2026-08-16).",
-  "note": "B-uc1-03: WPP 2024 population by single age x sex x country, medium variant, estimates 1950-2023 (de facto 1 July, thousands). URL verified against the WPP site's own assets/downloads.json index this iteration (the SPA has no static links). Large file: NOT committed to git \u2014 object storage pending (HUMAN); this manifest is the committed record. Verified: World 2023 sums to 8,091,734,933 persons, equal to golden N exactly. | B-uc1-04: WPP life tables added \u2014 abridged AND complete(single-age) availability CHECKED for 1950-2023. DISCREPANCY RECORDED (RP#VI r4, not averaged away): WPP world e0 both-sexes 2019=72.6093, 2021=70.865 vs WHO GHO 2019=73.123374469, 2021=71.368699065 \u2014 different estimators; the v1 switch to WPP as licensed source of record is a level change to handle via versioning.",
+  "note": "B-uc1-03: WPP 2024 population by single age x sex x country, medium variant, estimates 1950-2023 (de facto 1 July, thousands). URL verified against the WPP site's own assets/downloads.json index this iteration (the SPA has no static links). Large file: NOT committed to git \u2014 object storage pending (HUMAN); this manifest is the committed record. Verified: World 2023 sums to 8,091,734,933 persons, equal to golden N exactly. | B-uc1-04: WPP life tables added \u2014 abridged AND complete(single-age) availability CHECKED for 1950-2023. DISCREPANCY RECORDED (RP#VI r4, not averaged away): WPP world e0 both-sexes 2019=72.6093, 2021=70.865 vs WHO GHO 2019=73.123374469, 2021=71.368699065 \u2014 different estimators; the v1 switch to WPP as licensed source of record is a level change to handle via versioning. | B-uc1-11: mint-gap hypotheses h1/h2/h3 ALL REFUTED \u2014 WPP DemInd World births 2023 = 132,110,264 (identical to OWID; mirror is faithful); WHOSIS e0 2019 = 73.123374470 vs LIFE ex 73.123374469 (same quantity, last-digit rounding); no year convention (2022/2023/2024) yields 9.6606. The -0.0026% mint residual stands as documented; never tuned.",
   "snapshot_date": "2026-08-17"
 }

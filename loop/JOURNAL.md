@@ -291,3 +291,19 @@ timestamps, before the loop existed.
   residual exposure, burn semantics, float/mixed-location rejection);
   suite 66 passed; ruff clean.
 - Next: B-uc1-11 (mint-gap h1/h2/h3 checks — network task).
+
+## 2026-08-17T03:52+02:00 | B-uc1-11 | DONE (residual stands)
+- All three CALC_REPORT §4 hypotheses RUN against live sources and REFUTED:
+  h1 — WPP DemInd World births 2023 = 132,110,264, IDENTICAL to OWID (the
+  mirror is faithful); h2 — 2022/2024 births move mint AWAY from target
+  (9.6870/9.6820); h3 — WHOSIS e0 2019 = 73.123374470 vs ex 73.123374469
+  (last-digit rounding; no 4-dp effect).
+- Conclusion journaled: 9.6603B is THE reproducible mint; 9.6606B (implied
+  +3,442 births or +0.0026yr e0) is unreproducible from any tested source
+  pair — provenance lost with the original. Residual documented per
+  amended AC-1.2; nothing tuned. Forward-only addendum §7 appended to
+  seed/CALC_REPORT_v0.txt; evidence snapshots manifested (DemInd 16.6MB
+  in_git:false; WHOSIS 13KB committed; World-rows fixture committed).
+- Verifier: 4 pinning tests (mirror fidelity, year conventions, WHOSIS
+  equivalence, residual arithmetic); suite 70 passed; ruff clean.
+- Next: B-uc1-12 (drift/g vintage-pair convention — the harder lost piece).

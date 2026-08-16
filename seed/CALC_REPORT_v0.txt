@@ -142,3 +142,22 @@ guessing, which is forbidden).
   python3.12 seed/tly_v0_calc.py --fetch    # re-fetch (values may drift as
                                             # OWID/WHO revise; the committed
                                             # snapshot is the fixture)
+
+7. ADDENDUM 2026-08-17 (forward-only; B-uc1-11) — HYPOTHESES SETTLED
+--------------------------------------------------------------------
+h1 REFUTED: UN WPP Demographic Indicators (Medium) World births 2023 =
+  132,110.264 thousand = 132,110,264 persons — identical to the OWID value.
+  The OWID mirror is faithful; there is no alternative-births-source gap.
+h2 REFUTED: births 2022 (132,475,391) and 2024 (132,405,927) give mint
+  9.6870B / 9.6820B — further from the 9.6606B target, not closer.
+h3 REFUTED: WHOSIS_000001 GLOBAL BTSX 2019 = 73.123374470 vs the life-table
+  ex value 73.123374469 — the same quantity, last-digit rounding; mint is
+  unchanged at 4 dp (9.6603B).
+CONCLUSION: mint = 9.6603B is the reproducible value under every surviving
+convention. The DECISIONS.md figure 9.6606B (implied births 132,113,706,
+i.e. +3,442; or implied e0 +0.0026yr) is not reproducible from any tested
+source pair; its exact provenance was lost with the original calculator.
+The -0.0026% residual stands, documented, per amended AC-1.2. Never tuned.
+Evidence snapshots: WPP2024_Demographic_Indicators_Medium.csv.gz and
+gho_whosis_000001_global_btsx.json in data/snapshots/2026-08-17/ (manifest
+rows with sha256); pinned by tests/test_mint_gap.py.
