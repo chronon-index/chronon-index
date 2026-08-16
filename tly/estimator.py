@@ -14,6 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from decimal import Decimal
 
+from tly.guard import assert_decimal, assert_no_floats
 from tly.numeric import BILLION, Q4
 from tly.parsers import PopulationBand
 
@@ -60,6 +61,8 @@ class StockResult:
 
 def compute_stock(table: dict[int, Decimal], bands: list[PopulationBand], year: int) -> StockResult:
     """E2 over one life table and one population structure."""
+    assert_no_floats(table, "table")
+    assert_no_floats(bands, "bands")
     terms: list[BandTerm] = []
     s = Decimal(0)
     for band in bands:
@@ -84,9 +87,9 @@ def total_population(bands: list[PopulationBand]) -> Decimal:
 
 def e_bar(stock: StockResult, n_total: Decimal) -> Decimal:
     """Mean remaining expectancy per living person: Ē = S / N."""
-    return stock.s_life_years / n_total
+    return stock.s_life_years / assert_decimal(n_total, "n_total")
 
 
 def mint(births: Decimal, e0: Decimal) -> Decimal:
     """Identity mint term B × e(0) (RP Part IX E4/E5)."""
-    return births * e0
+    return assert_decimal(births, "births") * assert_decimal(e0, "e0")

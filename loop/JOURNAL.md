@@ -132,3 +132,17 @@ timestamps, before the loop existed.
 - Verifier: pre-commit run --all-files → both hooks Passed; suite 22 passed.
 - Next: A-16/A-17 are HUMAN (ratification; GitHub org). First open non-HUMAN
   task after Phase A per priority rule.
+
+## 2026-08-17T01:14+02:00 | B-uc1-01 | DONE
+- tly/guard.py: FloatContaminationError; assert_no_floats (recursive over
+  mappings/sequences/sets/dataclasses, path-named errors, fails CLOSED on
+  uninspectable objects); assert_decimal (bool/int/str also rejected).
+  Wired into estimator entry points: compute_stock guards table+bands,
+  e_bar/mint guard scalars.
+- Rationale recorded: Python refuses Decimal◦float arithmetic natively, but
+  an all-float pipeline never trips that, and Decimal(0.1) launders binary
+  error — the guard closes both leaks at the entry boundary.
+- Verifier: AC-1.3-named test injects floats at all 6 entry points (all
+  raise, with path names); nested/key/opaque cases; real parsed snapshot
+  proven float-free. Suite: 27 passed. ruff + format clean.
+- Next: B-uc1-02 (offline-only compute wired to verify_manifest).
