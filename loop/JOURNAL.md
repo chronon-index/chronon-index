@@ -397,3 +397,21 @@ timestamps, before the loop existed.
   window exclusion, coverage math, policy versioning, real-DEU pin); suite
   86 passed; ruff clean.
 - Next: B-uc2-05 (burn term Σ excess×e(a) — E4, exact fixture test).
+
+## 2026-08-17T05:52+02:00 | B-uc2-05 | DONE
+- tly/burn.py: burn_life_years = Σ excess(a)·e(a+0.5) under the SAME
+  registered midpoint+interpolation policies as the stock engine (one
+  policy set, both flow directions); signed (deficit → negative burn).
+  Plus allocate_largest_remainder (RP#IX E11) — exact-conservation
+  age attribution; weights must sum to exactly 1; total must be a
+  quantum multiple; deterministic tie-break. distribute_excess wraps it
+  for shock feeds (per-feed weight profiles are later versioned tasks).
+- test_burn_term_e4 (the named AC-2.6 verifier) exact:
+  100·e(0.5)+50·e(5.5) = 10256.25 on a division-free table. My first
+  expected constant was a hand-addition slip (9256.25) — the code was
+  right; test corrected, journaled per honesty rule.
+- E11 conservation tested incl. a case where naive rounding loses a
+  quantum; end-to-end DEU-scale excess → 70/30 old-age split → WHO-table
+  burn, conservation + determinism asserted.
+- Verifier: 7 tests; suite 93 passed; ruff+format clean.
+- Next: first open task in the backlog (uc2 chain continues).
