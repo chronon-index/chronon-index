@@ -1,0 +1,66 @@
+# loop/JOURNAL.md — append-only iteration journal
+
+One entry per iteration: `## <iso-datetime> | <task-id> | DONE|BLOCKED|PARTIAL`
+then 3–6 lines. Never edit or delete old entries. The first four entries
+record what the 2026-08-16 bootstrap session actually did, at the real
+timestamps, before the loop existed.
+
+## 2026-08-16T18:19:45+02:00 | A-01..A-07 | DONE
+- Scaffold commit 27e4dac (15 files, 1163 insertions): governing docs
+  (DECISIONS.md, RESEARCH_PROGRAM.md, RALPH_LOOP.md), pyproject + tly/
+  skeleton, ci.yml + print.yml (print job honestly labeled not-official until
+  SPEC#4), pre-commit config, Apache-2.0 LICENSE + README (docs CC BY 4.0),
+  docs/LICENSING.md (all rows (verify); ACLED/EM-DAT HUMAN), ledger/CORRECTIONS.md with C-0001.
+- Verifier: files on disk + `git show --stat 27e4dac`.
+- The original SPEC.md, METHODOLOGY_v0.md and seed/ artifacts were not
+  recoverable from disk anywhere; reconstruction follows in A-08..A-10.
+
+## 2026-08-16T18:25:00+02:00 | A-08 | DONE
+- SPEC.md reconstructed from DECISIONS.md + RESEARCH_PROGRAM.md +
+  RALPH_LOOP.md; reconstruction note in the header; pending Ben's review (A-16).
+- Seven capabilities with AC-n.m acceptance criteria, global conventions
+  G1–G8, and the P1–P10 / gates traceability table.
+- Verifier: document task — cross-read against the three surviving governing
+  docs; lost-anchor figures taken only from DECISIONS.md "Key numbers".
+
+## 2026-08-16T18:28:00+02:00 | A-09 | DONE
+- METHODOLOGY_v0.md reconstructed with reconstruction notice; section
+  numbering kept load-bearing (RP cites METH §4 transport identity, §6
+  wealth-neutrality proof — do not renumber).
+- Every number is (a) verbatim from DECISIONS.md/CORRECTIONS.md, (b) a
+  Decimal-reverified arithmetic consequence, or (c) marked (verify).
+- Pending Ben's ratification (A-16); not ground truth until re-anchored.
+
+## 2026-08-16T18:31:00+02:00 | A-10 | DONE
+- Reconstructed seed/tly_v0_calc.py (Python 3.12, stdlib, Decimal prec 34),
+  snapshot data/snapshots/2026-08-16/ (6 requests, UA, manifest with sha256 +
+  URL + timestamp per file), seed/results_v0.json, seed/CALC_REPORT_v0.txt,
+  tests/test_golden.py.
+- Verifier: pytest 2 passed; offline recompute run twice, byte-identical (P5).
+- Achieved vs target (CALC_REPORT §3): S 362.4126B (2019) / 348.1905B (2021),
+  E-bar 44.7880, N 8.0917B, spend −8.0917B all exact at 4 dp; mint 9.6603B vs
+  target 9.6606B (−0.0026%, hypotheses h1–h3 recorded unverified); drift
+  +1.0394B and g +0.7197%/yr NOT REPRODUCED — need the vintage-pair
+  convention lost with the original METHODOLOGY (backlog B-uc1-12).
+
+## 2026-08-16T18:40:00+02:00 | A-11 | DONE
+- Iteration 0 (RALPH_LOOP §4): created loop/BACKLOG.md (118 tasks, phases
+  A–E, deps + refs per line, 13 HUMAN tasks incl. ratification A-16),
+  loop/JOURNAL.md, loop/LEARNINGS.md (§6 hard rules verbatim + gotchas).
+- Every [x] in Phase A verified against the filesystem/git this iteration;
+  noted: pre-commit hooks NOT installed (A-15 open), tly/ holds only
+  __init__.py (port is A-12/A-13), CI has never run (no remote, A-17 HUMAN).
+- Verifier: full suite re-run this iteration — 2 passed
+  (`~/.venvs/main/bin/python -m pytest -q`).
+- Next iteration: A-12 (port seed parsers + Decimal context into tly/) —
+  local, no accounts needed.
+
+## 2026-08-17T00:14+02:00 | bootstrap-commit | DONE
+- Committed the 2026-08-16 reconstruction bundle (seed+snapshots+golden test;
+  SPEC.md; METHODOLOGY_v0.md; loop state). Verifier: suite re-run pre-commit
+  this iteration — 2 passed.
+- Adversarial consistency review of the reconstructed artifacts (planned
+  verify:critic agent) did NOT run — hit the session usage limit 2026-08-16
+  18:31 CEST before reading any artifact. No review claims exist. Rescheduled
+  as the next iteration's task; A-16 (Ben ratifies reconstructions) still
+  gates the first public print regardless.
