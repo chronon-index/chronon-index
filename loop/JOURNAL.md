@@ -97,3 +97,13 @@ timestamps, before the loop existed.
   vs golden band_detail, births) plus error-path tests. Full suite:
   11 passed. ruff check tly/ tests/ seed/: all checks passed.
 - Next: A-13 (port E2 estimator; package golden test to 4 dp).
+
+## 2026-08-17T00:52+02:00 | A-13 | DONE
+- tly/estimator.py: e_interp (linear-on-anchors, flat-tail — policy string
+  versioned per AC-1.4), compute_stock returning frozen StockResult with
+  full per-band decomposition, total_population, e_bar, mint.
+- Verifier: package golden test at THREE strengths — 4-dp match on
+  S/N/Ē/spend/mint (AC-1.2 core), full-precision prec-34 string equality
+  vs golden, and per-band term equality vs golden band_detail for both
+  years; plus e_interp unit properties. Full suite: 15 passed. ruff clean.
+- Next: A-14 (snapshot fetcher module) or A-15 (install pre-commit hooks).
