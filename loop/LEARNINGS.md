@@ -48,3 +48,5 @@
 - Local test runner: system python3.12 has no pytest; use
   `~/.venvs/main/bin/python -m pytest -q` (verified 2 passed, 2026-08-16).
 - Pre-commit config exists but hooks are NOT installed in .git/hooks (A-15).
+- pre-commit lives at ~/.local/bin (uv tool install); export PATH first.
+  Hook ruff pin must track local ruff (v0.15.0 now) or formatting flip-flops.

@@ -119,3 +119,16 @@ timestamps, before the loop existed.
   missing-manifest detection, backoff sequencing (2 sleeps for 3 attempts,
   exponential base). Full suite: 22 passed. ruff clean.
 - Next: A-15 (install pre-commit hooks; ruff green already verified).
+
+## 2026-08-17T01:06+02:00 | A-15 | DONE
+- pre-commit installed (uv tool; ~/.local/bin — not on default PATH, export
+  needed) and hooks installed into .git/hooks. Whole repo formatted; ruff
+  check + ruff format --check green.
+- Gotcha fixed: hook pin v0.5.7 vs local ruff 0.15.20 flip-flopped
+  formatting on tests/test_golden.py — bumped hook rev to v0.15.0 so hook
+  and local agree; verified both pass on the same tree.
+- seed/tly_v0_calc.py was reformatted (style-only): safe by proof — the
+  byte-exact golden recompute test stayed green (output unchanged).
+- Verifier: pre-commit run --all-files → both hooks Passed; suite 22 passed.
+- Next: A-16/A-17 are HUMAN (ratification; GitHub org). First open non-HUMAN
+  task after Phase A per priority rule.

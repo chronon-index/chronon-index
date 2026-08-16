@@ -58,9 +58,7 @@ class StockResult:
         return (self.s_life_years / BILLION).quantize(Q4)
 
 
-def compute_stock(
-    table: dict[int, Decimal], bands: list[PopulationBand], year: int
-) -> StockResult:
+def compute_stock(table: dict[int, Decimal], bands: list[PopulationBand], year: int) -> StockResult:
     """E2 over one life table and one population structure."""
     terms: list[BandTerm] = []
     s = Decimal(0)

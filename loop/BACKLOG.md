@@ -31,7 +31,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] A-12 | deps: A-10 | refs: RALPH#5, CALC#1, SPEC#0 G1 | Port seed parsers + Decimal context into tly/ modules (context prec 34 ROUND_HALF_EVEN; GHO JSON parse_float=Decimal; OWID CSV→Decimal), stdlib only, unit tests on the committed snapshot (done 2026-08-17)
 - [x] A-13 | deps: A-12 | refs: RALPH#5, RP#IX-E2 | Port E2 estimator into tly/ as a module; PACKAGE golden test: package output equals seed/results_v0.json to 4 decimal places (the ground-truth anchor every refactor keeps green) (done 2026-08-17)
 - [x] A-14 | deps: A-12 | refs: RALPH#5, SPEC#3, RP#VI | Port snapshot fetcher into tly/ module writing data/snapshots/<date>/manifest.json (sha256, source URL, retrieval timestamp, bytes per file); User-Agent, backoff+jitter, few-and-large requests (done 2026-08-17)
-- [ ] A-15 | deps: A-02 | refs: RALPH#5 | Make lint real locally: install pre-commit hooks into .git/hooks; ruff check + ruff format --check green over the repo
+- [x] A-15 | deps: A-02 | refs: RALPH#5 | Make lint real locally: install pre-commit hooks into .git/hooks; ruff check + ruff format --check green over the repo (done 2026-08-17)
 - [ ] A-16 | deps: A-08, A-09, A-10 | refs: RALPH#0, DEC#9 | HUMAN: review + ratify the reconstructed SPEC.md, METHODOLOGY_v0.md and seed/ artifacts (they replaced lost originals) — gates the first public print (P1) and the golden-anchor commit B-uc1-13
 - [ ] A-17 | deps: A-01 | refs: RP#VII | HUMAN: create GitHub org/repo under Praevex, add remote, push; confirm ci.yml runs green in public Actions (until then CI has never actually run)
 

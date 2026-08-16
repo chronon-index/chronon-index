@@ -33,8 +33,7 @@ def test_offline_recompute_is_byte_exact():
     rendered = calc.render_json(calc.compute(snapshot)).encode("utf-8")
     committed = RESULTS_PATH.read_bytes()
     assert rendered == committed, (
-        "offline recompute from the committed snapshot does not byte-match "
-        "seed/results_v0.json"
+        "offline recompute from the committed snapshot does not byte-match seed/results_v0.json"
     )
 
 

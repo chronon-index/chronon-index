@@ -66,8 +66,7 @@ SOURCES = {
         "%20and%20(TimeDim%20eq%202019%20or%20TimeDim%20eq%202021)"
     ),
     "gho_lifetable_indicator_list.json": (
-        "https://ghoapi.azureedge.net/api/Indicator"
-        "?$filter=contains(IndicatorCode,%20%27LIFE_%27)"
+        "https://ghoapi.azureedge.net/api/Indicator?$filter=contains(IndicatorCode,%20%27LIFE_%27)"
     ),
     "owid_population_5yr_world.csv": (
         "https://ourworldindata.org/grapher/population-by-five-year-age-group.csv"
@@ -399,19 +398,31 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  {name}")
         print(f"    {meta['source_url']}")
         print(f"    sha256 {meta['sha256']}  retrieved {meta['retrieved_utc']}")
-    print(f"S  (2019 table) = {a['S_2019_billions']}B life-years "
-          f"(target {TARGETS_FROM_DECISIONS['S_2019_billions']}B)")
-    print(f"S  (2021 table) = {a['S_2021_billions']}B life-years "
-          f"(target {TARGETS_FROM_DECISIONS['S_2021_billions']}B)")
-    print(f"E-bar           = {a['E_bar_years']} years "
-          f"(target {TARGETS_FROM_DECISIONS['E_bar_years']})")
-    print(f"N               = {a['N_billions']}B persons "
-          f"(target {TARGETS_FROM_DECISIONS['N_billions']}B)")
+    print(
+        f"S  (2019 table) = {a['S_2019_billions']}B life-years "
+        f"(target {TARGETS_FROM_DECISIONS['S_2019_billions']}B)"
+    )
+    print(
+        f"S  (2021 table) = {a['S_2021_billions']}B life-years "
+        f"(target {TARGETS_FROM_DECISIONS['S_2021_billions']}B)"
+    )
+    print(
+        f"E-bar           = {a['E_bar_years']} years "
+        f"(target {TARGETS_FROM_DECISIONS['E_bar_years']})"
+    )
+    print(
+        f"N               = {a['N_billions']}B persons "
+        f"(target {TARGETS_FROM_DECISIONS['N_billions']}B)"
+    )
     if a["mint_B_times_e0_billions"] is not None:
-        print(f"mint B*e(0)     = {a['mint_B_times_e0_billions']}B "
-              f"(target {TARGETS_FROM_DECISIONS['mint_B_times_e0_billions']}B)")
-    print(f"spend -N        = {a['spend_minus_N_billions']}B "
-          f"(target {TARGETS_FROM_DECISIONS['spend_minus_N_billions']}B)")
+        print(
+            f"mint B*e(0)     = {a['mint_B_times_e0_billions']}B "
+            f"(target {TARGETS_FROM_DECISIONS['mint_B_times_e0_billions']}B)"
+        )
+    print(
+        f"spend -N        = {a['spend_minus_N_billions']}B "
+        f"(target {TARGETS_FROM_DECISIONS['spend_minus_N_billions']}B)"
+    )
     print("drift, g        = NOT REPRODUCED in this pass (see results file)")
     print(f"results written: {args.out}")
     return 0
