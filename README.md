@@ -19,6 +19,11 @@ v3 Mirror token → v4 Ledger.
 | `METHODOLOGY_v0.md` | The v0 math: estimator, transport identity, error budget. |
 | `RALPH_LOOP.md` | The autonomous build loop protocol. |
 
+> **Reconstruction notice:** `SPEC.md`, `METHODOLOGY_v0.md` and everything in
+> `seed/` are 2026-08-16 reconstructions of lost originals, pending
+> ratification (`loop/BACKLOG.md` task A-16). Treat their numbers as
+> anchors-to-confirm, not truth. No public print before ratification.
+
 ## Principles (non-negotiable)
 
 - **Radical verifiability.** Every published figure is computed by open code

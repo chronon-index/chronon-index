@@ -53,8 +53,10 @@ Recorded v0 values (DECISIONS.md Key numbers): **S = 362.4126 B life-years**
 on the WHO 2019 global table × WPP 2024 population (348.1905 B on the
 COVID-depressed 2021 table), **Ē = 44.7880 years**. Consistency check
 performed during this reconstruction, in Decimal (prec 34, ROUND_HALF_EVEN):
-S / Ē = 362.4126 / 44.7880 = 8.0917 B persons, which matches the spend term
-of the issuance decomposition (section 5) exactly as the identity requires.
+S / Ē = 8.09173… B persons, matching the recorded spend term −8.0917 B at
+the published 4-dp precision. Because Ē is defined as S/N, this is a
+mutual-consistency check of the three recorded 4-dp values, not independent
+verification of the decomposition.
 
 ### 1.2 The v0 estimator
 
@@ -381,7 +383,10 @@ ROUND_HALF_EVEN):
 
     net flow = 9.6606 − 8.0917 + 1.0394 = +2.6083 B life-years/yr
     g = 2.6083 / 362.4126 = 0.0071970…  → +0.7197 %/yr   ✓ matches record
-    S / Ē = 362.4126 / 44.7880 = 8.0917 B                ✓ spend = headcount, as the identity requires
+    S / Ē = 362.4126 / 44.7880 = 8.09173… B  → 8.0917 at 4 dp
+                                  ✓ spend = headcount at published precision
+                                    (mutual consistency of recorded values,
+                                    not independent verification — see §1.1)
 
 Per-term contribution to g: mint +2.6656 %/yr, spend −2.2327 %/yr, drift
 +0.2868 %/yr (derived here from the recorded values). Implied consistency

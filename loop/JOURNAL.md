@@ -64,3 +64,24 @@ timestamps, before the loop existed.
   18:31 CEST before reading any artifact. No review claims exist. Rescheduled
   as the next iteration's task; A-16 (Ben ratifies reconstructions) still
   gates the first public print regardless.
+
+## 2026-08-17T00:35+02:00 | verify-critic | DONE
+- Adversarial consistency review of the reconstructions ran to completion
+  (5 findings: 1 high, 1 medium, 3 low). Critic independently re-ran the
+  suite: 2 passed; independently recomputed mint from the raw snapshot
+  (132,110,264 × 73.123374469 = 9,660,348,305.670449816) confirming the
+  committed golden value.
+- Fixes applied this iteration: SPEC AC-1.2 amended (golden-anchor conflict:
+  now S/Ē/N/spend exact at 4 dp; mint/drift/g reproduce-or-journal per
+  B-uc1-11/12; results_v0.json declared THE anchor until B-uc1-13 post-A-16;
+  amendment note in-place, flagged for A-16). SPEC dangling refs fixed
+  (DECISIONS 13→removed at G5; DECISIONS 11→Key-numbers bullet at AC-5.3;
+  grep confirms no DECISIONS n>10 refs remain). METHODOLOGY §1.1 and §5
+  "exactly" claims reworded to mutual-consistency-at-4dp. README gained the
+  reconstruction/ratification notice.
+- CORRECTION to the 2026-08-17T00:14 entry (append-only, not edited): the
+  2026-08-16 session limit was hit ~18:41 CEST (per .claude/RESUME.md
+  checkpoint 16:41:16Z), not 18:31; and iterations A-08..A-11 were committed
+  as one bundle at 2026-08-17T00:12:54+02:00, not per-iteration.
+- Verifier: full suite re-run after all edits — see next line for result.
+- Suite green after review fixes: 2 passed (2026-08-17T00:35+02:00).

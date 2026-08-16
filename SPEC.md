@@ -39,7 +39,7 @@ verbatim — a task is done only when its cited AC passes in CI.
 - **G5 v1 core inputs.** UN WPP population and life tables (licensed source
   of record, CC BY 3.0 IGO), HMD STMF weekly deaths, GBD YLL. WHO GHO is
   triangulation only (non-commercial clause, (verify)). Expansion only via
-  governed version bumps. (DECISIONS 6, 13; RP Part VII licensing gate.)
+  governed version bumps. (DECISIONS 6; RP Part VII licensing gate.)
 - **G6 Keyless and secretless.** All data sources keyless; no secrets exist
   in this project and none may be added. (RALPH_LOOP §6.)
 - **G7 Invariants as tests.** RP Part X invariants P1–P10 each map to a
@@ -74,13 +74,21 @@ stamped with methodology version and snapshot manifest hashes.
 - **AC-1.1** `test_p3_reconciliation` — sum of per-country dS equals global
   dS per epoch, exactly, in Decimal (invariant P3).
 - **AC-1.2** Golden anchor — on the archived v0-equivalent snapshot inputs
-  the engine reproduces the surviving DECISIONS.md key numbers to 4 decimal
-  places: S = 362.4126B life-years (2019 WHO table × WPP2024 population)
-  and 348.1905B (2021 table); E-bar = 44.7880; g = +0.7197%/yr with
-  mint +9.6606B, spend −8.0917B, drift +1.0394B. The original
-  `seed/results_v0.json` is lost; the regenerated golden file must match
-  these surviving figures and is then committed as the new ground-truth
-  anchor for the RALPH Phase A golden test.
+  the engine reproduces, to 4 decimal places, the surviving DECISIONS.md
+  anchors that the 2026-08-16 reconstruction verified as reproducible:
+  S = 362.4126B life-years (2019 WHO table × WPP2024 population) and
+  348.1905B (2021 table); E-bar = 44.7880; spend −8.0917B. For the remaining
+  DECISIONS.md terms — mint +9.6606B, drift +1.0394B, g = +0.7197%/yr — the
+  criterion is: reproduce them, OR journal the honest residual / mark
+  BLOCKED per B-uc1-11/12 (the reconstruction achieved mint 9.6603B,
+  −0.0026%, hypotheses in seed/CALC_REPORT_v0.txt; drift and g are NOT
+  REPRODUCED because their vintage-pair convention was lost). Tuning to
+  force agreement is forbidden (RALPH_LOOP §6). THE Phase A ground-truth
+  golden file is the committed `seed/results_v0.json` (achieved values);
+  it may be superseded only by B-uc1-13 after A-16 ratification.
+  [Amended 2026-08-17 on adversarial review: the original AC-1.2 wording
+  demanded all key numbers to 4 dp, which conflicted with the committed
+  golden file and was unsatisfiable without tuning. Flagged for A-16.]
 - **AC-1.3** `test_no_float_in_published_path` — the published-value code
   paths use Decimal (prec 34, ROUND_HALF_EVEN) end to end; a test injects a
   float and asserts rejection (G1).
@@ -234,7 +242,8 @@ defaults).
 - **AC-5.3** `test_e12_neutrality` — machine-checked E12 properties:
   wealth neutrality (wallet value = s_i × MarketCap; d(value)/d(rebase) = 0)
   and mortality neutrality (d(s_i)/d(deaths) = 0); a mass-death scenario
-  shrinks every balance pro-rata and no share grows (DECISIONS 4, 11).
+  shrinks every balance pro-rata and no share grows (DECISIONS 4;
+  DECISIONS Key numbers, wealth-neutrality bullet).
 - **AC-5.4** Performance gate — full simulation of 10,000 wallets ×
   600 epochs completes in < 5 s (RALPH_LOOP §7 Phase C gate); a scaling
   benchmark asserts rebase cost is O(1) — independent of wallet count.
