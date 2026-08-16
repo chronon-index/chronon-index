@@ -1,0 +1,22 @@
+# Methodology changelog
+
+Append-only. A methodology version bump is the ONLY sanctioned way to
+change a numerical policy (SPEC#1 AC-1.4; change process per
+RESEARCH_PROGRAM Part XI: proposal → public comment window → version bump).
+Each entry lists the policies that version is defined by; the registry in
+`tly/methodology.py` pins them and CI enforces the pairing.
+
+## v0.1.0-reconstruction — 2026-08-17
+
+Initial packaged methodology, reconstructed 2026-08-16 from DECISIONS.md /
+RESEARCH_PROGRAM.md / RALPH_LOOP.md after loss of the originals; pending
+ratification (loop/BACKLOG.md A-16).
+
+- interpolation: `linear-on-anchors, flat-tail` — piecewise-linear e() on
+  exact-age anchors, flat beyond the last anchor (RP M5; monotone-Hermite
+  upgrade would require a bump).
+- band_midpoint: `uniform-within-band; open-band lo+2.5 (inert beyond last
+  anchor)` — band [lo, hi] covers exact ages [lo, hi+1), midpoint
+  (lo+hi+1)/2.
+- decimal: `Decimal prec 34, ROUND_HALF_EVEN` — floats never touch
+  published numbers (G1).

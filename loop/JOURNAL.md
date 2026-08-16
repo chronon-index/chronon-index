@@ -223,3 +223,16 @@ timestamps, before the loop existed.
   source now fails the suite. WHO GHO path retained, triangulation-only.
 - Verifier: 6 new tests; suite 45 passed; ruff + format clean.
 - Next: B-uc1-07 per backlog.
+
+## 2026-08-17T02:40+02:00 | B-uc1-07 | DONE
+- tly/methodology.py: METHODOLOGY_VERSION=v0.1.0-reconstruction; three
+  policy strings (interpolation, band_midpoint, decimal); append-only
+  VERSION_POLICY_REGISTRY pinning version→policies; output_metadata() stamp
+  for every published artifact. docs/METHODOLOGY_CHANGELOG.md started.
+  estimator.INTERPOLATION_POLICY now re-exported from the canonical home.
+- The AC-1.4 guard is a TEST PAIR: live policies must equal the registry
+  pin for the current version (policy edit without bump → fail), and the
+  v0.1.0 entry is byte-pinned (editing history → fail). Changelog must
+  mention the current version (also tested).
+- Verifier: 5 new tests; suite 50 passed; ruff clean.
+- Next: B-uc1-08 (E1 stock engine, country × sex × single-age).

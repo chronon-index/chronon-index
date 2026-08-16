@@ -15,10 +15,9 @@ from dataclasses import dataclass
 from decimal import Decimal
 
 from tly.guard import assert_decimal, assert_no_floats
+from tly.methodology import INTERPOLATION_POLICY  # noqa: F401  (canonical home; re-exported)
 from tly.numeric import BILLION, Q4
 from tly.parsers import PopulationBand
-
-INTERPOLATION_POLICY = "linear-on-anchors, flat-tail"
 
 
 def e_interp(table: dict[int, Decimal], age: Decimal) -> Decimal:
