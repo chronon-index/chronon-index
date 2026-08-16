@@ -512,3 +512,18 @@ timestamps, before the loop existed.
 - Verifier: 2 tests; suite 123 passed; ruff clean.
 - Next: B-uc3-04 (version-bump guard is largely built at B-uc1-07 —
   verify what remains: tolerances/ensemble-weights registry coverage).
+
+## 2026-08-17T07:55+02:00 | B-uc3-04 | DONE
+- Guard completed beyond B-uc1-07: the two quanta (scheduling 1e-6,
+  attribution 0.001) were governed constants living only in code —
+  registered as the v0.4.0 "quanta" policy (registry + changelog + stamp
+  tests updated; the guard fired on the shape tests again as designed).
+- tests/test_version_bump_guard.py: governed code constants (FIT_YEARS,
+  LIFE_YEAR_QUANTUM, distribute_excess quantum default via signature
+  inspection, Decimal PRECISION) must appear in current policy strings;
+  every registry version must be in the changelog; registry keys ascending
+  with current == newest; policy keys only ever GROW across versions; and
+  an executable reminder that ensemble weights (RP#V Q1) MUST enter the
+  registry when the P2 ensemble lands.
+- Verifier: 5 tests; suite 128 passed; ruff+format clean.
+- Next: B-uc3-05 (correction-ledger parser + test_p10).

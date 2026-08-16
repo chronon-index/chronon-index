@@ -55,6 +55,7 @@ def test_output_metadata_stamp_shape():
         "decimal",
         "baseline",
         "p6_closure",
+        "quanta",
     }
 
 

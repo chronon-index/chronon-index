@@ -6,6 +6,17 @@ RESEARCH_PROGRAM Part XI: proposal → public comment window → version bump).
 Each entry lists the policies that version is defined by; the registry in
 `tly/methodology.py` pins them and CI enforces the pairing.
 
+## v0.4.0-reconstruction — 2026-08-17
+
+Adds the quanta policy (B-uc3-04); prior policies unchanged.
+
+- quanta: `scheduling quantum 0.000001 life-years; attribution quantum
+  0.001` — the E11 quantum for weekly flow scheduling (tly/weekly.py) and
+  the default quantum for age attribution (tly/burn.py) were governed
+  numerical parameters living only as code constants; changing either now
+  requires a bump. Registry-completeness is tested: every governed code
+  constant must appear in the current version's policy strings.
+
 ## v0.3.0-reconstruction — 2026-08-17
 
 Adds the P6 identity-closure tolerance policy (B-uc2-08); prior policies
