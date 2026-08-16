@@ -1,0 +1,24 @@
+# The weekly print. RESEARCH_PROGRAM Part VII: the CI run IS the official
+# computation — logs public, artifacts hashed and committed.
+#
+# BOOTSTRAP STATUS: until SPEC capability 4 (publication) lands, this job
+# only proves determinism by re-running the golden test against committed
+# snapshots. It must NOT be represented as producing official prints yet.
+name: weekly-print
+on:
+  schedule:
+    - cron: "0 12 * * 1" # Mondays 12:00 UTC (DECISIONS.md epoch default)
+  workflow_dispatch:
+jobs:
+  print:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e '.[dev]'
+      - name: reproducibility gate (golden test)
+        run: pytest -q tests/test_golden.py
+      - name: print (pending capability 4)
+        run: echo "Publication pipeline not yet built — see loop/BACKLOG.md"
