@@ -1,0 +1,43 @@
+{
+  "files": {
+    "gho_ex_global_btsx_2019_2021.json": {
+      "bytes": 22501,
+      "retrieved_utc": "2026-08-16T16:28:09+00:00",
+      "sha256": "ac38b0c45ef8186e314952accf782774b64893e38c9e5c9867a9988590e4b1d9",
+      "source_url": "https://ghoapi.azureedge.net/api/LIFE_0000000035?$filter=SpatialDim%20eq%20%27GLOBAL%27%20and%20Dim1%20eq%20%27SEX_BTSX%27%20and%20(TimeDim%20eq%202019%20or%20TimeDim%20eq%202021)"
+    },
+    "gho_lifetable_indicator_list.json": {
+      "bytes": 888,
+      "retrieved_utc": "2026-08-16T16:28:10+00:00",
+      "sha256": "a8b4f6c4850fe6bb71acc3eef0b45881cc6440f36e6fe91b303b64f664cc08e3",
+      "source_url": "https://ghoapi.azureedge.net/api/Indicator?$filter=contains(IndicatorCode,%20%27LIFE_%27)"
+    },
+    "owid_births_deaths.metadata.json": {
+      "bytes": 3944,
+      "retrieved_utc": "2026-08-16T16:28:12+00:00",
+      "sha256": "260b2bed72f9c02eeddb3d450cf9d4f7a1a32cd9cbcf1d8f7bfa888eb3319af1",
+      "source_url": "https://ourworldindata.org/grapher/births-and-deaths-projected-to-2100.metadata.json?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
+    },
+    "owid_births_deaths_world.csv": {
+      "bytes": 6438,
+      "retrieved_utc": "2026-08-16T16:28:12+00:00",
+      "sha256": "0939c742fe46b6e8bc266267bf4ec19708631215e99283967f72904bb4f4c426",
+      "source_url": "https://ourworldindata.org/grapher/births-and-deaths-projected-to-2100.csv?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
+    },
+    "owid_population_5yr.metadata.json": {
+      "bytes": 28215,
+      "retrieved_utc": "2026-08-16T16:28:11+00:00",
+      "sha256": "517664451bb357c7a1ddac95c28a184d7f24686561fd23caebec891088120712",
+      "source_url": "https://ourworldindata.org/grapher/population-by-five-year-age-group.metadata.json?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
+    },
+    "owid_population_5yr_world.csv": {
+      "bytes": 1286,
+      "retrieved_utc": "2026-08-16T16:28:10+00:00",
+      "sha256": "3dcbe21320bc68f175f24afccf727e373890a403680ebec39c18f8d0dbd6b86c",
+      "source_url": "https://ourworldindata.org/grapher/population-by-five-year-age-group.csv?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
+    }
+  },
+  "network_policy": "User-Agent sent; few-and-large requests; exponential backoff with jitter; World Bank API not used (WAF-blocked 2026-08-16).",
+  "note": "Reconstructed 2026-08-16 from DECISIONS.md, RESEARCH_PROGRAM.md and RALPH_LOOP.md after loss of the original; pending Ben's review.",
+  "snapshot_date": "2026-08-16"
+}
