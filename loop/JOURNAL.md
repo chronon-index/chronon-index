@@ -443,3 +443,18 @@ timestamps, before the loop existed.
   2021 fully measured (share 1), DEU weekly >0.9.
 - Verifier: 3 tests; suite 103 passed; ruff+format clean.
 - Next: B-uc2-08 (test_p6_identity_closure — 52 weekly prints vs annual E5).
+
+## 2026-08-17T06:40+02:00 | B-uc2-08 | DONE
+- tly/weekly.py: monday_epochs (the year's ACTUAL Mondays — 52 or 53,
+  never pretended), allocate_equal (E11 equal-weight case, signed,
+  micro-life-year quantum, exact conservation), schedule_annual_flow.
+- Methodology v0.3.0: p6_closure policy = "exact-0" registered + changelog;
+  the stated tolerance is ZERO — stronger than "within tolerance"; any
+  future nonzero tolerance (mixed-source weekly burn) needs a bump. Stamp-
+  shape tests updated consciously (the guard fired again, as designed).
+- test_p6_identity_closure (named per RP#X) green: real World 2019→2023 dS
+  (fixture-computed, long fractional tail) scheduled across 2026 (52
+  Mondays) and 2024 (53 Mondays); Σ weekly == annual EXACTLY; every epoch
+  stamp passes validate_epoch.
+- Verifier: 4 tests; suite 107 passed; ruff+format clean.
+- Next: first open task in backlog (uc2 chain tail / uc3).

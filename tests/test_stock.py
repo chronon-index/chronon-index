@@ -86,7 +86,13 @@ def test_report_stamp_carries_version_and_manifest_hashes():
     report = build_report(stocks, year=2023, sex="total", snapshot_dirs=[SNAP16, SNAP17])
     meta = report.metadata
     assert meta["methodology_version"] == METHODOLOGY_VERSION
-    assert set(meta["policies"]) == {"interpolation", "band_midpoint", "decimal", "baseline"}
+    assert set(meta["policies"]) == {
+        "interpolation",
+        "band_midpoint",
+        "decimal",
+        "baseline",
+        "p6_closure",
+    }
     # every input file's sha256 is citable from the stamp, incl. uncommitted
     assert "gho_ex_global_btsx_2019_2021.json" in meta["snapshots"]["2026-08-16"]
     s17 = meta["snapshots"]["2026-08-17"]

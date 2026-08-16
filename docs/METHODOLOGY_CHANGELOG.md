@@ -6,6 +6,17 @@ RESEARCH_PROGRAM Part XI: proposal → public comment window → version bump).
 Each entry lists the policies that version is defined by; the registry in
 `tly/methodology.py` pins them and CI enforces the pairing.
 
+## v0.3.0-reconstruction — 2026-08-17
+
+Adds the P6 identity-closure tolerance policy (B-uc2-08); prior policies
+unchanged.
+
+- p6_closure: `exact-0: E11-scheduled weekly flows sum to the annual
+  identity exactly` — annual flows split across the year's actual Mondays
+  (52 or 53) by equal quantum division with largest-remainder distribution;
+  closure is exact, no tolerance. Introducing any nonzero tolerance (e.g.
+  for mixed-source weekly burn) requires a bump.
+
 ## v0.2.0-reconstruction — 2026-08-17
 
 Adds the nowcast baseline policy (B-uc2-04); v0.1.0 policies unchanged.
