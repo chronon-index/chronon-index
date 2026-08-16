@@ -347,3 +347,16 @@ timestamps, before the loop existed.
 - Next: B-uc2-03 depends on B-uc2-01 only for the route — but the route is
   HUMAN-gated; WMD (keyless) exploration can proceed as the next task if
   backlog ordering allows, else first open non-HUMAN task.
+
+## 2026-08-17T04:48+02:00 | backlog-split(B-uc2-03) | DONE
+- Per RALPH §3.4 the split IS this iteration's work. B-uc2-03 (STMF fetch)
+  cannot execute keylessly (verified 302→Login); re-depped on HUMAN
+  B-uc2-02 and annotated BLOCKED. Inserted B-uc2-03a: World Mortality
+  Dataset via GitHub raw (keyless) — license verification + snapshot +
+  parser. WMD serves EITHER outcome of Ben's B-uc2-02 ruling: as the
+  automated feed (option a) or as triangulation beside STMF (option b).
+  B-uc2-04 re-depped onto B-uc2-03a so the nowcast chain isn't
+  human-gated.
+- Verifier: backlog re-read; deps re-validated by inspection (no dangling
+  IDs introduced; B-uc2-03a deps satisfied).
+- Next: B-uc2-03a.
