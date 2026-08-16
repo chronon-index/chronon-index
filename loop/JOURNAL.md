@@ -472,3 +472,16 @@ timestamps, before the loop existed.
   render. Suite 112 passed; ruff+format clean.
 - Next: B-uc2-09 needs D-03 (error budget); B-uc2-11/12 need STMF (HUMAN).
   Next open executable is in the uc3 chain or D-03 — follow priority rule.
+
+## 2026-08-17T07:10+02:00 | B-uc3-01 | DONE
+- tly/manifest_schema.py: bidirectional validator — disk→manifest (orphan
+  files fail) and manifest→fields (sha256+bytes always; provenance either
+  fetched [source_url+retrieved_utc] or derived [derived_from+parent-sha
+  cross-checked+derivation]; present files hash- and size-verified; absent
+  files must be marked in_git:false). Returns ALL violations, not first.
+- test_real_snapshots_fully_manifested IS the CI gate (pytest runs in CI)
+  and passed on first run over both committed snapshot dirs — the
+  manifest discipline from A-14 onward held with zero retrofits.
+- Verifier: 6 tests (real-tree gate + 5 synthetic failure modes incl.
+  parent-hash cross-check); suite 118 passed; ruff clean.
+- Next: B-uc3-02 (snapshot immutability vs manifest history).

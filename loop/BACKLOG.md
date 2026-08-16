@@ -72,7 +72,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 
 ### SPEC#3 — methodology & snapshot governance
 
-- [ ] B-uc3-01 | deps: A-14 | refs: SPEC#3 AC-3.3 | Manifest schema validator in CI: every snapshot file needs a row with sha256 + URL + retrieval timestamp; a file without a row fails the build
+- [x] B-uc3-01 | deps: A-14 | refs: SPEC#3 AC-3.3 | Manifest schema validator in CI: every snapshot file needs a row with sha256 + URL + retrieval timestamp; a file without a row fails the build (done 2026-08-17)
 - [ ] B-uc3-02 | deps: B-uc3-01 | refs: SPEC#3 AC-3.3, RALPH#6 | Snapshot-immutability CI check: snapshots never deleted or modified (diff against committed manifest history)
 - [ ] B-uc3-03 | deps: A-13 | refs: SPEC#3 AC-3.1, RP#X-P5, RP#VI | test_p5_reproducibility in CI: run the pipeline twice from identical snapshot hashes, diff byte-identical
 - [ ] B-uc3-04 | deps: B-uc1-07 | refs: SPEC#3 AC-3.4, RP#VI, RP#XI | Version-bump guard: registry of methodology-governed params (interpolation policy, baseline method, tolerances, ensemble weights); CI fails any diff without version bump + changelog entry
