@@ -275,3 +275,19 @@ timestamps, before the loop existed.
 - Verifier: 4 new tests; suite 61 passed (60 fast + full-universe ran
   once); ruff clean.
 - Next: B-uc1-10 per backlog.
+
+## 2026-08-17T03:30+02:00 | B-uc1-10 | DONE
+- tly/decomposition.py: two strictly-separated views. (1) exact_
+  decomposition: ΔS = Ē·ΔN + N·ΔĒ + ΔN·ΔĒ — algebraically exact; honest
+  note that prec-34 Ē division leaves ULP closure (~1e-23 observed on
+  world-scale; bounded <1e-15 life-years in tests; literally 0 on
+  division-free synthetic inputs). (2) identity_decomposition: E4/E5 form
+  mint B·e(0) + spend −N + drift N·ΔĒ − burn, with residual EXPOSED as a
+  property — burn shifts the residual, never ΔS (tested).
+- Fixture pins (World 2019→2023, WPP tables): dS +9.0602B = pop +12.7255B
+  + revision −3.5383B (COVID-era Ē dip) + cross −0.1270B. Japan: negative
+  through BOTH terms (shrinking + Ē dip) — a real down-rebase-shaped case.
+- Verifier: 6 new tests (synthetic exact-zero closure, pinned fixtures,
+  residual exposure, burn semantics, float/mixed-location rejection);
+  suite 66 passed; ruff clean.
+- Next: B-uc1-11 (mint-gap h1/h2/h3 checks — network task).
