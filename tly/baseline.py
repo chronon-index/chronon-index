@@ -143,3 +143,22 @@ def coverage_metadata(
         measured_periods=measured,
         imputed_periods=imputed,
     )
+
+
+def coverage_block(records: list[CoverageRecord]) -> dict:
+    """The print's P7 coverage block from per-country records.
+
+    measured_share is the plain ratio of measured periods to total periods
+    across all listed countries (equal period weighting — a versioned
+    upgrade to population weighting would need a methodology bump);
+    by_country carries each country's own share for full honesty.
+    """
+    if not records:
+        raise ValueError("coverage_block needs at least one CoverageRecord")
+    measured = sum(len(r.measured_periods) for r in records)
+    total = sum(len(r.measured_periods) + len(r.imputed_periods) for r in records)
+    return {
+        "measured_share": Decimal(measured) / Decimal(total),
+        "by_country": {r.iso3: r.measured_share for r in sorted(records, key=lambda r: r.iso3)},
+        "period_universe": {r.iso3: r.time_unit for r in sorted(records, key=lambda r: r.iso3)},
+    }

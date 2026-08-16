@@ -62,7 +62,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] B-uc2-04 | deps: B-uc2-03a | refs: SPEC#2, RP#II-D6, RP#X-P7 | Versioned baseline expected-deaths method + per-country coverage metadata (measured vs imputed); tests (works on WMD feed; STMF joins when B-uc2-03 unblocks) (done 2026-08-17: kk-linear policy registered as v0.2.0; coverage P7 records; DEU 2020 excess 24,501.8 pinned)
 - [x] B-uc2-05 | deps: B-uc2-04 | refs: SPEC#2 AC-2.6, RP#IX-E4 | Burn term Σ(excess_deaths × e(a)) in Decimal; test_burn_term_e4 on a fixture with known excess deaths and e(a), exact (done 2026-08-17)
 - [x] B-uc2-06 | deps: B-uc2-05, B-uc1-08 | refs: SPEC#2, SPEC#0 G2, DEC | Weekly print object: measured-period S, SETTLEMENT label, Monday 12:00 UTC epoch stamp, provenance block; schema (done 2026-08-17)
-- [ ] B-uc2-07 | deps: B-uc2-06 | refs: SPEC#2 AC-2.2, RP#X-P7 | test_p7_coverage_honesty: a print without the measured-vs-imputed share fails schema validation
+- [x] B-uc2-07 | deps: B-uc2-06 | refs: SPEC#2 AC-2.2, RP#X-P7 | test_p7_coverage_honesty: a print without the measured-vs-imputed share fails schema validation (done 2026-08-17)
 - [ ] B-uc2-08 | deps: B-uc2-06, B-uc1-10 | refs: SPEC#2 AC-2.1, RP#X-P6, RP#IX-E5 | test_p6_identity_closure: 52 weekly prints reconcile to the annual E5 identity within the stated versioned tolerance
 - [ ] B-uc2-09 | deps: B-uc2-06, D-03 | refs: SPEC#2 AC-2.4, RP#VIII | Every print embeds the deterministic error-budget accuracy statement (module-produced, never hand-typed); schema check
 - [ ] B-uc2-10 | deps: B-uc2-06 | refs: SPEC#2 AC-2.5, DEC | Dual-series plumbing: INFORMATIONAL cohort slot + labels; settlement value never depends on the cohort model; label tests (cohort values arrive with D-04)

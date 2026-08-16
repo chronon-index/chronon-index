@@ -430,3 +430,16 @@ timestamps, before the loop existed.
   missing-coverage + missing-provenance schema failures); suite 100
   passed; ruff+format clean.
 - Next: B-uc2-07 (test_p7_coverage_honesty — the named invariant test).
+
+## 2026-08-17T06:18+02:00 | B-uc2-07 | DONE
+- coverage_block() added to tly/baseline.py: aggregates CoverageRecords
+  into the print's P7 block (plain measured/total aggregate — population
+  weighting would be a versioned upgrade; per-country shares + period
+  universes carried for full honesty; deterministic country ordering).
+- test_p7_coverage_honesty (named per RP#X) green on REAL data: DEU+ALB
+  2021 coverage from the WMD feed → honest print passes schema; stripping
+  measured_share fails with the exact P7 message; stripping the whole
+  coverage block fails required-fields. Real-value checks: ALB monthly
+  2021 fully measured (share 1), DEU weekly >0.9.
+- Verifier: 3 tests; suite 103 passed; ruff+format clean.
+- Next: B-uc2-08 (test_p6_identity_closure — 52 weekly prints vs annual E5).
