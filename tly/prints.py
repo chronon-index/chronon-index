@@ -118,3 +118,46 @@ def validate_print_dict(data: dict) -> None:
     prov = data["provenance"]
     if not isinstance(prov, dict) or "methodology_version" not in prov or "snapshots" not in prov:
         raise PrintSchemaError("provenance must carry methodology_version and snapshots")
+
+
+@dataclass(frozen=True)
+class DualSeries:
+    """One epoch's dual publication (DECISIONS: settle on measurement,
+    inform with the model).
+
+    ``settlement`` is the measured-period S print — REQUIRED, and the ONLY
+    place a settlement value can come from. ``informational`` is the
+    cohort-model print — optional (absent before P2 delivers cohort values,
+    D-04) and structurally incapable of affecting settlement: the
+    settlement_value accessor reads the SETTLEMENT print alone, and both
+    prints are frozen.
+    """
+
+    settlement: WeeklyPrint
+    informational: WeeklyPrint | None = None
+
+    def __post_init__(self) -> None:
+        if self.settlement.series_label != "SETTLEMENT":
+            raise PrintSchemaError("settlement slot requires a SETTLEMENT-labeled print")
+        if self.informational is not None:
+            if self.informational.series_label != "INFORMATIONAL":
+                raise PrintSchemaError("informational slot requires an INFORMATIONAL-labeled print")
+            if self.informational.epoch_utc != self.settlement.epoch_utc:
+                raise PrintSchemaError(
+                    "dual series must share one epoch: "
+                    f"{self.settlement.epoch_utc} vs {self.informational.epoch_utc}"
+                )
+
+    @property
+    def settlement_value(self) -> Decimal:
+        """THE value derivatives settle on. Reads the SETTLEMENT print only —
+        there is no code path from the cohort model to this number."""
+        return self.settlement.s_life_years
+
+    def to_json_dict(self) -> dict:
+        out = {"settlement": self.settlement.to_json_dict()}
+        out["informational"] = self.informational.to_json_dict() if self.informational else None
+        return out
+
+    def render(self) -> str:
+        return json.dumps(self.to_json_dict(), indent=2, sort_keys=True) + "\n"

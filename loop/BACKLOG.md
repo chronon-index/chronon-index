@@ -65,7 +65,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] B-uc2-07 | deps: B-uc2-06 | refs: SPEC#2 AC-2.2, RP#X-P7 | test_p7_coverage_honesty: a print without the measured-vs-imputed share fails schema validation (done 2026-08-17)
 - [x] B-uc2-08 | deps: B-uc2-06, B-uc1-10 | refs: SPEC#2 AC-2.1, RP#X-P6, RP#IX-E5 | test_p6_identity_closure: 52 weekly prints reconcile to the annual E5 identity within the stated versioned tolerance (done 2026-08-17: p6_closure=exact-0 registered as v0.3.0; closure EXACT on 52- and 53-Monday years)
 - [ ] B-uc2-09 | deps: B-uc2-06, D-03 | refs: SPEC#2 AC-2.4, RP#VIII | Every print embeds the deterministic error-budget accuracy statement (module-produced, never hand-typed); schema check
-- [ ] B-uc2-10 | deps: B-uc2-06 | refs: SPEC#2 AC-2.5, DEC | Dual-series plumbing: INFORMATIONAL cohort slot + labels; settlement value never depends on the cohort model; label tests (cohort values arrive with D-04)
+- [x] B-uc2-10 | deps: B-uc2-06 | refs: SPEC#2 AC-2.5, DEC | Dual-series plumbing: INFORMATIONAL cohort slot + labels; settlement value never depends on the cohort model; label tests (cohort values arrive with D-04) (done 2026-08-17)
 - [ ] B-uc2-11 | deps: B-uc2-03 | refs: SPEC#2 AC-2.3 | Backfill data acquisition: historical STMF (plus World Mortality Dataset if license permits (verify)) snapshots covering ≥ 570 consecutive weeks
 - [ ] B-uc2-12 | deps: B-uc2-11, B-uc2-06 | refs: SPEC#2 AC-2.3, RALPH#7 | Backfill engine: ≥ 570 consecutive weekly prints ending at the current epoch
 - [ ] B-uc2-13 | deps: B-uc2-12 | refs: SPEC#2 AC-2.3, DEC | COVID-drag gate: drag visible in the backfilled series; cumulative burn inside the recalibrated 120–360M life-years band; report committed

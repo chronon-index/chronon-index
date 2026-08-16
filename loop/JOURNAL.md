@@ -458,3 +458,17 @@ timestamps, before the loop existed.
   stamp passes validate_epoch.
 - Verifier: 4 tests; suite 107 passed; ruff+format clean.
 - Next: first open task in backlog (uc2 chain tail / uc3).
+
+## 2026-08-17T06:55+02:00 | B-uc2-10 | DONE
+- DualSeries added to tly/prints.py: settlement slot REQUIRES a
+  SETTLEMENT-labeled print and is the sole source of settlement_value (no
+  code path from the cohort model to that number — structural, not
+  conventional); informational slot optional (absent pre-P2/D-04), must be
+  INFORMATIONAL-labeled and share the epoch; both prints frozen;
+  deterministic render.
+- Verifier: 5 tests — settlement reads settlement-only even when the
+  cohort print carries a different (higher) S; optional slot; label
+  discipline in both slots; epoch-mismatch rejection; deterministic
+  render. Suite 112 passed; ruff+format clean.
+- Next: B-uc2-09 needs D-03 (error budget); B-uc2-11/12 need STMF (HUMAN).
+  Next open executable is in the uc3 chain or D-03 — follow priority rule.
