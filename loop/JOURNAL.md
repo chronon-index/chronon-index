@@ -176,3 +176,21 @@ timestamps, before the loop existed.
   compatibility with tly.snapshot preserved).
 - Next: B-uc1-04 (WPP life tables — paths already sighted in the same
   index: WPP2024_Life_Table_{Abridged,Complete}_Medium_*_1950-2023.csv.gz).
+
+## 2026-08-17T02:00+02:00 | B-uc1-04 | DONE
+- WPP 2024 life tables snapshotted from the verified CSV_FILES base:
+  Abridged Medium 1950-2023 (144.5MB, 2,710,620 rows, 22 age groups,
+  Sex∈{Total,Male,Female}) and Complete Medium Both 1950-2023 (200.0MB,
+  4,148,070 rows, 101 single ages, Sex=Total). Availability CHECKED for
+  both forms, as the task demanded. Full life-table columns incl. mx..ex,ax
+  (everything RP#I M1 needs). Manifests with sha256 committed; .gz files
+  gitignored (in_git:false).
+- DISCREPANCY RECORDED, not reconciled (RP#VI rule 4): WPP world e0
+  2019=72.6093 / 2021=70.865 vs WHO GHO 73.123374469 / 71.368699065
+  (~0.5yr, ~0.7%). Different estimators. The G5 switch to WPP as licensed
+  source of record will be a documented level change via versioning.
+- License status: WPP CC BY 3.0 IGO remains (verify) in docs/LICENSING.md —
+  clearing it needs the terms page read + recorded (separate gate task).
+- Verifier: gz-valid full scans with row counts + column checks + world e0
+  extraction above; suite 33 passed.
+- Next: B-uc1-05 per backlog.
