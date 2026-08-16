@@ -485,3 +485,17 @@ timestamps, before the loop existed.
 - Verifier: 6 tests (real-tree gate + 5 synthetic failure modes incl.
   parent-hash cross-check); suite 118 passed; ruff clean.
 - Next: B-uc3-02 (snapshot immutability vs manifest history).
+
+## 2026-08-17T07:22+02:00 | B-uc3-02 | DONE
+- tests/test_snapshot_immutability.py: three history gates against git
+  itself — (1) no tracked snapshot file (manifests excepted) ever appears
+  as Modified/Deleted in any commit; (2) manifests are append-only
+  ledgers: across every consecutive committed version pair, each
+  (file, sha256) row survives unchanged (additions fine, rewrites fail);
+  (3) the WORKTREE may only extend HEAD's manifests — a rewrite is caught
+  before it can even be committed.
+- All three passed against the real 29-commit history on first run: no
+  snapshot has ever been modified or deleted, and every manifest evolution
+  was purely additive.
+- Verifier: 3 tests; suite 121 passed; ruff clean.
+- Next: continue uc3 chain per backlog.
