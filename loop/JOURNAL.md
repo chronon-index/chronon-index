@@ -194,3 +194,18 @@ timestamps, before the loop existed.
 - Verifier: gz-valid full scans with row counts + column checks + world e0
   extraction above; suite 33 passed.
 - Next: B-uc1-05 per backlog.
+
+## 2026-08-17T02:14+02:00 | B-uc1-05 | DONE
+- Committed fixture extracted from the 62MB source (World/Japan/Nigeria ×
+  2019+2023, 606 rows, 11.4KB, deterministic gzip mtime=0) with provenance
+  row in manifest (derived_from + parent sha256). .gitignore exception for
+  fixtures/*.gz added.
+- tly/wpp.py: parse_population_single_age streams the gz → PopulationCell
+  (loc_id/iso3/location/year/sex/age/persons); thousands→persons ×1000 in
+  Decimal (exact); population_by_age enforces the complete 0..100 age set.
+- Verifier: 6 tests — cell counts, ISO3 handling (World has none, JPN
+  does), World-2023 fixture sum == golden N to the person, completeness +
+  strict-miss errors, M+F≈Total within file rounding (≤1.5 persons/age),
+  and a skipif full-file regression (ran locally: passed). Suite: 39 passed.
+  ruff clean.
+- Next: B-uc1-06 (WPP life-table parser; WHO GHO becomes triangulation-only).

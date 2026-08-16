@@ -112,6 +112,15 @@
       "sha256": "f84c75789ccbd385122ad19bac70026d6306878442afbaa24e8e50a23b4bee2f",
       "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
       "units": "thousands of persons"
+    },
+    "fixtures/wpp_pop_single_age_fixture.csv.gz": {
+      "bytes": 11412,
+      "derivation": "rows where Location in {World, Japan, Nigeria} and Time in {2019, 2023}; header preserved; deterministic gzip (mtime=0)",
+      "derived_from": "WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
+      "derived_from_sha256": "f84c75789ccbd385122ad19bac70026d6306878442afbaa24e8e50a23b4bee2f",
+      "in_git": true,
+      "rows": 606,
+      "sha256": "12e0ec7f4ac04757021829d49ae0f3fcb26b1e69f468bba3451ee3949407c05e"
     }
   },
   "network_policy": "User-Agent sent; few-and-large requests; exponential backoff with jitter; World Bank API not used (WAF-blocked 2026-08-16).",
