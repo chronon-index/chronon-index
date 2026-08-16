@@ -107,3 +107,15 @@ timestamps, before the loop existed.
   vs golden, and per-band term equality vs golden band_detail for both
   years; plus e_interp unit properties. Full suite: 15 passed. ruff clean.
 - Next: A-14 (snapshot fetcher module) or A-15 (install pre-commit hooks).
+
+## 2026-08-17T00:58+02:00 | A-14 | DONE
+- tly/snapshot.py: fetch_url (User-Agent, exponential backoff + jitter,
+  injectable sleep), fetch_snapshot (injectable fetcher — manifest logic
+  testable offline; sha256/URL/UTC-timestamp/bytes per file), and
+  verify_manifest — the offline integrity gate (SnapshotIntegrityError on
+  missing/mismatched files) that AC-1.5 compute paths must call first.
+- Verifier: 7 network-free tests — fetch/manifest roundtrip, committed
+  2026-08-16 snapshot verifies intact (6 files), tamper + missing-file +
+  missing-manifest detection, backoff sequencing (2 sleeps for 3 attempts,
+  exponential base). Full suite: 22 passed. ruff clean.
+- Next: A-15 (install pre-commit hooks; ruff green already verified).
