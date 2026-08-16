@@ -91,12 +91,18 @@ def fetch_snapshot(
     return manifest
 
 
-def verify_manifest(snapshot_dir: Path) -> dict:
+def verify_manifest(snapshot_dir: Path, *, require_all: bool = True) -> dict:
     """Recompute every file hash against the manifest; raise on any mismatch.
 
     Returns the verified manifest. This is the offline integrity gate: a
     compute path must call this before reading snapshot files (AC-1.5), so
     a truncated or edited snapshot can never silently produce a number.
+
+    ``require_all=False`` permits ABSENCE of files the manifest itself
+    declares uncommitted (``in_git: false`` — large snapshots kept out of
+    git by policy, RP Part VII); their recorded hashes remain the citable
+    record. A present file must always match its hash, and files without
+    the in_git:false marker must always exist.
     """
     manifest_path = snapshot_dir / MANIFEST_FILE
     if not manifest_path.is_file():
@@ -105,6 +111,8 @@ def verify_manifest(snapshot_dir: Path) -> dict:
     for name, meta in manifest["files"].items():
         path = snapshot_dir / name
         if not path.is_file():
+            if not require_all and meta.get("in_git") is False:
+                continue
             raise SnapshotIntegrityError(f"missing snapshot file: {path}")
         digest = hashlib.sha256(path.read_bytes()).hexdigest()
         if digest != meta["sha256"]:

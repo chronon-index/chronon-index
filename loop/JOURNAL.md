@@ -236,3 +236,24 @@ timestamps, before the loop existed.
   mention the current version (also tested).
 - Verifier: 5 new tests; suite 50 passed; ruff clean.
 - Next: B-uc1-08 (E1 stock engine, country × sex × single-age).
+
+## 2026-08-17T02:56+02:00 | B-uc1-08 | DONE
+- tly/stock.py: E1 engine. compute_location_stock does Σ N(a)·e(a+0.5)
+  under the registered midpoint+interpolation policies (same policy strings
+  at every resolution — no bump needed); LocationStock (frozen) with
+  e_bar/s_billions_4dp; build_report + stamp() emitting methodology version
+  + policies + per-file sha256 of every input snapshot (manifests
+  re-verified at stamp time).
+- verify_manifest gained require_all: files the manifest itself declares
+  in_git:false may be ABSENT (fresh-clone/CI reality) but must match their
+  hash when present; committed files must always exist. Stamp uses
+  require_all=False; the AC-1.5 loader keeps the strict default.
+- Computed & pinned (fixtures, WPP single-age tables): World 2023
+  S=363.5117B Ē=44.9238; Japan 4.8031B/38.6189 (aged), male-via-abridged
+  2.2660B/37.3313; Nigeria 9.6041B/42.1448 (young); World 2019 354.4515B.
+  v0 WHO-based 362.4126B stands alongside — sources recorded apart, tested
+  apart (test_world_2019_wpp_vs_v0_who_recorded_apart).
+- Verifier: 7 new tests incl. stamp content + float rejection + mixed
+  year/sex rejection; suite 57 passed; ruff clean.
+- Next: B-uc1-09 (test_p3_reconciliation — needs all-countries run from the
+  full 62MB+200MB snapshots; design note: World-direct vs Σ countries).
