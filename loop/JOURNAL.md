@@ -209,3 +209,17 @@ timestamps, before the loop existed.
   and a skipif full-file regression (ran locally: passed). Suite: 39 passed.
   ruff clean.
 - Next: B-uc1-06 (WPP life-table parser; WHO GHO becomes triangulation-only).
+
+## 2026-08-17T02:28+02:00 | B-uc1-06 | DONE
+- Life-table fixtures extracted with provenance (abridged 594 rows/31.9KB;
+  complete 909 rows/44.2KB; deterministic gzip; manifest rows with parent
+  sha256). tly/wpp.py gained parse_life_table_ex + ex_anchors accepting
+  EXACTLY the 22-anchor abridged or 101-anchor complete age set (partial
+  tables rejected).
+- Cross-granularity check: abridged and complete e(x) agree EXACTLY at all
+  22 shared anchors (World 2023) — one underlying WPP table, two surfaces.
+- RP#VI rule 4 as a TEST: test_wpp_who_discrepancy_is_preserved_not_averaged
+  pins WPP e0(2019)=72.6093 ≠ WHO 73.123374469; silently "fixing" either
+  source now fails the suite. WHO GHO path retained, triangulation-only.
+- Verifier: 6 new tests; suite 45 passed; ruff + format clean.
+- Next: B-uc1-07 per backlog.

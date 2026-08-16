@@ -92,3 +92,74 @@ def population_by_age(
     if sorted(out) != list(range(0, 101)):
         raise ValueError(f"incomplete single-age set for {location}/{year}/{sex}: {len(out)} ages")
     return out
+
+
+ABRIDGED_ANCHOR_AGES = (0, 1, *range(5, 101, 5))  # 22 anchors: 0,1,5,...,100
+COMPLETE_ANCHOR_AGES = tuple(range(0, 101))  # 101 single ages
+
+
+@dataclass(frozen=True)
+class LifeTableCell:
+    """One (location, sex, exact-age) life-table e(x) value, in years."""
+
+    loc_id: int
+    iso3: str | None
+    location: str
+    year: int
+    sex: str  # "total" | "male" | "female"
+    age: int
+    ex: Decimal
+
+
+_WPP_SEX = {"Total": "total", "Male": "male", "Female": "female"}
+
+
+def parse_life_table_ex(
+    path: Path,
+    years: set[int],
+    locations: set[str] | None = None,
+) -> list[LifeTableCell]:
+    """Stream a WPP Life_Table CSV.gz (abridged or complete) into e(x) cells.
+
+    Works for both surfaces: they share columns; only the AgeGrpStart set
+    differs (validated in :func:`ex_anchors`, not here).
+    """
+    cells: list[LifeTableCell] = []
+    year_strs = {str(y) for y in years}
+    with gzip.open(path, "rt", encoding="utf-8-sig") as f:
+        for row in csv.DictReader(f):
+            if row["Time"] not in year_strs:
+                continue
+            if locations is not None and row["Location"] not in locations:
+                continue
+            cells.append(
+                LifeTableCell(
+                    loc_id=int(row["LocID"]),
+                    iso3=row["ISO3_code"] or None,
+                    location=row["Location"],
+                    year=int(row["Time"]),
+                    sex=_WPP_SEX[row["Sex"]],
+                    age=int(row["AgeGrpStart"]),
+                    ex=Decimal(row["ex"]),
+                )
+            )
+    if not cells:
+        raise ValueError(f"no rows matched years={sorted(years)} in {path.name}")
+    return cells
+
+
+def ex_anchors(
+    cells: list[LifeTableCell], location: str, year: int, sex: str = "total"
+) -> dict[int, Decimal]:
+    """{exact_age: e(x)} for one location/year/sex.
+
+    Accepts exactly the abridged (22-anchor) or complete (101-anchor) age
+    set; anything else — a partial table — raises rather than parsing.
+    """
+    out = {c.age: c.ex for c in cells if c.location == location and c.year == year and c.sex == sex}
+    if not out:
+        raise ValueError(f"no life-table cells for {location}/{year}/{sex}")
+    ages = tuple(sorted(out))
+    if ages not in (ABRIDGED_ANCHOR_AGES, COMPLETE_ANCHOR_AGES):
+        raise ValueError(f"unexpected anchor set for {location}/{year}/{sex}: {len(ages)} ages")
+    return out

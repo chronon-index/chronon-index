@@ -113,6 +113,24 @@
       "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
       "units": "thousands of persons"
     },
+    "fixtures/wpp_lt_abridged_fixture.csv.gz": {
+      "bytes": 31909,
+      "derivation": "rows where Location in {World, Japan, Nigeria} and Time in {2019, 2021, 2023}; header preserved; deterministic gzip (mtime=0)",
+      "derived_from": "WPP2024_Life_Table_Abridged_Medium_1950-2023.csv.gz",
+      "derived_from_sha256": "3d6e82f23023b5f20e1c190752758f637599974fdcac02d38b94c80c4081f982",
+      "in_git": true,
+      "rows": 594,
+      "sha256": "409702a168db88e7850f00a9c86479e398a6d71b2826406f1d7947111407e923"
+    },
+    "fixtures/wpp_lt_complete_fixture.csv.gz": {
+      "bytes": 44172,
+      "derivation": "rows where Location in {World, Japan, Nigeria} and Time in {2019, 2021, 2023}; header preserved; deterministic gzip (mtime=0)",
+      "derived_from": "WPP2024_Life_Table_Complete_Medium_Both_1950-2023.csv.gz",
+      "derived_from_sha256": "7ad8748f4dec567dcfd74fb7161a369e09f6501489c49bce1cd0572c16484058",
+      "in_git": true,
+      "rows": 909,
+      "sha256": "fbcbd9c9fe900408c241f87dbc0dd8a596fcbac02e748e0dc028b3344daeceb9"
+    },
     "fixtures/wpp_pop_single_age_fixture.csv.gz": {
       "bytes": 11412,
       "derivation": "rows where Location in {World, Japan, Nigeria} and Time in {2019, 2023}; header preserved; deterministic gzip (mtime=0)",
