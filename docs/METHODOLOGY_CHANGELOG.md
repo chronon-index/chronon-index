@@ -6,6 +6,18 @@ RESEARCH_PROGRAM Part XI: proposal → public comment window → version bump).
 Each entry lists the policies that version is defined by; the registry in
 `tly/methodology.py` pins them and CI enforces the pairing.
 
+## v0.2.0-reconstruction — 2026-08-17
+
+Adds the nowcast baseline policy (B-uc2-04); v0.1.0 policies unchanged.
+
+- baseline: `kk-linear: per-period linear trend fit on 2015-2019
+  (Karlinsky-Kobak)` — expected deaths for (country, period) extrapolate a
+  per-period straight line fit on the five pre-pandemic years, the World
+  Mortality Dataset's own published method (chosen for comparability with
+  the feed's literature; alternatives like 5-year means or Serfling
+  seasonal models would require a bump). Fit windows and the excess
+  definition (observed − expected) are part of this policy.
+
 ## v0.1.0-reconstruction — 2026-08-17
 
 Initial packaged methodology, reconstructed 2026-08-16 from DECISIONS.md /

@@ -13,11 +13,12 @@ from __future__ import annotations
 
 from tly.numeric import PRECISION, ROUNDING
 
-METHODOLOGY_VERSION = "v0.1.0-reconstruction"
+METHODOLOGY_VERSION = "v0.2.0-reconstruction"
 
 INTERPOLATION_POLICY = "linear-on-anchors, flat-tail"
 BAND_MIDPOINT_POLICY = "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)"
 DECIMAL_POLICY = f"Decimal prec {PRECISION}, {ROUNDING}"
+BASELINE_POLICY = "kk-linear: per-period linear trend fit on 2015-2019 (Karlinsky-Kobak)"
 
 # version -> the exact policy strings that version is defined by.
 # Append-only: past entries are history and must never be edited.
@@ -26,6 +27,14 @@ VERSION_POLICY_REGISTRY: dict[str, dict[str, str]] = {
         "interpolation": "linear-on-anchors, flat-tail",
         "band_midpoint": "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)",
         "decimal": "Decimal prec 34, ROUND_HALF_EVEN",
+    },
+    # v0.2.0: ADDS the nowcast baseline policy (B-uc2-04); prior policies
+    # unchanged. See docs/METHODOLOGY_CHANGELOG.md.
+    "v0.2.0-reconstruction": {
+        "interpolation": "linear-on-anchors, flat-tail",
+        "band_midpoint": "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)",
+        "decimal": "Decimal prec 34, ROUND_HALF_EVEN",
+        "baseline": "kk-linear: per-period linear trend fit on 2015-2019 (Karlinsky-Kobak)",
     },
 }
 
@@ -36,6 +45,7 @@ def current_policies() -> dict[str, str]:
         "interpolation": INTERPOLATION_POLICY,
         "band_midpoint": BAND_MIDPOINT_POLICY,
         "decimal": DECIMAL_POLICY,
+        "baseline": BASELINE_POLICY,
     }
 
 

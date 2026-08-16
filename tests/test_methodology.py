@@ -49,7 +49,7 @@ def test_estimator_uses_canonical_policy():
 def test_output_metadata_stamp_shape():
     meta = output_metadata()
     assert meta["methodology_version"] == METHODOLOGY_VERSION
-    assert set(meta["policies"]) == {"interpolation", "band_midpoint", "decimal"}
+    assert set(meta["policies"]) == {"interpolation", "band_midpoint", "decimal", "baseline"}
 
 
 def test_changelog_documents_current_version():

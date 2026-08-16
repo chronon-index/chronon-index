@@ -377,3 +377,23 @@ timestamps, before the loop existed.
   series, filter errors, malformed-period rejection); suite 80 passed;
   ruff clean.
 - Next: B-uc2-04 (baseline expected-deaths method on the WMD feed).
+
+## 2026-08-17T05:28+02:00 | B-uc2-04 | DONE
+- tly/baseline.py: Karlinsky-Kobak per-period linear baseline (fit
+  2015-2019, closed-form least squares in Decimal), excess_series
+  (observed − expected), CoverageRecord (P7: measured vs imputed periods
+  per country-year, measured_share). Incomplete fit windows (e.g. week 53)
+  are EXCLUDED not silently fit — they surface as imputed.
+- METHODOLOGY BUMP EXERCISED FOR REAL: baseline is a new policy →
+  v0.2.0-reconstruction appended to the registry + changelog entry; the
+  guard tests fired exactly as designed (2 stamp-shape tests failed until
+  consciously updated). The bump machinery works.
+- Real-feed fact: DEU 2020 excess (weekly, kk-linear) = 24,501.8 — pinned
+  exactly (deterministic from committed snapshot); lower than headline
+  estimates because the linear trend absorbs aging-driven increase and the
+  Dec-2020 wave books into 2021. My initial >30k threshold was a wrong
+  guess, corrected to the computed pin — the data was never touched.
+- Verifier: 6 new tests (exact linear recovery, exact excess, incomplete-
+  window exclusion, coverage math, policy versioning, real-DEU pin); suite
+  86 passed; ruff clean.
+- Next: B-uc2-05 (burn term Σ excess×e(a) — E4, exact fixture test).
