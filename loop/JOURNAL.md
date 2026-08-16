@@ -499,3 +499,16 @@ timestamps, before the loop existed.
   was purely additive.
 - Verifier: 3 tests; suite 121 passed; ruff clean.
 - Next: continue uc3 chain per backlog.
+
+## 2026-08-17T07:38+02:00 | B-uc3-03 | DONE
+- tly/pipeline.py: the end-to-end unit of reproducibility — committed
+  snapshots → verified load → E1 stock → real WMD coverage block → stamped
+  WeeklyPrint; `python -m tly.pipeline <epoch>` renders to stdout for
+  cross-process diffing.
+- test_p5_reproducibility (named per RP#X): two in-process builds render
+  byte-identically and pass the print schema; PLUS two cold OS processes
+  with PYTHONHASHSEED=0 vs 42 produce byte-identical stdout — hash
+  randomization, import order, and hidden nondeterminism all covered.
+- Verifier: 2 tests; suite 123 passed; ruff clean.
+- Next: B-uc3-04 (version-bump guard is largely built at B-uc1-07 —
+  verify what remains: tolerances/ensemble-weights registry coverage).
