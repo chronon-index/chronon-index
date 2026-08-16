@@ -158,3 +158,21 @@ timestamps, before the loop existed.
   reproducing S=362.4126/Ē=44.7880 with network physically disabled.
   Suite: 33 passed. ruff clean.
 - Next: B-uc1-03 (WPP single-age population source — network task).
+
+## 2026-08-17T01:44+02:00 | B-uc1-03 | DONE
+- WPP 2024 single-age population source identified and VERIFIED (not
+  assumed): the wpp site is an Angular SPA with no static links; its own
+  assets/downloads.json index lists the CSV_FILES bulk paths. Target:
+  assets/Excel Files/1_Indicator (Standard)/CSV_FILES/
+  WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz (de facto 1 July,
+  single ages 0..100+, per country and sex, thousands).
+- Downloaded (one request, 62,082,217 bytes, 32s), gz-valid, 4,148,070 rows.
+  Manifest with sha256 committed; the .gz itself is gitignored (large-file
+  policy: object storage HUMAN task pending) — in_git:false recorded.
+- TRIANGULATION (RP#VI rule 4): World 2023 PopTotal sums to 8,091,734,933
+  persons — equals golden N (OWID/WPP 5-yr bands) EXACTLY, to the person.
+  Two independent WPP surfaces agree; recorded in manifest note.
+- Verifier: full-file scan + sum above; suite 33 passed (manifest-format
+  compatibility with tly.snapshot preserved).
+- Next: B-uc1-04 (WPP life tables — paths already sighted in the same
+  index: WPP2024_Life_Table_{Abridged,Complete}_Medium_*_1950-2023.csv.gz).

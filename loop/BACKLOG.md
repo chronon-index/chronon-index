@@ -41,7 +41,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 
 - [x] B-uc1-01 | deps: A-13 | refs: SPEC#1 AC-1.3, SPEC#0 G1 | Float quarantine: published-path guard module rejecting float inputs end to end; test_no_float_in_published_path injects a float and asserts rejection (done 2026-08-17)
 - [x] B-uc1-02 | deps: A-14 | refs: SPEC#1 AC-1.5, RALPH#6 | Offline-only compute: loader raises on missing/mismatched manifest sha256; no network access during compute; tests for both failure modes (done 2026-08-17)
-- [ ] B-uc1-03 | deps: A-14 | refs: SPEC#1, RP#II-D1, SPEC#0 G6 | Identify + snapshot a keyless WPP 2024 source for population by single year of age × sex × country (population.un.org/wpp CSV downloads (verify)); manifest rows; few-and-large requests
+- [x] B-uc1-03 | deps: A-14 | refs: SPEC#1, RP#II-D1, SPEC#0 G6 | Identify + snapshot a keyless WPP 2024 source for population by single year of age × sex × country (population.un.org/wpp CSV downloads (verify)); manifest rows; few-and-large requests (done 2026-08-17)
 - [ ] B-uc1-04 | deps: A-14 | refs: SPEC#0 G5, RP#II-D2, RP#VII | Identify + snapshot WPP 2024 life tables (licensed source of record, CC BY 3.0 IGO (verify)) — abridged and single-age availability checked, not assumed; manifest rows
 - [ ] B-uc1-05 | deps: B-uc1-03 | refs: SPEC#1 | Parser: WPP single-age population → Decimal structures keyed (age, sex, country); unit tests against snapshot fixtures
 - [ ] B-uc1-06 | deps: B-uc1-04 | refs: SPEC#1, SPEC#0 G5 | Parser: WPP life tables → e(x) anchors per (sex, country); WHO GHO path retained as triangulation-only; unit tests

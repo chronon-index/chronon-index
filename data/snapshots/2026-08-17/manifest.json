@@ -1,0 +1,38 @@
+{
+  "files": {
+    "WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz": {
+      "bytes": 62082217,
+      "columns": [
+        "SortOrder",
+        "LocID",
+        "Notes",
+        "ISO3_code",
+        "ISO2_code",
+        "SDMX_code",
+        "LocTypeID",
+        "LocTypeName",
+        "ParentID",
+        "Location",
+        "VarID",
+        "Variant",
+        "Time",
+        "MidPeriod",
+        "AgeGrp",
+        "AgeGrpStart",
+        "AgeGrpSpan",
+        "PopMale",
+        "PopFemale",
+        "PopTotal"
+      ],
+      "in_git": false,
+      "retrieved_utc": "2026-08-16T22:50:57+00:00",
+      "rows": 4148070,
+      "sha256": "f84c75789ccbd385122ad19bac70026d6306878442afbaa24e8e50a23b4bee2f",
+      "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
+      "units": "thousands of persons"
+    }
+  },
+  "network_policy": "User-Agent sent; few-and-large requests; exponential backoff with jitter; World Bank API not used (WAF-blocked 2026-08-16).",
+  "note": "B-uc1-03: WPP 2024 population by single age x sex x country, medium variant, estimates 1950-2023 (de facto 1 July, thousands). URL verified against the WPP site's own assets/downloads.json index this iteration (the SPA has no static links). Large file: NOT committed to git \u2014 object storage pending (HUMAN); this manifest is the committed record. Verified: World 2023 sums to 8,091,734,933 persons, equal to golden N exactly.",
+  "snapshot_date": "2026-08-17"
+}

@@ -50,3 +50,7 @@
 - Pre-commit config exists but hooks are NOT installed in .git/hooks (A-15).
 - pre-commit lives at ~/.local/bin (uv tool install); export PATH first.
   Hook ruff pin must track local ruff (v0.15.0 now) or formatting flip-flops.
+- WPP downloads: SPA; the real file index is /wpp/assets/downloads.json.
+  Bulk CSVs under /wpp/assets/Excel Files/1_Indicator (Standard)/CSV_FILES/
+  (URL-encode spaces). Single-age pop 1950-2023 gz = 62MB, gitignored;
+  manifest-only in git. World 2023 = 8,091,734,933 persons = golden N exact.
