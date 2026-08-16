@@ -327,3 +327,23 @@ timestamps, before the loop existed.
 - Verifier: 4 tests recomputing the full chain from committed snapshots;
   suite 74 passed; ruff clean.
 - Next: B-uc1-13 blocked on A-16 (HUMAN); move to B-uc2 (nowcast) chain.
+
+## 2026-08-17T04:35+02:00 | B-uc2-01 | DONE (access not keyless — routed to HUMAN)
+- STMF access VERIFIED by live probe: /File/GetDocument/Public/STMF/Outputs/
+  stmf.csv responds 302 → /Account/Login; free registration required. The
+  pre-2022 keyless route is gone. G6 (keyless) cannot be satisfied by HMD
+  STMF directly.
+- License VERIFIED (better than assumed): HMD User Agreement states
+  HMD-constructed data — which includes STMF outputs — are CC BY 4.0;
+  input data excluded. Old "redistribution restricted" row corrected in
+  docs/LICENSING.md with evidence pointer (snapshot committed+manifested).
+- Routed per task instruction: B-uc2-02 (HUMAN) updated with the decision
+  Ben must make — HMD credentials would violate the no-secrets rule;
+  options framed: (a) World Mortality Dataset (GitHub, keyless) as the
+  automated feed + STMF as manually-refreshed triangulation, or (b) a
+  version-gated G6 relaxation for one read-only account.
+- Verifier: probe outputs quoted above; suite unchanged (74 passed prior);
+  no code touched.
+- Next: B-uc2-03 depends on B-uc2-01 only for the route — but the route is
+  HUMAN-gated; WMD (keyless) exploration can proceed as the next task if
+  backlog ordering allows, else first open non-HUMAN task.

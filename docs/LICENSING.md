@@ -10,8 +10,8 @@ URL + date. All rows start (verify).
 | UN WPP 2024 | CC BY 3.0 IGO (verify) | OK (verify) | Source of record: population + life tables | (verify) |
 | Our World in Data grapher | CC BY 4.0 (verify) | OK (verify) | Clean CSV mirror of WPP series | (verify) |
 | WHO GHO / GHE | Non-commercial clause on much content (verify) | PROBLEM for commercial product | Triangulation only — never source of record | (verify) |
-| HMD | Free registration; raw redistribution restricted (verify) | Derived indicators only; link raw | Research-grade life tables, exposures | (verify) |
-| HMD STMF | Same as HMD (verify) | Derived indicators only | Weekly deaths nowcast | (verify) |
+| HMD | CC BY 4.0 for HMD-constructed data (User Agreement read+snapshotted 2026-08-17: hmd_user_agreement.html, sha256 in 2026-08-17 manifest); input data excluded from CC BY | OK for constructed data with attribution | Research-grade life tables, exposures | VERIFIED 2026-08-17; access needs free account (HUMAN B-uc2-02) |
+| HMD STMF | CC BY 4.0 (STMF outputs are HMD-constructed; same evidence row as HMD) | OK with attribution | Weekly deaths nowcast | VERIFIED 2026-08-17; stmf.csv 302s to /Account/Login — NOT keyless, registration required (HUMAN B-uc2-02); G6 conflict logged |
 | World Mortality Dataset (Karlinsky & Kobak) | Open on GitHub (verify) | (verify) | Broad excess-death compilation | (verify) |
 | Eurostat weekly deaths | Eurostat standard reuse policy (verify) | OK (verify) | EU nowcast | (verify) |
 | CDC provisional deaths | US public domain (verify) | OK (verify) | US nowcast | (verify) |

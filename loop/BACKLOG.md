@@ -55,8 +55,8 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 
 ### SPEC#2 — weekly mortality nowcast
 
-- [ ] B-uc2-01 | deps: A-14 | refs: SPEC#2, SPEC#0 G6, RP#II-D3 | Verify HMD STMF access route + license terms honestly (keyless per G6? registration?); record evidence in docs/LICENSING.md; if registration is unavoidable, journal it and route through HUMAN B-uc2-02
-- [ ] B-uc2-02 | deps: - | refs: RP#II-D2, RP#II-D3 | HUMAN: register HMD account at mortality.org (needed for single-age life tables in D-01; possibly for STMF (verify))
+- [x] B-uc2-01 | deps: A-14 | refs: SPEC#2, SPEC#0 G6, RP#II-D3 | Verify HMD STMF access route + license terms honestly (keyless per G6? registration?); record evidence in docs/LICENSING.md; if registration is unavoidable, journal it and route through HUMAN B-uc2-02 (done 2026-08-17: NOT keyless — 302 to Login; CC BY 4.0 for outputs; routed to B-uc2-02)
+- [ ] B-uc2-02 | deps: - | refs: RP#II-D2, RP#II-D3 | HUMAN: register HMD account at mortality.org — CONFIRMED required for STMF too (stmf.csv 302s to Login, 2026-08-17). DECISION for Ben: HMD credentials in the pipeline would violate the no-secrets rule (RALPH#6/G6) — options: (a) World Mortality Dataset (GitHub, keyless) as the automated weekly feed with HMD STMF as manually-refreshed triangulation, or (b) relax G6 for one read-only account via a version gate
 - [ ] B-uc2-03 | deps: B-uc2-01 | refs: SPEC#2 | STMF snapshot fetch + parser: weekly deaths by age band, ~38–40 countries → Decimal; manifest rows; unit tests
 - [ ] B-uc2-04 | deps: B-uc2-03 | refs: SPEC#2, RP#II-D6, RP#X-P7 | Versioned baseline expected-deaths method + per-country coverage metadata (measured vs imputed); tests
 - [ ] B-uc2-05 | deps: B-uc2-04 | refs: SPEC#2 AC-2.6, RP#IX-E4 | Burn term Σ(excess_deaths × e(a)) in Decimal; test_burn_term_e4 on a fixture with known excess deaths and e(a), exact
