@@ -415,3 +415,18 @@ timestamps, before the loop existed.
   burn, conservation + determinism asserted.
 - Verifier: 7 tests; suite 93 passed; ruff+format clean.
 - Next: first open task in the backlog (uc2 chain continues).
+
+## 2026-08-17T06:05+02:00 | B-uc2-06 | DONE
+- tly/prints.py: WeeklyPrint (frozen — a constructed print is FINAL, P4);
+  epoch discipline enforced at construction AND at consumer-side schema
+  validation (Monday 12:00:00 UTC exactly, explicit UTC only); series
+  labels SETTLEMENT|INFORMATIONAL (DECISIONS dual-series); Decimal-only
+  numeric fields; deterministic render (sorted keys, Decimal-as-string —
+  P5). validate_print_dict is the consumer/recomputer gate; it already
+  REQUIRES coverage.measured_share (P7) and provenance with
+  methodology_version + snapshots — B-uc2-07's named test comes next.
+- Verifier: 8 tests (roundtrip+schema, 5 bad epochs, label/type
+  discipline, FrozenInstanceError on mutation, byte-identical renders,
+  missing-coverage + missing-provenance schema failures); suite 100
+  passed; ruff+format clean.
+- Next: B-uc2-07 (test_p7_coverage_honesty — the named invariant test).
