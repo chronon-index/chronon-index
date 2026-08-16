@@ -180,6 +180,22 @@
       "retrieved_utc": "2026-08-16T23:21:03+00:00",
       "sha256": "fe4ba484240894430523687aa67e06476e451003ebbc5e6ee075147a99a4404e",
       "source_url": "https://www.mortality.org/Data/UserAgreement"
+    },
+    "wmd_LICENSE.txt": {
+      "bytes": 1072,
+      "in_git": true,
+      "purpose": "B-uc2-03a license evidence: MIT (c) 2021 Ariel Karlinsky \u2014 keyless, commercial OK",
+      "retrieved_utc": "2026-08-16T23:23:29+00:00",
+      "sha256": "8f647bdcb7b6e6f54c9f12b13382ff8cf743be305958ce6ad9fc95b3b7381182",
+      "source_url": "https://raw.githubusercontent.com/akarlinsky/world_mortality/main/LICENSE"
+    },
+    "wmd_world_mortality.csv": {
+      "bytes": 1125760,
+      "in_git": true,
+      "purpose": "B-uc2-03a: World Mortality Dataset \u2014 34,423 rows, 127 countries, weekly+monthly all-cause deaths. OBSERVED LIMITATION: latest data point 2024-12 (92 countries through 2024) \u2014 20 months stale for a 2026 nowcast; whether fresher data exists elsewhere is (verify)",
+      "retrieved_utc": "2026-08-16T23:23:29+00:00",
+      "sha256": "4bf283d1491425d3d2d2f55b1c211e12d54bb5bbb7c5986fa11814614bd2fa6c",
+      "source_url": "https://raw.githubusercontent.com/akarlinsky/world_mortality/main/world_mortality.csv"
     }
   },
   "network_policy": "User-Agent sent; few-and-large requests; exponential backoff with jitter; World Bank API not used (WAF-blocked 2026-08-16).",

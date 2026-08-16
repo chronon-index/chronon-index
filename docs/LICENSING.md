@@ -12,7 +12,7 @@ URL + date. All rows start (verify).
 | WHO GHO / GHE | Non-commercial clause on much content (verify) | PROBLEM for commercial product | Triangulation only — never source of record | (verify) |
 | HMD | CC BY 4.0 for HMD-constructed data (User Agreement read+snapshotted 2026-08-17: hmd_user_agreement.html, sha256 in 2026-08-17 manifest); input data excluded from CC BY | OK for constructed data with attribution | Research-grade life tables, exposures | VERIFIED 2026-08-17; access needs free account (HUMAN B-uc2-02) |
 | HMD STMF | CC BY 4.0 (STMF outputs are HMD-constructed; same evidence row as HMD) | OK with attribution | Weekly deaths nowcast | VERIFIED 2026-08-17; stmf.csv 302s to /Account/Login — NOT keyless, registration required (HUMAN B-uc2-02); G6 conflict logged |
-| World Mortality Dataset (Karlinsky & Kobak) | Open on GitHub (verify) | (verify) | Broad excess-death compilation | (verify) |
+| World Mortality Dataset (Karlinsky & Kobak) | MIT (LICENSE fetched+snapshotted 2026-08-17: wmd_LICENSE.txt) | OK | Broad excess-death compilation; keyless nowcast feed candidate | VERIFIED 2026-08-17; observed data ends 2024-12 (staleness (verify)) |
 | Eurostat weekly deaths | Eurostat standard reuse policy (verify) | OK (verify) | EU nowcast | (verify) |
 | CDC provisional deaths | US public domain (verify) | OK (verify) | US nowcast | (verify) |
 | UCDP GED | Free for research; terms (verify) | (verify) | Conflict shock feed | (verify) |

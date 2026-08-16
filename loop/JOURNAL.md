@@ -360,3 +360,20 @@ timestamps, before the loop existed.
 - Verifier: backlog re-read; deps re-validated by inspection (no dangling
   IDs introduced; B-uc2-03a deps satisfied).
 - Next: B-uc2-03a.
+
+## 2026-08-17T05:05+02:00 | B-uc2-03a | DONE
+- WMD verified + snapshotted keylessly from GitHub raw: LICENSE = MIT
+  (evidence committed; LICENSING.md row VERIFIED), world_mortality.csv
+  1.1MB / 34,423 rows / 127 countries / weekly+monthly, committed +
+  manifested. tly/wmd.py: strict parser (unknown unit / out-of-range
+  period → raise), country_series (single-unit enforced), coverage() — the
+  staleness map P7 will publish per print.
+- HONEST LIMITATION observed and pinned: the dataset's edge is 2024-12
+  (92/127 countries through 2024) — 20 months stale for a 2026 nowcast.
+  No explanation invented; whether fresher data exists elsewhere is
+  (verify) in the manifest. This materially weakens option (a) of the
+  B-uc2-02 decision and belongs in front of Ben.
+- Verifier: 6 tests (shape, pinned first/latest rows, sorted single-unit
+  series, filter errors, malformed-period rejection); suite 80 passed;
+  ruff clean.
+- Next: B-uc2-04 (baseline expected-deaths method on the WMD feed).
