@@ -85,3 +85,15 @@ timestamps, before the loop existed.
   as one bundle at 2026-08-17T00:12:54+02:00, not per-iteration.
 - Verifier: full suite re-run after all edits — see next line for result.
 - Suite green after review fixes: 2 passed (2026-08-17T00:35+02:00).
+
+## 2026-08-17T00:45+02:00 | A-12 | DONE
+- Ported parsers into the package: tly/numeric.py (Decimal prec-34
+  ROUND_HALF_EVEN context, BILLION/Q4 quanta) and tly/parsers.py (GHO ex
+  life tables with scope+completeness validation, OWID population bands as
+  frozen dataclass with uniform-within-band midpoints, OWID births).
+  seed/tly_v0_calc.py untouched (frozen ground truth).
+- Verifier: 9 new unit tests cross-check parsed values against
+  seed/results_v0.json (e0 anchors, N_persons total, band midpoints/counts
+  vs golden band_detail, births) plus error-path tests. Full suite:
+  11 passed. ruff check tly/ tests/ seed/: all checks passed.
+- Next: A-13 (port E2 estimator; package golden test to 4 dp).
