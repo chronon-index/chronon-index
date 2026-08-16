@@ -146,3 +146,15 @@ timestamps, before the loop existed.
   raise, with path names); nested/key/opaque cases; real parsed snapshot
   proven float-free. Suite: 27 passed. ruff + format clean.
 - Next: B-uc1-02 (offline-only compute wired to verify_manifest).
+
+## 2026-08-17T01:22+02:00 | B-uc1-02 | DONE
+- tly/loader.py: load_verified_snapshot — the ONE sanctioned data entry;
+  verify_manifest runs BEFORE any parsing; returns frozen VerifiedSnapshot
+  (tables, bands, births, manifest).
+- Verifier: 6 tests — happy path; hash-mismatch, missing-file,
+  missing-manifest all raise SnapshotIntegrityError; corrupted-beyond-
+  parsing file fails on INTEGRITY not parse (ordering proof); and the full
+  load+compute path runs with socket.socket monkeypatched to raise,
+  reproducing S=362.4126/Ē=44.7880 with network physically disabled.
+  Suite: 33 passed. ruff clean.
+- Next: B-uc1-03 (WPP single-age population source — network task).
