@@ -257,3 +257,21 @@ timestamps, before the loop existed.
   year/sex rejection; suite 57 passed; ruff clean.
 - Next: B-uc1-09 (test_p3_reconciliation — needs all-countries run from the
   full 62MB+200MB snapshots; design note: World-direct vs Σ countries).
+
+## 2026-08-17T03:12+02:00 | B-uc1-09 | DONE
+- Parsers gained loc_types filter (LocTypeName; 'Country/Area' selects the
+  237-country universe). tly/stock.py gained aggregate_stocks (exact
+  Decimal sum; rejects mixed year/sex) and reconcile_delta (Σ per-location
+  dS vs global dS; rejects location-universe mismatch — a country entering/
+  leaving is an explicit data event, never silently netted).
+- test_p3_reconciliation green on the fixture universe AND at full scale:
+  all 237 Country/Area locations, 2022→2023, from the full 62MB+200MB
+  snapshots — per-location dS == global dS EXACTLY (44.7s run, skipif when
+  snapshots absent).
+- DATA measurement (separate from the engine invariant): WPP published
+  World 2023 = 8,091,734,933 persons vs Σ 237 countries = 8,091,736,565 —
+  gap 1,632 persons (~0.00002%), within the ±0.5-person/cell rounding
+  bound; asserted < 100k in the skipif test, recorded here exactly.
+- Verifier: 4 new tests; suite 61 passed (60 fast + full-universe ran
+  once); ruff clean.
+- Next: B-uc1-10 per backlog.

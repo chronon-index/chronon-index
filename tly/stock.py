@@ -112,3 +112,51 @@ def build_report(
     if any(s.year != year or s.sex != sex for s in stocks):
         raise ValueError("mixed year/sex in one report")
     return StockReport(year=year, sex=sex, stocks=tuple(stocks), metadata=stamp(snapshot_dirs))
+
+
+def aggregate_stocks(stocks: list[LocationStock], *, name: str = "AGGREGATE") -> LocationStock:
+    """Exact Decimal sum of location stocks (invariant P3's global side).
+
+    The aggregate IS the sum by definition — the P3 invariant then checks
+    the accounting discipline: per-location deltas must sum to the
+    aggregate delta exactly, with no rounding step anywhere in between.
+    """
+    if not stocks:
+        raise ValueError("nothing to aggregate")
+    years = {s.year for s in stocks}
+    sexes = {s.sex for s in stocks}
+    if len(years) != 1 or len(sexes) != 1:
+        raise ValueError(f"mixed year/sex in aggregate: {years}/{sexes}")
+    return LocationStock(
+        location=name,
+        iso3=None,
+        year=years.pop(),
+        sex=sexes.pop(),
+        s_life_years=sum((s.s_life_years for s in stocks), Decimal(0)),
+        n_persons=sum((s.n_persons for s in stocks), Decimal(0)),
+    )
+
+
+def reconcile_delta(
+    start: list[LocationStock], end: list[LocationStock]
+) -> tuple[Decimal, Decimal]:
+    """(sum of per-location dS, global dS) between two epochs — must be
+    EQUAL, exactly, in Decimal (invariant P3; SPEC#1 AC-1.1).
+
+    Raises on location-set mismatch: a location entering or leaving the
+    universe is a data event that must be handled explicitly, never
+    silently netted into a delta.
+    """
+    s0 = {s.location: s for s in start}
+    s1 = {s.location: s for s in end}
+    if set(s0) != set(s1):
+        raise ValueError(
+            f"location universes differ: only-start={sorted(set(s0) - set(s1))} "
+            f"only-end={sorted(set(s1) - set(s0))}"
+        )
+    per_location = sum((s1[loc].s_life_years - s0[loc].s_life_years for loc in s0), Decimal(0))
+    global_delta = (
+        aggregate_stocks(list(s1.values())).s_life_years
+        - aggregate_stocks(list(s0.values())).s_life_years
+    )
+    return per_location, global_delta

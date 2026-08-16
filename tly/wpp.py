@@ -41,6 +41,7 @@ def parse_population_single_age(
     path: Path,
     years: set[int],
     locations: set[str] | None = None,
+    loc_types: set[str] | None = None,
 ) -> list[PopulationCell]:
     """Stream a WPP PopulationBySingleAgeSex CSV.gz into PopulationCells.
 
@@ -55,6 +56,8 @@ def parse_population_single_age(
             if row["Time"] not in year_strs:
                 continue
             if locations is not None and row["Location"] not in locations:
+                continue
+            if loc_types is not None and row["LocTypeName"] not in loc_types:
                 continue
             loc_id = int(row["LocID"])
             iso3 = row["ISO3_code"] or None
@@ -118,6 +121,7 @@ def parse_life_table_ex(
     path: Path,
     years: set[int],
     locations: set[str] | None = None,
+    loc_types: set[str] | None = None,
 ) -> list[LifeTableCell]:
     """Stream a WPP Life_Table CSV.gz (abridged or complete) into e(x) cells.
 
@@ -131,6 +135,8 @@ def parse_life_table_ex(
             if row["Time"] not in year_strs:
                 continue
             if locations is not None and row["Location"] not in locations:
+                continue
+            if loc_types is not None and row["LocTypeName"] not in loc_types:
                 continue
             cells.append(
                 LifeTableCell(
