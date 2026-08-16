@@ -161,3 +161,25 @@ The -0.0026% residual stands, documented, per amended AC-1.2. Never tuned.
 Evidence snapshots: WPP2024_Demographic_Indicators_Medium.csv.gz and
 gho_whosis_000001_global_btsx.json in data/snapshots/2026-08-17/ (manifest
 rows with sha256); pinned by tests/test_mint_gap.py.
+
+8. ADDENDUM 2026-08-17 (forward-only; B-uc1-12) — DRIFT CONVENTION RECOVERED
+----------------------------------------------------------------------------
+Search space: 8 e0-proxy conventions (WPP LEx pairs 1.13-4.29B; WHOSIS
+trends 1.90-2.71B — all miss); 5 WPP-table fixed-structure conventions
+(0.06-8.16B — all miss; also anachronistic, WPP tables were not in the v0
+snapshot); 5 WHO-vintage fixed-structure conventions (GHE vintages
+2000/2010/2015/2019/2021 — the ONLY table family v0 had).
+RESULT: drift = [S(pop2023, WHO_2019) - S(pop2023, WHO_2015)] / 4
+      = (362.4126B - 358.2550B)/4 = 1.0394B  — EXACT match at 4 dp.
+Interpretation: the annualized table-revision gain between WHO GHE's two
+most recent pre-COVID vintages, evaluated at fixed 2023 structure — the
+pre-COVID secular improvement rate, which is exactly what an organic-drift
+term should carry (COVID years route through burn, not drift).
+g chain check: with DECISIONS mint 9.6606: (9.6606-8.0917+1.0394)/362.4126
+= 0.7197%/yr — the recorded g REPRODUCES. With the reproducible mint 9.6603
+(addendum 7): g = 0.7196%/yr — the -0.0003B mint residual propagates to g
+at the 4th decimal. Both stated; neither tuned.
+STATUS: convention recovered-by-search from v0-available sources; cannot be
+proven to be the original's definition — flagged for Ben's ratification
+(A-16). Evidence: gho_ex_global_btsx_2000_2010_2015.json (committed,
+manifested); pinned by tests/test_drift_convention.py.

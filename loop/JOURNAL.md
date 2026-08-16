@@ -307,3 +307,23 @@ timestamps, before the loop existed.
 - Verifier: 4 pinning tests (mirror fidelity, year conventions, WHOSIS
   equivalence, residual arithmetic); suite 70 passed; ruff clean.
 - Next: B-uc1-12 (drift/g vintage-pair convention — the harder lost piece).
+
+## 2026-08-17T04:15+02:00 | B-uc1-12 | DONE (convention recovered)
+- Exhaustive search across 18 candidate conventions: 8 e0-proxies (miss,
+  1.13-4.29B), 5 WPP-table fixed-structure (miss, 0.06-8.16B; also
+  anachronistic — WPP tables not in v0 snapshot), 5 WHO-vintage fixed-
+  structure (GHE 2000/2010/2015/2019/2021 — v0's only table family).
+- RECOVERED: drift = [S(pop2023, WHO2019) − S(pop2023, WHO2015)]/4 =
+  (362.4126 − 358.2550)/4 = 1.0394B EXACT at 4dp. Reading: annualized
+  pre-COVID WHO-vintage revision gain at fixed structure — exactly what an
+  organic-drift term should be (COVID routes through burn, not drift).
+- g chain: with DECISIONS mint 9.6606 → g = 0.7197 (RECORDED g REPRODUCES);
+  with reproducible mint 9.6603 → 0.7196 (mint residual propagates, both
+  stated). WHO 2015 S = 358.2550B pinned.
+- Honesty: recovered-by-search ≠ proven-original; flagged for A-16. Rivals
+  pinned as non-matches (test_rejected_conventions_stay_rejected) so the
+  convention can't be quietly swapped. Evidence json committed+manifested;
+  CALC_REPORT addendum §8.
+- Verifier: 4 tests recomputing the full chain from committed snapshots;
+  suite 74 passed; ruff clean.
+- Next: B-uc1-13 blocked on A-16 (HUMAN); move to B-uc2 (nowcast) chain.

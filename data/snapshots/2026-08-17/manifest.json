@@ -157,6 +157,14 @@
       "rows": 606,
       "sha256": "12e0ec7f4ac04757021829d49ae0f3fcb26b1e69f468bba3451ee3949407c05e"
     },
+    "gho_ex_global_btsx_2000_2010_2015.json": {
+      "bytes": 33699,
+      "in_git": true,
+      "purpose": "B-uc1-12: WHO GHE historical vintages for the drift convention search",
+      "retrieved_utc": "2026-08-16T23:18:08+00:00",
+      "sha256": "835d391b95dd9e769fe621322246f85b4551460b2956cb30eec465a4f1bd7082",
+      "source_url": "https://ghoapi.azureedge.net/api/LIFE_0000000035?$filter=SpatialDim%20eq%20%27GLOBAL%27%20and%20Dim1%20eq%20%27SEX_BTSX%27%20and%20(TimeDim%20eq%202000%20or%20TimeDim%20eq%202010%20or%20TimeDim%20eq%202015)"
+    },
     "gho_whosis_000001_global_btsx.json": {
       "bytes": 13043,
       "in_git": true,
@@ -167,6 +175,6 @@
     }
   },
   "network_policy": "User-Agent sent; few-and-large requests; exponential backoff with jitter; World Bank API not used (WAF-blocked 2026-08-16).",
-  "note": "B-uc1-03: WPP 2024 population by single age x sex x country, medium variant, estimates 1950-2023 (de facto 1 July, thousands). URL verified against the WPP site's own assets/downloads.json index this iteration (the SPA has no static links). Large file: NOT committed to git \u2014 object storage pending (HUMAN); this manifest is the committed record. Verified: World 2023 sums to 8,091,734,933 persons, equal to golden N exactly. | B-uc1-04: WPP life tables added \u2014 abridged AND complete(single-age) availability CHECKED for 1950-2023. DISCREPANCY RECORDED (RP#VI r4, not averaged away): WPP world e0 both-sexes 2019=72.6093, 2021=70.865 vs WHO GHO 2019=73.123374469, 2021=71.368699065 \u2014 different estimators; the v1 switch to WPP as licensed source of record is a level change to handle via versioning. | B-uc1-11: mint-gap hypotheses h1/h2/h3 ALL REFUTED \u2014 WPP DemInd World births 2023 = 132,110,264 (identical to OWID; mirror is faithful); WHOSIS e0 2019 = 73.123374470 vs LIFE ex 73.123374469 (same quantity, last-digit rounding); no year convention (2022/2023/2024) yields 9.6606. The -0.0026% mint residual stands as documented; never tuned.",
+  "note": "B-uc1-03: WPP 2024 population by single age x sex x country, medium variant, estimates 1950-2023 (de facto 1 July, thousands). URL verified against the WPP site's own assets/downloads.json index this iteration (the SPA has no static links). Large file: NOT committed to git \u2014 object storage pending (HUMAN); this manifest is the committed record. Verified: World 2023 sums to 8,091,734,933 persons, equal to golden N exactly. | B-uc1-04: WPP life tables added \u2014 abridged AND complete(single-age) availability CHECKED for 1950-2023. DISCREPANCY RECORDED (RP#VI r4, not averaged away): WPP world e0 both-sexes 2019=72.6093, 2021=70.865 vs WHO GHO 2019=73.123374469, 2021=71.368699065 \u2014 different estimators; the v1 switch to WPP as licensed source of record is a level change to handle via versioning. | B-uc1-11: mint-gap hypotheses h1/h2/h3 ALL REFUTED \u2014 WPP DemInd World births 2023 = 132,110,264 (identical to OWID; mirror is faithful); WHOSIS e0 2019 = 73.123374470 vs LIFE ex 73.123374469 (same quantity, last-digit rounding); no year convention (2022/2023/2024) yields 9.6606. The -0.0026% mint residual stands as documented; never tuned. | B-uc1-12: drift convention RECOVERED \u2014 drift = [S(pop2023, WHO2019) - S(pop2023, WHO2015)]/4 = 1.0394B exactly at 4dp (annualized pre-COVID WHO-vintage revision gain at fixed 2023 structure). Candidate table: e0-proxies 1.13-4.29B all miss; WPP-table conventions 0.06-8.16B all miss; WHO (2019-2015)/4 matches exactly. Flagged for A-16 ratification (cannot prove it is THE original, but it reproduces the target from v0-available sources).",
   "snapshot_date": "2026-08-17"
 }
