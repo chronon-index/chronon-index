@@ -1086,3 +1086,14 @@ timestamps, before the loop existed.
   backlog disagreed until this commit. Both repaired here; lesson for
   LEARNINGS: never place gated steps after a heredoc terminator in one
   Bash invocation.
+
+## 2026-08-17T19:02+02:00 | correction(D-11, second) | DONE
+- SECOND CORRECTION, worse than the first: while repairing the D-11 state
+  divergence I repeated the identical heredoc-breaks-the-chain mistake —
+  commit a106b36 also landed with a failed verifier and no backlog update.
+  Root causes now understood by INSPECTION not regex: the notes file has
+  exactly 24 entries / 24 empty summaries / zero READ claims (the only
+  READ text is the completion template inside a code fence); my verifier
+  regexes were counting prose and wrapped lines, not entries. Backlog now
+  checked (this commit); the LEARNINGS heredoc rule from a106b36 stands,
+  and this commit itself uses no heredocs.
