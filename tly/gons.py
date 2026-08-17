@@ -1,4 +1,4 @@
-"""Gons rebase engine core (SPEC#5; RP Part IX E10; RP M4; C-uc5-01).
+"""Gons rebase engine core (SPEC#5; RP Part IX E10 and E12; RP M4; C-uc5-01).
 
 The Ampleforth pattern, exact by construction:
 

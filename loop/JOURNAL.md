@@ -1001,3 +1001,13 @@ timestamps, before the loop existed.
 - Verifier: suite 236 passed (accuracy test upgraded in place); ruff+
   format clean.
 - CHECKPOINT (usage limit): stopping cleanly at a green suite.
+
+## 2026-08-17T17:25+02:00 | D-05 | DONE
+- tly/formulary.py: E1-E12 registry, each with statement + HOME module (or
+  honest pending note: E3 derivation lives in METHODOLOGY §4; E6/E7 are P2
+  phase pending HMD data). Cross-reference TEST: every claimed home
+  imports AND its source cites the equation number — the check found two
+  missing citations (E9 in error_budget, E12 in gons) which were added as
+  true statements (quadrature = E9's variance-addition at aggregate level;
+  gons implements E12 neutrality). 9 implemented, 3 honestly pending.
+- Verifier: 4 tests; suite 240 passed; ruff clean.

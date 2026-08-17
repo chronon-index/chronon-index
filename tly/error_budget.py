@@ -1,4 +1,8 @@
-"""Deterministic error budget (RP Part VIII; SPEC#2 AC-2.4; D-03).
+"""Deterministic error budget (RP Part VIII; RP Part IX E9; SPEC#2 AC-2.4; D-03).
+
+The quadrature over independent symmetric terms IS the E9 variance-addition
+rule applied at aggregate level; full per-age Var(S) propagation arrives at
+rung 4 with the Monte Carlo budget.
 
 The v0 accuracy statement, module-produced — never hand-typed. Two kinds
 of terms with OPPOSITE handling, exactly as Part VIII prescribes:
