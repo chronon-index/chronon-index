@@ -1238,3 +1238,20 @@ timestamps, before the loop existed.
 - Backlog state: every executable non-HUMAN task is now DONE. Remaining
   open items are HUMAN gates (A-16/A-17, HMD account+ruling, ACLED/EM-DAT,
   counsel, trademark, readings, accounts) and their dependent chains.
+
+## 2026-08-17T11:05+02:00 | B-uc4-09 | DONE (found by the dep-graph audit)
+- The frontier-verification script (dep-graph walk: does every open
+  non-HUMAN task transitively root in an open HUMAN gate?) caught
+  B-uc4-09 as still executable — my ad-hoc grep filters had hidden it.
+  Machine-checking the frontier claim instead of eyeballing it is what
+  found the gap.
+- Substance beyond E-01/D-10: LIVENESS — test proves an artifact edit
+  (a probe entry appended to a staged copy of the correction ledger)
+  appears in the next site build, and the vintage-archive page tracks the
+  staged manifests (one vintage staged -> one vintage rendered). No stale
+  intermediate copies exist between git and the site.
+- Verifier: 1 test (staged-repo liveness probe); suite 276 passed;
+  ruff+format clean.
+- Frontier audit result this iteration: 120 tasks, 86 done -> 87 with
+  this one; re-run of the graph walk is next iteration's opening move —
+  expect FRONTIER CONFIRMED.

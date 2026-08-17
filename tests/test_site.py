@@ -79,3 +79,48 @@ def test_d10_site_map_complete(tmp_path):
     for name in mandated:
         page = (tmp_path / "site" / f"{name}.html").read_text(encoding="utf-8")
         assert "vintage-archive.html" in page
+
+
+def test_b4_09_pages_render_from_live_artifacts(tmp_path):
+    """B-uc4-09: the named pages source from the LIVE repo artifacts — a
+    change to the artifact appears in the rendered page on the next build,
+    proving no stale intermediate copy exists between git and the site."""
+    import shutil
+
+    stage = tmp_path / "repo"
+    for rel in ("README.md", "METHODOLOGY_v0.md"):
+        (stage / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(REPO / rel, stage / rel)
+    for rel in (
+        "docs/LICENSING.md",
+        "docs/METHODOLOGY_CHANGELOG.md",
+        "docs/METHODOLOGY_CHANGE_PROCESS.md",
+        "docs/REPRODUCE_FIXING.md",
+        "docs/GLOSSARY.md",
+        "docs/FAQ.md",
+        "docs/API_REFERENCE.md",
+        "ledger/CORRECTIONS.md",
+    ):
+        (stage / rel).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(REPO / rel, stage / rel)
+    snap_dir = stage / "data" / "snapshots" / "2026-08-16"
+    snap_dir.mkdir(parents=True)
+    shutil.copy2(
+        REPO / "data" / "snapshots" / "2026-08-16" / "manifest.json",
+        snap_dir / "manifest.json",
+    )
+
+    build_site(tmp_path / "v1", repo_root=stage)
+    before = (tmp_path / "v1" / "site" / "correction-ledger.html").read_text()
+    assert "C-9999" not in before
+
+    with (stage / "ledger" / "CORRECTIONS.md").open("a") as f:
+        f.write("\n## C-9999 | 2026-08-17 | liveness-probe\n- artifact edit visible\n")
+    build_site(tmp_path / "v2", repo_root=stage)
+    after = (tmp_path / "v2" / "site" / "correction-ledger.html").read_text()
+    assert "C-9999" in after  # ledger page tracks the live ledger
+
+    # vintage archive tracks live manifests too
+    archive = (tmp_path / "v2" / "site" / "vintage-archive.html").read_text()
+    assert "Vintage 2026-08-16" in archive
+    assert "Vintage 2026-08-17" not in archive  # staged repo has only one vintage
