@@ -1097,3 +1097,17 @@ timestamps, before the loop existed.
   regexes were counting prose and wrapped lines, not entries. Backlog now
   checked (this commit); the LEARNINGS heredoc rule from a106b36 stands,
   and this commit itself uses no heredocs.
+
+## 2026-08-17T19:20+02:00 | E-01 | DONE
+- tly/site.py: files-only generator — 9 pages rendered from committed
+  artifacts (README, METHODOLOGY, LICENSING, changelog, correction ledger,
+  change process, reproduce doc, glossary, FAQ) into a minimal HTML shell
+  with zero JavaScript and all content HTML-escaped: the site cannot
+  mangle or inject into a governance document; what renders is
+  byte-derived from git. Markdown treatment minimal and total (headers,
+  fences, paragraphs; unterminated fences still yield valid HTML).
+- Verifier: 4 tests — every page renders, double build byte-identical,
+  no-scripts sweep, and load-bearing text faithfulness (C-0001 in the
+  ledger page, the pricing-lives response in the FAQ page). Suite 244
+  passed; ruff+format clean. No heredocs in this iteration.
+- Next: D-10 (site map wiring — deps just cleared).
