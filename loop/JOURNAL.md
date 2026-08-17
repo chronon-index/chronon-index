@@ -700,3 +700,16 @@ timestamps, before the loop existed.
   tampered-metadata break, unchained-file detection. Suite 160 passed;
   ruff+format clean.
 - Next: B-uc4-10 (negative lineage tests) or next open per rule.
+
+## 2026-08-17T11:18+02:00 | B-uc4-10 | DONE
+- The three AC-4.1 negative classes proven through the full PUBLISH path
+  (not just the lineage checker in isolation): orphan number (zero cited
+  snapshots), missing provenance block (schema gate catches before
+  lineage), negative value (lineage non-negativity) — each raises
+  PublishBlocked naming its cause, and each leaves no site directory
+  behind. Plus the all-three-at-once case: every violation reported
+  together, not first-failure-only.
+- Verifier: 4 tests; suite 164 passed; ruff clean.
+- SPEC#4 status: AC-4.1/4.4/4.6 green + archive; 4.2/4.3/4.5-CI wait on
+  A-17 (remote) / E-02 (OTS) / E-04 (stale flag). Next per priority rule:
+  C-uc5-01 (gons engine core) — Phase C begins.
