@@ -1147,3 +1147,16 @@ timestamps, before the loop existed.
   LEARNINGS: journal writes go through heredoc-fed python (quoting-safe),
   never shell-interpolated -c strings — inverse of the earlier heredoc
   rule: heredocs for CONTENT, flat chains for CONTROL FLOW.
+
+## 2026-08-17T20:30+02:00 | E-03 | DONE
+- tly/vintages.py: ALFRED-style addressing — list_vintages (manifested,
+  date-named dirs only), manifest_for(vintage), vintage_as_of(query) =
+  latest vintage <= query, with pre-first-vintage queries an ERROR (no
+  silent extrapolation into a data world that did not exist).
+- Never-delete at the VINTAGE level made explicit:
+  test_every_historical_vintage_still_present walks all git history for
+  snapshot directories and requires each in HEAD — complementing the
+  file-level immutability gates.
+- Verifier: 4 tests (real-tree listing, per-vintage manifests, as-of
+  resolution incl. future query -> latest, history walk). Suite 255
+  passed; ruff+format clean.
