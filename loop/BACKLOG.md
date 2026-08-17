@@ -109,7 +109,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] C-uc5-03 | deps: C-uc5-02 | refs: SPEC#5 AC-5.1, RP#X-P1 | test_p1_conservation: Σ balances = M(t) after every operation, exactly (done 2026-08-17)
 - [x] C-uc5-04 | deps: C-uc5-01 | refs: SPEC#5 AC-5.2, RP#X-P2 | test_p2_share_invariance: share vector identical across any rebase/F path (done 2026-08-17)
 - [x] C-uc5-05 | deps: C-uc5-01 | refs: SPEC#5 AC-5.5, DEC#3 | Transfer log; test_transfer_only_share_change: no transfers → bit-identical shares across any epoch sequence; with transfers → share deltas equal transfer amounts exactly (done 2026-08-17)
-- [ ] C-uc5-06 | deps: C-uc5-04 | refs: SPEC#5 AC-5.3, RP#IX-E12, DEC#4 | test_e12_neutrality: wealth neutrality (d(value)/d(rebase) = 0) and mortality neutrality (d(s_i)/d(deaths) = 0); mass-death scenario shrinks every balance pro-rata, no share grows
+- [x] C-uc5-06 | deps: C-uc5-04 | refs: SPEC#5 AC-5.3, RP#IX-E12, DEC#4 | test_e12_neutrality: wealth neutrality (d(value)/d(rebase) = 0) and mortality neutrality (d(s_i)/d(deaths) = 0); mass-death scenario shrinks every balance pro-rata, no share grows (done 2026-08-17)
 - [ ] C-uc5-07 | deps: C-uc5-01 | refs: SPEC#5 AC-5.6, DEC#2 | Genesis calibration: M = κ·S with κ = 1 token per life-year; display conversion 1 year = 8,766 h; Decimal end to end
 - [ ] C-uc5-08 | deps: C-uc5-03, C-uc5-05 | refs: SPEC#5 AC-5.4, RALPH#7 | Perf gate: 10,000 wallets × 600 epochs < 5 s; scaling benchmark asserts rebase cost is O(1) in wallet count
 

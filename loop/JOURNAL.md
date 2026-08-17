@@ -783,3 +783,18 @@ timestamps, before the loop existed.
   balance-unit transfers log their truncated gons amount.
 - Verifier: 3 tests; suite 186 passed; ruff+format clean.
 - Next: C-uc5-06 (test_e12_neutrality) then C-uc5-07/08.
+
+## 2026-08-17T13:00+02:00 | C-uc5-06 | DONE
+- test_e12_neutrality (named per AC-5.3) green: wallet values computed in
+  EXACT Fraction arithmetic (s_i × exogenous cap — rounding can neither
+  manufacture nor hide a violation). Organic weekly epoch (+0.0138%) →
+  values identical (wealth neutrality). COVID-scale mass-death down-rebase
+  (337M life-years, the DECISIONS upper band) → shares bit-identical
+  (d(s)/d(deaths)=0), values identical, every balance shrinks by exactly
+  (M−burn)/M — pro-rata, no share grows. Value RATIOS exact-invariant
+  under wild rebase paths; the E11 display layer obeys the same shrink.
+- The METHODOLOGY §6 proofs (wealth + mortality neutrality) both now have
+  machine checks, closing RP#I M4's "write both as machine-checkable
+  properties" requirement.
+- Verifier: 3 tests; suite 189 passed; ruff clean.
+- Next: C-uc5-07 (genesis calibration κ=1, hours display).
