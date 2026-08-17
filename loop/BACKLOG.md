@@ -125,7 +125,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 
 ### SPEC#7 — settlement fixing module
 
-- [ ] C-uc7-01 | deps: B-uc4-08 | refs: SPEC#7 AC-7.6, DEC#9 | Fixing record schema: value, epoch timestamp, methodology version, snapshot manifest hashes, source URLs, DRAFT → FINAL lifecycle; incomplete provenance fails validation
+- [x] C-uc7-01 | deps: B-uc4-08 | refs: SPEC#7 AC-7.6, DEC#9 | Fixing record schema: value, epoch timestamp, methodology version, snapshot manifest hashes, source URLs, DRAFT → FINAL lifecycle; incomplete provenance fails validation (done 2026-08-17)
 - [ ] C-uc7-02 | deps: C-uc7-01 | refs: SPEC#7 AC-7.1, RP#X-P4, DEC#7 | test_p4_immutability: any mutation of a FINAL print raises; corrections route to the ledger and next epoch only
 - [ ] C-uc7-03 | deps: C-uc7-01 | refs: SPEC#7 AC-7.2, DEC#7 | First-print-settles enforcement: the fixing equals the first published print for the epoch, always; a later "better" value never replaces it; test
 - [ ] C-uc7-04 | deps: C-uc7-01 | refs: SPEC#7 AC-7.3, DEC | Dispute log: 48 h window, append-only, log-only; a filed dispute alters nothing and delays nothing; test

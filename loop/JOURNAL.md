@@ -886,3 +886,16 @@ timestamps, before the loop existed.
   correction completeness.
 - Verifier: 4 tests; suite 211 passed; ruff+format clean.
 - Next: C-uc7 chain (settlement fixing module) per priority rule.
+
+## 2026-08-17T14:48+02:00 | C-uc7-01 | DONE
+- tly/fixings.py: Fixing — provenance-complete BY CONSTRUCTION (epoch,
+  Decimal value, methodology version, ≥1 snapshot-file sha256 [format-
+  checked], http(s)-only source URLs; incomplete provenance cannot exist,
+  not merely fail-validate-later). DRAFT→FINAL one-way lifecycle: drafts
+  correctable; finalize() computes the canonical-render sha256; after
+  FINAL, EVERY attribute write raises with the DEC#7 message (corrections
+  → ledger + next epoch). Identical content ⇒ identical fixing hash
+  (recomputer comparison anchor).
+- Verifier: 4 tests (lifecycle, 8 construction rejections, render field
+  coverage, hash-binds-to-content). Suite 215 passed; ruff+format clean.
+- Next: C-uc7-02 (test_p4_immutability — the last unnamed invariant test).
