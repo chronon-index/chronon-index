@@ -1040,3 +1040,12 @@ timestamps, before the loop existed.
   citations.
 - Verifier: doc re-read against the rule; suite state 240; tree clean
   after commit.
+
+## 2026-08-17T18:15+02:00 | D-08 | DONE
+- docs/GLOSSARY.md: all 12 mandated terms + gons, every definition
+  ASSEMBLED from repo sources with the source cited per entry (DECISIONS /
+  RP / module paths); the saeculum entry carries its (verify) on the Roman
+  sources and preserves the never-Strauss-Howe rule; drift's entry flags
+  its recovered-pending-ratification status.
+- Verifier: term list checked against the backlog line (all present);
+  no code changes; tree clean after commit.
