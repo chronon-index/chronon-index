@@ -668,3 +668,20 @@ timestamps, before the loop existed.
   mismatch, unknown snapshot, orphan print, negative stock.
 - Verifier: 4 tests; suite 149 passed; ruff+format clean.
 - Next: B-uc4-05 (publish gate) — B-uc4-04 needs A-17 (HUMAN, remote).
+
+## 2026-08-17T10:45+02:00 | B-uc4-05 | DONE
+- tly/publish.py: publish_prints — the ONE sanctioned publish path. Build
+  into staging → run ALL gates (consumer schema per artifact, API
+  integrity + closed-world index, static-only, P9 lineage) → atomic swap;
+  one prior tree retained as .previous. On ANY failure: staging destroyed,
+  PublishBlocked carries every violation, the existing published tree is
+  byte-for-byte untouched — a bad print can block a publish but never
+  half-publish or damage what is public.
+- Tests simulate the realistic bypass (object.__setattr__ on the frozen
+  dataclass — future code drift past constructor validation): bad label,
+  gutted accuracy, ghost-snapshot lineage each block; happy path,
+  previous-tree preservation (byte-compared), staging cleanup, and
+  republish retiring the prior tree all verified.
+- Verifier: 5 tests; suite 154 passed; ruff+format clean.
+- Next: B-uc4-04 needs A-17 (HUMAN); B-uc4-06/07 check deps next
+  iteration; else uc5/D-phase per priority rule.
