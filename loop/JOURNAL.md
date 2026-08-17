@@ -970,3 +970,20 @@ timestamps, before the loop existed.
   P5-phase HUMAN milestone by nature).
 - Verifier: 3 tests; suite 230 passed; ruff clean.
 - Next: D-03 (error-budget module — unblocks B-uc2-09).
+
+## 2026-08-17T16:45+02:00 | D-03 | DONE
+- tly/error_budget.py: symmetric terms (±1.0/±1.5/±0.5%) in Decimal
+  quadrature = 1.8708% ("~±2%"); one-sided terms (vintage lag +2–3%,
+  period-vs-cohort +3–8%) LISTED never netted, structurally excluded from
+  the quadrature set (tested disjoint); interval brackets measured S;
+  cohort band = S×1.05 .. S×1.11.
+- Module-produced statement: "Measured-period S = 362.4B ± ~1.9% ... 
+  cohort stock ~ 381-402B ...". HONEST DEVIATION from DECISIONS prose
+  ("380-400B"): 362.4126×1.05 = 380.53B → 381 at whole-billion rounding,
+  and ×1.11 = 402.3 → 402. The module emits computed values; the prose had
+  rounded loosely. Never tuned; noted in module docstring + backlog.
+- Retirement path stated: Monte Carlo intervals replace this at rung 4 via
+  version bump.
+- Verifier: 6 tests; suite 236 passed; ruff+format clean.
+- Next: B-uc2-09 (wire this budget into every print — its dep just
+  cleared) per priority rule.
