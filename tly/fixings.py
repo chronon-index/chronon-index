@@ -103,3 +103,58 @@ class Fixing:
         digest = hashlib.sha256(self.render().encode("utf-8")).hexdigest()
         object.__setattr__(self, "fixing_hash", digest)
         return digest
+
+
+def settle_from_archive(archive, epoch_utc: str, snapshots_root) -> Fixing:
+    """The ONE way to produce a settlement fixing (SPEC#7 AC-7.2; DEC#7):
+    read the epoch's print from the archive and finalize a fixing carrying
+    that print's value, its cited snapshot hashes, and the REAL source
+    URLs looked up from the committed manifests those hashes point into.
+
+    First-print-settles holds by composition: the archive accepts exactly
+    one print per epoch (re-appends raise), and this function reads only
+    the archive — so the fixing can never see a later "better" value, and
+    settling the same epoch twice yields byte-identical fixings.
+    """
+    import json as _json
+    from pathlib import Path as _Path
+
+    chain = archive.verify()
+    link = next((c for c in chain if c["epoch_utc"] == epoch_utc), None)
+    if link is None:
+        raise FixingValidationError(
+            f"no archived print for epoch {epoch_utc} — a fixing cannot precede its print"
+        )
+    record = _json.loads((archive.root / link["file"]).read_text(encoding="utf-8"))
+    prov = record["provenance"]
+
+    urls: list[str] = []
+    root = _Path(snapshots_root)
+    for snap, files in sorted(prov["snapshots"].items()):
+        manifest_path = root / snap / "manifest.json"
+        if not manifest_path.is_file():
+            raise FixingValidationError(f"cited snapshot {snap} has no manifest")
+        rows = _json.loads(manifest_path.read_text(encoding="utf-8"))["files"]
+        for name in sorted(files):
+            row = rows.get(name)
+            if row is None:
+                raise FixingValidationError(f"cited file {snap}/{name} not in manifest")
+            url = row.get("source_url")
+            if url:
+                urls.append(url)
+            elif row.get("derived_from"):
+                parent = rows.get(row["derived_from"], {})
+                if parent.get("source_url"):
+                    urls.append(parent["source_url"])
+    if not urls:
+        raise FixingValidationError("no source URLs resolvable from cited manifests")
+
+    fixing = Fixing(
+        epoch_utc=epoch_utc,
+        value=Decimal(record["s_life_years"]),
+        methodology_version=prov["methodology_version"],
+        snapshot_hashes=prov["snapshots"],
+        source_urls=tuple(dict.fromkeys(urls)),  # dedupe, keep order
+    )
+    fixing.finalize()
+    return fixing

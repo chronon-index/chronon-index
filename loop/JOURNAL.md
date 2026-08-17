@@ -913,3 +913,19 @@ timestamps, before the loop existed.
   an executable procedure, not a policy sentence.
 - Verifier: 2 tests; suite 217 passed; ruff+format clean.
 - Next: C-uc7-03 (first-print-settles enforcement).
+
+## 2026-08-17T15:25+02:00 | C-uc7-03 | DONE
+- settle_from_archive added to tly/fixings.py: the ONE way to produce a
+  fixing — reads the epoch's print from the archive (which admits exactly
+  one print per epoch), resolves REAL source URLs from the committed
+  manifests the print's hashes cite (derived files resolve through their
+  parent's URL; missing manifests/rows fail; my first draft used
+  placeholder URLs — rewritten before commit, fabrication-flavored
+  evidence is not evidence).
+- First-print-settles holds BY COMPOSITION and is tested with the real
+  pipeline print: fixing == first print; a "better" recomputation cannot
+  enter the archive; re-settling is byte-identical (same fixing hash);
+  fixing-before-print raises; fixing URLs really contain the WHO GHO and
+  OWID endpoints.
+- Verifier: 3 tests; suite 220 passed; ruff+format clean.
+- Next: C-uc7-04 (48h dispute log, log-only).
