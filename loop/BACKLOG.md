@@ -104,7 +104,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 
 ### SPEC#5 — O(1) gons rebase engine
 
-- [ ] C-uc5-01 | deps: A-13 | refs: SPEC#5, RP#IX-E10, RP#M4 | Gons engine core: balance_i = gons_i / F; rebase multiplies the global factor F only; Decimal precision/overflow analysis documented
+- [x] C-uc5-01 | deps: A-13 | refs: SPEC#5, RP#IX-E10, RP#M4 | Gons engine core: balance_i = gons_i / F; rebase multiplies the global factor F only; Decimal precision/overflow analysis documented (done 2026-08-17)
 - [ ] C-uc5-02 | deps: C-uc5-01 | refs: SPEC#5 AC-5.1, RP#IX-E11 | Largest-remainder allocation: floor to quantum, distribute residual quanta by descending fractional part; sum of parts equals total exactly; tests
 - [ ] C-uc5-03 | deps: C-uc5-02 | refs: SPEC#5 AC-5.1, RP#X-P1 | test_p1_conservation: Σ balances = M(t) after every operation, exactly
 - [ ] C-uc5-04 | deps: C-uc5-01 | refs: SPEC#5 AC-5.2, RP#X-P2 | test_p2_share_invariance: share vector identical across any rebase/F path

@@ -713,3 +713,21 @@ timestamps, before the loop existed.
 - SPEC#4 status: AC-4.1/4.4/4.6 green + archive; 4.2/4.3/4.5-CI wait on
   A-17 (remote) / E-02 (OTS) / E-04 (stale flag). Next per priority rule:
   C-uc5-01 (gons engine core) — Phase C begins.
+
+## 2026-08-17T11:40+02:00 | C-uc5-01 | DONE (Phase C opened)
+- tly/gons.py: integer-gons ledger (G = 10^30, Python ints — arbitrary
+  precision, NO Decimal rounding in the ledger layer, ever). balance_i =
+  gons_i/F; rebase sets F = G/M (F multiplier = M_old/M_new), touching no
+  wallet; share(wallet) returns the EXACT integer pair (gons_i, G) — the
+  P2 quantity with no division anywhere. transfer_balance converts by
+  truncation (Ampleforth convention), returns gons moved. Precision/
+  overflow analysis documented in the module docstring (F≈2.8e18 inside
+  prec 34; 1 gon ≈ 3.6e-19 tokens = dust; display Σ-exactness delegated to
+  the E11 layer at C-uc5-02).
+- KEY DESIGN: conservation and share-invariance live in INTEGER facts,
+  immune to any Decimal context — the exactness P1/P2 demand cannot be
+  eroded by a rounding-mode change.
+- Verifier: 7 tests (conservation, rebase-touches-nothing, bit-identical
+  shares across a 4-rebase path, balance∝M, truncation bounds, 5 illegal
+  ops, documented bounds hold). Suite 171 passed; ruff+format clean.
+- Next: C-uc5-02 (E11 display layer over the ledger).
