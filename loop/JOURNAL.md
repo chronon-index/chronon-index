@@ -822,3 +822,17 @@ timestamps, before the loop existed.
   log, AC-5.6 genesis calibration — all green named tests.
 - Verifier: 2 tests; suite 195 passed; ruff clean.
 - Next: C-uc6-01 (scenario lab: deterministic seeds).
+
+## 2026-08-17T13:40+02:00 | C-uc6-01 | DONE
+- tly/scenarios.py: Scenario as pure DATA (JSON-roundtrippable, pinned int
+  seed, validated shocks) + run_scenario as a pure function — RNG only
+  from Random(seed), no clocks/entropy/global state. v1 shape: initial S,
+  weekly growth, seeded jitter (bp), discrete (epoch, burn) shocks —
+  enough to script organic decades and pandemic weeks over the gons
+  engine. Deterministic render for byte-diffing.
+- test_deterministic_seeds (named per AC-6.4) green: identical seeds →
+  byte-identical outputs; different seed diverges (proving the jitter path
+  is really seed-driven); JSON roundtrip re-runs identically; jitter_bp=0
+  is seed-independent exact compounding (the deterministic backbone).
+- Verifier: 4 tests; suite 199 passed; ruff+format clean.
+- Next: C-uc6-02+ per backlog (scenario lab continues).
