@@ -56,6 +56,11 @@ class PrintArchive:
 
     def append(self, p: WeeklyPrint) -> str:
         """Append one print; returns its record hash."""
+        if not isinstance(p, WeeklyPrint):
+            raise ArchiveImmutabilityError(
+                f"print storage accepts WeeklyPrint only, got {type(p).__name__} "
+                "— simulations stay in the lab (SPEC#6 AC-6.5)"
+            )
         chain = self._load_chain()
         epoch_dt = validate_epoch(p.epoch_utc)
         if chain:

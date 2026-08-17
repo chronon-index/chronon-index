@@ -836,3 +836,15 @@ timestamps, before the loop existed.
   is seed-independent exact compounding (the deterministic backbone).
 - Verifier: 4 tests; suite 199 passed; ruff+format clean.
 - Next: C-uc6-02+ per backlog (scenario lab continues).
+
+## 2026-08-17T13:55+02:00 | C-uc6-02 | DONE
+- Simulation isolation as THREE independent walls: (1) render() itself
+  emits series_label=SIMULATION — no caller can forget it; (2)
+  PrintArchive.append type-rejects non-WeeklyPrint with an explicit
+  "simulations stay in the lab" error, archive verified untouched after
+  the attempt; (3) SIMULATION is not a constructible print label — a
+  simulation cannot be disguised as a print even deliberately.
+- test_simulation_isolation (named per AC-6.5) green + the all-renders-
+  labeled sweep. Suite 205 passed; ruff+format clean.
+- Next: C-uc6-05 or C-uc6-06 (C-uc6-03/04 need D-01 HMD data — HUMAN-
+  gated account); C-uc7 chain also opens.

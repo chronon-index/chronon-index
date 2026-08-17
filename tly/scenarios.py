@@ -1,5 +1,10 @@
 """Scenario lab: definitions and deterministic execution (SPEC#6; C-uc6-01).
 
+Lab outputs are SIMULATIONS, never prints: every rendered result carries
+the SIMULATION label (C-uc6-02), the label is not a valid print series
+label, and print storage type-rejects lab objects — three independent
+walls between what-if and what-is.
+
 A scenario is DATA — a JSON-serializable definition with a pinned integer
 seed — and running one is a pure function of that definition: identical
 definitions produce byte-identical rendered results (RP M5 deterministic
@@ -22,6 +27,8 @@ from decimal import Decimal
 
 from tly.gons import GonsLedger, genesis_ledger
 from tly.guard import assert_decimal
+
+SIMULATION_LABEL = "SIMULATION"
 
 
 @dataclass(frozen=True)
@@ -79,6 +86,7 @@ class ScenarioResult:
         return (
             json.dumps(
                 {
+                    "series_label": SIMULATION_LABEL,
                     "scenario": self.scenario.to_dict(),
                     "m_series": [str(m) for m in self.m_series],
                     "shocks_applied": [[e, str(b)] for e, b in self.shocks_applied],
