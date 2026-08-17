@@ -809,3 +809,16 @@ timestamps, before the loop existed.
   rejection). Suite 193 passed; ruff clean.
 - Next: C-uc5-08 (10k wallets × 600 epochs < 5s perf gate) — the last
   SPEC#5 task.
+
+## 2026-08-17T13:25+02:00 | C-uc5-08 | DONE — SPEC#5 COMPLETE
+- Perf gate green with 1600x headroom: 10,000 wallets × 600 epochs (each
+  epoch one rebase + 5 transfers) measured 0.003s against the 5s RALPH
+  Phase C gate; conservation still exact after the run. O(1) benchmark:
+  1,000 rebases at 100 vs 10,000 wallets — no scaling (architecturally
+  exact: rebase is a single Decimal multiply; the generous 3x noise budget
+  never approached).
+- SPEC#5 (Mirror gons engine) COMPLETE: AC-5.1 conservation+E11, AC-5.2
+  share invariance, AC-5.3 E12 neutrality, AC-5.4 perf, AC-5.5 transfer
+  log, AC-5.6 genesis calibration — all green named tests.
+- Verifier: 2 tests; suite 195 passed; ruff clean.
+- Next: C-uc6-01 (scenario lab: deterministic seeds).
