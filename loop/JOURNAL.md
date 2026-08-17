@@ -1348,3 +1348,17 @@ timestamps, before the loop existed.
   cites every manifest file, and the gate refused the unknown prefix.
   Fixed by classifying vaupel_ as literature-evidence (None), which is
   true. Suite green again (279 passed) — verified under pipefail.
+
+## 2026-08-17T20:20+02:00 | D-14(research portion) + D-06b(attempted) | DONE/BLOCKED
+- D-06b browser route ATTEMPTED and blocked: the Chrome extension is not
+  connected in this session (and iosco.org 403s curl under two UAs).
+  Stays HUMAN-or-browser; one honest attempt, no hammering.
+- D-14 research portion delivered (docs/TRADEMARK_PRELIM.md — explicitly
+  NOT legal advice): CoinGecko exact-"chronon" = 0 coins (name still
+  untaken, consistent with the 2026-08-16 resolution note); the flagged
+  neighborhood is live — CRO at rank 36 (the opposition concern), and a
+  CHR-symbol project (Chronos Finance, unranked) still lists, refining
+  DECISIONS' "defunct" note. Domain sweep: clean .com/.io taken
+  (chronon.io on Afternic aftermarket), chronon.xyz and tly.finance look
+  open; saeculum.com parked. Register searches remain counsel work.
+- Verifier: sweep outputs above; suite unchanged (279, pipefail-gated).
