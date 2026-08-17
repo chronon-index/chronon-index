@@ -145,7 +145,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] D-07 | deps: A-08 | refs: RP#XI | Whitepaper skeleton: the 7 sections of the Part XI outline, structure and pointers only, no invented content (done 2026-08-17)
 - [x] D-08 | deps: - | refs: RP#XI | Glossary: chronon, CHRONON, TLY, saeculum, E-bar, mint/spend/drift/burn, epoch, print, fixing, vintage, measured vs cohort series (done 2026-08-17)
 - [x] D-09 | deps: D-08 | refs: RP#XI, RP#V | FAQ + one-pager, including the pre-written "you are pricing human lives" response (VSL/QALY precedent: governments already do, in the open) (done 2026-08-17)
-- [ ] D-10 | deps: E-01 | refs: RP#XI | Docs site map wired: home / methodology / data & licenses / API reference / changelog / correction ledger / governance / vintage archive
+- [x] D-10 | deps: E-01 | refs: RP#XI | Docs site map wired: home / methodology / data & licenses / API reference / changelog / correction ledger / governance / vintage archive (done 2026-08-17)
 - [x] D-11 | deps: - | refs: RALPH#5, RP#III | Literature NOTES templates for R1–R7: citation slots + empty summaries marked (verify); never fake summaries of unread papers — fetch and read first or leave empty (done 2026-08-17: 24 entries, all UNREAD, summaries empty — verified by inspection)
 - [ ] D-12 | deps: - | refs: RP#III | HUMAN: textbook + paper reading program (R1 Preston/Keyfitz/Wachter/Vaupel; R2 mortality models; R3 longevity markets; R4 IOSCO/BMR/Wheatley; R6 mechanism precedents; R7 Becker 1965)
 - [ ] D-13 | deps: - | refs: RP#III-R5, RP#IV-P5 | HUMAN: counsel memos — MiCA classification, SEC/Howey analysis, jurisdiction choice (FINMA Zug / Cayman / UK)

@@ -1111,3 +1111,15 @@ timestamps, before the loop existed.
   ledger page, the pricing-lives response in the FAQ page). Suite 244
   passed; ruff+format clean. No heredocs in this iteration.
 - Next: D-10 (site map wiring — deps just cleared).
+
+## 2026-08-17T19:45+02:00 | D-10 | DONE
+- The mandated 8-page site map is complete: docs/API_REFERENCE.md written
+  (assembled from tly/api.py + the print schema — layout, field semantics,
+  integrity procedure, append-only stability rule) and registered; the
+  vintage-archive page is SYNTHESIZED from the committed manifests at
+  build time (per-vintage file counts, committed-vs-manifest-only split,
+  truncated hashes) — the page IS the manifest record restated, nothing
+  invented. One complete nav on every page.
+- Verifier: test_d10_site_map_complete (all 8 mandated pages, real vintage
+  content from both snapshot dates, nav completeness) + the page-set test
+  updated for the synthesized page. Suite 245 passed; ruff clean.

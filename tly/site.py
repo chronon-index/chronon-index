@@ -30,6 +30,7 @@ PAGES: dict[str, tuple[str, str]] = {
     "reproduce": ("Reproduce a fixing", "docs/REPRODUCE_FIXING.md"),
     "glossary": ("Glossary", "docs/GLOSSARY.md"),
     "faq": ("FAQ", "docs/FAQ.md"),
+    "api-reference": ("API reference", "docs/API_REFERENCE.md"),
 }
 
 _SHELL = """<!DOCTYPE html>
@@ -89,13 +90,50 @@ def _render_markdown(text: str) -> str:
     return "\n".join(out)
 
 
+def _vintage_archive_markdown(repo_root: Path) -> str:
+    """Synthesize the vintage-archive page from the committed manifests —
+    the page IS the manifest record, restated; nothing is invented."""
+    import json
+
+    lines = [
+        "# Vintage archive",
+        "",
+        "Every dated snapshot generation, from the committed manifests.",
+        "Vintages are immutable: upstream revisions create NEW vintages",
+        "beside the old (first print settles; RP Part VI).",
+        "",
+    ]
+    root = repo_root / "data" / "snapshots"
+    for d in sorted(p for p in root.iterdir() if p.is_dir()):
+        mf = d / "manifest.json"
+        if not mf.is_file():
+            continue
+        manifest = json.loads(mf.read_text(encoding="utf-8"))
+        files = manifest.get("files", {})
+        committed = sum(1 for r in files.values() if r.get("in_git") is not False)
+        lines.append(f"## Vintage {d.name}")
+        lines.append("")
+        lines.append(
+            f"{len(files)} manifested files ({committed} committed, "
+            f"{len(files) - committed} manifest-only large files)."
+        )
+        lines.append("")
+        lines.append("```")
+        for name, row in sorted(files.items()):
+            lines.append(f"{row.get('sha256', '?')[:16]}…  {name}")
+        lines.append("```")
+        lines.append("")
+    return "\n".join(lines)
+
+
 def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
-    """Render every registered page; returns {page: relative html path}."""
+    """Render every registered page + the synthesized vintage archive."""
     site = out_dir / "site"
     site.mkdir(parents=True, exist_ok=True)
-    nav = " · ".join(
-        f'<a href="{name}.html">{html.escape(title)}</a>' for name, (title, _) in PAGES.items()
-    )
+    all_names = list(PAGES) + ["vintage-archive"]
+    titles = {name: PAGES[name][0] for name in PAGES}
+    titles["vintage-archive"] = "Vintage archive"
+    nav = " · ".join(f'<a href="{name}.html">{html.escape(titles[name])}</a>' for name in all_names)
     written: dict[str, str] = {}
     for name, (title, source_rel) in PAGES.items():
         source = repo_root / source_rel
@@ -103,4 +141,8 @@ def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
         page = _SHELL.format(title=html.escape(title), nav=nav, body=body)
         (site / f"{name}.html").write_text(page, encoding="utf-8")
         written[name] = f"site/{name}.html"
+    body = _render_markdown(_vintage_archive_markdown(repo_root))
+    page = _SHELL.format(title="Vintage archive", nav=nav, body=body)
+    (site / "vintage-archive.html").write_text(page, encoding="utf-8")
+    written["vintage-archive"] = "site/vintage-archive.html"
     return written
