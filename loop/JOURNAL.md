@@ -929,3 +929,16 @@ timestamps, before the loop existed.
   OWID endpoints.
 - Verifier: 3 tests; suite 220 passed; ruff+format clean.
 - Next: C-uc7-04 (48h dispute log, log-only).
+
+## 2026-08-17T15:45+02:00 | C-uc7-04 | DONE
+- tly/disputes.py: append-only JSONL dispute log. 48h window validated
+  against the epoch (inclusive at exactly 48h, closed at +1s; cannot
+  precede the epoch); caller-supplied timestamps (no clock reads —
+  deterministic); every record carries the log-only effect statement.
+  Late filings refused loudly, never silently dropped.
+- The named property tested end to end with real pipeline prints: dispute
+  filed against a FINAL fixing → fixing bit-identical (render compared),
+  re-settlement same hash, AND the next epoch archives + settles on
+  schedule. A dispute is a record, not a lever.
+- Verifier: 4 tests; suite 224 passed; ruff+format clean.
+- Next: C-uc7-05 (settlement-series discipline vs INFORMATIONAL).
