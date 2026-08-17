@@ -34,6 +34,8 @@ _EXCLUDE_PREFIXES: dict[str, str] = {
     "the recorded source_url and verify against the sha256",
     "who_": "WHO site content — evidence snapshot; same restriction family",
     "hmd_": "mortality.org site content — evidence snapshot; not data",
+    "vaupel_": "literature PDF under CC BY-NC 2.0 DE — non-commercial license; "
+    "cite and link, never redeposit",
 }
 
 

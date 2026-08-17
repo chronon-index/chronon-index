@@ -27,8 +27,34 @@ Key results for TLY: <what changes in this repo because of it>
 - Wachter, *Essential Demographic Methods* (verify) — Status: UNREAD.
   Summary: (empty).
 - Vaupel 2009, "Life lived and left: Carey's equality", Demographic
-  Research (verify) — Status: UNREAD. Summary: (empty). Note: gates
-  whitepaper §1.
+  Research 20(3): 7-10, DOI 10.4054/DemRes.2009.20.3 —
+  Status: READ 2026-08-17 | Source: demographic-research.org open access,
+  snapshotted (vaupel_2009_life_lived_and_left.pdf; CC BY-NC 2.0 DE — NC:
+  excluded from Zenodo deposits).
+  Summary: In a STATIONARY population the age composition equals the
+  distribution of remaining lifespans: c(a) = g(a) — a randomly chosen
+  individual is as likely to have lived a years as to have exactly a
+  years left. Four-line proof: c(a) = ℓ(a)/e(0); the death-in-n-years
+  density given age a is μ(a+n)ℓ(a+n)/ℓ(a); integrating over the
+  population gives g(n) = ℓ(n)/e(0) = c(n). Corollaries: mean age equals
+  mean remaining lifespan (∫a·c = ∫a·g), and via Goldstein's companion
+  result (DemRes 20(2)) both equal mean remaining life EXPECTANCY
+  ∫e(a)c(a)da. Concept due to Carey's medfly work (Müller et al. 2004,
+  2007 — estimating age structure from residual lifespans of individuals
+  of unknown age); also derivable from renewal theory (Cox 1962).
+  Striking application: in the US 2005 lifetable >48% of individuals are
+  41+, i.e. nearly half the stationary population is still alive in 2050.
+  Key results for TLY: (1) this is the correct citation and content for
+  the whitepaper §1 claim "a population's past mirrors its future" — but
+  it holds EXACTLY only in stationary populations; the estimator rightly
+  computes Σ N(a)·e(a) directly instead of assuming stationarity. (2) The
+  Goldstein/Vaupel identity means: in a stationary world our Ē would
+  equal the population's mean age; in the real world Ē = 44.79 vs world
+  mean age ≈ low 30s — that gap is a clean, citable measure of how
+  non-stationary (young + still-improving) humanity is; belongs in
+  whitepaper §1 as the honest caveat. (3) Müller et al.'s statistical
+  adjustments for non-stationary populations are the thread to pull if a
+  residual-demography cross-check of S is ever wanted.
 
 ## R2 — Mortality modeling (est. 2–3 weeks)
 

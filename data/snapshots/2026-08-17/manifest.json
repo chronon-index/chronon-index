@@ -245,6 +245,14 @@
       "sha256": "5b8c5d85582971fe6f30b161886704b38b241b12cd18fea29ea3d762f8e5ebc5",
       "source_url": "https://ucdp.uu.se/downloads/"
     },
+    "vaupel_2009_life_lived_and_left.pdf": {
+      "bytes": 219346,
+      "in_git": true,
+      "purpose": "D-12(R1) reading: Vaupel 2009 Carey's equality \u2014 READ 2026-08-17, notes in docs/notes/READING_NOTES.md; license CC BY-NC 2.0 DE (excluded from Zenodo deposits)",
+      "retrieved_utc": "2026-08-17T17:47:13+00:00",
+      "sha256": "64641769a9b90a7b6091df1ddcfa2bd0c4fb4c48c36e3b86626d38cc7fe06d88",
+      "source_url": "https://www.demographic-research.org/volumes/vol20/3/20-3.pdf"
+    },
     "who_copyright.html": {
       "bytes": 89447,
       "in_git": true,

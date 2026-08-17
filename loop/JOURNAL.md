@@ -1319,3 +1319,21 @@ timestamps, before the loop existed.
   feeds (both CLEARED, keyless) or STMF (HUMAN).
 - Verifier: suite 279 passed locally; both workflows green in Actions;
   chain verified via PrintArchive.verify().
+
+## 2026-08-17T19:58+02:00 | D-12(partial): Vaupel 2009 READ | DONE
+- First genuine READ entry in the reading program. Vaupel 2009 "Life
+  lived and left: Carey's equality" (DemRes 20(3):7-10) fetched from the
+  journal (open access), snapshotted+manifested, and READ IN FULL (4
+  content pages). Notes with proof sketch, corollaries, history, and
+  three TLY-specific consequences written to READING_NOTES — including
+  the honest whitepaper §1 caveat: Carey's equality is exact only in
+  stationary populations; the Ē-vs-mean-age gap measures how
+  non-stationary humanity is.
+- Process note: my first URL guess (vol20/7) fetched the WRONG paper
+  (a fertility study) — caught by reading the title page, resolved from
+  the journal's own volume index (vol20/3). Uncommitted wrong file
+  removed. Recalled URLs are not citations.
+- License handled: the paper is CC BY-NC 2.0 DE — added to the Zenodo
+  exclusion rules (cite and link, never redeposit) before it could ever
+  reach a deposit.
+- Verifier: suite 279 passed; manifest+zenodo gates green.
