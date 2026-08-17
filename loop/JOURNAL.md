@@ -1011,3 +1011,18 @@ timestamps, before the loop existed.
   true statements (quadrature = E9's variance-addition at aggregate level;
   gons implements E12 neutrality). 9 implemented, 3 honestly pending.
 - Verifier: 4 tests; suite 240 passed; ruff clean.
+
+## 2026-08-17T17:45+02:00 | D-06 | DONE (skeleton; fetch blocked, routed)
+- iosco.org 403s both a project UA and a browser UA via curl — the 2013
+  Principles PDF could NOT be fetched. Per the no-recalled-text rule, the
+  skeleton contains ZERO document content: no titles, not even the
+  principle count. What it does contain: the row-filling discipline (no
+  compliance claim without a named evidence artifact), the unblock
+  procedure, and a repo-side candidate-mapping inventory (methodology
+  governance / transparency / data quality / complaints / determination
+  integrity artifacts, plus expected structural gaps: administrator
+  separation, external audit, cessation policy).
+- D-06b added to backlog: browser-assisted fetch + snapshot, then fill
+  rows reading from the PDF only.
+- Verifier: doc reviewed against the rule (grep for any principle-like
+  recalled text: none); no code changes; suite state 240.
