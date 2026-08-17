@@ -1220,3 +1220,21 @@ timestamps, before the loop existed.
   licensing CI gate) is now unblocked.
 - Verifier: manifest+immutability gates green (9 passed) over the extended
   manifest.
+
+## 2026-08-17T10:45+02:00 | B-uc3-13 | DONE — the P1 licensing gate is live
+- tly/licensing_gate.py: the gate reads docs/LICENSING.md ITSELF (the
+  table is the law; no second source of truth to drift), maps compute
+  files to rows by prefix (unknown files FAIL CLOSED), and applies mode
+  semantics: commercial requires CLEARED/CLEARED-CONSTRUCTED-ONLY;
+  research additionally tolerates VERIFIED-RESTRICTED; HUMAN blocks both.
+- THE HONEST HEADLINE, as a named test: the commercial gate BLOCKS today's
+  pipeline (it cites WHO GHO files, confirmed non-commercial) — the gate
+  correctly guards the G5 WPP migration; the WPP-only compute path already
+  passes commercial mode, so the migration target is gate-legal. Research
+  mode passes the current pipeline (the v0 posture). Compute files are
+  taken from the print's OWN provenance — the gate audits what the print
+  actually cites, not a hand-maintained list.
+- Verifier: 7 tests; suite 275 passed; ruff+format clean.
+- Backlog state: every executable non-HUMAN task is now DONE. Remaining
+  open items are HUMAN gates (A-16/A-17, HMD account+ruling, ACLED/EM-DAT,
+  counsel, trademark, readings, accounts) and their dependent chains.
