@@ -640,3 +640,17 @@ timestamps, before the loop existed.
   unknown type, non-bracketing + inverted intervals, reason-less
   convention, live-pipeline label); suite 139 passed; ruff clean.
 - Next: B-uc4-02 (static JSON API builder).
+
+## 2026-08-17T10:05+02:00 | B-uc4-02 | DONE
+- tly/api.py: static builder — api/v1/{latest.json, prints/<date>.json,
+  countries.json, index.json}. index.json carries every artifact's sha256:
+  the API self-describes its own integrity, so a mirror can be verified
+  byte-for-byte (verify_api also rejects artifacts the index doesn't
+  describe — no rogue files). assert_static_only: JSON-only, parseable, no
+  executable bits (AC-4.4 no-server-runtime gate). Deterministic renders
+  throughout.
+- Verifier: 6 tests — layout+latest+per-epoch schema validation, tamper
+  detection, rogue-file detection, static-only gate (a planted server.py
+  fails), byte-identical double build, bad-input rejection. Suite 145
+  passed; ruff+format clean.
+- Next: B-uc4-03 (test_p9_lineage: published figures → manifest hashes).
