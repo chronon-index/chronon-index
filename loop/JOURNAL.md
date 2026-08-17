@@ -744,3 +744,17 @@ timestamps, before the loop existed.
   rebase (×2 exactly, shares fixed), sub-quantum-tail honesty. Suite 177
   passed; ruff+format clean.
 - Next: C-uc5-03 (test_p1_conservation named test).
+
+## 2026-08-17T12:15+02:00 | C-uc5-03 | DONE
+- test_p1_conservation (named per RP#X) green: conservation asserted at
+  BOTH layers (Σ gons == G exact int; Σ display == display supply via E11)
+  after EVERY operation — scripted walk (genesis, gons + balance-unit
+  transfers, organic up-rebase, shock down-rebase, wallet exhaustion,
+  M collapse to one quantum, M ×1000) plus a seeded 300-op fuzz walk
+  (seed 20260817, deterministic; 46 wallets created; conservation checked
+  after each op, not at the end).
+- The one failure in development was my wallet-count sanity threshold
+  (46 vs >50), not conservation — corrected with the seed's actual count
+  noted. Conservation never broke once.
+- Verifier: 2 tests; suite 179 passed; ruff clean.
+- Next: C-uc5-04 (test_p2_share_invariance).
