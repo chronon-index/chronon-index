@@ -855,3 +855,18 @@ timestamps, before the loop existed.
   (2 new isolation tests over 199, = 201). The 205 was my arithmetic slip,
   not a test result. Commit message left as-is (no history rewriting);
   this entry is the record.
+
+## 2026-08-17T14:12+02:00 | C-uc6-05 | DONE
+- tly/jumps.py: the E8 historical shock registry. Exactly ONE calibrated
+  entry — COVID, carrying only the DECISIONS.md anchors (WHO 14.83M excess;
+  148-337M life-year burn band) and the committed-WMD source pointer.
+  1918/WWII/HIV are PENDING with (verify)-marked source POINTERS and no
+  numbers (Johnson & Mueller, Barro-Ursua-Weng, UNAIDS, HMD
+  discontinuities — pointers to fetch, not citations of read works).
+- fit_frequency_severity REFUSES while any event is pending, naming every
+  missing event + "never invent"; and on a complete set it raises
+  NotImplementedError pointing at the successor task — the scaffold cannot
+  silently pretend to fit in either direction.
+- Verifier: 6 tests incl. pending-carry-no-numbers sweep; suite 207
+  passed; ruff clean.
+- Next: C-uc6-06 (test_p8_interval_coverage on synthetic data).
