@@ -731,3 +731,16 @@ timestamps, before the loop existed.
   shares across a 4-rebase path, balance∝M, truncation bounds, 5 illegal
   ops, documented bounds hold). Suite 171 passed; ruff+format clean.
 - Next: C-uc5-02 (E11 display layer over the ledger).
+
+## 2026-08-17T12:00+02:00 | C-uc5-02 | DONE
+- allocate_by_integer_weights added to tly/gons.py: E11 with EXACT integer
+  weights (gons) — divmod arithmetic throughout, so the weights-sum-to-1
+  Decimal trap never arises; floors + descending-remainder distribution
+  with deterministic key tie-break. display_balances: display supply = M
+  floored to the nano-token quantum (sub-quantum tail of M is stated
+  undisplayable, never rounded up), Σ displayed == display supply exactly.
+- Verifier: 6 tests — adversarial equal-thirds, whale+dust skew at full
+  G-scale, bad inputs, exact-sum over awkward shares, display-tracks-
+  rebase (×2 exactly, shares fixed), sub-quantum-tail honesty. Suite 177
+  passed; ruff+format clean.
+- Next: C-uc5-03 (test_p1_conservation named test).

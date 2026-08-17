@@ -117,3 +117,47 @@ class GonsLedger:
         """Display balance gons/F (rounds at prec 34 — see the analysis;
         exact-sum display goes through the E11 layer, C-uc5-02)."""
         return Decimal(self.gons(wallet)) * self._m / Decimal(G_TOTAL)
+
+
+def allocate_by_integer_weights(
+    total: Decimal, weights: dict[str, int], quantum: Decimal
+) -> dict[str, Decimal]:
+    """E11 with EXACT integer weights (no weights-sum-to-1 Decimal trap):
+    split ``total`` (a quantum multiple) proportionally to integer weights,
+    flooring to the quantum and handing leftover quanta to the largest
+    fractional remainders (ties broken by key — deterministic).
+    Σ parts == total, always."""
+    if not weights or any(w < 0 for w in weights.values()):
+        raise GonsError("weights must be non-empty and non-negative")
+    w_sum = sum(weights.values())
+    if w_sum <= 0:
+        raise GonsError("total weight must be positive")
+    if total % quantum != 0:
+        raise GonsError(f"total {total} is not a multiple of quantum {quantum}")
+    total_quanta = int(total / quantum)
+    floors: dict[str, int] = {}
+    remainders: list[tuple[int, str]] = []
+    allocated = 0
+    for key in sorted(weights):
+        # exact integer arithmetic: raw share in quanta = total_quanta*w/w_sum
+        num = total_quanta * weights[key]
+        q, rem = divmod(num, w_sum)
+        floors[key] = q
+        allocated += q
+        remainders.append((rem, key))
+    leftover = total_quanta - allocated
+    remainders.sort(key=lambda t: (-t[0], t[1]))
+    for _, key in remainders[:leftover]:
+        floors[key] += 1
+    return {k: v * quantum for k, v in floors.items()}
+
+
+DISPLAY_QUANTUM = Decimal("0.000000001")  # nano-token display quantum
+
+
+def display_balances(ledger: GonsLedger, quantum: Decimal = DISPLAY_QUANTUM) -> dict[str, Decimal]:
+    """Balances for publication: Σ displayed == display supply EXACTLY,
+    where display supply = M floored to the quantum (the sub-quantum tail
+    of M is undisplayable by definition and stated here, not hidden)."""
+    display_supply = (ledger.m // quantum) * quantum
+    return allocate_by_integer_weights(display_supply, ledger.wallets(), quantum)
