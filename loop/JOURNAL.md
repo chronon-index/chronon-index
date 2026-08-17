@@ -1049,3 +1049,17 @@ timestamps, before the loop existed.
   its recovered-pending-ratification status.
 - Verifier: term list checked against the backlog line (all present);
   no code changes; tree clean after commit.
+
+## 2026-08-17T18:30+02:00 | D-09 | DONE
+- docs/FAQ.md: one-pager + 8 FAQ entries + the pre-written pricing-lives
+  response. The response argues RP Part V Q5's own line (VSL/QALY
+  institutions weigh life-years in public; opacity is worse; TLY holds no
+  personal data) while every institutional SPECIFIC (current VSL figure,
+  NICE threshold) carries (verify) — the argument is given by the program,
+  the numbers wait for the D9 sources. Every FAQ claim maps to a repo
+  artifact (neutrality tests, reproduction doc, ledger, dispute log);
+  the reconstruction-pending-ratification status is stated in the FAQ
+  itself ("Don't trust it — check it").
+- Pre-launch status header marked for removal at launch.
+- Verifier: claims cross-checked against repo facts; tree clean after
+  commit; suite state 240.
