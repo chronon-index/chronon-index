@@ -120,7 +120,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [ ] C-uc6-03 | deps: D-01 | refs: SPEC#6, RP#IX-E7, RP#M2 | Lee-Carter implementation: SVD fit, κ(t) random walk with drift, jump-off bias correction; replicate published parameter estimates for 3 HMD countries — fetch the reference estimates first, never invent them
 - [ ] C-uc6-04 | deps: C-uc6-03 | refs: SPEC#6 AC-6.3, RP#IV-P2 | 1990-vintage backtest harness: fit on HMD data through 1990 only, project to 2020, compare to realized, compute bias
 - [x] C-uc6-05 | deps: C-uc6-01 | refs: SPEC#6, RP#IX-E8, RP#M3 | Jump-calibration scaffolding for the 1918/WWII/HIV/COVID frequency-severity set; data sources (verify); fixtures honest, no invented calibration values (done 2026-08-17: COVID calibrated from DECISIONS anchors; 1918/WWII/HIV PENDING with (verify) pointers; fitter refuses incomplete sets)
-- [ ] C-uc6-06 | deps: C-uc6-01 | refs: SPEC#6 AC-6.1, RP#X-P8 | test_p8_interval_coverage: coverage harness validated on synthetic data with known coverage; honesty stated in the docstring; never skipped
+- [x] C-uc6-06 | deps: C-uc6-01 | refs: SPEC#6 AC-6.1, RP#X-P8 | test_p8_interval_coverage: coverage harness validated on synthetic data with known coverage; honesty stated in the docstring; never skipped (done 2026-08-17)
 - [ ] C-uc6-07 | deps: C-uc6-02, B-uc2-12 | refs: SPEC#6 AC-6.2, RP#IV-P4 | COVID replay using only real-time-vintage data (no hindsight); error versus final figures computed and documented
 
 ### SPEC#7 — settlement fixing module

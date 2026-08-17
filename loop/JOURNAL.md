@@ -870,3 +870,19 @@ timestamps, before the loop existed.
 - Verifier: 6 tests incl. pending-carry-no-numbers sweep; suite 207
   passed; ruff clean.
 - Next: C-uc6-06 (test_p8_interval_coverage on synthetic data).
+
+## 2026-08-17T14:30+02:00 | C-uc6-06 | DONE — all 10 invariants named+green
+- tly/interval_coverage.py: measure_coverage (inclusive bounds, matching
+  the print schema) + CoverageResult with Decimal binomial tolerance
+  3·sqrt(p(1−p)/n). test_p8_interval_coverage (named, NEVER skipped;
+  the pre-P3 honesty stated in the docstring per amended AC-6.1):
+  exact-construction 90% case measured as exactly 0.9 with an
+  overclaiming nominal (0.99) rejected; seeded noisy case within
+  tolerance; inclusive-bounds and input-discipline checks.
+- MILESTONE: all ten RP Part X invariants now have green named tests —
+  P1 conservation, P2 share invariance, P3 reconciliation, P4 (archive
+  immutability errors), P5 reproducibility, P6 identity closure, P7
+  coverage honesty, P8 interval coverage (harness), P9 lineage, P10
+  correction completeness.
+- Verifier: 4 tests; suite 211 passed; ruff+format clean.
+- Next: C-uc7 chain (settlement fixing module) per priority rule.
