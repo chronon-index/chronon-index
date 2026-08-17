@@ -145,6 +145,14 @@
       "sha256": "1bd199c513f00e409b85a2be585a0d7be48b8e19778bd333de4bfd7833872086",
       "source_url": "https://api.github.com/repos/TheEconomist/covid-19-the-economist-global-excess-deaths-model/license"
     },
+    "eurostat_demo_r_mwk_ts.json": {
+      "bytes": 375727,
+      "in_git": true,
+      "purpose": "B-uc2-14: Eurostat weekly deaths (total, by country) 2014-W01..2026-W31 \u2014 THE live keyless CLEARED nowcast feed; 39 geos, 23,780 observations",
+      "retrieved_utc": "2026-08-17T21:43:09+00:00",
+      "sha256": "27ab1ada25c487cf98b0a951225c1b087e22d1e3256181384386920fe3d6b8e4",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_mwk_ts?format=JSON&sex=T&sinceTimePeriod=2014-W01"
+    },
     "eurostat_legal_notice.html": {
       "bytes": 151548,
       "in_git": true,

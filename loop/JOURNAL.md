@@ -1362,3 +1362,20 @@ timestamps, before the loop existed.
   (chronon.io on Afternic aftermarket), chronon.xyz and tly.finance look
   open; saeculum.com parked. Register searches remain counsel work.
 - Verifier: sweep outputs above; suite unchanged (279, pipefail-gated).
+
+## 2026-08-17T23:55+02:00 | B-uc2-14 (added+done) | DONE — LIVE NOWCAST FEED
+- Answering Ben's "is everything you can do done?": NOT quite — one route
+  remained. Eurostat demo_r_mwk_ts probed live: keyless, CLEARED (EU CC
+  BY 4.0), data through 2026-W31 (~2 weeks behind now). Snapshotted
+  (375KB, 39 geos, 657 weeks, 23,780 obs, manifested) + tly/eurostat.py:
+  JSON-stat cube decoder -> the same DeathsCell shape as WMD, ISO3-mapped,
+  aggregates (EU27_2020…) explicitly skipped, absent keys = reporting lag
+  not zero.
+- END TO END LIVE: kk-linear baseline (fit 2015-2019) on Germany produces
+  a 2026 weekly excess series (25+ weeks measurable) + P7 coverage record
+  — the index CAN now adjust on current-year data from a cleared keyless
+  source. This closes the liveness gap for the EU leg; CDC provisional
+  (also CLEARED, keyless) is the natural US follow-up; STMF stays the
+  HUMAN-gated global widener.
+- Verifier: 5 tests incl. freshness assert (>= 2026-W25) and end-to-end
+  nowcast; full suite next; pipefail gating used.
