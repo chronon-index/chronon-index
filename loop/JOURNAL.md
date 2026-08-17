@@ -899,3 +899,17 @@ timestamps, before the loop existed.
 - Verifier: 4 tests (lifecycle, 8 construction rejections, render field
   coverage, hash-binds-to-content). Suite 215 passed; ruff+format clean.
 - Next: C-uc7-02 (test_p4_immutability — the last unnamed invariant test).
+
+## 2026-08-17T15:05+02:00 | C-uc7-02 | DONE
+- test_p4_immutability (named per RP#X) green across all three FINAL
+  layers: FINAL fixing rejects writes to EVERY attribute incl. status and
+  fixing_hash themselves (value verified untouched after all attempts);
+  prints are frozen dataclasses; the archive refuses re-opening a
+  published epoch with head-hash verified unchanged.
+- test_corrections_route_forward_only: the sanctioned path walked end to
+  end — FINAL fixing stays as published, ledger entry records the
+  deviation (parsed by the real parser), the NEXT epoch absorbs the
+  correction, and find_restatements confirms zero restatements. DEC#7 as
+  an executable procedure, not a policy sentence.
+- Verifier: 2 tests; suite 217 passed; ruff+format clean.
+- Next: C-uc7-03 (first-print-settles enforcement).
