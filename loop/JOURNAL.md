@@ -1173,3 +1173,18 @@ timestamps, before the loop existed.
 - Verifier: 8 tests — one per rung + recovery + worst-source-governs +
   input discipline + decision-is-data. Suite 263 passed; ruff+format
   clean.
+
+## 2026-08-17T21:10+02:00 | E-06 | DONE
+- tly/zenodo.py: dry-run deposit builder — vintage files + deposition.json
+  (Zenodo metadata payload) + CHECKSUMS.sha256, zero network. LICENSE-AWARE
+  INCLUSION is the substance: WHO GHO extracts are EXCLUDED from the
+  deposit (their confirmed NC clause restricts exactly this open-DOI
+  redistribution) but travel as manifest rows — hash + source URL — so
+  anyone refetches and verifies independently; UN WPP / OWID / WMD /
+  evidence-of-license files included; in_git:false large files manifest-
+  only. Every exclusion visible in the metadata with its reason — the
+  deposit never claims more completeness than the licenses allow.
+- Live upload remains E-05 (HUMAN: Zenodo account).
+- Verifier: 5 tests (classification vs licensing table, both vintages
+  built, byte-identity of copied files vs manifest hashes, metadata shape,
+  unknown vintage). Suite 268 passed; ruff+format clean.

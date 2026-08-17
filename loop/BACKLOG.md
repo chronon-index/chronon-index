@@ -159,7 +159,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] E-03 | deps: B-uc3-02 | refs: RP#VII, RP#V | Vintage archive layout (ALFRED-style): every revision retained and addressable by vintage date; never-delete enforced (done 2026-08-17)
 - [x] E-04 | deps: B-uc2-06 | refs: SPEC#4 AC-4.5, RP#XII | Status/stale-print logic: failure ladder source down → carry rule → stale flag → deferred fixing; unit tests simulate each rung (done 2026-08-17)
 - [ ] E-05 | deps: - | refs: RP#VII | HUMAN: Zenodo account (quarterly snapshot-set deposits, one DOI per vintage)
-- [ ] E-06 | deps: B-uc3-02 | refs: RP#VII | Zenodo deposit script: package snapshot set + metadata for DOI deposit; dry-run testable without an account (live deposit needs E-05)
+- [x] E-06 | deps: B-uc3-02 | refs: RP#VII | Zenodo deposit script: package snapshot set + metadata for DOI deposit; dry-run testable without an account (live deposit needs E-05) (done 2026-08-17: license-aware dry-run; WHO extracts excluded with hash+URL)
 - [ ] E-07 | deps: - | refs: RP#VII | HUMAN: Cloudflare Pages account + custom domain (domain choice ties into the D-14 trademark sweep)
 - [ ] E-08 | deps: E-01, E-07 | refs: RP#VII | Deploy static site + JSON API to Cloudflare Pages; publish the URL in README
 - [ ] E-09 | deps: - | refs: RP#VII | HUMAN: object-storage account (R2/S3) for raw snapshot sets too large for git
