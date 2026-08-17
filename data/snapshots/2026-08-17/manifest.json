@@ -189,6 +189,14 @@
       "sha256": "fe4ba484240894430523687aa67e06476e451003ebbc5e6ee075147a99a4404e",
       "source_url": "https://www.mortality.org/Data/UserAgreement"
     },
+    "owid_about.html": {
+      "bytes": 119948,
+      "in_git": true,
+      "purpose": "B-uc3-07 license evidence: 'Our charts, articles, and data are licensed under CC BY, unless stated otherwise'; third-party data subject to third-party licenses (for our WPP series: UN CC BY 3.0 IGO, cleared B-uc3-06)",
+      "retrieved_utc": "2026-08-17T00:04:47+00:00",
+      "sha256": "036201a48a1b36d8beccb90bd751aa888b3cb4745363c1d0a4c8b3ae15fe34f8",
+      "source_url": "https://ourworldindata.org/about"
+    },
     "wmd_LICENSE.txt": {
       "bytes": 1072,
       "in_git": true,

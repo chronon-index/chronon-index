@@ -558,3 +558,18 @@ timestamps, before the loop existed.
 - Verifier: manifest-schema + immutability gates re-run green (9 passed)
   over the extended manifest; the licensing row carries evidence pointers.
 - Next: B-uc3-07 (OWID row).
+
+## 2026-08-17T08:48+02:00 | B-uc3-07 | DONE
+- OWID LICENSING row CLEARED (second row). Evidence snapshotted+manifested
+  (owid_about.html): "Our charts, articles, and data are licensed under
+  CC BY, unless stated otherwise"; third-party data subject to upstream
+  licenses. The layer analysis matters: our WPP-via-OWID series is
+  third-party data, so the GOVERNING license is the UN's CC BY 3.0 IGO
+  (cleared B-uc3-06) with OWID's processing layer CC BY on top — both
+  permissive, chain clean. Attribution: cite both (citation strings are in
+  the committed grapher metadata).
+- Note: the row previously assumed "CC BY 4.0"; the about page says
+  "CC BY" without pinning a version on the data statement — recorded as
+  stated, not embellished.
+- Verifier: manifest+immutability gates green (9 passed).
+- Next: B-uc3-08 (WHO GHO terms — the non-commercial clause check).
