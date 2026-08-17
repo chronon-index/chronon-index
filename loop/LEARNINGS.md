@@ -56,3 +56,4 @@
   manifest-only in git. World 2023 = 8,091,734,933 persons = golden N exact.
 - Bash gating: commands after a heredoc EOF are NOT part of the preceding && chain — keep verify-then-commit in ONE chain or separate invocations.
 - Quoting: shell backticks inside double-quoted python -c strings get command-substituted; write journal CONTENT via heredoc-fed python; keep && GATING in flat chains. Content=heredoc, control=flat.
+- Bash gating 3: 'pytest | tail' returns TAIL's exit code — a red suite passed the && chain and got pushed. Use set -o pipefail in every gating chain.

@@ -1337,3 +1337,14 @@ timestamps, before the loop existed.
   exclusion rules (cite and link, never redeposit) before it could ever
   reach a deposit.
 - Verifier: suite 279 passed; manifest+zenodo gates green.
+
+## 2026-08-17T20:05+02:00 | correction(red push) + gate fix | DONE
+- CORRECTION: commit 245f1b0 was committed AND pushed with 2 failing
+  tests — 'pytest | tail -1' returns tail's exit code, so the red suite
+  passed the && gate. Third shell-gating lesson; pipefail rule added to
+  LEARNINGS and used from now on.
+- The failures themselves were the licensing gate FAIL-CLOSED design
+  working: the new vaupel_ PDF entered the manifest, the print's stamp
+  cites every manifest file, and the gate refused the unknown prefix.
+  Fixed by classifying vaupel_ as literature-evidence (None), which is
+  true. Suite green again (279 passed) — verified under pipefail.

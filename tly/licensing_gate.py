@@ -48,6 +48,7 @@ PREFIX_TO_ROW: dict[str, str] = {
     "ucdp_": None,
     "economist_": None,
     "ihme_": None,
+    "vaupel_": None,  # literature evidence (CC BY-NC paper), not a data source
 }
 
 
