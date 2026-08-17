@@ -107,7 +107,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] C-uc5-01 | deps: A-13 | refs: SPEC#5, RP#IX-E10, RP#M4 | Gons engine core: balance_i = gons_i / F; rebase multiplies the global factor F only; Decimal precision/overflow analysis documented (done 2026-08-17)
 - [x] C-uc5-02 | deps: C-uc5-01 | refs: SPEC#5 AC-5.1, RP#IX-E11 | Largest-remainder allocation: floor to quantum, distribute residual quanta by descending fractional part; sum of parts equals total exactly; tests (done 2026-08-17)
 - [x] C-uc5-03 | deps: C-uc5-02 | refs: SPEC#5 AC-5.1, RP#X-P1 | test_p1_conservation: Σ balances = M(t) after every operation, exactly (done 2026-08-17)
-- [ ] C-uc5-04 | deps: C-uc5-01 | refs: SPEC#5 AC-5.2, RP#X-P2 | test_p2_share_invariance: share vector identical across any rebase/F path
+- [x] C-uc5-04 | deps: C-uc5-01 | refs: SPEC#5 AC-5.2, RP#X-P2 | test_p2_share_invariance: share vector identical across any rebase/F path (done 2026-08-17)
 - [ ] C-uc5-05 | deps: C-uc5-01 | refs: SPEC#5 AC-5.5, DEC#3 | Transfer log; test_transfer_only_share_change: no transfers → bit-identical shares across any epoch sequence; with transfers → share deltas equal transfer amounts exactly
 - [ ] C-uc5-06 | deps: C-uc5-04 | refs: SPEC#5 AC-5.3, RP#IX-E12, DEC#4 | test_e12_neutrality: wealth neutrality (d(value)/d(rebase) = 0) and mortality neutrality (d(s_i)/d(deaths) = 0); mass-death scenario shrinks every balance pro-rata, no share grows
 - [ ] C-uc5-07 | deps: C-uc5-01 | refs: SPEC#5 AC-5.6, DEC#2 | Genesis calibration: M = κ·S with κ = 1 token per life-year; display conversion 1 year = 8,766 h; Decimal end to end

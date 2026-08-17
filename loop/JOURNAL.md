@@ -758,3 +758,16 @@ timestamps, before the loop existed.
   noted. Conservation never broke once.
 - Verifier: 2 tests; suite 179 passed; ruff clean.
 - Next: C-uc5-04 (test_p2_share_invariance).
+
+## 2026-08-17T12:30+02:00 | C-uc5-04 | DONE
+- test_p2_share_invariance (named per RP#X) green: 200 seeded rebases +
+  12-orders-of-magnitude extremes, share vector bit-identical after every
+  one. Path independence: two ledgers, divergent rebase detours, same
+  final M → identical share vectors AND identical display balances.
+  Mortality-neutrality corollary (DECISIONS #4): a COVID-scale down-rebase
+  leaves shares untouched and shrinks every display balance (none grows).
+  Complement: a TRANSFER does change shares, by exactly the gons moved.
+- Verifier: 4 tests; suite 183 passed; ruff clean. SPEC#5 AC-5.1/5.2 both
+  green; both formal neutrality properties (METHODOLOGY §6) now have
+  machine checks.
+- Next: C-uc5-05+ per backlog (rebase-from-print wiring / perf gate).
