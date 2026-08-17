@@ -1160,3 +1160,16 @@ timestamps, before the loop existed.
 - Verifier: 4 tests (real-tree listing, per-vintage manifests, as-of
   resolution incl. future query -> latest, history walk). Suite 255
   passed; ruff+format clean.
+
+## 2026-08-17T20:50+02:00 | E-04 | DONE
+- tly/failure_ladder.py: the four-rung ladder as pure decision logic (no
+  IO, no clocks — caller supplies per-source availability + carried-epoch
+  counts): HEALTHY -> CARRY (outage: carry the named last vintage, keep
+  publishing) -> STALE (carried > 2 epochs: publish flagged) -> DEFER
+  (carried > 4: the status publishes but THE FIXING DEFERS — settling on
+  invented-fresh data is worse than settling late; never blocks the next
+  epoch's attempt). Worst source governs the print rung; recovery resets
+  (current data age, not grudges); per-source states in the status block.
+- Verifier: 8 tests — one per rung + recovery + worst-source-governs +
+  input discipline + decision-is-data. Suite 263 passed; ruff+format
+  clean.
