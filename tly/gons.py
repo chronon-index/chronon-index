@@ -51,6 +51,7 @@ class GonsLedger:
             raise GonsError("money supply must be positive")
         self._gons: dict[str, int] = {"GENESIS": G_TOTAL}
         self._m = initial_m
+        self._transfer_log: list[tuple[str, str, int]] = []
 
     # -- supply ------------------------------------------------------------
     @property
@@ -100,6 +101,7 @@ class GonsLedger:
         self._gons[dst] = self.gons(dst) + amount_gons
         if self._gons[src] == 0:
             del self._gons[src]
+        self._transfer_log.append((src, dst, amount_gons))
 
     def transfer_balance(self, src: str, dst: str, amount_balance: Decimal) -> int:
         """Transfer specified in balance units; converts to gons by
@@ -111,6 +113,12 @@ class GonsLedger:
             raise GonsError("amount below one gon at current F")
         self.transfer_gons(src, dst, amount_gons)
         return amount_gons
+
+    def transfer_log(self) -> tuple[tuple[str, str, int], ...]:
+        """Append-only record of every share-changing operation (DEC#3:
+        a wallet's share changes ONLY by transfer — this log is the
+        complete causal record of all share changes)."""
+        return tuple(self._transfer_log)
 
     # -- display -----------------------------------------------------------
     def balance(self, wallet: str) -> Decimal:

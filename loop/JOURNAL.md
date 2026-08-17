@@ -771,3 +771,15 @@ timestamps, before the loop existed.
   green; both formal neutrality properties (METHODOLOGY §6) now have
   machine checks.
 - Next: C-uc5-05+ per backlog (rebase-from-print wiring / perf gate).
+
+## 2026-08-17T12:45+02:00 | C-uc5-05 | DONE
+- GonsLedger gained an append-only transfer log (every transfer_gons entry,
+  incl. via transfer_balance) — the COMPLETE causal record of share
+  changes per DEC#3.
+- test_transfer_only_share_change (named) green: 50 pure-rebase epochs →
+  bit-identical shares + empty log delta; with interleaved transfers →
+  every wallet's gons delta equals the NET of its logged transfers exactly
+  (accounting reconstruction from the log alone). Log strictly extends;
+  balance-unit transfers log their truncated gons amount.
+- Verifier: 3 tests; suite 186 passed; ruff+format clean.
+- Next: C-uc5-06 (test_e12_neutrality) then C-uc5-07/08.
