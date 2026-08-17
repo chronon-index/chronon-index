@@ -33,7 +33,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] A-14 | deps: A-12 | refs: RALPH#5, SPEC#3, RP#VI | Port snapshot fetcher into tly/ module writing data/snapshots/<date>/manifest.json (sha256, source URL, retrieval timestamp, bytes per file); User-Agent, backoff+jitter, few-and-large requests (done 2026-08-17)
 - [x] A-15 | deps: A-02 | refs: RALPH#5 | Make lint real locally: install pre-commit hooks into .git/hooks; ruff check + ruff format --check green over the repo (done 2026-08-17)
 - [ ] A-16 | deps: A-08, A-09, A-10 | refs: RALPH#0, DEC#9 | HUMAN: review + ratify the reconstructed SPEC.md, METHODOLOGY_v0.md and seed/ artifacts (they replaced lost originals) — gates the first public print (P1) and the golden-anchor commit B-uc1-13
-- [ ] A-17 | deps: A-01 | refs: RP#VII | HUMAN: create GitHub org/repo under Praevex, add remote, push; confirm ci.yml runs green in public Actions (until then CI has never actually run)
+- [ ] A-17 | deps: A-01 | refs: RP#VII | HUMAN: create GitHub org/repo under Praevex, add remote, push; confirm ci.yml runs green in public Actions (until then CI has never actually run) (PARTIAL 2026-08-17: gh was authenticated — PRIVATE repo HaleMarshall/tly created, pushed, ci.yml GREEN in real Actions after a rule-drift fix; REMAINS HUMAN: Praevex org + public visibility flip)
 
 ## Phase B — the index (SPEC capabilities 1–4)
 
@@ -92,7 +92,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] B-uc4-01 | deps: B-uc2-06 | refs: SPEC#4 AC-4.6, RP#VI | Print JSON schema: accuracy statement + interval-or-"convention" label mandatory on every published S; schema-validated on publish (done 2026-08-17)
 - [x] B-uc4-02 | deps: B-uc4-01 | refs: SPEC#4 AC-4.4 | Static JSON API builder: latest print, per-epoch history, per-country breakdown — committed files only; CI asserts build output contains no server runtime (done 2026-08-17)
 - [x] B-uc4-03 | deps: B-uc4-02 | refs: SPEC#4 AC-4.1, RP#X-P9 | test_p9_lineage: walk published JSON, resolve every figure to manifest hashes, non-negativity; no orphan numbers (done 2026-08-17)
-- [ ] B-uc4-04 | deps: B-uc4-02, A-17 | refs: SPEC#4 AC-4.2, RP#VII | Wire the real pipeline into print.yml: Monday 12:00 UTC public CI computation, artifacts hashed + committed, placeholder removed; a print produced any other way is invalid
+- [x] B-uc4-04 | deps: B-uc4-02, A-17 | refs: SPEC#4 AC-4.2, RP#VII | Wire the real pipeline into print.yml: Monday 12:00 UTC public CI computation, artifacts hashed + committed, placeholder removed; a print produced any other way is invalid (done 2026-08-17: placeholder removed; gates+compute+archive+commit wired; FIRST PRINT archived by the bot — epoch 2026-08-17T12:00, chain head 4533c2b1…, S equals golden exactly; research-series notice inline)
 - [x] B-uc4-05 | deps: B-uc4-01 | refs: SPEC#4 AC-4.6, SPEC#2 AC-2.4 | Publish gate: a print failing schema/label/accuracy-statement validation blocks publish; tests (done 2026-08-17)
 - [ ] B-uc4-06 | deps: E-02, B-uc4-04 | refs: SPEC#4 AC-4.3, RP#VII | CI verifies a .ots proof exists and matches the print hash before publish
 - [ ] B-uc4-07 | deps: E-04, B-uc4-04 | refs: SPEC#4 AC-4.5, RP#XII | Stale-print CI integration: simulate a missing source; status flag flips within the same epoch per the failure ladder
@@ -164,7 +164,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [ ] E-08 | deps: E-01, E-07 | refs: RP#VII | Deploy static site + JSON API to Cloudflare Pages; publish the URL in README
 - [ ] E-09 | deps: - | refs: RP#VII | HUMAN: object-storage account (R2/S3) for raw snapshot sets too large for git
 - [ ] E-10 | deps: E-09 | refs: RP#VII | Snapshot object-storage uploader; sha256 manifests stay committed in-repo
-- [ ] E-11 | deps: A-17 | refs: RP#XII | Dependency hash-pinning + CI supply-chain hardening (lockfile with hashes)
+- [x] E-11 | deps: A-17 | refs: RP#XII | Dependency hash-pinning + CI supply-chain hardening (lockfile with hashes) (done 2026-08-17: requirements-dev.lock with sha256 hashes via uv; ruff band pinned + lint rules frozen after the CI drift incident)
 - [ ] E-12 | deps: A-17 | refs: RP#XII | HUMAN: signing keys (sigstore/cosign), branch protection + signed commits on the org repo
 - [x] E-13 | deps: B-uc3-03 | refs: RP#VII, RP#IV-P5 | One-command Docker image for independent recomputation; byte-identical output documented for outsiders (done 2026-08-17: built + run; container==host byte-identical across OS/Python versions)
 - [ ] E-14 | deps: E-13 | refs: RP#VII, RP#XII | HUMAN: recruit ≥ 2 external recomputers (university demography group, actuarial society student chapter); N-of-M starts at 3-of-3 matching

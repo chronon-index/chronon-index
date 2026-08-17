@@ -1292,3 +1292,30 @@ timestamps, before the loop existed.
   hypotheses refuted); drift convention recovered-by-search pending
   ratification; WMD staleness; STMF+UCDP-API keyless regressions
   (UCDP resolved via bulk route).
+
+## 2026-08-17T19:45+02:00 | A-17(partial)+B-uc4-04+E-11 | DONE — FIRST PRINT
+- Ben directed "do everything that's left that you can do" — reopening
+  routes previously classed HUMAN where a tool-route exists. gh was
+  authenticated (HaleMarshall, repo+workflow scopes): created PRIVATE repo
+  HaleMarshall/tly, pushed all 90+ commits. First real Actions run FAILED
+  (newer ruff selected rules the local pin never ran — EXE001/UP017);
+  fixed by pinning the ruff band and freezing lint rule selection in
+  pyproject; ci.yml GREEN (run 32051122782). Praevex org + public flip
+  remain Ben's (visibility decision).
+- B-uc4-04: print.yml placeholder REMOVED. The Monday job now: gates
+  (manifest/immutability/P5) -> tly/ci_print (current_epoch derivation,
+  injectable + tested; idempotent archive append — P4-safe reruns) ->
+  bot-commits archive/. Dispatched manually (GraphQL 503s worked around
+  via REST): run 32051511467 SUCCESS, 18s.
+- THE FIRST PRINT EXISTS: epoch 2026-08-17T12:00:00+00:00 (today is a
+  real Monday), computed IN CI, committed by the bot, chain head
+  4533c2b1a90077ea…, verifies locally, S = 362412641743.467008807750 —
+  equals the golden value exactly. RESEARCH SERIES pending A-16 + G5
+  (notice inline in the workflow; commercial gate still correctly blocks).
+- E-11: requirements-dev.lock with sha256 hashes (uv pip compile).
+- WMD staleness (verify) RESOLVED: repo actively maintained (2026-08-10
+  commit) yet the compiled CSV edge is still 2024-12 — refetched, byte-
+  identical file. Fresher weekly data must come from Eurostat/CDC direct
+  feeds (both CLEARED, keyless) or STMF (HUMAN).
+- Verifier: suite 279 passed locally; both workflows green in Actions;
+  chain verified via PrintArchive.verify().
