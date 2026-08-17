@@ -13,6 +13,7 @@ burn 0 pending the live shock mesh.
 from __future__ import annotations
 
 import sys
+from datetime import datetime, timedelta, timezone
 from decimal import Decimal
 from pathlib import Path
 
@@ -57,9 +58,29 @@ def build_settlement_print(epoch_utc: str) -> WeeklyPrint:
     )
 
 
+def current_epoch(now: datetime | None = None) -> str:
+    """The most recent Monday-12:00-UTC epoch at ``now`` (UTC). Injectable
+    for tests; the CI weekly job is the only caller that omits ``now``."""
+    if now is None:
+        now = datetime.now(timezone.utc)
+    if now.tzinfo is None:
+        raise ValueError("now must be timezone-aware")
+    now = now.astimezone(timezone.utc)
+    days_back = now.weekday()  # Monday=0
+    candidate = (now - timedelta(days=days_back)).replace(
+        hour=12, minute=0, second=0, microsecond=0
+    )
+    if candidate > now:  # it is Monday but before noon UTC
+        candidate -= timedelta(days=7)
+    return candidate.isoformat()
+
+
 def main(argv: list[str]) -> int:
+    if argv == ["--current-epoch"]:
+        sys.stdout.write(build_settlement_print(current_epoch()).render())
+        return 0
     if len(argv) != 1:
-        print("usage: python -m tly.pipeline <epoch-utc>", file=sys.stderr)
+        print("usage: python -m tly.pipeline <epoch-utc>|--current-epoch", file=sys.stderr)
         return 2
     sys.stdout.write(build_settlement_print(argv[0]).render())
     return 0
