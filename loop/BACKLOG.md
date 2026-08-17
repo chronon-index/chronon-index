@@ -80,7 +80,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] B-uc3-06 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Clear LICENSING row UN WPP: fetch current license text (CC BY 3.0 IGO (verify)), record URL + retrieval date, set status CLEARED (done 2026-08-17: CLEARED — UN's own statement + CC deed snapshotted)
 - [x] B-uc3-07 | deps: A-06 | refs: SPEC#3 AC-3.5 | Clear LICENSING row OWID grapher: fetch current terms (CC BY 4.0 (verify)), record URL + date (done 2026-08-17: CLEARED — CC BY own layer; upstream WPP layer already cleared)
 - [x] B-uc3-08 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Verify + record WHO GHO terms (non-commercial clause (verify)); confirm triangulation-only status in the table (done 2026-08-17: NC confirmed — CC BY-NC-SA 3.0 IGO + data-policy NC clause; triangulation-only locked)
-- [ ] B-uc3-09 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Verify + record HMD / STMF redistribution terms; document the derived-indicators-only policy
+- [x] B-uc3-09 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Verify + record HMD / STMF redistribution terms; document the derived-indicators-only policy (done 2026-08-17: constructed-vs-input split documented from committed evidence; rows CLEARED-CONSTRUCTED-ONLY)
 - [ ] B-uc3-10 | deps: A-06 | refs: SPEC#3 AC-3.5 | Verify + record remaining non-HUMAN rows: Eurostat, CDC, World Mortality Dataset, UCDP, Economist model, IHME GBD, UBS
 - [ ] B-uc3-11 | deps: - | refs: SPEC#3 AC-3.5, RP#II-D4 | HUMAN: purchase ACLED commercial license
 - [ ] B-uc3-12 | deps: - | refs: SPEC#3 AC-3.5, RP#II-D4 | HUMAN: obtain EM-DAT commercial-use license

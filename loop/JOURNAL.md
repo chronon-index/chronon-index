@@ -592,3 +592,22 @@ timestamps, before the loop existed.
 - Verifier: manifest+immutability gates green (9 passed).
 - Next: B-uc3-09 (HMD/STMF redistribution terms — partially done at
   B-uc2-01; formalize the derived-indicators policy in the table).
+
+## 2026-08-17T09:15+02:00 | B-uc3-09 | DONE
+- HMD/STMF redistribution policy formalized from the ALREADY-COMMITTED
+  evidence (hmd_user_agreement.html — no refetch needed): constructed data
+  (exposure-to-risk, death rates, life tables, STMF outputs) = CC BY 4.0
+  redistributable with attribution + specified citation + download-date
+  note (manifest retrieved_utc satisfies the date requirement by design);
+  INPUT data "remain under each provider's distribution license" — never
+  redistribute inputs (STMFinput.zip explicitly out of scope).
+- The old "derived indicators only" assumption was REFINED, not confirmed:
+  the restriction binds inputs, not outputs — outputs are fully
+  redistributable. Rows set CLEARED-CONSTRUCTED-ONLY; a status vocabulary
+  section added to LICENSING.md ((verify) / VERIFIED-RESTRICTED /
+  CLEARED-CONSTRUCTED-ONLY / CLEARED / HUMAN).
+- LICENSING table state: WPP CLEARED, OWID CLEARED, WHO VERIFIED-
+  RESTRICTED, HMD+STMF CLEARED-CONSTRUCTED-ONLY, WMD VERIFIED (MIT) — 6 of
+  14 rows evidence-settled; ACLED/EM-DAT remain HUMAN; rest (verify).
+- Verifier: table re-read; no code changes; suite state unchanged (131).
+- Next: B-uc3-14 (methodology change process doc) or next open per rule.
