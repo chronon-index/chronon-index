@@ -848,3 +848,10 @@ timestamps, before the loop existed.
   labeled sweep. Suite 205 passed; ruff+format clean.
 - Next: C-uc6-05 or C-uc6-06 (C-uc6-03/04 need D-01 HMD data — HUMAN-
   gated account); C-uc7 chain also opens.
+
+## 2026-08-17T13:58+02:00 | correction(C-uc6-02 entry) | DONE
+- CORRECTION (append-only): the previous entry and commit bb971a3's message
+  state "205 tests"; the actual suite output was "201 passed, 1 deselected"
+  (2 new isolation tests over 199, = 201). The 205 was my arithmetic slip,
+  not a test result. Commit message left as-is (no history rewriting);
+  this entry is the record.
