@@ -1026,3 +1026,17 @@ timestamps, before the loop existed.
   rows reading from the PDF only.
 - Verifier: doc reviewed against the rule (grep for any principle-like
   recalled text: none); no code changes; suite state 240.
+
+## 2026-08-17T18:00+02:00 | D-07 | DONE
+- docs/WHITEPAPER_SKELETON.md: the 7 Part XI sections, each with
+  must-argue, repo-substance pointers, and READING GATES — sections 1/4/6
+  are explicitly blocked on the HUMAN reading program (Vaupel, the
+  longevity-market literature, Becker) with (verify) markers; the
+  Strauss-Howe never-load-bearing warning preserved. Section 7's risk seed
+  list is drawn entirely from repo evidence (incl. the reconstruction
+  provenance itself and the WMD staleness). Assembly-order note: 3/5/7 are
+  draftable from CI-verified artifacts alone; 4/6 blocked on readings.
+- No invented content: zero drafted prose, zero characterized-but-unread
+  citations.
+- Verifier: doc re-read against the rule; suite state 240; tree clean
+  after commit.

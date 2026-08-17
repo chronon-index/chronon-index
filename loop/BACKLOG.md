@@ -142,7 +142,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] D-05 | deps: A-13 | refs: RP#IX, SPEC#0 G8 | tly/formulary doc-module: E1–E12 as a tested module; implementations cite equation numbers in docstrings/metadata; cross-reference test (done 2026-08-17)
 - [x] D-06 | deps: A-08 | refs: RP#XI, RP#III-R4 | IOSCO mapping table skeleton: one row per Principle mapped to a SPEC capability or governance doc, gaps listed with phase numbers; rows stay (verify) until the 2013 IOSCO document is fetched and read — no recalled principle text (done 2026-08-17: skeleton with ZERO recalled content — iosco.org 403s curl; HUMAN/browser fetch unblock documented in the doc)
 - [ ] D-06b | deps: D-06 | refs: RP#III-R4 | HUMAN-or-browser: fetch IOSCOPD415.pdf (site 403s curl), snapshot+manifest it, then fill docs/IOSCO_MAPPING.md rows reading from the PDF only
-- [ ] D-07 | deps: A-08 | refs: RP#XI | Whitepaper skeleton: the 7 sections of the Part XI outline, structure and pointers only, no invented content
+- [x] D-07 | deps: A-08 | refs: RP#XI | Whitepaper skeleton: the 7 sections of the Part XI outline, structure and pointers only, no invented content (done 2026-08-17)
 - [ ] D-08 | deps: - | refs: RP#XI | Glossary: chronon, CHRONON, TLY, saeculum, E-bar, mint/spend/drift/burn, epoch, print, fixing, vintage, measured vs cohort series
 - [ ] D-09 | deps: D-08 | refs: RP#XI, RP#V | FAQ + one-pager, including the pre-written "you are pricing human lives" response (VSL/QALY precedent: governments already do, in the open)
 - [ ] D-10 | deps: E-01 | refs: RP#XI | Docs site map wired: home / methodology / data & licenses / API reference / changelog / correction ledger / governance / vintage archive
