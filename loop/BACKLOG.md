@@ -91,7 +91,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 
 - [x] B-uc4-01 | deps: B-uc2-06 | refs: SPEC#4 AC-4.6, RP#VI | Print JSON schema: accuracy statement + interval-or-"convention" label mandatory on every published S; schema-validated on publish (done 2026-08-17)
 - [x] B-uc4-02 | deps: B-uc4-01 | refs: SPEC#4 AC-4.4 | Static JSON API builder: latest print, per-epoch history, per-country breakdown — committed files only; CI asserts build output contains no server runtime (done 2026-08-17)
-- [ ] B-uc4-03 | deps: B-uc4-02 | refs: SPEC#4 AC-4.1, RP#X-P9 | test_p9_lineage: walk published JSON, resolve every figure to manifest hashes, non-negativity; no orphan numbers
+- [x] B-uc4-03 | deps: B-uc4-02 | refs: SPEC#4 AC-4.1, RP#X-P9 | test_p9_lineage: walk published JSON, resolve every figure to manifest hashes, non-negativity; no orphan numbers (done 2026-08-17)
 - [ ] B-uc4-04 | deps: B-uc4-02, A-17 | refs: SPEC#4 AC-4.2, RP#VII | Wire the real pipeline into print.yml: Monday 12:00 UTC public CI computation, artifacts hashed + committed, placeholder removed; a print produced any other way is invalid
 - [ ] B-uc4-05 | deps: B-uc4-01 | refs: SPEC#4 AC-4.6, SPEC#2 AC-2.4 | Publish gate: a print failing schema/label/accuracy-statement validation blocks publish; tests
 - [ ] B-uc4-06 | deps: E-02, B-uc4-04 | refs: SPEC#4 AC-4.3, RP#VII | CI verifies a .ots proof exists and matches the print hash before publish

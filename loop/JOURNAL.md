@@ -654,3 +654,17 @@ timestamps, before the loop existed.
   fails), byte-identical double build, bad-input rejection. Suite 145
   passed; ruff+format clean.
 - Next: B-uc4-03 (test_p9_lineage: published figures → manifest hashes).
+
+## 2026-08-17T10:25+02:00 | B-uc4-03 | DONE
+- tly/lineage.py: check_lineage walks a published API tree — integrity
+  first (verify_api), then per print: every cited (snapshot, file, sha256)
+  triple must EXIST in the committed manifests with exactly that hash;
+  prints citing nothing are orphans; stocks (S/Ē/N) must be non-negative
+  (burn exempt: signed flow). Returns all violations.
+- test_p9_lineage (named per RP#X) green on the REAL pipeline print: every
+  cited hash resolves to the committed manifests, zero violations. Each
+  violation class provoked via an index-consistent rewrite helper (so
+  lineage, not the integrity layer, is what fires): citation-hash
+  mismatch, unknown snapshot, orphan print, negative stock.
+- Verifier: 4 tests; suite 149 passed; ruff+format clean.
+- Next: B-uc4-05 (publish gate) — B-uc4-04 needs A-17 (HUMAN, remote).
