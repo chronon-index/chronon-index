@@ -43,6 +43,10 @@ def _real_print(coverage: dict) -> WeeklyPrint:
         n_persons=D("8091734933"),
         burn_life_years=D("0"),
         coverage=coverage,
+        accuracy={
+            "statement": "test accuracy statement",
+            "uncertainty": {"type": "convention", "note": "test fixture"},
+        },
         provenance=stamp([SNAP16]),
     )
 

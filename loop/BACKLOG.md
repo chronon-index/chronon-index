@@ -89,7 +89,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 
 ### SPEC#4 — publication & static API
 
-- [ ] B-uc4-01 | deps: B-uc2-06 | refs: SPEC#4 AC-4.6, RP#VI | Print JSON schema: accuracy statement + interval-or-"convention" label mandatory on every published S; schema-validated on publish
+- [x] B-uc4-01 | deps: B-uc2-06 | refs: SPEC#4 AC-4.6, RP#VI | Print JSON schema: accuracy statement + interval-or-"convention" label mandatory on every published S; schema-validated on publish (done 2026-08-17)
 - [ ] B-uc4-02 | deps: B-uc4-01 | refs: SPEC#4 AC-4.4 | Static JSON API builder: latest print, per-epoch history, per-country breakdown — committed files only; CI asserts build output contains no server runtime
 - [ ] B-uc4-03 | deps: B-uc4-02 | refs: SPEC#4 AC-4.1, RP#X-P9 | test_p9_lineage: walk published JSON, resolve every figure to manifest hashes, non-negativity; no orphan numbers
 - [ ] B-uc4-04 | deps: B-uc4-02, A-17 | refs: SPEC#4 AC-4.2, RP#VII | Wire the real pipeline into print.yml: Monday 12:00 UTC public CI computation, artifacts hashed + committed, placeholder removed; a print produced any other way is invalid

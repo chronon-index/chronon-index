@@ -31,12 +31,45 @@ REQUIRED_FIELDS = (
     "n_persons",
     "burn_life_years",
     "coverage",
+    "accuracy",
     "provenance",
 )
+
+UNCERTAINTY_TYPES = ("interval", "convention")
 
 
 class PrintSchemaError(ValueError):
     """The print dict violates the published schema."""
+
+
+def validate_accuracy(accuracy: object, s_value: Decimal | None = None) -> None:
+    """RP Part VI rule 6: a number without an interval is a convention and
+    must be labeled as one. Every published S carries an accuracy block:
+    a human-readable statement plus uncertainty typed either "interval"
+    (Decimal lower/upper bracketing S) or "convention" (with a note saying
+    why no interval exists yet)."""
+    if not isinstance(accuracy, dict):
+        raise PrintSchemaError("accuracy must be an object")
+    if not str(accuracy.get("statement", "")).strip():
+        raise PrintSchemaError("accuracy.statement is required and non-empty")
+    unc = accuracy.get("uncertainty")
+    if not isinstance(unc, dict) or unc.get("type") not in UNCERTAINTY_TYPES:
+        raise PrintSchemaError(f"accuracy.uncertainty.type must be one of {UNCERTAINTY_TYPES}")
+    if unc["type"] == "interval":
+        try:
+            lower = Decimal(str(unc["lower"]))
+            upper = Decimal(str(unc["upper"]))
+        except (KeyError, ArithmeticError) as err:
+            raise PrintSchemaError("interval needs Decimal lower and upper") from err
+        if lower > upper:
+            raise PrintSchemaError(f"interval inverted: {lower} > {upper}")
+        if s_value is not None and not (lower <= s_value <= upper):
+            raise PrintSchemaError(
+                f"published S {s_value} outside its own interval [{lower}, {upper}]"
+            )
+    else:  # convention
+        if not str(unc.get("note", "")).strip():
+            raise PrintSchemaError("a convention-labeled number must say why (uncertainty.note)")
 
 
 def validate_epoch(epoch_utc: str) -> datetime:
@@ -63,6 +96,7 @@ class WeeklyPrint:
     n_persons: Decimal
     burn_life_years: Decimal
     coverage: dict  # P7 block: {"measured_share": "...", "by_country": {...}}
+    accuracy: dict  # RP VI r6 block: statement + typed uncertainty
     provenance: dict  # stamp(): methodology_version, policies, snapshots
     schema_version: str = field(default=PRINT_SCHEMA_VERSION)
 
@@ -73,6 +107,7 @@ class WeeklyPrint:
         for name in ("s_life_years", "e_bar_years", "n_persons", "burn_life_years"):
             if not isinstance(getattr(self, name), Decimal):
                 raise PrintSchemaError(f"{name} must be Decimal")
+        validate_accuracy(self.accuracy, self.s_life_years)
 
     def to_json_dict(self) -> dict:
         def encode(obj):
@@ -93,6 +128,7 @@ class WeeklyPrint:
             "n_persons": str(self.n_persons),
             "burn_life_years": str(self.burn_life_years),
             "coverage": encode(self.coverage),
+            "accuracy": encode(self.accuracy),
             "provenance": encode(self.provenance),
         }
 
@@ -115,6 +151,7 @@ def validate_print_dict(data: dict) -> None:
     cov = data["coverage"]
     if not isinstance(cov, dict) or "measured_share" not in cov:
         raise PrintSchemaError("coverage.measured_share is required (invariant P7)")
+    validate_accuracy(data["accuracy"], Decimal(str(data["s_life_years"])))
     prov = data["provenance"]
     if not isinstance(prov, dict) or "methodology_version" not in prov or "snapshots" not in prov:
         raise PrintSchemaError("provenance must carry methodology_version and snapshots")

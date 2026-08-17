@@ -625,3 +625,18 @@ timestamps, before the loop existed.
   green: AC-3.1..3.5 all have live tests or evidence-settled rows.
 - Verifier: suite 132 passed; ruff+format clean.
 - Next: B-uc4-01 (print JSON schema: accuracy statement mandatory).
+
+## 2026-08-17T09:45+02:00 | B-uc4-01 | DONE
+- Print schema now REQUIRES an accuracy block (RP#VI rule 6 as schema):
+  non-empty statement + uncertainty typed "interval" (Decimal bounds that
+  must actually BRACKET the published S — an S outside its own interval
+  fails) or "convention" (with a mandatory WHY note — the label alone is
+  not honesty). Validated at construction AND at the consumer-side gate.
+- tly/pipeline.py now emits an honestly convention-labeled block: no
+  machine-produced interval exists until D-03, and the print says so in
+  its own words. Three test-helper constructors updated (the schema change
+  correctly broke them until updated).
+- Verifier: 7 new tests (valid interval/convention, missing statement,
+  unknown type, non-bracketing + inverted intervals, reason-less
+  convention, live-pipeline label); suite 139 passed; ruff clean.
+- Next: B-uc4-02 (static JSON API builder).

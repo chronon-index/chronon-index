@@ -27,6 +27,10 @@ def _print(**overrides) -> WeeklyPrint:
         n_persons=D("8091734933"),
         burn_life_years=D("0"),
         coverage={"measured_share": D("0.92"), "by_country": {"DEU": D("0.98")}},
+        accuracy={
+            "statement": "test accuracy statement",
+            "uncertainty": {"type": "convention", "note": "test fixture"},
+        },
         provenance=stamp([SNAP16]),
     )
     kwargs.update(overrides)
