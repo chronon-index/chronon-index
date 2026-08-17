@@ -953,3 +953,20 @@ timestamps, before the loop existed.
   still-settles, and the DualSeries accessor belt-to-braces check.
 - Verifier: 3 tests; suite 227 passed; ruff clean.
 - Next: C-uc7-06+ per backlog.
+
+## 2026-08-17T16:20+02:00 | C-uc7-06 | DONE — SPEC#7 executable ACs complete
+- docs/REPRODUCE_FIXING.md: 8 steps for a stranger — tree integrity gates
+  first, byte-determinism second, upstream verification with the
+  revision-vs-tampering distinction spelled out, fixing-hash comparison as
+  the agreement protocol, the 48h dispute path on mismatch, and an
+  explicit "what you may NOT conclude" section (agreement proves
+  derivation, not truth). Current-state caveats stated (no public remote,
+  no official prints yet).
+- The doc is TESTED: every load-bearing mechanism named; the step-6 code
+  snippet actually executed as a subprocess by an outsider's path and
+  produces a 64-hex fixing hash; the honesty sections asserted present.
+- SPEC#7 status: AC-7.1..7.6 all have green tests/artifacts (7.5's full
+  gate — an external party reproducing WITHOUT assistance — remains a
+  P5-phase HUMAN milestone by nature).
+- Verifier: 3 tests; suite 230 passed; ruff clean.
+- Next: D-03 (error-budget module — unblocks B-uc2-09).

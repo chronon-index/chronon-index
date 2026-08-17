@@ -130,7 +130,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] C-uc7-03 | deps: C-uc7-01 | refs: SPEC#7 AC-7.2, DEC#7 | First-print-settles enforcement: the fixing equals the first published print for the epoch, always; a later "better" value never replaces it; test (done 2026-08-17)
 - [x] C-uc7-04 | deps: C-uc7-01 | refs: SPEC#7 AC-7.3, DEC | Dispute log: 48 h window, append-only, log-only; a filed dispute alters nothing and delays nothing; test (done 2026-08-17)
 - [x] C-uc7-05 | deps: C-uc7-01, B-uc2-10 | refs: SPEC#7 AC-7.4, DEC | Settlement-series discipline: the cohort/INFORMATIONAL series can never be a settlement input; test (done 2026-08-17: closed a REAL gap — settle_from_archive had no label check)
-- [ ] C-uc7-06 | deps: C-uc7-01 | refs: SPEC#7 AC-7.5 | docs/REPRODUCE_FIXING.md: outsider reproduction instructions, written as if the author will not be there
+- [x] C-uc7-06 | deps: C-uc7-01 | refs: SPEC#7 AC-7.5 | docs/REPRODUCE_FIXING.md: outsider reproduction instructions, written as if the author will not be there (done 2026-08-17)
 - [ ] C-uc7-07 | deps: C-uc7-06, B-uc4-04 | refs: SPEC#7 AC-7.5, RP#IV-P5, RALPH#7 | Outsider-sim CI job: clean environment + public artifacts only reproduces a chosen fixing byte-identically
 
 ## Phase D — research artifacts
