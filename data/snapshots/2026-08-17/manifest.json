@@ -197,6 +197,22 @@
       "sha256": "036201a48a1b36d8beccb90bd751aa888b3cb4745363c1d0a4c8b3ae15fe34f8",
       "source_url": "https://ourworldindata.org/about"
     },
+    "who_copyright.html": {
+      "bytes": 89447,
+      "in_git": true,
+      "purpose": "B-uc3-08 license evidence: WHO publications are CC BY-NC-SA 3.0 IGO \u2014 non-commercial confirmed",
+      "retrieved_utc": "2026-08-17T00:06:12+00:00",
+      "sha256": "5a3132bd0d13bd96c2504dbce779c2b1cb0e2e0021473b18ce17c326328cfe66",
+      "source_url": "https://www.who.int/about/policies/publishing/copyright"
+    },
+    "who_data-policy.html": {
+      "bytes": 96141,
+      "in_git": true,
+      "purpose": "B-uc3-08 license evidence: WHO data made available 'on terms that allow non-commercial, not-for-profit use... for public health purposes'",
+      "retrieved_utc": "2026-08-17T00:06:12+00:00",
+      "sha256": "5b6df89c0882b43bc7e561502e9ee275426962726eddd98cd25357689536a4c8",
+      "source_url": "https://www.who.int/about/policies/publishing/data-policy"
+    },
     "wmd_LICENSE.txt": {
       "bytes": 1072,
       "in_git": true,

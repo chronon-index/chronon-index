@@ -573,3 +573,22 @@ timestamps, before the loop existed.
   stated, not embellished.
 - Verifier: manifest+immutability gates green (9 passed).
 - Next: B-uc3-08 (WHO GHO terms — the non-commercial clause check).
+
+## 2026-08-17T09:02+02:00 | B-uc3-08 | DONE
+- WHO GHO terms VERIFIED, both pages snapshotted+manifested: publications
+  CC BY-NC-SA 3.0 IGO (copyright page); data policy grants access "on
+  terms that allow non-commercial, not-for-profit use of the Data for
+  public health purposes". The non-commercial clause the architecture
+  assumed is REAL — WHO cannot feed a commercial index; the G5 decision
+  (WPP source of record, WHO triangulation-only) is now evidence-backed
+  from both directions (WPP cleared permissive; WHO confirmed restricted).
+- Row status: VERIFIED-RESTRICTED (a row can be honestly settled without
+  being cleared FOR commercial use — the table now distinguishes these).
+  v0 research use remains compatible.
+- IMPLICATION recorded for A-16/B-uc1-13: the v0 golden anchor is computed
+  from a WHO table — fine as research/reconstruction ground truth, but the
+  COMMERCIAL settlement series must move to WPP tables (the G5 switch,
+  with its documented ~0.5yr e0 level change) before any commercial print.
+- Verifier: manifest+immutability gates green (9 passed).
+- Next: B-uc3-09 (HMD/STMF redistribution terms — partially done at
+  B-uc2-01; formalize the derived-indicators policy in the table).
