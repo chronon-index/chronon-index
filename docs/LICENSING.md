@@ -7,7 +7,7 @@ URL + date. All rows start (verify).
 
 | Source | License (as recorded Aug 2026) | Commercial use | Role in TLY | Status |
 |---|---|---|---|---|
-| UN WPP 2024 | CC BY 3.0 IGO (verify) | OK (verify) | Source of record: population + life tables | (verify) |
+| UN WPP 2024 | CC BY 3.0 IGO — the UN's own WPP index states it verbatim (wpp_downloads_index.json, snapshotted 2026-08-17) and the CC deed (cc_by_30_igo_deed.html) confirms share/adapt 'for any purpose, even commercially', irrevocable, attribution required | OK, with attribution + citation per UN suggested form | Source of record: population + life tables | CLEARED 2026-08-17 |
 | Our World in Data grapher | CC BY 4.0 (verify) | OK (verify) | Clean CSV mirror of WPP series | (verify) |
 | WHO GHO / GHE | Non-commercial clause on much content (verify) | PROBLEM for commercial product | Triangulation only — never source of record | (verify) |
 | HMD | CC BY 4.0 for HMD-constructed data (User Agreement read+snapshotted 2026-08-17: hmd_user_agreement.html, sha256 in 2026-08-17 manifest); input data excluded from CC BY | OK for constructed data with attribution | Research-grade life tables, exposures | VERIFIED 2026-08-17; access needs free account (HUMAN B-uc2-02) |

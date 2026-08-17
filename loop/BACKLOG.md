@@ -77,7 +77,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] B-uc3-03 | deps: A-13 | refs: SPEC#3 AC-3.1, RP#X-P5, RP#VI | test_p5_reproducibility in CI: run the pipeline twice from identical snapshot hashes, diff byte-identical (done 2026-08-17)
 - [x] B-uc3-04 | deps: B-uc1-07 | refs: SPEC#3 AC-3.4, RP#VI, RP#XI | Version-bump guard: registry of methodology-governed params (interpolation policy, baseline method, tolerances, ensemble weights); CI fails any diff without version bump + changelog entry (done 2026-08-17: quanta registered as v0.4.0; registry-completeness + append-only-order tests; ensemble reminder test)
 - [x] B-uc3-05 | deps: A-07 | refs: SPEC#3 AC-3.2, RP#X-P10 | Correction-ledger parser + test_p10_correction_completeness: diff vintage pairs against ledger entries; forward-applied only (done 2026-08-17)
-- [ ] B-uc3-06 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Clear LICENSING row UN WPP: fetch current license text (CC BY 3.0 IGO (verify)), record URL + retrieval date, set status CLEARED
+- [x] B-uc3-06 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Clear LICENSING row UN WPP: fetch current license text (CC BY 3.0 IGO (verify)), record URL + retrieval date, set status CLEARED (done 2026-08-17: CLEARED — UN's own statement + CC deed snapshotted)
 - [ ] B-uc3-07 | deps: A-06 | refs: SPEC#3 AC-3.5 | Clear LICENSING row OWID grapher: fetch current terms (CC BY 4.0 (verify)), record URL + date
 - [ ] B-uc3-08 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Verify + record WHO GHO terms (non-commercial clause (verify)); confirm triangulation-only status in the table
 - [ ] B-uc3-09 | deps: A-06 | refs: SPEC#3 AC-3.5, RP#VII | Verify + record HMD / STMF redistribution terms; document the derived-indicators-only policy

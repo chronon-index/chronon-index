@@ -542,3 +542,19 @@ timestamps, before the loop existed.
   on forward-fold/restate/drop cases; parser rejection tests.
 - Verifier: 3 tests; suite 131 passed; ruff+format clean.
 - Next: B-uc3-06 (clear the UN WPP LICENSING row — network task).
+
+## 2026-08-17T08:32+02:00 | B-uc3-06 | DONE
+- UN WPP LICENSING row CLEARED — the first row to reach CLEARED status.
+  Evidence chain, both files snapshotted + manifested: (1) the UN's own
+  downloads index (wpp_downloads_index.json) states verbatim "Copyright ©
+  2024 by United Nations, made available under a Creative Commons license
+  CC BY 3.0 IGO"; (2) the CC BY 3.0 IGO deed confirms share/adapt "for any
+  purpose, even commercially", irrevocable, attribution required. Note:
+  /wpp/copyright 404s — the license statement lives in the index the site
+  itself serves, which is stronger evidence anyway (it governs the exact
+  files we fetched).
+- Commercial condition: attribution + UN suggested citation form —
+  recorded in the row.
+- Verifier: manifest-schema + immutability gates re-run green (9 passed)
+  over the extended manifest; the licensing row carries evidence pointers.
+- Next: B-uc3-07 (OWID row).

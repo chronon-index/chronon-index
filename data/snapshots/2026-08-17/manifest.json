@@ -121,6 +121,14 @@
       "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
       "units": "thousands of persons"
     },
+    "cc_by_30_igo_deed.html": {
+      "bytes": 35639,
+      "in_git": true,
+      "purpose": "B-uc3-06 license evidence: CC BY 3.0 IGO deed \u2014 share/adapt 'for any purpose, even commercially', irrevocable, attribution required",
+      "retrieved_utc": "2026-08-17T00:03:24+00:00",
+      "sha256": "134454c0802f8b7e84cb89b8173a123d4b06896ec82d91e380419a3f0ec73d57",
+      "source_url": "https://creativecommons.org/licenses/by/3.0/igo/"
+    },
     "fixtures/wpp_demind_world_fixture.csv.gz": {
       "bytes": 1800,
       "derivation": "World rows, Time 2019-2024; header preserved; deterministic gzip (mtime=0)",
@@ -196,6 +204,14 @@
       "retrieved_utc": "2026-08-16T23:23:29+00:00",
       "sha256": "4bf283d1491425d3d2d2f55b1c211e12d54bb5bbb7c5986fa11814614bd2fa6c",
       "source_url": "https://raw.githubusercontent.com/akarlinsky/world_mortality/main/world_mortality.csv"
+    },
+    "wpp_downloads_index.json": {
+      "bytes": 248768,
+      "in_git": true,
+      "purpose": "B-uc3-06 license evidence: the UN's own WPP index declares 'Copyright (c) 2024 by United Nations, made available under a Creative Commons license CC BY 3.0 IGO' with link to the CC deed; also the file-path index used for B-uc1-03/04 discovery",
+      "retrieved_utc": "2026-08-17T00:03:24+00:00",
+      "sha256": "5a088f7691f39ad5f1a7e11dccd149b481f88adf77705ffc907a31cada07df1a",
+      "source_url": "https://population.un.org/wpp/assets/downloads.json"
     }
   },
   "network_policy": "User-Agent sent; few-and-large requests; exponential backoff with jitter; World Bank API not used (WAF-blocked 2026-08-16).",
