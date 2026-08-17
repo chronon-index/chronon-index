@@ -89,6 +89,22 @@ Compare your 64-hex hash with the published one (once official fixings
 publish, they live in the static API tree under `api/v1/` and in the
 archive's `chain.json`). String-equal = agreement.
 
+## 6b. One-command reproduction (Docker)
+
+If you would rather not manage a Python environment:
+
+```sh
+docker build -t tly-recompute .
+docker run --rm --network=none tly-recompute > my_print.json
+```
+
+`--network=none` enforces at the container level what the code enforces
+internally (offline compute over hash-verified snapshots). Verified at
+E-13: two container runs are byte-identical, and container output is
+byte-identical to a host run on a DIFFERENT OS and Python version
+(Linux/CPython 3.12 container vs macOS/CPython 3.13 host) — the P5
+property holds across platforms, not just across runs.
+
 ## 7. If your hash differs
 
 1. Re-run step 3 (is your tree intact?) and step 4 (is your run

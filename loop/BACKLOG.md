@@ -166,5 +166,5 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [ ] E-10 | deps: E-09 | refs: RP#VII | Snapshot object-storage uploader; sha256 manifests stay committed in-repo
 - [ ] E-11 | deps: A-17 | refs: RP#XII | Dependency hash-pinning + CI supply-chain hardening (lockfile with hashes)
 - [ ] E-12 | deps: A-17 | refs: RP#XII | HUMAN: signing keys (sigstore/cosign), branch protection + signed commits on the org repo
-- [ ] E-13 | deps: B-uc3-03 | refs: RP#VII, RP#IV-P5 | One-command Docker image for independent recomputation; byte-identical output documented for outsiders
+- [x] E-13 | deps: B-uc3-03 | refs: RP#VII, RP#IV-P5 | One-command Docker image for independent recomputation; byte-identical output documented for outsiders (done 2026-08-17: built + run; container==host byte-identical across OS/Python versions)
 - [ ] E-14 | deps: E-13 | refs: RP#VII, RP#XII | HUMAN: recruit ≥ 2 external recomputers (university demography group, actuarial society student chapter); N-of-M starts at 3-of-3 matching

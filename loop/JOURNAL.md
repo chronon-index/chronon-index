@@ -1188,3 +1188,14 @@ timestamps, before the loop existed.
 - Verifier: 5 tests (classification vs licensing table, both vintages
   built, byte-identity of copied files vs manifest hashes, metadata shape,
   unknown vintage). Suite 268 passed; ruff+format clean.
+
+## 2026-08-17T21:35+02:00 | E-13 | DONE (live-verified)
+- Dockerfile (python:3.12-slim, package + committed snapshots + seed only;
+  .dockerignore excludes loop/tests/docs) built and RUN on this machine
+  (daemon 29.6.1, verified live): two --network=none container runs
+  byte-identical, AND container output byte-identical to the host run —
+  across a DIFFERENT OS and CPython version (Linux/3.12 vs macOS/3.13).
+  The strongest P5 evidence yet: byte-identity holds cross-platform.
+- REPRODUCE_FIXING.md gained the one-command Docker section (6b) with the
+  cross-platform verification recorded.
+- Verifier: the two diffs above (both empty); suite unchanged (268).
