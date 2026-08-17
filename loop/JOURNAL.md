@@ -942,3 +942,14 @@ timestamps, before the loop existed.
   schedule. A dispute is a record, not a lever.
 - Verifier: 4 tests; suite 224 passed; ruff+format clean.
 - Next: C-uc7-05 (settlement-series discipline vs INFORMATIONAL).
+
+## 2026-08-17T16:00+02:00 | C-uc7-05 | DONE (real gap closed)
+- GAP FOUND AND CLOSED: settle_from_archive read the epoch's print without
+  checking series_label — an archived INFORMATIONAL (cohort) print could
+  have become a settlement fixing. Now refused with the dual-series rule
+  named in the error. Archiving cohort prints stays legitimate (published
+  data); settling on them is not.
+- Tests: informational-cannot-settle (the gap's regression), settlement-
+  still-settles, and the DualSeries accessor belt-to-braces check.
+- Verifier: 3 tests; suite 227 passed; ruff clean.
+- Next: C-uc7-06+ per backlog.

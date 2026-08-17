@@ -126,6 +126,12 @@ def settle_from_archive(archive, epoch_utc: str, snapshots_root) -> Fixing:
             f"no archived print for epoch {epoch_utc} — a fixing cannot precede its print"
         )
     record = _json.loads((archive.root / link["file"]).read_text(encoding="utf-8"))
+    if record.get("series_label") != "SETTLEMENT":
+        raise FixingValidationError(
+            f"epoch {epoch_utc} archived a {record.get('series_label')!r} print — "
+            "the cohort/INFORMATIONAL series can never be a settlement input "
+            "(SPEC#7 AC-7.4; DECISIONS dual-series rule)"
+        )
     prov = record["provenance"]
 
     urls: list[str] = []
