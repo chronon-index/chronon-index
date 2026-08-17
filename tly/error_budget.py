@@ -94,3 +94,25 @@ def build_error_budget(s_life_years: Decimal) -> ErrorBudget:
         symmetric_pct=quadrature_pct(),
         one_sided=dict(ONE_SIDED_TERMS),
     )
+
+
+def accuracy_block(s_life_years: Decimal) -> dict:
+    """The print's accuracy block, module-produced end to end (B-uc2-09):
+    the Part VIII statement plus a real interval from the symmetric
+    quadrature; the one-sided terms ride along, listed never netted. Any
+    hand-typed accuracy text in a print is a defect — prints must call
+    this."""
+    budget = build_error_budget(s_life_years)
+    lo, hi = budget.interval
+    return {
+        "statement": budget.statement(),
+        "uncertainty": {
+            "type": "interval",
+            "lower": str(lo),
+            "upper": str(hi),
+        },
+        "one_sided_terms_pct": {
+            name: [str(lo_), str(hi_)] for name, (lo_, hi_) in budget.one_sided.items()
+        },
+        "produced_by": "tly.error_budget.accuracy_block",
+    }

@@ -987,3 +987,17 @@ timestamps, before the loop existed.
 - Verifier: 6 tests; suite 236 passed; ruff+format clean.
 - Next: B-uc2-09 (wire this budget into every print — its dep just
   cleared) per priority rule.
+
+## 2026-08-17T17:05+02:00 | B-uc2-09 | DONE
+- accuracy_block() added to tly/error_budget.py; the pipeline's interim
+  convention label (honest placeholder since B-uc4-01) is RETIRED — every
+  print now embeds the module-produced Part VIII statement + a real
+  interval from the quadrature, with one-sided terms listed alongside and
+  a produced_by field naming the module.
+- The schema check is byte-equality: the pipeline print's accuracy dict
+  must EQUAL accuracy_block(S) exactly — hand-typed accuracy text anywhere
+  in a print now fails the suite. Interval-brackets-S enforcement was
+  already in the schema (B-uc4-01) and now applies to real intervals.
+- Verifier: suite 236 passed (accuracy test upgraded in place); ruff+
+  format clean.
+- CHECKPOINT (usage limit): stopping cleanly at a green suite.

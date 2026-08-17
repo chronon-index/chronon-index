@@ -76,10 +76,14 @@ def test_convention_without_reason_fails():
         validate_accuracy({"statement": "s", "uncertainty": {"type": "convention", "note": ""}}, S)
 
 
-def test_pipeline_print_carries_convention_label():
-    """The live pipeline honestly labels its S a convention until D-03."""
+def test_pipeline_print_carries_module_produced_interval():
+    """B-uc2-09: since D-03, the live pipeline embeds the module-produced
+    budget — a real interval, no hand-typed text (the pre-D-03 convention
+    label is retired)."""
+    from tly.error_budget import accuracy_block
     from tly.pipeline import build_settlement_print
 
     p = build_settlement_print("2026-08-17T12:00:00+00:00")
-    assert p.accuracy["uncertainty"]["type"] == "convention"
-    assert "D-03" in p.accuracy["uncertainty"]["note"]
+    assert p.accuracy == accuracy_block(p.s_life_years)  # byte-equal: module-produced
+    assert p.accuracy["uncertainty"]["type"] == "interval"
+    assert p.accuracy["produced_by"] == "tly.error_budget.accuracy_block"

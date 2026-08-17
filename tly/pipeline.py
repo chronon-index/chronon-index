@@ -17,6 +17,7 @@ from decimal import Decimal
 from pathlib import Path
 
 from tly.baseline import coverage_block, coverage_metadata, fit_baseline
+from tly.error_budget import accuracy_block
 from tly.estimator import compute_stock, e_bar, total_population
 from tly.loader import load_verified_snapshot
 from tly.prints import WeeklyPrint
@@ -51,24 +52,7 @@ def build_settlement_print(epoch_utc: str) -> WeeklyPrint:
         n_persons=n,
         burn_life_years=Decimal(0),
         coverage=coverage_block(records),
-        accuracy={
-            "statement": (
-                "Measured-period S on the 2026-08-16 v0-equivalent snapshot "
-                "(WHO 2019 global table x WPP2024 population, 2023 structure). "
-                "Deterministic error budget per RP Part VIII: ~+-2 percent "
-                "symmetric, plus one-sided vintage-lag and period-vs-cohort "
-                "terms; module-produced budget pending D-03."
-            ),
-            "uncertainty": {
-                "type": "convention",
-                "note": (
-                    "No machine-produced interval yet: the deterministic "
-                    "error-budget module lands with D-03 (B-uc2-09 wires it). "
-                    "Until then this figure is a convention per RP Part VI "
-                    "rule 6."
-                ),
-            },
-        },
+        accuracy=accuracy_block(stock.s_life_years),
         provenance=stamp([SNAP16, SNAP17]),
     )
 
