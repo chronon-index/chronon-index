@@ -1138,3 +1138,12 @@ timestamps, before the loop existed.
   stampable target. B-uc4-06 (CI verifies proof before publish) remains
   open pending the real client + A-17.
 - Verifier: 6 tests; suite 251 passed; ruff+format clean.
+
+## 2026-08-17T20:12+02:00 | correction(E-02 entry) | DONE
+- CORRECTION: the E-02 entry reads "no  on this machine" — zsh
+  command-substituted a backticked word inside a double-quoted python -c
+  string, deleting the client name from the sentence. It should read:
+  "no ots client on this machine". Entry appended, not edited.
+  LEARNINGS: journal writes go through heredoc-fed python (quoting-safe),
+  never shell-interpolated -c strings — inverse of the earlier heredoc
+  rule: heredocs for CONTENT, flat chains for CONTROL FLOW.
