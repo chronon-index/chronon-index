@@ -611,3 +611,17 @@ timestamps, before the loop existed.
   14 rows evidence-settled; ACLED/EM-DAT remain HUMAN; rest (verify).
 - Verifier: table re-read; no code changes; suite state unchanged (131).
 - Next: B-uc3-14 (methodology change process doc) or next open per rule.
+
+## 2026-08-17T09:28+02:00 | B-uc3-14 | DONE
+- docs/METHODOLOGY_CHANGE_PROCESS.md: scope (governed policy strings;
+  explicitly NOT bug fixes — those are correction-ledger, forward-only);
+  procedure (proposal → comment window 14d/7d with an explicit pre-P1
+  Ben-sign-off shortcut that EXPIRES at first public print → one-commit
+  bump → next-epoch effective date, level breaks published side-by-side);
+  enforcement section lists the five live CI tests by name.
+- Wired both directions: test_change_process_doc_wired asserts the doc
+  names every mechanism + enforcement test, and the changelog header now
+  points at the process doc (also asserted). SPEC#3 capability now fully
+  green: AC-3.1..3.5 all have live tests or evidence-settled rows.
+- Verifier: suite 132 passed; ruff+format clean.
+- Next: B-uc4-01 (print JSON schema: accuracy statement mandatory).

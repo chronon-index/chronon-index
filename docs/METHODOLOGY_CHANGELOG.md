@@ -1,8 +1,8 @@
 # Methodology changelog
 
 Append-only. A methodology version bump is the ONLY sanctioned way to
-change a numerical policy (SPEC#1 AC-1.4; change process per
-RESEARCH_PROGRAM Part XI: proposal → public comment window → version bump).
+change a numerical policy (SPEC#1 AC-1.4). The full procedure — proposal →
+public comment window → version bump — is docs/METHODOLOGY_CHANGE_PROCESS.md.
 Each entry lists the policies that version is defined by; the registry in
 `tly/methodology.py` pins them and CI enforces the pairing.
 

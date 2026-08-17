@@ -79,3 +79,23 @@ def test_ensemble_weights_not_yet_governed_reminder():
         "an ensemble policy appeared — ensure weights are registry-governed "
         "and delete this reminder test"
     )
+
+
+def test_change_process_doc_wired():
+    """B-uc3-14: the process doc exists, names every live enforcement test,
+    and the changelog points to it."""
+    doc = (REPO / "docs" / "METHODOLOGY_CHANGE_PROCESS.md").read_text(encoding="utf-8")
+    for mechanism in (
+        "VERSION_POLICY_REGISTRY",
+        "METHODOLOGY_VERSION",
+        "METHODOLOGY_CHANGELOG.md",
+        "test_policy_change_requires_version_bump",
+        "test_governed_constants_are_registered",
+        "public comment window",
+        "CORRECTIONS.md",
+    ):
+        assert mechanism.lower() in doc.lower(), f"process doc missing {mechanism}"
+    changelog = (REPO / "docs" / "METHODOLOGY_CHANGELOG.md").read_text(encoding="utf-8")
+    assert "METHODOLOGY_CHANGE_PROCESS.md" in changelog, (
+        "changelog must point to the change process doc"
+    )

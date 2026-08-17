@@ -85,7 +85,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [ ] B-uc3-11 | deps: - | refs: SPEC#3 AC-3.5, RP#II-D4 | HUMAN: purchase ACLED commercial license
 - [ ] B-uc3-12 | deps: - | refs: SPEC#3 AC-3.5, RP#II-D4 | HUMAN: obtain EM-DAT commercial-use license
 - [ ] B-uc3-13 | deps: B-uc3-06, B-uc3-07, B-uc3-08, B-uc3-09, B-uc3-10 | refs: SPEC#3 AC-3.5, RALPH#7 | Licensing-gate CI check (P1 GATE): public print blocked unless every non-HUMAN licensing row is CLEARED
-- [ ] B-uc3-14 | deps: A-08 | refs: RP#XI, SPEC#0 | Methodology change process doc: proposal → public comment window → version bump with changelog; wired to the version-bump guard
+- [x] B-uc3-14 | deps: A-08 | refs: RP#XI, SPEC#0 | Methodology change process doc: proposal → public comment window → version bump with changelog; wired to the version-bump guard (done 2026-08-17)
 
 ### SPEC#4 — publication & static API
 
