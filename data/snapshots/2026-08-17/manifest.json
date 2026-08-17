@@ -129,6 +129,30 @@
       "sha256": "134454c0802f8b7e84cb89b8173a123d4b06896ec82d91e380419a3f0ec73d57",
       "source_url": "https://creativecommons.org/licenses/by/3.0/igo/"
     },
+    "cdc_materials.html": {
+      "bytes": 80260,
+      "in_git": true,
+      "purpose": "B-uc3-10: CDC use-of-materials \u2014 most CDC/ATSDR information public domain, freely usable",
+      "retrieved_utc": "2026-08-17T08:05:20+00:00",
+      "sha256": "ca28a73819be1e905cf9de29bfc76d5828fe1963a1ba0d5547802ffad4bb9173",
+      "source_url": "https://www.cdc.gov/other/agencymaterials.html"
+    },
+    "economist_model_license_api.json": {
+      "bytes": 2684,
+      "in_git": true,
+      "purpose": "B-uc3-10: GitHub license API \u2014 The Economist excess-deaths model repo is MIT (spdx MIT)",
+      "retrieved_utc": "2026-08-17T08:05:20+00:00",
+      "sha256": "1bd199c513f00e409b85a2be585a0d7be48b8e19778bd333de4bfd7833872086",
+      "source_url": "https://api.github.com/repos/TheEconomist/covid-19-the-economist-global-excess-deaths-model/license"
+    },
+    "eurostat_legal_notice.html": {
+      "bytes": 151548,
+      "in_git": true,
+      "purpose": "B-uc3-10: EU Commission legal notice \u2014 EU-owned content CC BY 4.0 unless otherwise indicated",
+      "retrieved_utc": "2026-08-17T08:05:20+00:00",
+      "sha256": "7c067d9a38c377cf027aef87b143ac19ed4ea133c54d806cc5837873e2a85479",
+      "source_url": "https://commission.europa.eu/legal-notice_en"
+    },
     "fixtures/wpp_demind_world_fixture.csv.gz": {
       "bytes": 1800,
       "derivation": "World rows, Time 2019-2024; header preserved; deterministic gzip (mtime=0)",
@@ -189,6 +213,14 @@
       "sha256": "fe4ba484240894430523687aa67e06476e451003ebbc5e6ee075147a99a4404e",
       "source_url": "https://www.mortality.org/Data/UserAgreement"
     },
+    "ihme_terms.html": {
+      "bytes": 133141,
+      "in_git": true,
+      "purpose": "B-uc3-10: IHME Free-of-Charge NON-COMMERCIAL User Agreement \u2014 NC confirmed; triangulation-only stands",
+      "retrieved_utc": "2026-08-17T08:05:20+00:00",
+      "sha256": "4068231b9e8ad8ed5be07bef07af251acf710ee7f94e4b4e3646978cf6aceea6",
+      "source_url": "https://www.healthdata.org/Data-tools-practices/data-practices/ihme-free-charge-non-commercial-user-agreement"
+    },
     "owid_about.html": {
       "bytes": 119948,
       "in_git": true,
@@ -196,6 +228,22 @@
       "retrieved_utc": "2026-08-17T00:04:47+00:00",
       "sha256": "036201a48a1b36d8beccb90bd751aa888b3cb4745363c1d0a4c8b3ae15fe34f8",
       "source_url": "https://ourworldindata.org/about"
+    },
+    "ucdp_apidocs.html": {
+      "bytes": 110935,
+      "in_git": true,
+      "purpose": "B-uc3-10: UCDP API docs \u2014 API free but TOKEN-AUTHENTICATED (G6 conflict if used; bulk downloads instead)",
+      "retrieved_utc": "2026-08-17T08:05:20+00:00",
+      "sha256": "e5e5698386af4246dea33841fdd854895f453f576f2d0626decef614b170e7bd",
+      "source_url": "https://ucdp.uu.se/apidocs/"
+    },
+    "ucdp_downloads_page.html": {
+      "bytes": 138078,
+      "in_git": true,
+      "purpose": "B-uc3-10: UCDP download center \u2014 all datasets free of charge, CC BY 4.0, redistributable with citation; keyless direct downloads",
+      "retrieved_utc": "2026-08-17T08:05:20+00:00",
+      "sha256": "5b8c5d85582971fe6f30b161886704b38b241b12cd18fea29ea3d762f8e5ebc5",
+      "source_url": "https://ucdp.uu.se/downloads/"
     },
     "who_copyright.html": {
       "bytes": 89447,

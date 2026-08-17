@@ -1199,3 +1199,24 @@ timestamps, before the loop existed.
 - REPRODUCE_FIXING.md gained the one-command Docker section (6b) with the
   cross-platform verification recorded.
 - Verifier: the two diffs above (both empty); suite unchanged (268).
+
+## 2026-08-17T10:20+02:00 | B-uc3-10 | DONE (session resumed 2026-08-17 morning)
+- Remaining licensing rows verified with snapshotted+manifested evidence
+  (6 new files): Eurostat/EC content CC BY 4.0 (legal notice) — CLEARED;
+  CDC materials mostly public domain (with a per-dataset-exceptions note)
+  — CLEARED; UCDP datasets free + CC BY 4.0 redistributable-with-citation
+  via BULK downloads — CLEARED, with the important catch that UCDP's API
+  is now TOKEN-AUTHENTICATED (second keyless-rule collision after STMF;
+  resolved architecturally: bulk downloads only); Economist model repo MIT
+  via the GitHub license API — CLEARED; IHME Free-of-Charge NON-COMMERCIAL
+  agreement confirmed — VERIFIED-RESTRICTED (triangulation only stands);
+  WMD upgraded to CLEARED (confirming B-uc2-03a); UBS row set ROLE-LIMITED
+  (cite-only, not in any compute path — no terms fetch needed unless the
+  role expands).
+- LICENSING TABLE STATE: every non-HUMAN row is now evidence-settled —
+  CLEARED×6 (WPP, OWID, WMD, Eurostat, CDC, UCDP, Economist =7),
+  CLEARED-CONSTRUCTED-ONLY×2 (HMD, STMF), VERIFIED-RESTRICTED×2 (WHO,
+  IHME), ROLE-LIMITED×1 (UBS); HUMAN×2 (ACLED, EM-DAT). B-uc3-13 (the
+  licensing CI gate) is now unblocked.
+- Verifier: manifest+immutability gates green (9 passed) over the extended
+  manifest.

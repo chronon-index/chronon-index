@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Google Tag Manager -->
+    <script async="" src="https://www.googletagmanager.com/gtm.js?id=GTM-T26P2Z5&l=dataLkyer"></script><script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLkyer', 'GTM-T26P2Z5');</script>
+    <!-- End Google Tag Manager -->
+    
+    <!-- Always force latest IE rendering engine & Chrome Frame -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="cleartype" content="on">
+    <link rel="shortcut icon" href="https://ucdp.uu.se/favicon.ico">
+
+    <!-- Responsive and mobile friendly stuff -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="https://ucdp.uu.se/apidocs/css/html5reset.css?v=1.1" media="all">
+    <link rel="stylesheet" href="https://ucdp.uu.se/apidocs/css/col.css?v=1.1" media="all">
+    <link rel="stylesheet" href="https://ucdp.uu.se/apidocs/css/2cols.css?v=1.1" media="all">
+    <link rel="stylesheet" href="https://ucdp.uu.se/apidocs/css/3cols.css?v=1.1" media="all">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/prettify.css">
+    <link href="https://ucdp.uu.se/Scripts/lib/foundation-sites/dist/foundation.css" rel="stylesheet">
+    <link href="https://ucdp.uu.se/Content/foundation-icons.css" rel="stylesheet">
+    <link href="https://ucdp.uu.se/Content/print.css" rel="stylesheet">
+    <link href="https://ucdp.uu.se/Scripts/lib/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <title>UCDP Application Programming Interface (API)</title>
+
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; }
+
+        :root {
+            --navy:      #12131a;
+            --navy-mid:  #1e2030;
+            --navy-soft: #2b2e42;
+            --accent:    #990000;
+            --accent2:   #bb1111;
+            --gold:      #d4a84b;
+            --text:      #2c2c2c;
+            --text-light:#555;
+            --border:    #dde1e8;
+            --bg:        #ffffff;
+            --bg-code:   #1e2030;
+            --sidebar-w: 230px;
+            --content-max: 820px;
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 16px;
+            background: #7a0000;
+            color: #ffffff;
+            padding: 8px 16px;
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 0 0 4px 4px;
+            z-index: 9999;
+            transition: top 0.1s;
+            border-bottom: none;
+        }
+        .skip-link:focus {
+            top: 0;
+            outline: 3px solid #ffffff;
+            outline-offset: 2px;
+        }
+
+        html { scroll-behavior: smooth; }
+        
+        section[id] {
+            scroll-margin-top: 158px;
+        }
+        body {
+            background: var(--bg);
+            font-family: 'Work Sans', Arial, sans-serif;
+            color: var(--text);
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        /* ── UU-style Header ── */
+        #ucdp-header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+        }
+
+        /* Utility bar – pale grey, like uu.se */
+        .uu-util-bar {
+            background: #12131a;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .uu-util-bar__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .uu-util-bar__uu-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            border-bottom: none;
+            color: rgba(255,255,255,0.75);
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .uu-util-bar__uu-link:hover { color: #fff; }
+
+        .uu-util-bar__uu-logo {
+            display: block;
+            height: 20px;
+            width: auto;
+        }
+
+        .uu-util-bar__nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .uu-util-bar__nav a {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 11px;
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            border-bottom: none;
+            transition: color 0.15s;
+        }
+
+        .uu-util-bar__nav a:hover { color: #fff; }
+
+        /* Main header bar – dark navy with red bottom border */
+        .uu-header__bar {
+            background: #12131a;
+            border-bottom: 4px solid #990000;
+        }
+
+        .uu-header__inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .uu-header__logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+            border-bottom: none;
+        }
+
+        .uu-header__uu-logo {
+            display: block;
+            width: 60px;
+            height: 60px;
+        }
+
+        .uu-header__logo-divider {
+            width: 1px;
+            height: 32px;
+            background: rgba(255,255,255,0.2);
+        }
+
+        .uu-header__logo-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .uu-header__logo-ucdp {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            line-height: 1;
+            letter-spacing: 0.01em;
+        }
+
+        .uu-header__logo-sub {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 10.5px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+
+        .uu-header__nav {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            height: 100%;
+        }
+
+        .uu-header__nav a {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            border-bottom: none;
+            padding: 0 14px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -4px;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        .uu-header__nav a:hover {
+            color: #fff;
+            border-bottom-color: rgba(255,255,255,0.4);
+        }
+
+        .uu-header__nav--active {
+            color: #fff !important;
+            border-bottom-color: #990000 !important;
+            font-weight: 600 !important;
+        }
+
+        /* ── Code tabs ── */
+        .code-tabs {
+            margin-top: 10px;
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .code-tab-bar {
+            display: flex;
+            background: rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .code-tab {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.6);
+            background: none;
+            border: none;
+            padding: 7px 16px;
+            cursor: pointer;
+            transition: color 0.15s, background 0.15s;
+            letter-spacing: 0.02em;
+        }
+
+        .code-tab:hover { color: rgba(255,255,255,0.9); background: rgba(255,255,255,0.05); }
+        .code-tab.active { color: #fff; background: rgba(255,255,255,0.1); border-bottom: 2px solid rgba(255,255,255,0.6); }
+
+        .code-tab-content pre.code-example {
+            margin: 0;
+            padding: 16px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            color: #abb2bf;
+            background: transparent;
+            border: none;
+            white-space: pre;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+
+        /* ── Nav button styles ── */
+        .uu-header__nav-label {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 11px;
+            font-weight: 400;
+            color: rgba(255,255,255,0.5);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            margin-right: 4px;
+            white-space: nowrap;
+        }
+
+        .uu-header__nav-btn {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.9) !important;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            padding: 6px 14px;
+            height: auto !important;
+            display: inline-flex !important;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.25) !important;
+            border-radius: 3px;
+            margin: 0 3px;
+            margin-bottom: 0 !important;
+            transition: background 0.15s, border-color 0.15s, color 0.15s;
+            background: transparent;
+        }
+
+        .uu-header__nav-btn:hover {
+            background: rgba(255,255,255,0.12) !important;
+            border-color: rgba(255,255,255,0.5) !important;
+            color: #fff !important;
+        }
+        #footer-view footer {
+            background: #1a1a1a;
+            color: #ccc;
+            padding: 0;
+            text-align: left;
+            position: relative;
+            z-index: 60;
+        }
+
+        .uu-footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 32px;
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .uu-footer__bottom a {
+            color: rgba(255,255,255,0.55);
+            border-bottom: none;
+            text-decoration: none;
+        }
+
+        .uu-footer__bottom a:hover { color: rgba(255,255,255,0.85); }
+
+        /* ── Main layout: fixed sidebar + content ── */
+        main {
+            display: block;
+            min-height: 100vh;
+            padding-top: 138px;
+            padding-left: var(--sidebar-w);
+        }
+
+        main .row {
+            display: block;
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* Sidebar */
+        #ucdp-sidebar {
+            position: fixed;
+            top: 138px;
+            left: 0;
+            width: var(--sidebar-w);
+            min-width: var(--sidebar-w);
+            height: calc(100vh - 138px);
+            overflow-y: auto;
+            padding: 32px 0 32px 24px;
+            background: #ffffff;
+            border-right: 1px solid #e8e8e8;
+            z-index: 50;
+        }
+
+        #ucdp-sidebar h4,
+        #ucdp-sidebar .sidebar-label {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin: 0 0 12px 0;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        #ucdp-sidebar ul {
+            list-style: none;
+            margin: 0 0 24px 0;
+            padding: 0;
+        }
+
+        #ucdp-sidebar ul li a {
+            display: block;
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 13px;
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 5px 10px 5px 0;
+            border-radius: 3px;
+            transition: color 0.15s, padding-left 0.15s;
+            line-height: 1.4;
+        }
+
+        #ucdp-sidebar ul li a:hover {
+            color: var(--accent);
+            padding-left: 4px;
+        }
+
+        #ucdp-sidebar ul li a.active {
+            color: var(--accent);
+            font-weight: 600;
+            border-left: 2px solid var(--accent);
+            padding-left: 6px;
+        }
+
+        /* Content column */
+        main .col-md-6 {
+            flex: 1;
+            max-width: var(--content-max);
+            padding: 48px 48px 80px 56px !important;
+        }
+
+        /* ── Typography ── */
+        h1 {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: var(--navy);
+            margin: 0 0 6px 0;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin: 0 0 16px 0;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy-soft);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-size: 0.8rem;
+            margin: 24px 0 10px 0;
+        }
+
+        p {
+            margin: 0 0 1rem 0;
+            color: #333;
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 16px;
+            line-height: 1.75;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(153,0,0,0.5);
+            transition: border-color 0.15s;
+        }
+
+        a:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        strong { font-weight: 600; color: var(--navy); }
+
+        /* ── Sections ── */
+        section.header2 {
+            margin-bottom: 0;
+        }
+
+        section.header2 .header {
+            padding: 0;
+        }
+
+        /* ── HR ── */
+        hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 32px 0;
+        }
+
+        /* ── Breadcrumb ── */
+        nav.breadcrumb {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 16px;
+            letter-spacing: 0.02em;
+        }
+
+        nav.breadcrumb a {
+            color: var(--text-light);
+            border-bottom: none;
+        }
+
+        nav.breadcrumb a:hover { color: var(--accent); }
+
+        /* ── Token / access callout box ── */
+        .token-callout {
+            background: var(--navy-mid);
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 20px 24px;
+            margin: 20px 0;
+        }
+
+        .token-callout p {
+            color: #cdd3e0;
+            margin: 0 0 8px 0;
+            font-size: 0.95rem;
+        }
+
+        .token-callout p:last-child { margin: 0; }
+
+        .token-callout a {
+            color: var(--gold);
+            border-bottom-color: rgba(212,168,75,0.3);
+        }
+
+        .token-callout a:hover { border-bottom-color: var(--gold); }
+
+        .token-callout code {
+            background: rgba(255,255,255,0.1);
+            color: #a8d8b5;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        /* ── Code & Pre ── */
+        code {
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-size: 0.82em;
+            background: #edeae4;
+            color: #c0392b;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        pre.prettyprint, pre {
+            font-family: 'IBM Plex Mono', monospace !important;
+            background: var(--bg-code) !important;
+            color: #cdd3e0 !important;
+            border: none !important;
+            border-left: 3px solid var(--accent) !important;
+            border-radius: 0 6px 6px 0 !important;
+            padding: 16px 20px !important;
+            font-size: 0.82rem !important;
+            line-height: 1.6 !important;
+            overflow-x: auto;
+            margin: 12px 0 20px 0 !important;
+        }
+
+        pre.prettyprint .pln { color: #cdd3e0 !important; }
+        pre.prettyprint .com { color: #7a8ba0 !important; }
+        pre.prettyprint .str { color: #a8d8b5 !important; }
+        pre.prettyprint .lit { color: #f0c27f !important; }
+        pre.prettyprint .kwd { color: #e8b4b8 !important; }
+        pre.prettyprint .typ { color: #89c4e1 !important; }
+        pre.prettyprint .pun { color: #aab0c0 !important; }
+
+        /* ── Tables ── */
+        .div-table-scroll {
+            overflow-x: auto;
+            margin: 16px 0 24px 0;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 13.5px;
+        }
+
+        div[style*="overflow-x"] {
+            margin-bottom: 24px;
+        }
+
+        thead tr {
+            background: #f2f2f2;
+            color: #333333;
+        }
+
+        thead th {
+            padding: 10px 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.1s;
+        }
+
+        tbody tr:nth-child(even) { background: rgba(0,0,0,0.02); }
+        tbody tr:hover { background: rgba(192,57,43,0.04); }
+
+        tbody td {
+            padding: 9px 14px;
+            vertical-align: top;
+            line-height: 1.5;
+            color: var(--text);
+        }
+
+        tbody td:first-child {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            white-space: nowrap;
+        }
+
+        tbody td:nth-child(2), tbody td:nth-child(3) {
+            white-space: nowrap;
+            color: var(--text-light);
+        }
+
+        /* ── Section anchor headers ── */
+        section.header2 > .header > h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        section.header2 > .header > h2::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 1.1em;
+            background: var(--accent);
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+
+        /* ── Access tier cards ── */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin: 16px 0 24px 0;
+        }
+
+        .tier-card {
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            background: white;
+        }
+
+        .tier-card.authenticated {
+            border-color: rgba(192,57,43,0.3);
+            background: rgba(192,57,43,0.02);
+        }
+
+        .tier-card h4 {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin: 0 0 10px 0;
+            color: var(--text-light);
+        }
+
+        .tier-card.authenticated h4 { color: var(--accent); }
+
+        .tier-card p {
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* ── Sidebar scroll active highlight ── */
+        @media (max-width: 768px) {
+            #ucdp-sidebar { display: none; }
+            main { padding-left: 0; }
+            main .col-md-6 { padding: 32px 20px 60px 20px !important; }
+            .uu-header__nav { display: none; }
+            .uu-util-bar__nav { display: none; }
+
+            /* Override any grey backgrounds injected by external stylesheets */
+            html, body, main, .row, [class*="col-"],
+            section, div:not([class*="code"]):not([class*="tier"]):not([class*="token"]):not([class*="uu-header"]):not([class*="uu-util"]):not([class*="uu-footer"]):not(#footer-view):not(#ucdp-header) {
+                background-color: #ffffff !important;
+            }
+        }
+    </style>
+</head>
+
+<body data-new-gr-c-s-check-loaded="14.1239.0" data-gr-ext-installed="">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+<!-- UU-style header -->
+<header id="ucdp-header">
+    <!-- Utility bar -->
+    <div class="uu-util-bar">
+        <div class="uu-util-bar__inner">
+            <a href="https://www.uu.se/en" class="uu-util-bar__uu-link"><span>Uppsala University</span></a>
+            <nav class="uu-util-bar__nav" aria-label="Utility navigation">
+                <a href="https://www.uu.se/en/department/peace-and-conflict-research">Department of Peace and Conflict Research</a>
+            </nav>
+        </div>
+    </div>
+    <!-- Main header bar -->
+    <div class="uu-header__bar">
+        <div class="uu-header__inner">
+            <a class="uu-header__logo" href="https://ucdp.uu.se/encyclopedia" aria-label="UCDP – Uppsala Conflict Data Program">
+                <img src="data:image/png;base64,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" alt="Uppsala University" class="uu-header__uu-logo">
+                <span class="uu-header__logo-divider"></span>
+                <span class="uu-header__logo-text">
+                    <span class="uu-header__logo-ucdp">UCDP</span>
+                    <span class="uu-header__logo-sub">Uppsala Conflict Data Program</span>
+                </span>
+            </a>
+            <nav class="uu-header__nav" aria-label="Main navigation">
+                <span class="uu-header__nav-label">Explore organized violence by</span>
+                <a href="https://ucdp.uu.se/encyclopedia" class="uu-header__nav-btn">Countries in Conflict</a>
+                <a href="https://ucdp.uu.se/exploratory" class="uu-header__nav-btn">Fatalities</a>
+            </nav>
+        </div>
+    </div>
+</header>
+    <main id="main-content">
+        <nav id="ucdp-sidebar" aria-label="Page sections" tabindex="0">
+            <p class="sidebar-label">On this page</p>
+            <ul>
+                <li><a href="#section-intro">Introduction</a></li>
+                <li><a href="#section-description">Description</a></li>
+                <li><a href="#section-filtering">Filtering &amp; Subsetting</a></li>
+                <li><a href="#section-quotas">Quotas &amp; Restrictions</a></li>
+                <li><a href="#section-datasets">Available Datasets</a></li>
+            </ul>
+        </nav>
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" id="#header-view" style="padding:60px 30px 0px 30px;">
+                <section class="header2" aria-label="Welcome to the UCDP API" id="section-intro">
+                    <div class="header">
+                        <nav aria-label="Breadcrumb" class="breadcrumb">
+                            <a href="https://ucdp.uu.se/encyclopedia">Start</a> / <a href="https://ucdp.uu.se/apidocs/" aria-current="page">API</a>
+                        </nav>
+                        <h1>UCDP Application Programming Interface (API)</h1>
+						<hr>
+                        <p>
+                            The main maintainer of the API is <a href="mailto:mertcan.yilmaz@pcr.uu.se">Mert Can Yilmaz</a>.
+                        </p>
+
+                        <p>
+                            In keeping with UCDP's commitment to open and accessible research infrastructure,
+                            the API is free of charge. To safeguard service stability and
+                            protect against unintended overuse and automated bot traffic, authenticated access
+                            via token was introduced. <strong>To use the API, please
+                            <a href="mailto:mertcan.yilmaz@pcr.uu.se">contact the API maintainer</a> to request
+                            an access token.</strong> In your email, briefly describe your research project and/or intended
+                            use of the data.
+                        </p>
+
+                        <div style="background:#f7f6f3;border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:18px 24px;margin:4px 0 20px 0;font-family:'IBM Plex Mono',monospace;font-size:0.82rem;line-height:1.8;color:#444;">
+                            <div style="margin-bottom:10px;font-family:'Work Sans',sans-serif;font-size:0.78rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);">Email template — example</div>
+                            <strong>To:</strong> mertcan.yilmaz@pcr.uu.se<br>
+                            <strong>Subject:</strong> UCDP API Access Request<br><br>
+                            Hello,<br><br>
+                            I am writing to request access to the UCDP API.<br><br>
+                            <strong>Name:</strong> [Your full name]<br>
+                            <strong>Affiliation:</strong> [University / institution / organisation / company / independent]<br>
+                            <strong>Role:</strong> [e.g. PhD student, researcher, journalist, policy analyst]<br><br>
+                            <strong>Project / intended use:</strong><br>
+                            [Brief description of your research project or how you plan to use the data]<br><br>
+                            Kind regards,<br>
+                            [Your name]
+                        </div>
+                        <p style="font-size:0.85rem;color:var(--text-light);margin-top:-12px;">All requests are reviewed and responded to within 3–5 working days.</p>
+
+                        <p>
+                            An API (Application Programming Interface) enables direct programmatic access to our systems,
+                            allowing scripts, programs, database queries, do-files, and similar tools to extract and process
+                            data without manual intervention. Through the UCDP API, researchers can obtain, process, and subset
+                            UCDP data dynamically with only a few lines of code, eliminating the need to download or maintain
+                            local copies of the data.
+                        </p>
+
+                        <p>
+                            The API is designed to substantially reduce the overhead associated with working with UCDP data.
+                            Data management tasks that previously demanded extensive code, considerable computational resources,
+                            and careful manual handling can be delegated entirely to our servers. Researchers are thus relieved
+                            of the need to maintain local copies of the data, manage version histories, or guard against
+                            unintended modifications to source files. All data is retrieved directly and freshly from a
+                            centrally maintained, authoritative source that remains unaffected by client-side operations.
+                        </p>
+
+                        <p>
+                            The API fully supports versioning. Each API call — expressed as a URL — is
+                            guaranteed to return the same data at the same version indefinitely. Researchers who include API
+                            calls in their replication materials can therefore be confident that the same data will be returned
+                            upon future retrieval, even years after the original query. To ensure this guarantee holds,
+                            we require that a version number be specified with every API call.
+                        </p>
+
+
+                        <p>
+                            Once issued, the token must be submitted with each request as an HTTP header named
+                            <code>x-ucdp-access-token</code>:
+                        </p>
+                        <div class="token-callout">
+                            <div class="code-tabs">
+                                <div class="code-tab-bar" role="tablist">
+                                    <button class="code-tab active" role="tab" data-tab="curl">curl</button>
+                                    <button class="code-tab" role="tab" data-tab="python">Python</button>
+                                    <button class="code-tab" role="tab" data-tab="r">R</button>
+                                    <button class="code-tab" role="tab" data-tab="stata">Stata</button>
+                                </div>
+                                <div class="code-tab-content" id="tab-curl">
+                                    <pre class="code-example">curl -H "x-ucdp-access-token: YOUR-TOKEN" \
+     "https://ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=100"</pre>
+                                </div>
+                                <div class="code-tab-content" id="tab-python" style="display:none">
+                                    <pre class="code-example">import requests
+
+TOKEN = "YOUR-TOKEN"
+headers = {"x-ucdp-access-token": TOKEN}
+
+url = "https://ucdpapi.pcr.uu.se/api/gedevents/26.1"
+params = {"pagesize": 100, "page": 1}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+
+print(f"Total events: {data['TotalCount']}")
+for event in data["Result"]:
+    print(event["id"], event["country"])</pre>
+                                </div>
+                                <div class="code-tab-content" id="tab-r" style="display:none">
+                                    <pre class="code-example">library(httr)
+library(jsonlite)
+
+TOKEN &lt;- "YOUR-TOKEN"
+
+url &lt;- "https://ucdpapi.pcr.uu.se/api/gedevents/26.1"
+response &lt;- GET(
+  url,
+  add_headers("x-ucdp-access-token" = TOKEN),
+  query = list(pagesize = 100, page = 1)
+)
+
+data &lt;- fromJSON(content(response, "text", encoding = "UTF-8"))
+cat("Total events:", data$TotalCount, "\n")
+print(head(data$Result[, c("id", "country")]))</pre>
+                                </div>
+                                <div class="code-tab-content" id="tab-stata" style="display:none">
+                                    <pre class="code-example">* Requires the -jsonio- package: net install jsonio, from("https://raw.githubusercontent.com/mdroste/stata-jsonio/master/")
+
+local token "YOUR-TOKEN"
+local url "https://ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=100"
+
+jsonio get, url("`url'") ///
+    headers("x-ucdp-access-token: `token'")
+
+* Results are stored in r(json) and can be parsed with jsonio kv
+jsonio kv, from(r(json)) fromtype(object)</pre>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            As standard browser address bars do not support custom HTTP headers, token-protected endpoints
+                            cannot be invoked directly from a browser URL. Access must therefore be established
+                            programmatically — for example, via <code>curl</code>, Python's <code>requests</code>,
+                            R's <code>httr</code>, Stata's <code>jsonio</code>, or any HTTP client capable of transmitting custom headers.
+                        </p>
+                    </div>
+                </section>
+				<p>&nbsp;</p>
+                <hr>
+                <section class="header2" aria-label="Description" id="section-description">
+                    <div class="header">
+                        <h2>Description</h2>
+
+                        <p>
+                            The API is fully <strong>RESTful</strong>, takes the form of simple <strong>HTTP</strong> requests, and returns
+                            <strong>JSON</strong>, having this general format:
+                        </p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/&lt;resource&gt;/&lt;version&gt;?&lt;pagesize=x&gt;&amp;&lt;page=x&gt;</span></pre>
+                        <p></p>
+                        <p>
+                            The API returns standard JSON objects that can be processed with ease in your script (see examples below).
+                        </p>
+
+                        <p>Currently, available resources are:</p>
+                        <p>
+                            The UCDP Georeferenced Event Dataset (UCDP GED), which is labeled in the API as:
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">gedevents</span></pre>
+                        <p style="margin-top:-10px;font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/ged/ged261.pdf" target="_blank">Codebook (v26.1)</a></p>
+                        <p>
+                            The latest version of UCDP GED:
+                            <code>26.1</code>
+                        </p>
+                        <p>
+                            The latest versions of UCDP GED Candidate:<br>
+                            Monthly release: <code>26.0.6</code><br>
+                            Quarterly release: <code>26.01.26.06</code><br>
+                            <span style="font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/candidateged/ucdp-candidate-codebook1.5.pdf" target="_blank">Codebook (v1.5)</a></span>
+                        </p>
+
+                        <p>The yearly UCDP datasets:</p>
+                        <p>UCDP/PRIO Armed Conflict Dataset which is labeled in the API as:</p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">ucdpprioconflict</span></pre><p style="margin-top:-10px;font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/ucdpprio/ucdp-prio-acd-261.pdf" target="_blank">Codebook (v26.1)</a></p>
+                        <p>UCDP Dyadic Dataset which is labeled in the API as:</p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">dyadic</span></pre><p style="margin-top:-10px;font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/dyadic/ucdp-dyadic-261.pdf" target="_blank">Codebook (v26.1)</a></p>
+                        <p>UCDP Non-State Conflict Dataset which is labeled in the API as:</p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">nonstate</span></pre><p style="margin-top:-10px;font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/nsos/ucdp-nonstate-261.pdf" target="_blank">Codebook (v26.1)</a></p>
+                        <p>UCDP One-Sided Violence Dataset which is labeled in the API as:</p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">onesided</span></pre><p style="margin-top:-10px;font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/nsos/ucdp-onesided-261.pdf" target="_blank">Codebook (v26.1)</a></p>
+                        <p>UCDP Battle Related Deaths Dataset which is labeled in the API as:</p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">battledeaths</span></pre><p style="margin-top:-10px;font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/brd/ucdp-brd-codebook-261.pdf" target="_blank">Codebook (v26.1)</a></p>
+                        <p>UCDP Country-Year Dataset on Organized Violence within Country Borders, which is labeled in the API as:</p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">organizedviolencecy</span></pre><p style="margin-top:-10px;font-size:0.85rem;"><a href="https://ucdp.uu.se/downloads/organizedviolencecy/UCDP_OrganizedViolenceCY_Codebook_261.pdf" target="_blank">Codebook (v26.1)</a></p>
+                        <p>
+                            The latest version of the yearly datasets:
+                            <code>26.1</code>
+                        </p>
+                        <p>
+                            Due to the large size of UCDP resources (especially GED), the API implements and requires paging. As such,
+                            the API will return all the rows in your query at once, but will do so in a number pages of a fixed maximum
+                            number of rows.
+                        </p>
+
+                        <p>
+                            You may iterate through the pages. Each response will provide you with the current page number, the total
+                            number of pages, the total number of rows, as well as links to the next and previous page.
+                        </p>
+
+                        <p>
+                            You may specify the page size (number of rows to be returned in each page) depending on your requirements
+                            and computational setup.
+                        </p>
+
+                        <p>
+                            The following examples illustrate the structure of API calls and the format of returned output.
+                            Note that token-protected requests require a programmatic client capable of sending custom HTTP headers (see above). For example, this link:
+                        </p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=1</span></pre>
+                        <p></p>
+                        <p>will output each GED event as its own page, like this:</p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pun">{</span><span class="pln">
+  </span><span class="str">"TotalCount"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">417968</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"TotalPages"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">417968</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"PreviousPageUrl"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"https://ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=1&amp;pagesize=100&amp;page=0"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"NextPageUrl"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"https://ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=1&amp;pagesize=100&amp;page=2"</span><span class="pun">,</span><span class="pln">
+  </span><span class="str">"Result"</span><span class="pun">:</span><span class="pln"> </span><span class="pun">[</span><span class="pln">
+    </span><span class="pun">{</span><span class="pln">
+      </span><span class="str">"id"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">4</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"relid"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"YEM-2010-1-784-46"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"year"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">2010</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"active_year"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">true</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"code_status"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Clear"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"type_of_violence"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"conflict_dset_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"230"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"conflict_new_id"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">230</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"conflict_name"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Yemen (North Yemen): Government"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"dyad_dset_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"459"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"dyad_new_id"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">459</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"dyad_name"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Government of Yemen (North Yemen) - AQAP"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"side_a_dset_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"123"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"side_a_new_id"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">123</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"side_a"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Government of Yemen (North Yemen)"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"side_b_dset_id"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"881"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"side_b_new_id"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">881</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"side_b"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"AQAP"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"number_of_sources"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">-1</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"source_article"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"BBC Monitoring Middle East, 2010-10-01, Yemen tightens security measures after Al-Qa&#39;idah attacks///Agence France-Presse (AFP), 2010-10-09, Qaeda claims Yemen bus ambush, says killed 14"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"source_office"</span><span class="pun">:</span><span class="pln"> </span><span class="str">""</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"source_date"</span><span class="pun">:</span><span class="pln"> </span><span class="str">""</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"source_headline"</span><span class="pun">:</span><span class="pln"> </span><span class="str">""</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"source_original"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Ministry of Interior"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"where_prec"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"where_coordinates"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Şan’ā’ city"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"where_description"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Şan’ā’ city (60 m road near Al-Eman University)"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"adm_1"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Amānat al ‘Āşimah governorate"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"adm_2"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"latitude"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">15.354722</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"longitude"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">44.206667</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"geom_wkt"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"POINT (44.206667 15.354722)"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"priogrid_gid"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">151649</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"country"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Yemen (North Yemen)"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"country_id"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">678</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"region"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"Middle East"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"event_clarity"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"date_prec"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">1</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"date_start"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"2010-09-25"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"date_end"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"2010-09-25"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"deaths_a"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"deaths_b"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"deaths_civilians"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"deaths_unknown"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"best"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"high"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"low"</span><span class="pun">:</span><span class="pln"> </span><span class="lit">2</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"gwnoa"</span><span class="pun">:</span><span class="pln"> </span><span class="str">"678"</span><span class="pun">,</span><span class="pln">
+      </span><span class="str">"gwnob"</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">null</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+  </span><span class="pun">]</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+            </span></pre>
+                        <p></p>
+                        <p>
+                            To access page 295 of this result set, you may either use the NextPageUrl property to iterate until page 295,
+                            or simply give the page number directly like this:
+                        </p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=1&amp;page=295</span></pre>
+                        <p></p>
+                        <p>
+                            We guarantee the consistency of the result-set order within a session. However, the order of events is
+                            meaningless and determined by an internal mechanism not connected to the dataset in any way. If your
+                            application depends on ordered sets, you will have to use the filtering mechanisms described below.
+                        </p>
+                        <p>
+                            Requesting a page far outside the bounds of the data may return a server error rather than an empty set. It is recommended to iterate using the <code>TotalPages</code> value in the response to stay within valid bounds.
+                        </p>
+                        <p>&nbsp;</p>
+                    </div>
+                </section>
+                <hr>
+                <section class="header2" aria-label="Filtering and Subsetting" id="section-filtering">
+                    <div class="header">
+                        <h2>Filtering and Subsetting</h2>
+                        <h3>UCDP GED</h3>
+                        <p>You may use the following filters and parameters to request only a subset of UCDP GED:</p>
+                        <br>
+                        <div style="overflow-x:auto; display: block;">
+                            <table id="tableParamUCDPGed" aria-label="UCDP GED filter parameters">
+                                <caption>Filter parameters for requesting a subset of UCDP GED</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Multiple</th>
+                                        <th scope="col">Dataset Variable</th>
+                                        <th scope="col">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Id</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>country_id</td>
+                                        <td>Gleditsch and Ward country codes</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Geography</td>
+                                        <td>String</td>
+                                        <td>No</td>
+                                        <td>latitude, longitude</td>
+                                        <td>
+                                            Two coordinates (upper left and lower right in the format y0 x0,y1 x1) describing
+                                            the bounding box to be used to select GED events.
+                                            <br>
+                                            The first point should be the South-Western point whereas the second point should
+                                            be the North-Eastern point.
+                                            <br>
+                                            Note that you have to use: latitude longitude,latitude longitude NOT longitude
+                                            latitude, as expected by some GIS applications.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>StartDate</td>
+                                        <td>String</td>
+                                        <td>No</td>
+                                        <td>date_end</td>
+                                        <td>YYYY-MM-DD</td>
+                                    </tr>
+                                    <tr>
+                                        <td>EndDate</td>
+                                        <td>String</td>
+                                        <td>No</td>
+                                        <td>date_end</td>
+                                        <td>YYYY-MM-DD</td>
+                                    </tr>
+                                    <tr>
+                                        <td>TypeOfViolence</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>type_of_violence</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dyad</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>date_new_id</td>
+                                        <td>
+                                            Uses the NEW format for Dyad IDs introduced with GED at version 5.0 and rolled
+                                            out in all UCDP datasets with version 17.1. Thus, Government of Mali - FIAA is
+                                            dyad 801 and not 72.
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Actor</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>side_a_new_id OR side_b_new_id</td>
+                                        <td>
+                                            Will retrieve all events having the given actor as one of the sides. Uses the
+                                            NEW format for Actor IDs introduced with GED at version 5.0 and rolled out
+                                            in all UCDP datasets with version 17.1. Thus, the Government of Mali is 72
+                                            AND NOT 432. See the actor list available on http://ucdp.uu.se/downloads for
+                                            details
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>When filtering is employed, the general form of the API call is described below:</p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/&lt;resource&gt;/&lt;version&gt;?&lt;pagesize=x&gt;&amp;&lt;page=x&gt;[&amp;&lt;filter&gt;=&lt;condition1,[condition2]&gt;...]</span></pre>
+                        <p></p>
+                        <p>Multiple filters can be used together, see details below.</p>
+                        <p>• A note on the StartDate and EndDate parameters: they both operate on <b>date_end</b>.</p>
+                        <p>
+                            <b>StartDate</b> will give you all the events that have a date_end (i.e. that have definitely
+                            happened by that date) equal or greater to the specified date, to the end of the dataset
+                            time-span. For example, if you use this filter:
+                        </p>
+                        <p></p><pre class="prettyprint prettyprinted" style="background: white;"><span class="typ">StartDate</span><span class="pun">=</span><span class="lit">2000</span><span class="pun">-</span><span class="lit">01</span><span class="pun">-</span><span class="lit">01</span></pre><p></p>
+                        <p>you will receive all the events taking place between 1 January 2000 and 31 December 2015.</p>
+                        <p>
+                            <b>EndDate</b> will give you all the events from the beginning of the dataset's time span to
+                            the specified date_end (i.e. the date by which those events have definitely happened by
+                            that date). For example, if you use this filter:
+                        </p>
+                        <p></p><pre class="prettyprint prettyprinted" style="background: white;"><span class="typ">EndDate</span><span class="pun">=</span><span class="lit">2000</span><span class="pun">-</span><span class="lit">01</span><span class="pun">-</span><span class="lit">01</span></pre><p></p>
+                        <p>you will receive all the events taking place between 1 January 1989 and 1 January 2000.</p>
+                        <p>You can combine these two filters to get a fixed time span. Using:</p>
+                        <p></p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln"> </span><span class="typ">StartDate</span><span class="pun">=</span><span class="lit">2000</span><span class="pun">-</span><span class="lit">01</span><span class="pun">-</span><span class="lit">01</span><span class="pun">&amp;</span><span class="typ">EndDate</span><span class="pun">=</span><span class="lit">2007</span><span class="pun">-</span><span class="lit">10</span><span class="pun">-</span><span class="lit">12</span></pre><p></p>
+                        <p>will yield all the events between 1 January 2000 and 12 October 2007.</p>
+                        <p>
+                            For those variables permitting multiple values, you may request data that fulfills ANY of
+                            the conditions specified (boolean <strong>OR</strong>). You need to separate the conditions
+                            by a comma (,). For example, you may issue this request:
+                        </p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=100&amp;Country=90,91,92</span></pre>
+                        <p></p>
+                        <p>
+                            This will request all the events taking place in <strong>either</strong> Guatemala (id:90),
+                            Honduras (id:91) or El Salvador (id:92).
+                        </p>
+                        <p>
+                            You can use multiple filters at once, each filter separated by the http standard ampersand
+                            (the &amp; character). The result set will contain all the events fulfilling ALL the criteria
+                            at the same time (boolean <strong>AND</strong>. For example, you may issue this request:
+                        </p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=100&amp;Country=365,369&amp;StartDate=2014-01-15&amp;EndDate=2015-02-28&amp;TypeOfViolence=1,3</span></pre>
+                        <p></p>
+                        <p>
+                            you will receive all the state-based and one-sided events in either Russia or Ukraine
+                            taking place between 15 January 2014 and 31 December 2015.
+                        </p>
+                        <p>Similarly, using:</p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=100&amp;Geography=40%20-75,41%20-73&amp;StartDate=2001-09-11&amp;EndDate=2001-09-11</span></pre>
+                        <p></p>
+                        <p>
+                            will give you all UCDP events coupled with the 9/11 events in New York City. Note that in
+                            some applications you may have to escape the space characters and replace them with the
+                            %20 escape code.
+                        </p>
+                        <p>Similarly, using:</p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/gedevents/26.1?pagesize=100&amp;Country=645&amp;Actor=234</span></pre>
+                        <p></p>
+                        <p>
+                            will return all the activity of the Islamic State (IS, ISIL, ISIS, Daesh etc.) in Iraq.
+                        </p>
+
+                        <p>
+                            The behaviour in case of errors is this:
+                            <br>
+                            Attempting to use a filter that does not exist will result in that filter being completely
+                            ignored.
+                            <br>
+                            Attempting to use an out-of-bounds or wrong value for filtering will result in an empty
+                            set being returned.
+                        </p>
+
+                        <h3>Yearly Datasets</h3>
+                        <p>
+                            You may use the following filters and parameters to request only a subset of the UCDP/PRIO
+                            Conflict Dataset (<code>ucdpprioconflict</code>):
+                        </p>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <table id="tableYearlyPrio" aria-label="Yearly PRIO conflict data parameters">
+                                <caption>Filter parameters for requesting a yearly subset of UCDP/PRIO Conflict Dataset(ucdpprioconflict)</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Multiple</th>
+                                        <th scope="col">Dataset Variable</th>
+                                        <th scope="col">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>gwno_loc</td>
+                                        <td>Gleditsch and Ward country codes, the location of incompatibility</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conflict</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>conflict_id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>year</td>
+                                        <td>YYYY</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ConflictIncompatibility</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>incompatibility</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ConflictType</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>type_of_conflict</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>
+                            You may use the following filters and parameters to request only a subset of the UCDP
+                            Dyadic Dataset (<code>dyadic</code>):
+                        </p>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <table id="tableYearlyDyadic" aria-label="Yearly dyadic conflict data parameters">
+                                <caption>Filter parameters for requesting a yearly subset of UCDP Dyadic Dataset (dyadic)</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Multiple</th>
+                                        <th scope="col">Dataset Variable</th>
+                                        <th scope="col">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dyad</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>dyad_id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conflict</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>conflict_id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>gwno_loc</td>
+                                        <td>Gleditsch and Ward country codes, the location of incompatibility</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>year</td>
+                                        <td>YYYY</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ConflictIncompatibility</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>incompatibility</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ConflictType</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>type_of_conflict</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            You may use the following filters and parameters to request only a subset of the UCDP Battle Related Deaths Dataset
+                            (<code>battledeaths</code>):
+                        </p>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <table id="tableYearlyDyadic" aria-label="Yearly dyadic conflict data parameters">
+                                <caption>
+                                    Filter parameters for requesting a yearly subset of UCDP Battle Related Deaths Dataset
+                                    (battledeaths)
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Multiple</th>
+                                        <th scope="col">Dataset Variable</th>
+                                        <th scope="col">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dyad</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>dyad_id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conflict</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>conflict_id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>gwno_battle</td>
+                                        <td>Gleditsch and Ward country codes, the location of events</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>year</td>
+                                        <td>YYYY</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ConflictIncompatibility</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>incompatibility</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>ConflictType</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>type_of_conflict</td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                        </p><p>
+                            You may use the following filters and parameters to request only a subset of the
+                            UCDP Non-State Conflict Dataset (<code>nonstate</code>):
+                        </p>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <table id="tableYearlyNonstate" aria-label="Yearly non-state conflict data parameters">
+                                <caption>Filter parameters for requesting a yearly subset of UCDP Non-State Conflict Dataset(nonstate)</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Multiple</th>
+                                        <th scope="col">Dataset Variable</th>
+                                        <th scope="col">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>gwno_location</td>
+                                        <td>Gleditsch and Ward country codes, the location of events</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conflict</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>conflict_id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Org</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>org</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>year</td>
+                                        <td>YYYY</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>
+                            You may use the following filters and parameters to request only a subset of the
+                            UCDP One-Sided Violence Dataset (<code>onesided</code>):
+                        </p>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <table id="tableYearlyOnesided" aria-label="Yearly one-sided violence data parameters">
+                                <caption>Filter parameters for requesting a yearly subset of UCDP One-Sided Violence Dataset(onesided)</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Multiple</th>
+                                        <th scope="col">Dataset Variable</th>
+                                        <th scope="col">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Dyad</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>actor_id</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>gwno_location</td>
+                                        <td>Gleditsch and Ward country codes, the location of events</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>year</td>
+                                        <td>YYYY</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>
+                            You may use the following filters and parameters to request only a subset of the
+                            UCDP Country-Year Dataset on Organized Violence (<code>organizedviolencecy</code>):
+                        </p>
+                        <br>
+                        <div style="overflow-x:auto;">
+                            <table id="tableYearlyOrgViolCY" aria-label="Country-year organized violence data parameters">
+                                <caption>Filter parameters for requesting a subset of UCDP Country-Year Dataset on Organized Violence (organizedviolencecy)</caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Parameter</th>
+                                        <th scope="col">Type</th>
+                                        <th scope="col">Multiple</th>
+                                        <th scope="col">Dataset Variable</th>
+                                        <th scope="col">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>String</td>
+                                        <td>Yes</td>
+                                        <td>country</td>
+                                        <td>Country name</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country_Id</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>country_id</td>
+                                        <td>Numeric country identifier</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Year</td>
+                                        <td>Integer</td>
+                                        <td>Yes</td>
+                                        <td>year</td>
+                                        <td>YYYY</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Region</td>
+                                        <td>String</td>
+                                        <td>Yes</td>
+                                        <td>region</td>
+                                        <td>Geographic region</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Govt_name</td>
+                                        <td>String</td>
+                                        <td>No</td>
+                                        <td>govt_name</td>
+                                        <td>Government actor name</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sb_exist</td>
+                                        <td>Integer</td>
+                                        <td>No</td>
+                                        <td>sb_exist</td>
+                                        <td>0/1 — state-based violence present</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sb_intrastate_exist</td>
+                                        <td>Integer</td>
+                                        <td>No</td>
+                                        <td>sb_intrastate_exist</td>
+                                        <td>0/1 — intrastate state-based violence present</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sb_interstate_exist</td>
+                                        <td>Integer</td>
+                                        <td>No</td>
+                                        <td>sb_interstate_exist</td>
+                                        <td>0/1 — interstate state-based violence present</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Ns_exist</td>
+                                        <td>Integer</td>
+                                        <td>No</td>
+                                        <td>ns_exist</td>
+                                        <td>0/1 — non-state conflict present</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Os_exist</td>
+                                        <td>Integer</td>
+                                        <td>No</td>
+                                        <td>os_exist</td>
+                                        <td>0/1 — one-sided violence present</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>When filtering is employed, the general form of the API call is described below:</p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/&lt;resource&gt;/&lt;version&gt;?&lt;pagesize=x&gt;&amp;&lt;page=x&gt;[&amp;&lt;filter&gt;=&lt;condition1,[condition2]&gt;...]</span></pre>
+                        <p></p>
+
+                        <p>
+                            All filters for yearly datasets permit multiple values - you may request data
+                            within a filter that fulfills ANY of the conditions specified (boolean
+                            <strong>OR</strong>). You need to separate the conditions by a comma (,). For
+                            example, you may issue this request:
+                        </p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/nonstate/26.1?pagesize=100&amp;Country=90,91,92</span></pre>
+                        <p></p>
+
+                        <p>
+                            This will request a list of all the non-state conflicts taking place in
+                            <strong>either</strong> Guatemala (id:90), Honduras (id:91) or El Salvador
+                            (id:92).
+                        </p>
+
+                        <p>
+                            You can use multiple filters at once. Each filter must be separated by the
+                            http standard ampersand (the &amp; character). The result set will contain all
+                            the events fulfilling ALL the criteria at the same time (boolean
+                            <strong>AND</strong>). For example, you may issue this request:
+                        </p>
+                        <p>
+                            </p><pre class="prettyprint prettyprinted" style="background: white;"><span class="pln">https</span><span class="pun">:</span><span class="com">//ucdpapi.pcr.uu.se/api/ucdpprioconflict/26.1?pagesize=100&amp;Country=365,369&amp;year=2014,2015</span></pre>
+                        <p></p>
+                        <p>
+                            you will receive all the list of state-based conflicts taking place in
+                            Russia or Ukraine in 2014 or 2015.
+                        </p>
+
+                        <p>
+                            The behaviour in case of errors is this:
+                            <br>
+                            Attempting to use a filter that does not exist will result in that filter
+                            being completely ignored.
+                            <br>
+                            Attempting to use an out-of-bounds or wrong value for filtering will result
+                            in an empty set being returned.
+                        </p>
+						<p>&nbsp;</p>
+                    </div>
+                </section>
+                <hr>
+                <section class="header2" aria-label="Access Quotas and Restrictions" id="section-quotas">
+                    <div class="header">
+                        <h2>Access Quotas and Restrictions</h2>
+                        <p>Usage is governed by the following limit:</p>
+
+                        <p><strong>5,000 requests per day</strong>. Errors count towards the limit.</p>
+                        <p>
+                            To request a token, or to have a token revoked or reissued for security reasons, please
+                            <a href="mailto:mertcan.yilmaz@pcr.uu.se">contact the API maintainer</a>.
+                        </p>
+						<p>&nbsp;</p>
+                    </div>
+                </section>
+                <hr>
+                <section class="header2" aria-label="Available datasets" id="section-datasets">
+                    <div class="header">
+                        <h2>Available datasets</h2>
+                        <p>
+                            For UCDP GED (<code>gedevents</code>), the following versions are available:
+                        </p>
+                        <p>
+                            <code>5.0</code> <code>17.1</code> <code>17.2</code> <code>18.1</code> <code>19.1</code> <code>652.1601.1911</code> <code>20.1</code> <code>21.1</code> <code>22.1</code> <code>23.1</code> <code>24.1</code> <code>25.1</code> <code>26.1</code> <code>26.1.4.1101.2512</code>
+
+                        </p>
+                        <br>
+                        <p>
+                            For UCDP GED Candidate (<code>gedevents</code>), the following versions are available:
+                        </p>
+                        <p><code>18.0.1</code> <code>18.0.2</code> <code>18.0.3</code> <code>18.0.4</code> <code>18.0.5</code> <code>18.0.6</code> <code>18.0.7</code> <code>18.0.8</code> <code>18.0.9</code> <code>18.0.10</code> <code>18.0.11</code> <code>18.0.12</code> </p>
+                        <p><code>19.0.1</code> <code>19.0.2</code> <code>19.0.3</code> <code>19.0.4</code> <code>19.0.5</code> <code>19.0.6</code> <code>19.0.7</code> <code>19.0.8</code> <code>19.0.9</code> <code>19.0.10</code> <code>19.0.11</code> <code>19.0.12</code> </p>
+                        <p><code>20.0.1</code> <code>20.0.2</code> <code>20.0.3</code> <code>20.0.4</code> <code>20.0.5</code> <code>20.0.6</code> <code>20.0.7</code> <code>20.0.8</code> <code>20.0.9</code> <code>20.0.10</code> <code>20.0.11</code> <code>20.0.12</code> <code>20.01.20.06</code> <code>20.01.20.09</code> <code>20.01.20.12</code> </p>
+                        <p><code>21.0.1</code> <code>21.0.2</code> <code>21.0.3</code> <code>21.0.4</code> <code>21.0.5</code> <code>21.0.6</code> <code>21.0.7</code> <code>21.0.8</code> <code>21.0.9</code> <code>21.0.10</code> <code>21.0.11</code> <code>21.0.12</code> <code>21.01.21.03</code> <code>21.01.21.06</code> <code>21.01.21.09</code> <code>21.01.21.12</code> </p>
+                        <p><code>22.0.1</code> <code>22.0.2</code> <code>22.0.3</code> <code>22.0.4</code> <code>22.0.5</code> <code>22.0.6</code> <code>22.0.7</code> <code>22.0.8</code> <code>22.0.9</code> <code>22.0.10</code> <code>22.0.11</code> <code>22.0.12</code> <code>22.01.22.03</code> <code>22.01.22.06</code> <code>22.01.22.09</code> <code>22.01.22.12</code> </p>
+                        <p><code>23.0.1</code> <code>23.0.2</code> <code>23.0.3</code> <code>23.0.4</code> <code>23.0.5</code> <code>23.0.6</code> <code>23.0.7</code> <code>23.0.8</code> <code>23.0.9</code> <code>23.0.10</code> <code>23.0.11</code> <code>23.0.12</code> <code>23.01.23.04</code> <code>23.01.23.06</code> <code>23.01.23.09</code> <code>23.01.23.12</code> </p>
+                        <p><code>24.0.1</code> <code>24.0.2</code> <code>24.0.3</code> <code>24.0.4</code> <code>24.0.5</code> <code>24.0.6</code> <code>24.0.7</code> <code>24.0.8</code> <code>24.0.9</code> <code>24.0.10</code> <code>24.0.11</code> <code>24.0.12</code> <code>24.01.24.03</code> <code>24.01.24.06</code> <code>24.01.24.09</code> <code>24.01.24.12</code></p> <code>25.0.1</code> <code>25.0.2</code> <code>25.0.3</code> <code>25.0.4</code>  <code>25.0.5</code> <code>25.0.6</code> <code>25.0.7</code> <code>25.0.8</code> <code>25.0.9</code> <code>25.0.10</code> <code>25.0.11</code> <code>25.0.12</code> <code>25.01.25.03</code> <code>25.01.25.06</code> <code>25.01.25.09</code> <code>25.01.25.12</code></p>
+                        <p><code>26.0.1</code> <code>26.0.2</code> <code>26.0.3</code> <code>26.01.26.03</code> <code>26.0.4</code> <code>26.0.5</code> <code>26.0.6</code> <code>26.01.26.06</code> </p>
+                        <p>&nbsp;</p>
+<p>
+                            For the yearly datasets such as UCDP/PRIO Armed Conflict Dataset (<code>ucdpprioconflict</code>), UCDP Dyadic Dataset (<code>dyadic</code>), UCDP Non-State Conflict Dataset (<code>nonstate</code>), UCDP One-Sided Violence Dataset (<code>onesided</code>), and UCDP Battle Related Deaths Dataset (<code>battledeaths</code>), the following versions are available:
+                        </p>
+                        <p>
+                            <code>17.2</code> <code>18.1</code> <code>19.1</code> <code>20.1</code> <code>21.1</code> <code>22.1</code> <code>23.1</code> <code>24.1</code> <code>25.1</code>  <code>26.1</code>
+                        </p>
+                        <br>
+                        <p>
+                            For the UCDP Country-Year Dataset on Organized Violence (<code>organizedviolencecy</code>), the following versions are available:
+                        </p>
+                        <p>
+                            <code>26.1</code>
+                        </p>
+                        <br>
+                        <p>
+                            All codebooks and version histories for UCDP's datasets can be downloaded from the <a href="https://ucdp.uu.se/downloads/">UCDP Dataset Download Center</a>.
+                        </p>
+                        <p>&nbsp;</p>
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Sidebar active section highlight
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('#ucdp-sidebar a');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(a => a.classList.remove('active'));
+                    const active = document.querySelector('#ucdp-sidebar a[href="#' + entry.target.id + '"]');
+                    if (active) active.classList.add('active');
+                }
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+        sections.forEach(s => observer.observe(s));
+
+        // Code tab switching
+        document.querySelectorAll('.code-tab').forEach(function(tab) {
+            tab.addEventListener('click', function() {
+                const tabBar = this.closest('.code-tabs');
+                const targetId = 'tab-' + this.dataset.tab;
+                tabBar.querySelectorAll('.code-tab').forEach(function(t) { t.classList.remove('active'); });
+                tabBar.querySelectorAll('.code-tab-content').forEach(function(c) { c.style.display = 'none'; });
+                this.classList.add('active');
+                tabBar.querySelector('#' + targetId).style.display = 'block';
+            });
+        });
+    </script>
+
+    <div id="footer-view">
+        <footer id="footer" class="footer">
+            <div class="uu-footer__bottom">
+                <span>Take a look at the website's <a href="https://www.uu.se/en/department/peace-and-conflict-research/research/ucdp/ucdp-conflict-encyclopedia-ucdp-database/accessibility-statement" target="_blank">accessibility report</a></span>
+                <a href="#" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">↑ Back to top</a>
+            </div>
+        </footer>
+    </div>
