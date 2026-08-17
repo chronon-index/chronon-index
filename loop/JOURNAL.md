@@ -1255,3 +1255,40 @@ timestamps, before the loop existed.
 - Frontier audit result this iteration: 120 tasks, 86 done -> 87 with
   this one; re-run of the graph walk is next iteration's opening move —
   expect FRONTIER CONFIRMED.
+
+## 2026-08-17T11:20+02:00 | frontier | BLOCKED (all remaining work is Ben's)
+- FRONTIER CONFIRMED by dep-graph walk (not eyeballed): 120 tasks, 87
+  done, 33 open — 14 HUMAN gates + 19 tasks transitively rooted in them.
+  Zero executable non-HUMAN tasks remain. Per RALPH §8, surfacing this
+  IS the completed work; the loop should HALT until a HUMAN gate clears.
+
+- WHAT EXISTS (all verified green this session): 276 tests; the seven SPEC
+  capabilities built to their executable frontier; all ten P1-P10
+  invariants with named green tests; methodology v0.4.0 under a working
+  version-bump guard; the licensing table fully evidence-settled with the
+  P1 gate LIVE (commercial mode correctly blocks the WHO-based v0 path;
+  WPP-only path passes); print->archive->fixing->dispute chain complete;
+  static site + self-verifying API + Docker recomputation proven
+  byte-identical cross-platform; Zenodo dry-run; OTS workflow; failure
+  ladder; vintage addressing; whitepaper/FAQ/glossary/reading scaffolds.
+
+- BEN'S GATES, in dependency order of what they unblock:
+  1. A-16 ratify reconstructions -> B-uc1-13 golden anchor.
+  2. A-17 GitHub org -> real CI (B-uc4-04/06/07), supply-chain (E-11/12),
+     outsider-sim job (C-uc7-07).
+  3. B-uc2-02 HMD account + the G6 ruling (WMD-as-feed vs version-gated
+     account; note WMD staleness: data ends 2024-12) -> STMF chain
+     (B-uc2-03/11/12/13 backfill + COVID-drag gate), D-01 -> Lee-Carter
+     (C-uc6-03/04, D-02, D-04 cohort series).
+  4. Accounts: E-05 Zenodo, E-07 Cloudflare (+domain, ties to D-14
+     trademark), E-09 object storage -> E-08/E-10 deploys.
+  5. Licenses/legal/reading: B-uc3-11/12 (ACLED, EM-DAT), D-06b (IOSCO
+     PDF via browser), D-12 (reading program), D-13 (counsel), D-14
+     (trademark) -> D-15 terms drafts, IOSCO fill, whitepaper drafting.
+  6. E-14 recruit external recomputers (the P5 milestone).
+
+- Standing risks already documented in-repo: WPP-vs-WHO ~0.5yr e0 level
+  change at the G5 switch; mint residual -0.0026% (unreproducible, all
+  hypotheses refuted); drift convention recovered-by-search pending
+  ratification; WMD staleness; STMF+UCDP-API keyless regressions
+  (UCDP resolved via bulk route).
