@@ -11,7 +11,7 @@ license = { file = "LICENSE" }
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.5"]
+dev = ["pytest>=8", "ruff>=0.15,<0.16"]
 
 [tool.setuptools.packages.find]
 include = ["tly*"]
@@ -19,6 +19,10 @@ include = ["tly*"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+
+[tool.ruff.lint]
+# Frozen explicitly so CI and local can never drift on rule selection.
+select = ["E4", "E7", "E9", "F"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
