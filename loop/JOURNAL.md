@@ -1074,3 +1074,15 @@ timestamps, before the loop existed.
   Wheatley→dispute-design check, Ampleforth→gons divergence audit,
   Becker→whitepaper §6).
 - Verifier: template-discipline script above; tree clean after commit.
+
+## 2026-08-17T18:52+02:00 | correction(D-11 iteration mechanics) | DONE
+- CORRECTION: the D-11 verifier script initially FAILED (my regex demanded
+  'Status: UNREAD' on one line; two entries line-wrap after 'Status:' —
+  the DISCIPLINE held: 24 UNREAD, 24 empty summaries, zero READ claims;
+  the check was too strict, re-verified with a whitespace-tolerant regex).
+  Worse: my shell chain put the failure-gated steps after a heredoc, so
+  the journal append and commit b8a9b5a ran UNCONDITIONALLY while the
+  BACKLOG check-off (inside the failed chain) was skipped — commit and
+  backlog disagreed until this commit. Both repaired here; lesson for
+  LEARNINGS: never place gated steps after a heredoc terminator in one
+  Bash invocation.

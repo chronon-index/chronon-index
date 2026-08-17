@@ -54,3 +54,4 @@
   Bulk CSVs under /wpp/assets/Excel Files/1_Indicator (Standard)/CSV_FILES/
   (URL-encode spaces). Single-age pop 1950-2023 gz = 62MB, gitignored;
   manifest-only in git. World 2023 = 8,091,734,933 persons = golden N exact.
+- Bash gating: commands after a heredoc EOF are NOT part of the preceding && chain — keep verify-then-commit in ONE chain or separate invocations.
