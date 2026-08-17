@@ -1063,3 +1063,14 @@ timestamps, before the loop existed.
 - Pre-launch status header marked for removal at launch.
 - Verifier: claims cross-checked against repo facts; tree clean after
   commit; suite state 240.
+
+## 2026-08-17T18:45+02:00 | D-11 | DONE
+- docs/notes/READING_NOTES.md: R1-R7 templates, 24 entries transcribed
+  from RP Part III's own reading list (each (verify) until fetched), every
+  one Status: UNREAD with Summary: (empty) — verified by script (counts
+  match; zero READ claims). Entry-completion format specified. Cross-links
+  to the gates each reading unblocks (Vaupel→whitepaper §1, Cairns
+  2009→C-uc6-04 backtest protocol, IOSCO→D-06b [fetch-blocked noted],
+  Wheatley→dispute-design check, Ampleforth→gons divergence audit,
+  Becker→whitepaper §6).
+- Verifier: template-discipline script above; tree clean after commit.
