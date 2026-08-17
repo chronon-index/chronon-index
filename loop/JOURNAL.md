@@ -685,3 +685,18 @@ timestamps, before the loop existed.
 - Verifier: 5 tests; suite 154 passed; ruff+format clean.
 - Next: B-uc4-04 needs A-17 (HUMAN); B-uc4-06/07 check deps next
   iteration; else uc5/D-phase per priority rule.
+
+## 2026-08-17T11:05+02:00 | B-uc4-08 | DONE
+- tly/archive.py: PrintArchive — per-epoch record files + chain.json where
+  record_hash(n) = sha256(prev_hash + rendered print): every print commits
+  to the entire history before it. Append refuses duplicate epochs (even
+  with different data — prints are FINAL), out-of-order epochs, and
+  existing files; there is no delete. verify() recomputes the whole chain
+  from the record files and also rejects unchained files (closed-world,
+  same as the API index). head_hash is what SPEC#7 fixings and the E-02
+  OpenTimestamps stamping will anchor to.
+- Verifier: 6 tests — chain build+verify (link n carries hash n-1),
+  duplicate-epoch raise, out-of-order raise, edited-record break,
+  tampered-metadata break, unchained-file detection. Suite 160 passed;
+  ruff+format clean.
+- Next: B-uc4-10 (negative lineage tests) or next open per rule.

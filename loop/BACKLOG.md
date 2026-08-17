@@ -96,7 +96,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] B-uc4-05 | deps: B-uc4-01 | refs: SPEC#4 AC-4.6, SPEC#2 AC-2.4 | Publish gate: a print failing schema/label/accuracy-statement validation blocks publish; tests (done 2026-08-17)
 - [ ] B-uc4-06 | deps: E-02, B-uc4-04 | refs: SPEC#4 AC-4.3, RP#VII | CI verifies a .ots proof exists and matches the print hash before publish
 - [ ] B-uc4-07 | deps: E-04, B-uc4-04 | refs: SPEC#4 AC-4.5, RP#XII | Stale-print CI integration: simulate a missing source; status flag flips within the same epoch per the failure ladder
-- [ ] B-uc4-08 | deps: B-uc4-02 | refs: SPEC#4, DEC#9 | Immutable print storage layout: append-only per-epoch records + hash chain; mutation attempt raises (feeds SPEC#7)
+- [x] B-uc4-08 | deps: B-uc4-02 | refs: SPEC#4, DEC#9 | Immutable print storage layout: append-only per-epoch records + hash chain; mutation attempt raises (feeds SPEC#7) (done 2026-08-17)
 - [ ] B-uc4-09 | deps: B-uc4-02, E-01 | refs: SPEC#4, RP#XI | Site pages rendered from live artifacts: methodology, data & licenses, changelog, correction ledger, vintage archive
 - [ ] B-uc4-10 | deps: B-uc4-03, B-uc4-05 | refs: SPEC#4 AC-4.1 | Negative tests: an orphan number, a missing provenance block, and a negative value each fail the lineage/publish checks
 
