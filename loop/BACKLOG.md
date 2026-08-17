@@ -155,7 +155,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 ## Phase E — infrastructure
 
 - [x] E-01 | deps: B-uc4-02 | refs: RP#VII, RP#XI | Static site generator, files only: renders pages from committed artifacts; local build reproducible byte-for-byte (done 2026-08-17)
-- [ ] E-02 | deps: A-13 | refs: RP#VII, SPEC#4 AC-4.3 | OpenTimestamps module: stamp print hash → .ots + verify tooling; tests with local fixtures
+- [x] E-02 | deps: A-13 | refs: RP#VII, SPEC#4 AC-4.3 | OpenTimestamps module: stamp print hash → .ots + verify tooling; tests with local fixtures (done 2026-08-17: workflow module; real ots client invocation; no-client path honest UNSTAMPED)
 - [ ] E-03 | deps: B-uc3-02 | refs: RP#VII, RP#V | Vintage archive layout (ALFRED-style): every revision retained and addressable by vintage date; never-delete enforced
 - [ ] E-04 | deps: B-uc2-06 | refs: SPEC#4 AC-4.5, RP#XII | Status/stale-print logic: failure ladder source down → carry rule → stale flag → deferred fixing; unit tests simulate each rung
 - [ ] E-05 | deps: - | refs: RP#VII | HUMAN: Zenodo account (quarterly snapshot-set deposits, one DOI per vintage)

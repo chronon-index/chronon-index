@@ -1123,3 +1123,18 @@ timestamps, before the loop existed.
 - Verifier: test_d10_site_map_complete (all 8 mandated pages, real vintage
   content from both snapshot dates, nav completeness) + the page-set test
   updated for the synthesized page. Suite 245 passed; ruff clean.
+
+## 2026-08-17T20:05+02:00 | E-02 | DONE
+- tly/timestamping.py: OTS workflow manager — .hash/.ots layout beside the
+  archive; record_target refuses digest overwrites (a new epoch needs a
+  new name); stamp() invokes the REAL external ots client and raises
+  honestly when none is installed (no  on this machine — verified);
+  status() surfaces UNSTAMPED/STAMPED/STALE (stale = live hash diverged
+  from the recorded one — surfaced, never hidden). The module never fakes
+  a proof.
+- Tests use a stub-client local fixture (sh script producing .ots) to
+  exercise OUR orchestration without faking cryptography in the module;
+  the no-client path is asserted honest; archive head integrates as a
+  stampable target. B-uc4-06 (CI verifies proof before publish) remains
+  open pending the real client + A-17.
+- Verifier: 6 tests; suite 251 passed; ruff+format clean.
