@@ -798,3 +798,14 @@ timestamps, before the loop existed.
   properties" requirement.
 - Verifier: 3 tests; suite 189 passed; ruff clean.
 - Next: C-uc5-07 (genesis calibration κ=1, hours display).
+
+## 2026-08-17T13:12+02:00 | C-uc5-07 | DONE
+- genesis_ledger (M = κ·S, κ=1) + tokens_to_hours_minutes (1yr = 8,766h,
+  floors to the whole minute — display never overstates a holding) added
+  to tly/gons.py. Genesis proven against the LIVE pipeline print: M equals
+  the pipeline's S at full prec-34 precision, string-equal.
+- Verifier: 4 tests (genesis exact vs live print, display convention incl.
+  the 52-minute floor case, just-under-a-minute → 0, float/negative
+  rejection). Suite 193 passed; ruff clean.
+- Next: C-uc5-08 (10k wallets × 600 epochs < 5s perf gate) — the last
+  SPEC#5 task.

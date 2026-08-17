@@ -169,3 +169,28 @@ def display_balances(ledger: GonsLedger, quantum: Decimal = DISPLAY_QUANTUM) -> 
     of M is undisplayable by definition and stated here, not hidden)."""
     display_supply = (ledger.m // quantum) * quantum
     return allocate_by_integer_weights(display_supply, ledger.wallets(), quantum)
+
+
+# -- genesis calibration (SPEC#5 AC-5.6; DECISIONS #2 and defaults) --------
+
+KAPPA = Decimal(1)  # tokens per life-year at genesis (DEC#2)
+HOURS_PER_YEAR = Decimal(8766)  # DECISIONS display default: 1 year = 8,766 h
+MINUTES_PER_YEAR = HOURS_PER_YEAR * 60
+
+
+def genesis_ledger(s0_life_years: Decimal) -> GonsLedger:
+    """The genesis state: M = κ·S₀ (DEC#2). With κ = 1 the money supply IS
+    the measured stock of remaining life-years, Decimal end to end."""
+    assert_decimal(s0_life_years, "s0_life_years")
+    return GonsLedger(KAPPA * s0_life_years)
+
+
+def tokens_to_hours_minutes(tokens: Decimal) -> tuple[int, int]:
+    """DECISIONS display default: token amounts render as hours and
+    minutes of remaining human time (1 year = 8,766 h). Floors to the
+    whole minute — display never overstates a holding."""
+    assert_decimal(tokens, "tokens")
+    if tokens < 0:
+        raise GonsError("cannot display negative time")
+    total_minutes = int(tokens * MINUTES_PER_YEAR)  # floor
+    return divmod(total_minutes, 60)
