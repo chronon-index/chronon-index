@@ -36,6 +36,8 @@ _EXCLUDE_PREFIXES: dict[str, str] = {
     "hmd_": "mortality.org site content — evidence snapshot; not data",
     "vaupel_": "literature PDF under CC BY-NC 2.0 DE — non-commercial license; "
     "cite and link, never redeposit",
+    "iosco_": "(c) IOSCO 2013 all rights reserved — brief excerpts only; "
+    "cite and link, never redeposit",
 }
 
 

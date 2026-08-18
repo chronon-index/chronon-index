@@ -1,0 +1,14 @@
+{
+  "files": {
+    "iosco_pd415_principles_2013.pdf": {
+      "bytes": 398281,
+      "in_git": true,
+      "retrieved_utc": "2026-08-18T10:16:00+00:00",
+      "sha256": "5f82996101e450254a9e46e365f453abe5b69c3b08a32a783f350959bf303a04",
+      "source_url": "https://www.iosco.org/library/pubdocs/pdf/IOSCOPD415.pdf"
+    }
+  },
+  "network_policy": "browser-assisted single fetch; no automated hammering of a WAF-protected site",
+  "note": "D-06b: IOSCO PD415 fetched via real-browser route (site 403s curl); (c) IOSCO 2013 all rights reserved, brief excerpts with source stated \u2014 EXCLUDED from Zenodo redistribution; read in full 2026-08-18, mapping filled in docs/IOSCO_MAPPING.md.",
+  "snapshot_date": "2026-08-18"
+}

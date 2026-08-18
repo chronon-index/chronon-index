@@ -32,7 +32,9 @@ def test_manifest_addressable_by_vintage():
 def test_as_of_resolution():
     assert vintage_as_of(date(2026, 8, 16)) == date(2026, 8, 16)
     assert vintage_as_of(date(2026, 8, 16)) != date(2026, 8, 17)
-    assert vintage_as_of(date(2027, 1, 1)) == date(2026, 8, 17)  # latest ≤ query
+    assert (
+        vintage_as_of(date(2027, 1, 1)) == list_vintages()[-1]
+    )  # any future date -> newest vintage (archive grows)
     with pytest.raises(VintageError, match="on or before"):
         vintage_as_of(date(2020, 1, 1))  # before the first data world
 

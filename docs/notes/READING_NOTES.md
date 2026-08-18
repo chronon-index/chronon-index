@@ -83,8 +83,28 @@ Key results for TLY: <what changes in this repo because of it>
 
 ## R4 — Index governance (est. 1 week; before any settlement product)
 
-- IOSCO Principles for Financial Benchmarks 2013 (verify) — Status:
-  UNREAD (fetch BLOCKED: site 403s curl — see D-06b). Summary: (empty).
+- IOSCO Principles for Financial Benchmarks 2013, Final Report FR07/13,
+  July 2013 — Status: READ 2026-08-18 | Source: iosco.org via browser
+  route (curl 403s), snapshotted iosco_pd415_principles_2013.pdf.
+  Summary: 19 Principles in four blocks — Governance (1-5: administrator
+  responsibility, third-party oversight, conflicts, control framework,
+  internal oversight), Quality of the Benchmark (6-10: design, data
+  sufficiency ANCHORED in active markets but with an explicit clause for
+  non-transactional indices that measure what non-transactional data
+  reflects, input hierarchy, per-determination transparency, periodic
+  review), Quality of the Methodology (11-15: published methodology
+  content incl. stress/absent-source procedures and error handling,
+  governed changes with consultation, cessation/transition policy,
+  submitter code [submissions-based only], data-collection controls),
+  Accountability (16-19: complaints, audits, 5-year audit trail,
+  regulator cooperation). Proportionality throughout; Annex C elaborates
+  Principle 9.
+  Key results for TLY: full row-by-row mapping now in
+  docs/IOSCO_MAPPING.md — 8 principles satisfied by architecture, 14 N/A
+  (no submissions), 5 partial; every open gap is entity-shaped and
+  P5-phase (oversight, COI, whistleblowing, review cadence, cessation,
+  audit, recomputer arrangements), confirming RP's sequencing that the
+  IOSCO distance is administrator work, not computation.
 - EU Benchmark Regulation 2016/1011 + third-country regime (verify) —
   Status: UNREAD. Summary: (empty).
 - The Wheatley Review of LIBOR (verify) — Status: UNREAD. Summary:

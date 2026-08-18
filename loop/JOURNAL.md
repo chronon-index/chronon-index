@@ -1379,3 +1379,27 @@ timestamps, before the loop existed.
   HUMAN-gated global widener.
 - Verifier: 5 tests incl. freshness assert (>= 2026-W25) and end-to-end
   nowcast; full suite next; pipefail gating used.
+
+## 2026-08-18T12:35+02:00 | D-06b DONE + R4-IOSCO READ | the mapping is filled
+- Ben re-enabled a browser route. The Chrome extension stayed disconnected
+  but the PLAYWRIGHT plugin worked after clearing an orphaned automation
+  browser: real-Chrome fetch passed IOSCO's WAF, PDF extracted via
+  in-page fetch->base64 (398,281 bytes), verified as the genuine Final
+  Report FR07/13 (July 2013), snapshotted as the NEW 2026-08-18 vintage
+  (manifested; (c) IOSCO all-rights-reserved -> added to Zenodo excludes
+  alongside the NC literature).
+- READ pp. 9-29 (the Principles chapter, all 19, verbatim titles).
+  docs/IOSCO_MAPPING.md filled row by row with evidence artifacts:
+  8 satisfied by architecture (7,8,9,11,12,15,18,19), 14 N/A (no
+  submissions), 5 partial (1,4,6-ratification,10,16), and every open gap
+  entity-shaped and P5-phase (oversight function, COI statement,
+  whistleblowing, review cadence, cessation policy, external audit,
+  recomputer arrangements) — confirming RP's sequencing: the IOSCO
+  distance is administrator work, not computation. READING_NOTES R4 entry
+  -> READ with summary.
+- The new vintage falsified test_as_of_resolution's hardcoded
+  newest-vintage pin — the FUNCTION was right; the test now asserts
+  against list_vintages()[-1] (archive-growth-proof). Pipefail caught the
+  red suite BEFORE any commit this time — the lesson from yesterday
+  working as intended.
+- Verifier: suite 284 passed under pipefail.
