@@ -40,8 +40,9 @@ and removes the "pending ratification" banners.
 Done already: private repo `HaleMarshall/tly` exists, all commits pushed,
 CI green, weekly Monday print job armed. Remaining decisions:
 
-- [ ] Create the **Praevex GitHub org** (or decide the personal account is
-      fine for now) and transfer the repo.
+- [x] ~~Praevex GitHub org~~ — RULED 2026-08-20: personal account is
+      fine; this is a separate organisation from Praevex (the time
+      project stands alone). No transfer.
 - [ ] Flip visibility to **public** — required for "the CI run IS the
       official computation; anyone can watch the print being made."
       Note: everything in the repo was built to be public (no secrets by

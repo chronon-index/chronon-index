@@ -1403,3 +1403,16 @@ timestamps, before the loop existed.
   red suite BEFORE any commit this time — the lesson from yesterday
   working as intended.
 - Verifier: suite 284 passed under pipefail.
+
+## 2026-08-20T12:18+02:00 | Ben directive (A-17 scope) + A-16 packet delivered
+- BEN RULED: the personal GitHub account (HaleMarshall/tly) is fine — the
+  time project is a SEPARATE organisation, NOT Praevex. No org transfer.
+  A-17's remaining scope is therefore ONLY the public-visibility flip
+  (after A-16). NOTE for P5 entity work: RESEARCH_PROGRAM Part XI records
+  "TLY/SAECULUM IP held under Praevex initially" — Ben's ruling supersedes
+  the org-hosting part; the eventual administrator-entity/IP question at
+  P5 should be revisited against this ruling, not assumed Praevex.
+- A-16 review packet zipped to ~/Downloads/A16-review-packet.zip
+  (CALC_REPORT_v0.txt, METHODOLOGY_v0.md, SPEC.md + a START-HERE reading
+  guide covering §3/§7/§8, the METHODOLOGY §4 + §8-item-7 tension, the
+  amended AC-1.2, and the 381-402B vs 380-400B blessing decision).

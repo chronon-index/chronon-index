@@ -33,7 +33,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] A-14 | deps: A-12 | refs: RALPH#5, SPEC#3, RP#VI | Port snapshot fetcher into tly/ module writing data/snapshots/<date>/manifest.json (sha256, source URL, retrieval timestamp, bytes per file); User-Agent, backoff+jitter, few-and-large requests (done 2026-08-17)
 - [x] A-15 | deps: A-02 | refs: RALPH#5 | Make lint real locally: install pre-commit hooks into .git/hooks; ruff check + ruff format --check green over the repo (done 2026-08-17)
 - [ ] A-16 | deps: A-08, A-09, A-10 | refs: RALPH#0, DEC#9 | HUMAN: review + ratify the reconstructed SPEC.md, METHODOLOGY_v0.md and seed/ artifacts (they replaced lost originals) — gates the first public print (P1) and the golden-anchor commit B-uc1-13
-- [ ] A-17 | deps: A-01 | refs: RP#VII | HUMAN: create GitHub org/repo under Praevex, add remote, push; confirm ci.yml runs green in public Actions (until then CI has never actually run) (PARTIAL 2026-08-17: gh was authenticated — PRIVATE repo HaleMarshall/tly created, pushed, ci.yml GREEN in real Actions after a rule-drift fix; REMAINS HUMAN: Praevex org + public visibility flip)
+- [ ] A-17 | deps: A-01 | refs: RP#VII | HUMAN: create GitHub org/repo under Praevex, add remote, push; confirm ci.yml runs green in public Actions (until then CI has never actually run) (PARTIAL 2026-08-17: private repo HaleMarshall/tly, CI green. BEN RULED 2026-08-20: personal account is FINE — this is a SEPARATE organisation from Praevex (the time project stands alone); no org transfer. REMAINS HUMAN: the public visibility flip only, after A-16)
 
 ## Phase B — the index (SPEC capabilities 1–4)
 
