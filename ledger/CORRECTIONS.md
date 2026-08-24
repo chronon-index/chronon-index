@@ -24,3 +24,14 @@ Format:
   +1.0394B). Recorded in DECISIONS.md (Key numbers).
 - Forward treatment: none needed — predates all prints. Logged for lineage
   because the openness rule caught it, and that is the point of the rule.
+
+## C-0002 | 2026-08-24 | v0 calculator (original) — float intermediate
+- The ORIGINAL tly_v0_calc.py computed births through a float intermediate
+  (line 144 per A-16 ruling D3): full-precision births 132,113,756.251091
+  x e0 73.123374469 -> mint 9,660,603,670.8547 (9.6606B). The
+  reconstruction, working from 4-dp printed values and possibly revised
+  OWID data, landed at 9.6603B — the famous -0.0026% residual is
+  input-precision/vintage noise, not method.
+- Forward treatment: recorded as a v0 defect; the v1 engine's float
+  quarantine (test_no_float_in_published_path, adopted per D3c) makes the
+  defect class unrepresentable. No published value restated.

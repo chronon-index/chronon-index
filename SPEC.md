@@ -73,22 +73,18 @@ stamped with methodology version and snapshot manifest hashes.
 **Acceptance criteria.**
 - **AC-1.1** `test_p3_reconciliation` — sum of per-country dS equals global
   dS per epoch, exactly, in Decimal (invariant P3).
-- **AC-1.2** Golden anchor — on the archived v0-equivalent snapshot inputs
-  the engine reproduces, to 4 decimal places, the surviving DECISIONS.md
-  anchors that the 2026-08-16 reconstruction verified as reproducible:
-  S = 362.4126B life-years (2019 WHO table × WPP2024 population) and
-  348.1905B (2021 table); E-bar = 44.7880; spend −8.0917B. For the remaining
-  DECISIONS.md terms — mint +9.6606B, drift +1.0394B, g = +0.7197%/yr — the
-  criterion is: reproduce them, OR journal the honest residual / mark
-  BLOCKED per B-uc1-11/12 (the reconstruction achieved mint 9.6603B,
-  −0.0026%, hypotheses in seed/CALC_REPORT_v0.txt; drift and g are NOT
-  REPRODUCED because their vintage-pair convention was lost). Tuning to
-  force agreement is forbidden (RALPH_LOOP §6). THE Phase A ground-truth
-  golden file is the committed `seed/results_v0.json` (achieved values);
-  it may be superseded only by B-uc1-13 after A-16 ratification.
-  [Amended 2026-08-17 on adversarial review: the original AC-1.2 wording
-  demanded all key numbers to 4 dp, which conflicted with the committed
-  golden file and was unsatisfiable without tuning. Flagged for A-16.]
+- **AC-1.2** Golden anchor — on the frozen v0-original snapshot
+  (`data/snapshots/v0-original/`, per A-16 ruling D3b), STRICT
+  reproduction of every `seed/results_v0.json` value to 4 decimal places —
+  satisfiable without tuning because the inputs are pinned. The golden
+  file is the ORIGINAL `seed/results_v0.json` at full precision (D3a).
+  "Reproduce-or-journal" applies ONLY to live-fetch vintage runs, which
+  log residuals as vintage drift and never touch goldens.
+  [Rewritten 2026-08-20 per A-16 ruling D4, superseding the 2026-08-17
+  amendment; that amendment's adversarial catch was correct at the time
+  and stays in the record. TRANSITIONAL: the original goldens and the
+  v0-original freeze are blocked on READY.zip delivery — until restore,
+  the reconstructed results_v0.json remains the operative anchor.]
 - **AC-1.3** `test_no_float_in_published_path` — the published-value code
   paths use Decimal (prec 34, ROUND_HALF_EVEN) end to end; a test injects a
   float and asserts rejection (G1).

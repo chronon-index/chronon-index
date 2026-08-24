@@ -1,0 +1,14 @@
+{
+  "files": {
+    "cdc_r8kw7aab_us_weekly.json": {
+      "bytes": 43404,
+      "in_git": true,
+      "retrieved_utc": "2026-08-24T12:14:06+00:00",
+      "sha256": "e2041dcc47685d475a383bc4a027e0cd5275ae98bd07d049298060fa43f899b3",
+      "source_url": "https://data.cdc.gov/resource/r8kw-7aab.json?$select=end_date,total_deaths,covid_19_deaths,percent_of_expected_deaths&$where=`group`='By Week' AND state='United States'&$order=end_date&$limit=50000"
+    }
+  },
+  "network_policy": "anonymous GET, User-Agent sent, single request",
+  "note": "B-uc2-15 per ruling B-uc2-02(c): CDC SODA r8kw-7aab US weekly all-cause deaths \u2014 the only still-updating keyless US weekly feed (four sibling datasets froze 2025-04-21). No age breakdown. Immature ~8-week tail censored by the parser.",
+  "snapshot_date": "2026-08-24"
+}

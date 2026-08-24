@@ -140,3 +140,22 @@ def parse_eurostat_weekly(path: Path, countries: set[str] | None = None) -> list
 
 def latest_week(cells: list[DeathsCell]) -> tuple[int, int]:
     return max((c.year, c.time) for c in cells)
+
+
+def weekly_panel_edge(cells: list[DeathsCell], min_countries: int = 20) -> tuple[int, int]:
+    """The aggregation-safe edge of the EU weekly panel (B-uc2-16; ruling
+    B-uc2-02(c) edge-case 1): the last ISO week reported by at least
+    ``min_countries`` countries.
+
+    The panel's edge is badly ragged — at the 2026-08-20 verification the
+    nominal max week (W32) had ONE reporting country while W27 had 26.
+    Aggregating at the nominal edge fabricates an ~80% collapse in EU
+    deaths. Cut here instead; per-country series may still individually
+    run past this edge."""
+    counts: dict[tuple[int, int], set[str]] = {}
+    for c in cells:
+        counts.setdefault((c.year, c.time), set()).add(c.iso3)
+    qualified = sorted(wk for wk, geos in counts.items() if len(geos) >= min_countries)
+    if not qualified:
+        raise EurostatFormatError(f"no week reaches {min_countries} reporting countries")
+    return qualified[-1]

@@ -1446,3 +1446,45 @@ timestamps, before the loop existed.
   -branch therefore requires a deploy key, a GitHub App, or moving prints
   off main. print.yml now takes an optional ssh-key on checkout so the
   deploy-key route is a secret away. Tracked as A-19.
+
+## 2026-08-24T08:40-04:00 | A-16 rulings executed (D1-D7) + B-uc2-02(c) built
+- Ben's rulings arrived (docs/rulings/): A16_DECISIONS.md and
+  B-uc2-02_RULING.md + keyless_mortality_reference.py, plus corrected
+  DECISIONS.md/RESEARCH_PROGRAM.md (D5: stale 330.0B struck; D6: computed
+  381-402B band blessed) and the A-17/A-19 patch (applied by hand, pushed
+  to the chronon-index org; gh account switched HaleMarshall<-tranchebook
+  to push).
+- THE HEADLINE (D1): the originals were NEVER lost — they were in
+  chronon-index-READY.zip; the loop started from the pre-merge scaffold.
+  Searched this machine + org exhaustively: the zip is NOT here (only the
+  two pre-merge scaffold zips, no seed/). Executed: reconstruction copies
+  archived to ops/reconstruction/2026-08-16/ with README. The RESTORE
+  itself + D3b v0-original freeze are BLOCKED on Ben delivering
+  READY.zip to ~/Downloads. A-16's box stays open on exactly that.
+- D2: drift convention CONFIRMED against the original source (lines
+  148-151) — identical to the search-recovered convention. The search
+  found the truth. Record closed.
+- D3: mint residual EXPLAINED — original births 132,113,756.251091
+  through a float intermediate vs the reconstruction's 4-dp/revised-OWID
+  inputs; input noise, not method. C-0002 appended to the correction
+  ledger; the float-quarantine test is adopted per D3c (already the AC-1.3
+  gate).
+- D4: SPEC AC-1.2 rewritten — strict 4-dp on the frozen v0-original
+  snapshot; reproduce-or-journal demoted to live-vintage runs only;
+  2026-08-17 amendment superseded, its catch honored in the record;
+  transitional note until restore.
+- D7 (verbatim intent honored): the loop's conduct under apparent data
+  loss — reconstruction notices on every file, exhaustive search with
+  honesty about unprovability, an adversarial review that refused an
+  unsatisfiable criterion, and no tuning under pressure — is the reward
+  surface working as designed. Commended.
+- B-uc2-02(c) EXECUTED: HMD removed everywhere (B-uc2-03 cancelled;
+  D-01/B-uc2-11 rewired keyless). Built now with tests: CDC r8kw-7aab
+  feed (snapshotted 2026-08-24, 346 weeks 2020-01-04..2026-08-15; parser
+  censors the ~8-week immature tail — live artifact: newest week 20,897
+  vs ~48k mature) and weekly_panel_edge for the EU ragged edge (safe edge
+  < nominal edge verified on the committed cube). New follow-up tasks:
+  vintage store, ONS adapter, model-layer integration (numpy in the
+  MODEL layer only).
+- Verifier: suite green incl. 6 new guard tests; pushed to
+  chronon-index/chronon-index; CI green.

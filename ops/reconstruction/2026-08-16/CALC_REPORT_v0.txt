@@ -1,0 +1,185 @@
+CALC_REPORT_v0.txt — TLY v0 calculator, reproduction report
+============================================================
+
+NOTE: Reconstructed 2026-08-16 from DECISIONS.md, RESEARCH_PROGRAM.md and
+RALPH_LOOP.md after loss of the original; pending Ben's review.
+
+1. WHAT WAS COMPUTED
+--------------------
+Estimator E2 (RESEARCH_PROGRAM Part IX):
+
+    S = sum over age bands of  N_band * e(mid(band))
+
+- Band midpoint by the uniform-within-band assumption: a band of integer
+  ages [lo, hi] covers exact ages [lo, hi+1), midpoint (lo + hi + 1) / 2
+  (0-4 -> 2.5, 5-9 -> 7.5, ..., 95-99 -> 97.5).
+- The open-ended 100+ band has no width; convention lo + 2.5 = 102.5 was
+  used. This choice is inert: e() is flat beyond the last anchor (85), so
+  any midpoint >= 85 yields e(85).
+- e() by piecewise-linear interpolation on the exact-age anchors of the WHO
+  abridged global life table (anchors at exact ages 0, 1, 5, 10, ..., 85);
+  flat beyond age 85.
+- ALL arithmetic in Decimal, precision 34, ROUND_HALF_EVEN, from the moment
+  values leave parsing (GHO JSON parsed with parse_float=Decimal; CSV values
+  parsed directly to Decimal). No floats anywhere in the computation.
+
+Runner: seed/tly_v0_calc.py (Python 3.12, stdlib only).
+  --fetch          fetch + snapshot + manifest, then compute
+  (default)        offline recompute from the committed snapshot
+Output: seed/results_v0.json (Decimal-as-string; deterministic rendering —
+two offline runs were diffed and are byte-identical; invariant P5).
+
+2. INPUTS (snapshot data/snapshots/2026-08-16/, sha256 per manifest.json)
+-------------------------------------------------------------------------
+a) WHO GHO OData API, indicator LIFE_0000000035
+   ("ex - expectation of life at age x" — code verified in-iteration against
+   the API's indicator list, snapshotted as gho_lifetable_indicator_list.json,
+   sha256 a8b4f6c4850fe6bb71acc3eef0b45881cc6440f36e6fe91b303b64f664cc08e3).
+   GLOBAL, both sexes (SEX_BTSX), years 2019 and 2021; 19 abridged age
+   anchors per year.
+   URL: https://ghoapi.azureedge.net/api/LIFE_0000000035?$filter=SpatialDim%20eq%20%27GLOBAL%27%20and%20Dim1%20eq%20%27SEX_BTSX%27%20and%20(TimeDim%20eq%202019%20or%20TimeDim%20eq%202021)
+   File: gho_ex_global_btsx_2019_2021.json
+   sha256 ac38b0c45ef8186e314952accf782774b64893e38c9e5c9867a9988590e4b1d9
+   retrieved 2026-08-16T16:28:09+00:00
+   e(0) 2019 = 73.123374469 ; e(0) 2021 = 71.368699065
+
+b) Our World in Data grapher CSV, population by five-year age group,
+   World, both sexes, year 2023, variant "estimates". OWID metadata
+   (snapshotted) cites: "UN, World Population Prospects (2024) - processed
+   by Our World in Data", last updated 2024-07-12 — i.e. WPP 2024 revision.
+   21 bands: 0-4 ... 95-99, 100+.
+   URL: https://ourworldindata.org/grapher/population-by-five-year-age-group.csv?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL
+   File: owid_population_5yr_world.csv
+   sha256 3dcbe21320bc68f175f24afccf727e373890a403680ebec39c18f8d0dbd6b86c
+   retrieved 2026-08-16T16:28:10+00:00
+
+c) Our World in Data grapher CSV, births and deaths (WPP 2024), World.
+   Births 2023 (variant estimates) = 132,110,264.
+   URL: https://ourworldindata.org/grapher/births-and-deaths-projected-to-2100.csv?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL
+   File: owid_births_deaths_world.csv
+   sha256 0939c742fe46b6e8bc266267bf4ec19708631215e99283967f72904bb4f4c426
+   retrieved 2026-08-16T16:28:12+00:00
+
+Network etiquette: User-Agent sent on every request; 6 requests total
+(few and large); exponential backoff with jitter on retry; World Bank API
+not touched (WAF-blocked this project 2026-08-16, per RALPH_LOOP section 6).
+
+3. ACHIEVED vs TARGET (targets from DECISIONS.md "Key numbers")
+---------------------------------------------------------------
+                          achieved         target      deviation
+S (2019 table)            362.4126 B       362.4126 B   0.0000 %
+S (2021 table)            348.1905 B       348.1905 B   0.0000 %
+E-bar (2019 table)        44.7880 yr       44.7880 yr   0.0000 %
+N (2023)                  8.0917 B         8.0917 B     0.0004 %*
+mint B*e(0)               9.6603 B         9.6606 B    -0.0026 %
+spend -N                  -8.0917 B        -8.0917 B    0.0004 %*
+drift                     NOT REPRODUCED   1.0394 B     —
+g                         NOT REPRODUCED   0.7197 %/yr  —
+
+* deviation computed against the 4-dp target before quantizing the achieved
+  value; at published (4-dp) precision achieved N = 8.0917 B exactly equals
+  the target. Exact N = 8,091,734,933 persons.
+
+Exact achieved values (Decimal, prec 34):
+  S_2019 = 362,412,641,743.467008807750 life-years
+  S_2021 = 348,190,517,604.195795040000 life-years
+  E-bar  = 44.78800217064240910519084103072905 years
+  mint   = 9,660,348,305.670449816 life-years (= 132,110,264 x 73.123374469)
+
+4. DISCUSSION OF DEVIATIONS (honest; hypotheses labeled as unverified)
+----------------------------------------------------------------------
+S (both tables), E-bar, N, spend: reproduced exactly at the published 4-dp
+precision, with no parameter tuning — the estimator was computed exactly as
+specified in RP Part IX E2 and the numbers came out matching. This strongly
+supports that the lost original used this same source pair (WHO GHO global
+abridged ex; OWID/WPP-2024 5-year world population, 2023) and the same
+banding/interpolation choices.
+
+mint: achieved 9.6603 B vs target 9.6606 B (-0.0026%). The reconstruction
+used mint = B_2023 * e_2019(0) with OWID births 132,110,264. Unverified
+hypotheses for the 0.0003 B gap, each with the check that would settle it:
+  (h1) The original took births from a different WPP 2024 surface (e.g. the
+       UN demographic-indicators CSV or data portal), which can differ from
+       OWID's processed series by rounding/aggregation. Check: fetch UN WPP
+       2024 demographic indicators for 2023, world births, and recompute.
+       (Implied births for an exact match: 9.6606e9 / 73.123374469 =
+       ~132,113,706 — about 3,442 above the OWID value.)
+  (h2) The original used a different births window or year convention
+       (mid-2022 to mid-2023 vs calendar 2023). Check: same fetch as h1
+       with both conventions.
+  (h3) The original used e(0) at a different precision or from a different
+       series (e.g. the WHO GHE life expectancy at birth indicator rather
+       than the life-table ex row). Check: fetch WHOSIS_000001 (life
+       expectancy at birth) global 2019 and compare against 73.123374469.
+None of these is asserted. The core S / E-bar / N anchors do not depend on
+births and are unaffected.
+
+drift (+1.0394 B) and g (+0.7197 %/yr): NOT REPRODUCED in this pass. They
+require dE-bar/dt — E-bar evaluated at two adjacent time points (successive
+population structures and/or successive life tables), which this pass did
+not fetch. The identity (RP Part IX E4) is
+  dS/dt = B e(0) - N + N dE-bar/dt   (- excess-death term)
+so with mint and spend reproduced, drift is the one remaining term; it
+should be reconstructed together with METHODOLOGY_v0.md, which defined the
+exact vintage pair and differencing convention (that definition was lost
+with the original — reconstructing it from DECISIONS.md alone would be
+guessing, which is forbidden).
+
+5. VERIFICATION PERFORMED THIS ITERATION
+----------------------------------------
+- GHO indicator code LIFE_0000000035 confirmed = "ex - expectation of life
+  at age x" from the live indicator list (snapshotted).
+- OWID metadata confirmed provenance "UN, World Population Prospects (2024)"
+  (snapshotted).
+- Offline recompute run twice; outputs byte-identical (P5).
+- tests/test_golden.py: (1) byte-exact equality of offline recompute with
+  committed seed/results_v0.json; (2) E-bar * N == S to < 1e-30 relative
+  and spend == -N exactly. Both green under pytest (2 passed).
+
+6. REPRODUCE IT YOURSELF
+------------------------
+  python3.12 seed/tly_v0_calc.py            # offline, from committed snapshot
+  python3.12 seed/tly_v0_calc.py --fetch    # re-fetch (values may drift as
+                                            # OWID/WHO revise; the committed
+                                            # snapshot is the fixture)
+
+7. ADDENDUM 2026-08-17 (forward-only; B-uc1-11) — HYPOTHESES SETTLED
+--------------------------------------------------------------------
+h1 REFUTED: UN WPP Demographic Indicators (Medium) World births 2023 =
+  132,110.264 thousand = 132,110,264 persons — identical to the OWID value.
+  The OWID mirror is faithful; there is no alternative-births-source gap.
+h2 REFUTED: births 2022 (132,475,391) and 2024 (132,405,927) give mint
+  9.6870B / 9.6820B — further from the 9.6606B target, not closer.
+h3 REFUTED: WHOSIS_000001 GLOBAL BTSX 2019 = 73.123374470 vs the life-table
+  ex value 73.123374469 — the same quantity, last-digit rounding; mint is
+  unchanged at 4 dp (9.6603B).
+CONCLUSION: mint = 9.6603B is the reproducible value under every surviving
+convention. The DECISIONS.md figure 9.6606B (implied births 132,113,706,
+i.e. +3,442; or implied e0 +0.0026yr) is not reproducible from any tested
+source pair; its exact provenance was lost with the original calculator.
+The -0.0026% residual stands, documented, per amended AC-1.2. Never tuned.
+Evidence snapshots: WPP2024_Demographic_Indicators_Medium.csv.gz and
+gho_whosis_000001_global_btsx.json in data/snapshots/2026-08-17/ (manifest
+rows with sha256); pinned by tests/test_mint_gap.py.
+
+8. ADDENDUM 2026-08-17 (forward-only; B-uc1-12) — DRIFT CONVENTION RECOVERED
+----------------------------------------------------------------------------
+Search space: 8 e0-proxy conventions (WPP LEx pairs 1.13-4.29B; WHOSIS
+trends 1.90-2.71B — all miss); 5 WPP-table fixed-structure conventions
+(0.06-8.16B — all miss; also anachronistic, WPP tables were not in the v0
+snapshot); 5 WHO-vintage fixed-structure conventions (GHE vintages
+2000/2010/2015/2019/2021 — the ONLY table family v0 had).
+RESULT: drift = [S(pop2023, WHO_2019) - S(pop2023, WHO_2015)] / 4
+      = (362.4126B - 358.2550B)/4 = 1.0394B  — EXACT match at 4 dp.
+Interpretation: the annualized table-revision gain between WHO GHE's two
+most recent pre-COVID vintages, evaluated at fixed 2023 structure — the
+pre-COVID secular improvement rate, which is exactly what an organic-drift
+term should carry (COVID years route through burn, not drift).
+g chain check: with DECISIONS mint 9.6606: (9.6606-8.0917+1.0394)/362.4126
+= 0.7197%/yr — the recorded g REPRODUCES. With the reproducible mint 9.6603
+(addendum 7): g = 0.7196%/yr — the -0.0003B mint residual propagates to g
+at the 4th decimal. Both stated; neither tuned.
+STATUS: convention recovered-by-search from v0-available sources; cannot be
+proven to be the original's definition — flagged for Ben's ratification
+(A-16). Evidence: gho_ex_global_btsx_2000_2010_2015.json (committed,
+manifested); pinned by tests/test_drift_convention.py.
