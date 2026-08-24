@@ -35,22 +35,44 @@ and removes the "pending ratification" banners.
 
 ---
 
-## 2. A-17 remainder — Praevex org + public flip
+## 2. A-17 — DONE. Successor: A-19 deploy key (10 minutes)
 
-Done already: private repo `HaleMarshall/tly` exists, all commits pushed,
-CI green, weekly Monday print job armed. Remaining decisions:
+Done 2026-08-20: repo transferred to the **chronon-index** org, renamed, and
+flipped **public**. Canonical remote is now
+`github.com/chronon-index/chronon-index`; the old `HaleMarshall/tly` URL
+redirects. Ruleset `main-integrity` is ACTIVE on main — no force pushes, no
+deletions. Local clones keep working via the redirect, but retarget them:
 
-- [x] ~~Praevex GitHub org~~ — RULED 2026-08-20: personal account is
-      fine; this is a separate organisation from Praevex (the time
-      project stands alone). No transfer.
-- [ ] Flip visibility to **public** — required for "the CI run IS the
-      official computation; anyone can watch the print being made."
-      Note: everything in the repo was built to be public (no secrets by
-      design), but flip only after A-16 so what goes public is ratified.
-- [ ] After the flip: enable branch protection + require status checks
-      (pairs with E-12 signing below).
+    git remote set-url origin git@github.com:chronon-index/chronon-index.git
 
-**Effort:** 15 minutes + the judgment call.
+**What is left (A-19).** The second ruleset, `main-review-and-checks`
+(signed commits + PR + required `test` check), is created but **disabled**,
+because turning it on right now would break the weekly print: GitHub gives
+rulesets no GitHub-Actions bypass actor, so the print bot's push to `main`
+would be rejected. A write-enabled **deploy key** is the one bypass actor
+that works for a bot without handing humans a bypass:
+
+    ssh-keygen -t ed25519 -C "tly-print-bot" -f /tmp/print_bot -N ""
+
+1. `cat /tmp/print_bot.pub` -> Settings -> Deploy keys -> Add deploy key,
+   **tick "Allow write access"**.
+2. `cat /tmp/print_bot` -> Settings -> Secrets and variables -> Actions ->
+   New repository secret named `PRINT_BOT_DEPLOY_KEY`.
+3. Settings -> Rulesets -> `main-review-and-checks` -> Bypass list ->
+   Add bypass -> **Deploy keys**; set Enforcement to **Active**; save.
+4. Actions -> weekly-print -> Run workflow. Confirm the archive commit lands.
+5. `shred -u /tmp/print_bot /tmp/print_bot.pub`
+
+`print.yml` is already wired for step 2 and falls back to `GITHUB_TOKEN`
+if the secret is absent, so nothing breaks between now and then.
+
+**Note on the no-secrets principle.** G6/RALPH#6 is about *data sources*
+being keyless — no API keys in the fetch path. A repo-scoped deploy key is
+CI infrastructure, not a data credential, and it is strictly narrower than
+the `GITHUB_TOKEN` the job already holds. If you would rather hold the line
+absolutely, the alternative is to stop pushing prints to `main` and land
+them on a `prints` branch instead — cleaner cryptographically, but it
+splits the archive hash chain, which contradicts B-uc4-08.
 
 ---
 

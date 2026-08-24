@@ -6,7 +6,7 @@ Locked 2026-08-16. Names: **TLY** (the index), **Mirror** (the protocol), **CHRO
 ## Locked
 
 1. **Layered rollout.** v1 TLY index (data product) → v2 cash-settled derivatives on it → v3 Mirror token → v4 Ledger. "All of the above" is a sequence, not one asset; each layer funds and legitimizes the next.
-2. **Supply rule.** M(t) = κ·S(t), where S(t) = Σ over (age, sex, country) of population × remaining life expectancy. κ = 1 token per life-year at genesis (S₀ ≈ 330.0B).
+2. **Supply rule.** M(t) = κ·S(t), where S(t) = Σ over (age, sex, country) of population × remaining life expectancy. κ = 1 token per life-year at genesis. [Corrected 2026-08-20 per A-16: a stale pre-computation genesis figure of ≈330.0B formerly appeared here; S₀ is whatever S measures at the genesis epoch — computed stock lives in Key numbers.]
 3. **Mirror model.** All balances rebase pro-rata with S. A wallet's share of supply changes only by transfer, never by demographics. The token is a permanent fractional claim-by-convention on humanity's remaining time.
 4. **Symmetric down-rebase on mortality shocks.** Mass-death events shrink every balance together — nobody's share grows from war or pandemic ("mortality neutrality").
 5. **FX floats.** The formula governs supply only, never price. No peg → no reserves, no reflexive defense, no Soros trade against it.

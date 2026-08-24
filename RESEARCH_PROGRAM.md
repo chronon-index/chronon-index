@@ -401,7 +401,7 @@ One-sided (structural) terms:
 
 The honest v0 statement, to appear wherever S is quoted:
 "Measured-period S = 362.4B +- ~2% on 2023 structure; best-estimate current
-cohort stock ~ 380-400B."
+cohort stock 381-402B (computed per the error-budget module, blessed per A-16)."
 
 Design decision (proposed default): publish a DUAL SERIES from P2 onward —
 settlement settles on the conservative measured-period S (small model

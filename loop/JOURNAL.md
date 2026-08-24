@@ -1416,3 +1416,33 @@ timestamps, before the loop existed.
   (CALC_REPORT_v0.txt, METHODOLOGY_v0.md, SPEC.md + a START-HERE reading
   guide covering §3/§7/§8, the METHODOLOGY §4 + §8-item-7 tension, the
   amended AC-1.2, and the 381-402B vs 380-400B blessing decision).
+
+## 2026-08-20T18:00+02:00 | Org move + public flip + branch protection
+- BEN REVERSED the morning ruling: the repo DOES move. HaleMarshall/tly ->
+  transferred to the chronon-index organisation and renamed to
+  chronon-index. Canonical remote: github.com/chronon-index/chronon-index.
+  Old URL redirects; all 12 workflow runs, the archive chain and the first
+  print carried over intact. A-17 closed.
+- Name collision cleared first: the org already held an empty public
+  placeholder repo named chronon-index, renamed to
+  chronon-index-placeholder (empty, safe to delete).
+- Repo flipped PUBLIC the same day, ahead of A-16. Recorded honestly: what
+  is public is still the RESEARCH series. The first OFFICIAL print stays
+  gated on A-16 + the licensing gate in code, so the flip does not
+  short-circuit P1 — it only means the reconstruction notices are now
+  readable by outsiders, which they were written to be.
+- Swept for hardcoded HaleMarshall/tly references: none. print.yml and
+  ralph.sh use relative git only.
+- Branch protection: ruleset main-integrity ACTIVE on main (restrict
+  deletions + block force pushes). Ruleset main-review-and-checks created
+  but DISABLED — signed commits + PR + required `test` check.
+- LEARNING (the reason layer 2 is off): GitHub rulesets have NO
+  GitHub-Actions bypass actor. Available bypass actors are Organization
+  admin, Repository admin, Maintain, Write, Deploy keys, and installed
+  Apps. GITHUB_TOKEN matches none of them, so ANY ruleset carrying the
+  pull_request or required_status_checks rule on main will reject the
+  weekly-print bot's push. The rule text is explicit: "commits must first
+  be pushed to another ref where the checks pass". Bot-writes-to-protected
+  -branch therefore requires a deploy key, a GitHub App, or moving prints
+  off main. print.yml now takes an optional ssh-key on checkout so the
+  deploy-key route is a secret away. Tracked as A-19.

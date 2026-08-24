@@ -17,6 +17,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Branch protection on main has no GitHub-Actions bypass actor, so the
+          # print bot pushes over a write-enabled deploy key, which IS bypassable
+          # (ruleset main-review-and-checks -> bypass list -> Deploy keys).
+          # If the secret is unset, checkout falls back to GITHUB_TOKEN and the
+          # push still works on an unprotected branch.
+          ssh-key: ${{ secrets.PRINT_BOT_DEPLOY_KEY }}
+          persist-credentials: true
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"

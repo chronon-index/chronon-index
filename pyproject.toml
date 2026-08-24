@@ -19,6 +19,8 @@ include = ["tly*"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# docs/rulings/ holds verbatim ruling artifacts (records, not project code)
+extend-exclude = ["docs/rulings"]
 
 [tool.ruff.lint]
 # Frozen explicitly so CI and local can never drift on rule selection.
