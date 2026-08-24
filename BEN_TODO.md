@@ -7,33 +7,19 @@ judgment. Ordered by leverage — item 1 unblocks the most.
 
 ---
 
-## 1. A-16 — Ratify the reconstructed methodology  ⭐ highest leverage
+## 1. A-16 — one file left: deliver chronon-index-READY.zip  ⭐
 
-The original SPEC.md, METHODOLOGY_v0.md and seed calculator were lost;
-they were reconstructed 2026-08-16, adversarially reviewed, and every
-DECISIONS.md key number was reproduced or residual-documented. Nothing
-can be called official until you sign off.
+Your D1–D7 rulings (docs/rulings/A16_DECISIONS.md) are EXECUTED as of
+2026-08-24: reconstructions archived to ops/reconstruction/, drift
+convention confirmed against the original source (D2), the mint residual
+explained and ledgered as C-0002 (D3), SPEC AC-1.2 rewritten (D4), D5/D6
+doc corrections applied, D7 commendation journaled.
 
-**Review packet (in reading order):**
-- `seed/CALC_REPORT_v0.txt` — §3 achieved-vs-target table, §7 mint-gap
-  hypotheses (all refuted; −0.0026% residual stands), §8 the recovered
-  drift convention: drift = [S(pop2023, WHO2019) − S(pop2023, WHO2015)]/4
-  = 1.0394B exact — recovered by search, cannot be *proven* to be the
-  original's definition. This is the main thing you're ratifying.
-- `METHODOLOGY_v0.md` — esp. §4 (transport identity) and §8 item 7: the
-  unreconciled DECISIONS tension (S₀ ≈ 330.0B vs S = 362.4126B).
-- `SPEC.md` — esp. the amended AC-1.2 (golden anchor definition).
-- Also decide: the error-budget module computes the cohort band as
-  **381–402B** where DECISIONS prose said "~380–400B" (prose had rounded).
-  Bless the computed values.
-
-**How to ratify:** check the box on A-16 in `loop/BACKLOG.md`, note it in
-`loop/JOURNAL.md`, commit. That unblocks B-uc1-13 (golden anchor commit)
-and removes the "pending ratification" banners.
-
-**Effort:** one focused evening.
-
----
+**The only thing left:** `chronon-index-READY.zip` is not on this machine
+(searched disk, iCloud, the org, and both scaffold zips — only the
+pre-merge scaffolds exist here). Drop it in `~/Downloads` and the next
+session executes the restore: originals → live tree, D3b v0-original
+snapshot freeze, golden swap to full precision, A-16 box checked.
 
 ## 2. A-17 — DONE. Successor: A-19 deploy key (10 minutes)
 
@@ -76,29 +62,13 @@ splits the archive hash chain, which contradicts B-uc4-08.
 
 ---
 
-## 3. B-uc2-02 — HMD account + the keyless-rule ruling
+## 3. B-uc2-02 — RULED (c) and BUILT. Nothing left here.
 
-STMF weekly deaths now sit behind a login (verified: the old keyless URL
-302s to /Account/Login). Registration is free, but putting credentials in
-the pipeline violates your no-secrets rule (RALPH §6 / G6).
-
-- [ ] Register at mortality.org (free) — needed for STMF *and* for the
-      single-age life tables Lee-Carter needs (D-01).
-- [ ] **Rule on the conflict** — options framed in the backlog:
-      (a) Eurostat/CDC keyless feeds as the automated legs (Eurostat is
-          already wired and live to 2026-W31), with STMF as a
-          manually-refreshed snapshot you download while logged in; or
-      (b) relax G6 for one read-only account via a version gate.
-      Recommendation on file: (a) — it keeps the pipeline keyless and
-      STMF becomes a periodic manual snapshot like any other vintage.
-
-**Unblocks:** the STMF chain → ≥570-week backfill → the COVID-drag gate
-(B-uc2-03/11/12/13), and D-01 → Lee-Carter → cohort series (C-uc6-03/04,
-D-02, D-04).
-
-**Effort:** 10 minutes to register; the ruling is one decision.
-
----
+Your keyless-only ruling (docs/rulings/B-uc2-02_RULING.md) is executed:
+HMD removed everywhere, no account needed ever. CDC r8kw-7aab feed live
+with 8-week censoring; EU panel-edge guard live; Eurostat magec/pjan
+life-table build + Lee-Carter integration queued as loop tasks
+(D-01, B-uc2-19). The Lee-Carter chain is no longer human-gated.
 
 ## 4. Commercial data licenses — ACLED + EM-DAT
 
