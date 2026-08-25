@@ -58,6 +58,24 @@
       "rows": 21252,
       "sha256": "f6088e214bb1020fd9d04feeff406b353f829f5af137e398a18172ef79b30eca"
     },
+    "fixtures/wmd_vintages_alb_deu.json": {
+      "bytes": 112029,
+      "derivation": "Albania+Germany rows from each vintage, normalized to [year, time, time_unit, deaths] with country_name->iso3 (early vintages lack the iso3c column and carry a BOM; the 2021-01-14 vintage has an extra date column, dropped); values byte-preserved as strings",
+      "derived_from": [
+        "wmd_vintage_2021-01-14.csv.gz",
+        "wmd_vintage_2021-06-29.csv.gz",
+        "wmd_vintage_2021-12-31.csv.gz",
+        "wmd_vintage_2022-06-29.csv.gz"
+      ],
+      "derived_from_sha256": {
+        "wmd_vintage_2021-01-14.csv.gz": "ea906cf6b8252e1af8522292eb7b1d0eda2525ce231f83fb3c9ffe07b27f8da7",
+        "wmd_vintage_2021-06-29.csv.gz": "d99aaa42dc8a8944fa7953e9331dcc6470d891762cd1b6e4ed6c52dee4f40dfa",
+        "wmd_vintage_2021-12-31.csv.gz": "56af952b4f72ac2e08a147635a27b76279fcdc12db8c631c442bc1ae895097b1",
+        "wmd_vintage_2022-06-29.csv.gz": "2667a7f42a61d7be7c26e9de3a53d482daaeac9e94b42e8bab1bb84202ea9c28"
+      },
+      "in_git": true,
+      "sha256": "83a4dc146142fb13fbc730a159399a93b28a825b3be518875256419776efc509"
+    },
     "fixtures/wpp_world_qx_surface_2010_2100.json": {
       "bytes": 182159,
       "derivation": "World qx per single age: 2010-2023 from the MEASURED 1950-2023 file (2026-08-17 vintage, sha256 7ad8748f4dec567d...) + 2024-2100 from the PROJECTED medium file; deterministic JSON",
@@ -88,6 +106,50 @@
       "stored_encoding": "gzip (deterministic mtime=0) of the wire CSV; wire hash recorded",
       "wire_bytes": 3737861,
       "wire_sha256": "c313f32579087b0b460fe723b801f24c664ebf85bd2040d8a2c153019997f2f3"
+    },
+    "wmd_vintage_2021-01-14.csv.gz": {
+      "bytes": 74770,
+      "in_git": false,
+      "purpose": "C-uc6-07 TRUE real-time vintage: world_mortality.csv exactly as of 2021-01-14 (git commit 7c245b0829) \u2014 the as-of data a 2020/21 analyst had",
+      "retrieved_utc": "2026-08-25T13:43:29+00:00",
+      "sha256": "ea906cf6b8252e1af8522292eb7b1d0eda2525ce231f83fb3c9ffe07b27f8da7",
+      "source_url": "https://raw.githubusercontent.com/akarlinsky/world_mortality/7c245b082954959d7c37f2399b3bae281f95aa89/world_mortality.csv",
+      "stored_encoding": "gzip (deterministic mtime=0) of the wire CSV; wire hash recorded",
+      "wire_bytes": 474898,
+      "wire_sha256": "3a34d905b86d94c7e144a5993d2d06923a2b841cd2994c64f66b33f4e4278ac2"
+    },
+    "wmd_vintage_2021-06-29.csv.gz": {
+      "bytes": 95018,
+      "in_git": false,
+      "purpose": "C-uc6-07 TRUE real-time vintage: world_mortality.csv exactly as of 2021-06-29 (git commit 33694fef9b) \u2014 the as-of data a 2020/21 analyst had",
+      "retrieved_utc": "2026-08-25T13:43:29+00:00",
+      "sha256": "d99aaa42dc8a8944fa7953e9331dcc6470d891762cd1b6e4ed6c52dee4f40dfa",
+      "source_url": "https://raw.githubusercontent.com/akarlinsky/world_mortality/33694fef9b7cd19a5cfaa10a1652fb5d06454342/world_mortality.csv",
+      "stored_encoding": "gzip (deterministic mtime=0) of the wire CSV; wire hash recorded",
+      "wire_bytes": 568040,
+      "wire_sha256": "9ccf71c2d6e43db4aa1921143f3afd00e33c2dbaf9e69cc76db9b11a48e3f3c0"
+    },
+    "wmd_vintage_2021-12-31.csv.gz": {
+      "bytes": 110517,
+      "in_git": false,
+      "purpose": "C-uc6-07 TRUE real-time vintage: world_mortality.csv exactly as of 2021-12-31 (git commit c2fe1261b6) \u2014 the as-of data a 2020/21 analyst had",
+      "retrieved_utc": "2026-08-25T13:43:29+00:00",
+      "sha256": "56af952b4f72ac2e08a147635a27b76279fcdc12db8c631c442bc1ae895097b1",
+      "source_url": "https://raw.githubusercontent.com/akarlinsky/world_mortality/c2fe1261b69a54c01966ad287481261151ca2257/world_mortality.csv",
+      "stored_encoding": "gzip (deterministic mtime=0) of the wire CSV; wire hash recorded",
+      "wire_bytes": 662010,
+      "wire_sha256": "ea79d50b78670500a1887856e2756a31220930ca2f9fc2d77a501fe84f0f5d04"
+    },
+    "wmd_vintage_2022-06-29.csv.gz": {
+      "bytes": 124507,
+      "in_git": false,
+      "purpose": "C-uc6-07 TRUE real-time vintage: world_mortality.csv exactly as of 2022-06-29 (git commit a2418a18cb) \u2014 the as-of data a 2020/21 analyst had",
+      "retrieved_utc": "2026-08-25T13:43:29+00:00",
+      "sha256": "2667a7f42a61d7be7c26e9de3a53d482daaeac9e94b42e8bab1bb84202ea9c28",
+      "source_url": "https://raw.githubusercontent.com/akarlinsky/world_mortality/a2418a18cb403ff0defb00ae036319913478201d/world_mortality.csv",
+      "stored_encoding": "gzip (deterministic mtime=0) of the wire CSV; wire hash recorded",
+      "wire_bytes": 815304,
+      "wire_sha256": "60a5d0e3e9566a0a4955e3ac69a1d5693fb047c99a4bfbcfc39bb4339c4b57d4"
     }
   },
   "network_policy": "anonymous GET, User-Agent sent, single request",

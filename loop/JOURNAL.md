@@ -1705,3 +1705,22 @@ timestamps, before the loop existed.
   before the vintage pull was wired; first real pulls land 2026-08-31.
 - Verifier: 5 adapter tests on real data (magnitude band 7-16k held);
   vintage-store suite green; resolver exercised live.
+
+## 2026-08-25T11:20-04:00 | C-uc6-07 | DONE — COVID replay on TRUE vintages
+- Upgraded the planned 'limited' replay into a real one: WMD's git
+  history IS a vintage store for 2020-22. Four as-of commits fetched
+  (found + fixed my own truncated-sha 404 on the way), snapshotted with
+  commit shas + stored/wire hashes; ALB+DEU fixture committed with
+  multi-parent derivation.
+- Real-time texture the replay had to honor, discovered in the data:
+  Jan-2021 vintage lacks iso3c + has an extra date column; Germany had
+  NO 2015 history then (baseline fits the vintage's own years, >=4
+  floor); Albania switched weekly->monthly mid-2021.
+- FINDINGS (docs/reports/COVID_REPLAY.md): a Jan-2021 analyst measured
+  NEGATIVE German 2020 excess (-1598, err -106.5%) — wrong SIGN at the
+  shock edge; decomposition shows the Jun-2021 DEU error was -8360
+  baseline-history vs +378 data revisions — history availability, not
+  backfill, dominated; both countries final-exact by Dec-2021.
+- This is the P4 trade quantified on our own panel machinery.
+- Verifier: 5 tests regenerate every report number from committed
+  artifacts; full suite pending this commit's run.
