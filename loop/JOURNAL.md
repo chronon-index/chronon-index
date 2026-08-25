@@ -1573,3 +1573,19 @@ timestamps, before the loop existed.
 - Verifier: 4 tests; suite 304 passed.
 - Next: C-uc6-04 (backtest harness — adapt the 1990-vintage protocol to
   the Eurostat-era data honestly: fit 1990-2005, project 2006-2024).
+
+## 2026-08-25T23:20-04:00 | C-uc6-04 + D-02 | DONE — the P2 gate artifact exists
+- tly/backtest.py: vintage harness with the protocol adaptation STATED
+  (RP's fit-through-1990 predates the keyless data; adapted to fit
+  1990-2005 / project 2006-2024 — same structure, 19y out-of-sample with
+  the COVID break inside). Jump-off anchoring at last observed rates,
+  BOTH paths computed.
+- THE BIAS, measured: full-window IT +0.405 / DE -0.420 / SE +0.104
+  years; pre-COVID all within |0.6|y over 14 years (real skill); COVID
+  2020-21 blindness quantified (IT +1.49y — the model cannot foresee
+  shocks, which is exactly why the index routes shocks through burn/E8
+  and settles on measurement, never on the model); jump-off correction
+  HELPS IT/SE and HURTS DE — measured both ways, recorded.
+- D-02: docs/reports/LEECARTER_BACKTEST.md committed, module-produced,
+  bias pinned in tests as regression anchors.
+- Verifier: 3 tests; suite 307 passed.
