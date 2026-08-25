@@ -39,6 +39,25 @@
       "sha256": "0b4a13258f9b1f277219b9c48a4de37416151f55ba697f9df9e7b2b14e2c546b",
       "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_mwk_ts?format=JSON&sex=T&sinceTimePeriod=2000-W01"
     },
+    "fixtures/ons_weekly_deaths_ew_2025_2026.csv.gz": {
+      "bytes": 111578,
+      "derivation": "rows with administrative-geography in {E92000001 England, W92000004 Wales} from the 2025-v45 (52 wks, mature) + 2026-v20 (25 wks) editions; header + row content byte-preserved, order preserved",
+      "derived_from": [
+        "ons_weekly_deaths_age_sex_2025_v45.csv.gz",
+        "ons_weekly_deaths_age_sex_2026_v20.csv.gz"
+      ],
+      "derived_from_sha256": {
+        "ons_weekly_deaths_age_sex_2025_v45.csv.gz": "cca5d039743500ff85ab5ecf3bd5518419e23d526f873c2926272fc0c48ffc8e",
+        "ons_weekly_deaths_age_sex_2026_v20.csv.gz": "d628256d8f4c42f6b59e28073e8933a6a82f6bee1efd6e0fa5f490b22533511d"
+      },
+      "derived_from_wire_sha256": {
+        "ons_weekly_deaths_age_sex_2025_v45.csv.gz": "65a05802390a6d30526cbc14d0d686195666d8d5d7cf77a0b8992e45b642ced1",
+        "ons_weekly_deaths_age_sex_2026_v20.csv.gz": "c313f32579087b0b460fe723b801f24c664ebf85bd2040d8a2c153019997f2f3"
+      },
+      "in_git": true,
+      "rows": 21252,
+      "sha256": "f6088e214bb1020fd9d04feeff406b353f829f5af137e398a18172ef79b30eca"
+    },
     "fixtures/wpp_world_qx_surface_2010_2100.json": {
       "bytes": 182159,
       "derivation": "World qx per single age: 2010-2023 from the MEASURED 1950-2023 file (2026-08-17 vintage, sha256 7ad8748f4dec567d...) + 2024-2100 from the PROJECTED medium file; deterministic JSON",
@@ -47,6 +66,28 @@
       "in_git": true,
       "rows": 9191,
       "sha256": "33253bb2d842456c5b0884d79ff71887759905ad123aa491eb4670fb1e172adc"
+    },
+    "ons_weekly_deaths_age_sex_2025_v45.csv.gz": {
+      "bytes": 426792,
+      "in_git": false,
+      "purpose": "B-uc2-18 keyless ONS weekly deaths, England & Wales, by age/sex/region, registrations+occurrences (v4 CSV)",
+      "retrieved_utc": "2026-08-25T13:35:37+00:00",
+      "sha256": "cca5d039743500ff85ab5ecf3bd5518419e23d526f873c2926272fc0c48ffc8e",
+      "source_url": "https://download.ons.gov.uk/downloads/datasets/weekly-deaths-age-sex/editions/2025/versions/45.csv",
+      "stored_encoding": "gzip (deterministic mtime=0) of the wire CSV; wire hash recorded",
+      "wire_bytes": 7804226,
+      "wire_sha256": "65a05802390a6d30526cbc14d0d686195666d8d5d7cf77a0b8992e45b642ced1"
+    },
+    "ons_weekly_deaths_age_sex_2026_v20.csv.gz": {
+      "bytes": 205384,
+      "in_git": false,
+      "purpose": "B-uc2-18 keyless ONS weekly deaths, England & Wales, by age/sex/region, registrations+occurrences (v4 CSV)",
+      "retrieved_utc": "2026-08-25T13:35:37+00:00",
+      "sha256": "d628256d8f4c42f6b59e28073e8933a6a82f6bee1efd6e0fa5f490b22533511d",
+      "source_url": "https://download.ons.gov.uk/downloads/datasets/weekly-deaths-age-sex/editions/2026/versions/20.csv",
+      "stored_encoding": "gzip (deterministic mtime=0) of the wire CSV; wire hash recorded",
+      "wire_bytes": 3737861,
+      "wire_sha256": "c313f32579087b0b460fe723b801f24c664ebf85bd2040d8a2c153019997f2f3"
     }
   },
   "network_policy": "anonymous GET, User-Agent sent, single request",

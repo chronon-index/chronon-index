@@ -64,11 +64,23 @@ def validate_snapshot_dir(snapshot_dir: Path) -> list[str]:
             for field in ("derived_from_sha256", "derivation"):
                 if field not in row:
                     problems.append(f"{where}: derived row missing {field}")
-            parent = row.get("derived_from")
-            if parent not in rows:
-                problems.append(f"{where}: derived_from {parent!r} has no manifest row")
-            elif rows[parent].get("sha256") != row.get("derived_from_sha256"):
-                problems.append(f"{where}: derived_from_sha256 does not match parent row")
+            # single parent: derived_from is a name, derived_from_sha256 a
+            # hash. Multi-parent (e.g. the ONS E&W fixture spanning two
+            # year-editions): derived_from is a list, derived_from_sha256
+            # a {parent: hash} map — every parent checked, same strictness.
+            parents = row.get("derived_from")
+            hashes = row.get("derived_from_sha256")
+            if isinstance(parents, str):
+                parents, hashes = [parents], {parents: hashes}
+            if not isinstance(hashes, dict):
+                hashes = {}
+            for parent in parents or []:
+                if parent not in rows:
+                    problems.append(f"{where}: derived_from {parent!r} has no manifest row")
+                elif rows[parent].get("sha256") != hashes.get(parent):
+                    problems.append(
+                        f"{where}: derived_from_sha256 does not match parent row ({parent!r})"
+                    )
         else:
             problems.append(f"{where}: row has neither source_url nor derived_from")
 

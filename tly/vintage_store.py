@@ -38,11 +38,19 @@ class VintageStore:
     def _ledger_path(self, feed: str) -> Path:
         return self._feed_dir(feed) / "ledger.jsonl"
 
-    def store_pull(self, feed: str, pull_date: date, body: bytes, source_url: str) -> dict:
+    def store_pull(
+        self,
+        feed: str,
+        pull_date: date,
+        body: bytes,
+        source_url: str,
+        suffix: str = ".json",
+    ) -> dict:
         """Store one pull. Idempotent for identical bytes; a DIFFERENT
-        body on an existing pull date raises (vintages never mutate)."""
+        body on an existing pull date raises (vintages never mutate).
+        ``suffix`` names the wire format (ONS pulls are CSV)."""
         d = self._feed_dir(feed)
-        path = d / f"{pull_date.isoformat()}.json"
+        path = d / f"{pull_date.isoformat()}{suffix}"
         digest = hashlib.sha256(body).hexdigest()
         if path.exists():
             existing = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -62,6 +70,7 @@ class VintageStore:
         record = {
             "feed": feed,
             "pull_date": pull_date.isoformat(),
+            "file": path.name,
             "sha256": digest,
             "bytes": len(body),
             "source_url": source_url,
@@ -83,13 +92,15 @@ class VintageStore:
         d = self._feed_dir(feed)
         ledgered = set()
         for row in rows:
-            path = d / f"{row['pull_date']}.json"
+            # pre-suffix ledger rows (eurostat/cdc history) lack "file"
+            fname = row.get("file", f"{row['pull_date']}.json")
+            path = d / fname
             if not path.is_file():
                 raise VintageStoreError(f"{feed}/{row['pull_date']}: ledgered pull missing")
             if hashlib.sha256(path.read_bytes()).hexdigest() != row["sha256"]:
                 raise VintageStoreError(f"{feed}/{row['pull_date']}: vintage bytes mutated")
-            ledgered.add(row["pull_date"])
-        on_disk = {p.stem for p in d.glob("*.json") if p.name != "ledger.jsonl"}
+            ledgered.add(fname)
+        on_disk = {p.name for p in d.iterdir() if p.is_file() and p.name != "ledger.jsonl"}
         stray = on_disk - ledgered
         if stray:
             raise VintageStoreError(f"{feed}: unledgered vintages {sorted(stray)}")
@@ -100,7 +111,8 @@ class VintageStore:
         maps one vintage's bytes to {week_key: value}."""
         out: dict[str, dict[str, object]] = {}
         for row in self.ledger(feed):
-            body = (self._feed_dir(feed) / f"{row['pull_date']}.json").read_bytes()
+            fname = row.get("file", f"{row['pull_date']}.json")
+            body = (self._feed_dir(feed) / fname).read_bytes()
             for week, value in extract_weeks(body).items():
                 out.setdefault(week, {})[row["pull_date"]] = value
         return out

@@ -17,27 +17,34 @@ def _store_weekly_vintages() -> None:
     concern); a failed pull is simply an absent vintage for the date."""
     from datetime import datetime, timezone
 
+    from tly.ons_weekly import latest_csv_url
     from tly.snapshot import fetch_url
     from tly.vintage_store import VintageStore
 
     store = VintageStore(REPO_ROOT / "data" / "vintages")
     today = datetime.now(timezone.utc).date()
+    # feed -> (url or resolver-callable, stored suffix). ONS resolves the
+    # year-edition's latest version each Monday (URLs are version-pinned).
     feeds = {
         "eurostat_weekly": (
             "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/"
-            "data/demo_r_mwk_ts?format=JSON&sex=T&sinceTimePeriod=2024-W01"
+            "data/demo_r_mwk_ts?format=JSON&sex=T&sinceTimePeriod=2024-W01",
+            ".json",
         ),
         "cdc_weekly": (
             "https://data.cdc.gov/resource/r8kw-7aab.json?"
             "%24select=end_date,total_deaths,covid_19_deaths&"
             "%24where=%60group%60%3D%27By%20Week%27%20AND%20state%3D%27United%20States%27&"
-            "%24order=end_date&%24limit=50000"
+            "%24order=end_date&%24limit=50000",
+            ".json",
         ),
+        "ons_weekly": (lambda: latest_csv_url(datetime.now(timezone.utc).year), ".csv"),
     }
-    for feed, url in feeds.items():
+    for feed, (source, suffix) in feeds.items():
         try:
+            url = source() if callable(source) else source
             body = fetch_url(url)
-            result = store.store_pull(feed, today, body, url)
+            result = store.store_pull(feed, today, body, url, suffix=suffix)
             store.verify(feed)
             print(f"vintage {feed}/{today}: {'stored' if result['new'] else 'already stored'}")
         except Exception as err:  # noqa: BLE001 — never block the print

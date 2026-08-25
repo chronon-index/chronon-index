@@ -1684,3 +1684,24 @@ timestamps, before the loop existed.
 - The finding test now records BOTH the original exceedance (>8, on
   record) and the resolution (inside the governed band).
 - Verifier: outsider-sim PASSED post-change; suite 324 green.
+
+## 2026-08-25T10:40-04:00 | B-uc2-18 | DONE — ONS England&Wales weekly adapter
+- Verified live before building: api.beta.ons.gov.uk weekly-deaths-age-sex
+  is keyless, edition-per-year (2026 v20 weeks 1-25; 2025 v45 full 52),
+  v4 CSV with age(23 bands) x sex x region x registrations/occurrences.
+- HONESTY items baked into the module: (1) this is England & Wales, NOT
+  UK — Scotland/NI publish separately, no silent scope inflation; (2) no
+  national total row exists — E&W = England+Wales computed, partial
+  totals REFUSED; (3) registrations are publish-complete, occurrences
+  backfill — callers choose the basis explicitly.
+- Snapshot discipline: raw 2025/2026 CSVs stored gzipped (gitignored)
+  with BOTH stored and wire sha256 recorded; committed fixture =
+  E92000001+W92000004 rows (21,252), derivation + wire hashes in the
+  manifest.
+- Vintage wiring: feeds map now (url-or-resolver, suffix); ONS resolves
+  its version-pinned CSV URL each Monday; VintageStore gained suffix
+  support back-compatibly (old ledger rows without "file" still verify).
+- Found while wiring: data/vintages is EMPTY — the 08-24 cron print ran
+  before the vintage pull was wired; first real pulls land 2026-08-31.
+- Verifier: 5 adapter tests on real data (magnitude band 7-16k held);
+  vintage-store suite green; resolver exercised live.
