@@ -117,6 +117,19 @@ registry entry; every archived snapshot citation must resolve into the
 committed manifests (manifests grow append-only — the archived citation
 set is a valid subset). Compare values, verify stamps against history.
 
+## 6d. Independent timestamp check (OpenTimestamps)
+
+Each archived epoch's chain `record_hash` is Bitcoin-timestamped:
+`stamps/<epoch>.hash` holds the record_hash (compare it to `chain.json`
+yourself), and `stamps/<epoch>.ots` is the proof over that hash file.
+To verify independently: `pip install opentimestamps-client`, then
+`ots verify -f stamps/<epoch>.hash stamps/<epoch>.ots`. A fresh proof is
+calendar-pending until aggregated into a Bitcoin block (hours); run
+`ots upgrade` on the proof after that, and note full verification wants
+a local Bitcoin node (the client offers a trusted-explorer fallback).
+CI blocks publish unless every epoch has a matching, existing proof
+(`python -m tly.ots_gate verify`).
+
 ## 7. If your hash differs
 
 1. Re-run step 3 (is your tree intact?) and step 4 (is your run

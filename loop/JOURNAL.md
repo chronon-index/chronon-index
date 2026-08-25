@@ -1648,3 +1648,21 @@ timestamps, before the loop existed.
 - B-uc4-07: same-epoch status flip + the full CARRY->STALE->DEFER walk +
   recovery simulated through the real ladder, in the suite CI runs.
 - Verifier: 3 new tests; suite 318 passed.
+
+## 2026-08-25T09:35-04:00 | B-uc4-06 | DONE — OTS publish gate live with real proofs
+- tly/ots_gate.py bridges E-02's StampStore to the chain: `stamp` records
+  stamps/<epoch>.hash = record_hash + invokes the real client for missing
+  proofs (backfill honest: a later proof attests existence-by-stamp-time,
+  the chain dates the print); `verify` blocks publish unless every epoch
+  has a matching digest AND a .ots on disk.
+- Stamped BOTH archived epochs locally with the real client (pipx
+  opentimestamps-client) against the public calendars — 619/654-byte
+  proofs committed; pending Bitcoin aggregation, stated not hidden.
+  Attestation depth is explicitly out of the gate's scope (client's
+  upgrade/verify job) — the AC gates existence + hash match.
+- print.yml: install client -> ci_print -> ots_gate stamp -> ots_gate
+  verify -> commit now includes stamps/.
+- Outsider path documented (REPRODUCE_FIXING 6d): ots verify -f <hash>
+  <ots>, upgrade later, Bitcoin-node caveat.
+- Verifier: 5 gate tests (3 block modes, pass mode, real repo passes its
+  own gate); full suite green.
