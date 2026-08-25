@@ -1610,3 +1610,20 @@ timestamps, before the loop existed.
   explicitly deferred to P3), slots into DualSeries with settlement
   proven untouched.
 - Verifier: 4 tests; suite 311 passed.
+
+## 2026-08-26T00:30-04:00 | B-uc2-17 | DONE — the lag triangle starts growing
+- tly/vintage_store.py: append-only per-feed vintages (one pull per
+  date; identical re-pulls idempotent, DIFFERENT bytes on a stored date
+  refused — vintages never mutate), sha256 ledger, closed-world verify
+  (same discipline as the archive), and lag_triangle() — {week:
+  {pull_date: value}} across vintages, the raw material for chain-ladder
+  correction.
+- WIRED INTO ci_print: every Monday run now stores that day's Eurostat +
+  CDC pulls before printing (fetch failure logs an absent vintage and
+  never blocks the print — the failure ladder owns that concern);
+  print.yml commits data/vintages/. From next Monday the repo accrues
+  the (week, pull-date) pairs no one can reconstruct retroactively —
+  the exact prerequisite the ruling named for correction-vs-censoring
+  and for future no-hindsight replays.
+- Verifier: 4 tests incl. a synthetic maturation triangle (20000 ->
+  39000 -> 47500 across three pulls); suite 315 passed.
