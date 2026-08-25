@@ -1589,3 +1589,24 @@ timestamps, before the loop existed.
 - D-02: docs/reports/LEECARTER_BACKTEST.md committed, module-produced,
   bias pinned in tests as regression anchors.
 - Verifier: 3 tests; suite 307 passed.
+
+## 2026-08-25T23:55-04:00 | D-04 | DONE — the dual series is real
+- WPP projected complete LT 2024-2100 fetched (204MB, in_git:false);
+  World qx SURFACE fixture committed (2010-2023 measured + 2024-2100
+  projected, dual provenance, 182KB).
+- tly/cohort.py: E6 by diagonal survival with trapezoid person-years;
+  conventions stated (post-2100 holds the 2100 column — affects only
+  cohorts <25 in 2025; open age closes on WPP's own qx=1). Cohort
+  e0(2023) = 78.0502 (+4.9y over period — literature-plausible);
+  COHORT-S = 392.8260B, INSIDE the D6-blessed 381-402B band.
+- FINDING, recorded as a test not hidden: the computed period-vs-cohort
+  uplift is +8.06% — 0.06pp above the error budget's recorded +3-8%
+  upper bound. Per computed-beats-prose (D6) the budget term is due a
+  version-bump proposal; test_period_vs_cohort_term_measured_finding
+  documents the exceedance until then.
+- informational_print(): cohort print with measured_share=0 (every
+  diagonal crosses projected mortality — model content BY CONSTRUCTION,
+  stated), symmetric measurement interval (projection-model uncertainty
+  explicitly deferred to P3), slots into DualSeries with settlement
+  proven untouched.
+- Verifier: 4 tests; suite 311 passed.

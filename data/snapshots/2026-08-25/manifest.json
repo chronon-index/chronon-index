@@ -1,5 +1,13 @@
 {
   "files": {
+    "WPP2024_Life_Table_Complete_Medium_Both_2024-2100.csv.gz": {
+      "bytes": 203785578,
+      "in_git": false,
+      "purpose": "D-04: WPP MEDIUM-VARIANT PROJECTED complete life tables 2024-2100 \u2014 model content, INFORMATIONAL series only, never settlement",
+      "retrieved_utc": "2026-08-25T03:45:00+00:00",
+      "sha256": "ca2977c727b77a27548673d82cf065fe10e87162a3e31af5eaa811ea507ce390",
+      "source_url": "https://population.un.org/wpp/assets/Excel%20Files/1_Indicator%20(Standard)/CSV_FILES/WPP2024_Life_Table_Complete_Medium_Both_2024-2100.csv.gz"
+    },
     "eurostat_demo_magec_it_de_se.json": {
       "bytes": 130143,
       "in_git": true,
@@ -30,6 +38,15 @@
       "retrieved_utc": "2026-08-25T00:23:04+00:00",
       "sha256": "0b4a13258f9b1f277219b9c48a4de37416151f55ba697f9df9e7b2b14e2c546b",
       "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_mwk_ts?format=JSON&sex=T&sinceTimePeriod=2000-W01"
+    },
+    "fixtures/wpp_world_qx_surface_2010_2100.json": {
+      "bytes": 182159,
+      "derivation": "World qx per single age: 2010-2023 from the MEASURED 1950-2023 file (2026-08-17 vintage, sha256 7ad8748f4dec567d...) + 2024-2100 from the PROJECTED medium file; deterministic JSON",
+      "derived_from": "WPP2024_Life_Table_Complete_Medium_Both_2024-2100.csv.gz",
+      "derived_from_sha256": "ca2977c727b77a27548673d82cf065fe10e87162a3e31af5eaa811ea507ce390",
+      "in_git": true,
+      "rows": 9191,
+      "sha256": "33253bb2d842456c5b0884d79ff71887759905ad123aa491eb4670fb1e172adc"
     }
   },
   "network_policy": "anonymous GET, User-Agent sent, single request",
