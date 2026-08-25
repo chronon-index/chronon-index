@@ -1,0 +1,14 @@
+{
+  "files": {
+    "eurostat_demo_r_mwk_ts_full.json": {
+      "bytes": 648219,
+      "in_git": true,
+      "retrieved_utc": "2026-08-25T00:23:04+00:00",
+      "sha256": "0b4a13258f9b1f277219b9c48a4de37416151f55ba697f9df9e7b2b14e2c546b",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_r_mwk_ts?format=JSON&sex=T&sinceTimePeriod=2000-W01"
+    }
+  },
+  "network_policy": "anonymous GET, User-Agent sent, single request",
+  "note": "B-uc2-11 backfill acquisition (keyless per B-uc2-02(c)): Eurostat demo_r_mwk_ts FULL history 2000-W01..2026-W32, 39 geos, 42,472 observations. Verified: 1,383 CONSECUTIVE weeks with >=20 reporting countries (2000-W01..2026-W27) \u2014 2.4x the >=570-week AC-2.3 requirement. COVID window fully covered. Joins the committed WMD (2015-2024, 127 countries) and CDC (2020+, US) snapshots for the backfill engine.",
+  "snapshot_date": "2026-08-25"
+}

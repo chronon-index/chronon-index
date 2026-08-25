@@ -80,3 +80,31 @@ def test_cdc_disorder_rejected(tmp_path):
     )
     with pytest.raises(CdcFormatError, match="out of order"):
         parse_cdc_weekly(bad)
+
+
+def test_backfill_coverage_570_consecutive_weeks():
+    """B-uc2-11 acceptance: the full-history Eurostat snapshot carries an
+    UNBROKEN >=20-country panel far exceeding 570 consecutive weeks."""
+    from datetime import date, timedelta
+
+    full = REPO / "data" / "snapshots" / "2026-08-25" / "eurostat_demo_r_mwk_ts_full.json"
+    cells = parse_eurostat_weekly(full)
+    counts: dict[tuple[int, int], set[str]] = {}
+    for c in cells:
+        counts.setdefault((c.year, c.time), set()).add(c.iso3)
+    qualified = sorted(wk for wk, g in counts.items() if len(g) >= 20)
+
+    def iso_next(y: int, w: int) -> tuple[int, int]:
+        nxt = date.fromisocalendar(y, w, 1) + timedelta(days=7)
+        i = nxt.isocalendar()
+        return (i[0], i[1])
+
+    run = best = 1
+    prev = qualified[0]
+    for wk in qualified[1:]:
+        run = run + 1 if wk == iso_next(*prev) else 1
+        best = max(best, run)
+        prev = wk
+    assert best >= 570, f"longest consecutive >=20-country run only {best}"
+    assert qualified[0] == (2000, 1)
+    assert qualified[-1] >= (2026, 20)  # runs to the current-year panel edge

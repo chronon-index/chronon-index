@@ -1488,3 +1488,17 @@ timestamps, before the loop existed.
   MODEL layer only).
 - Verifier: suite green incl. 6 new guard tests; pushed to
   chronon-index/chronon-index; CI green.
+
+## 2026-08-25T20:30-04:00 | B-uc2-11 | DONE — backfill data secured
+- Also noted on pull: the Monday cron ran UNATTENDED on 2026-08-24 and
+  archived the second print (archive/2026-08-24.json) — the public CI
+  computation is self-sustaining; the chain now has two links.
+- Eurostat demo_r_mwk_ts FULL history snapshotted (2000-W01..2026-W32,
+  648KB, 42,472 obs, manifested 2026-08-25 vintage). Verified by test:
+  1,383 CONSECUTIVE weeks with >=20 reporting countries (2000-W01..
+  2026-W27) — 2.4x AC-2.3's >=570 requirement, unbroken, COVID window
+  fully inside. Combined with committed WMD (127 countries, 2015-2024)
+  and CDC US (2020+): acquisition complete.
+- Verifier: 7 guard tests incl. the new coverage test; suite next.
+- Next: B-uc2-12 (backfill engine — the print series) then B-uc2-13
+  (COVID-drag gate).
