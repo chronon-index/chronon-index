@@ -13,12 +13,16 @@ of terms with OPPOSITE handling, exactly as Part VIII prescribes:
     ±0.5% → √(1.0² + 1.5² + 0.5²) = √3.5 ≈ ±1.87%, stated as "~±2%".
 - ONE-SIDED (structural) terms are LISTED, never netted and never added
     to the quadrature: vintage lag +2 to +3% (2023 structure read in
-    2026), period-vs-cohort +3 to +8% (true cohort stock is higher).
+    2026), period-vs-cohort +3 to +9% since v0.6.0 (the E6 computation
+    on the committed surface measured +8.06%, above the +3-8% literature
+    prose — measurement supersedes prose, governed as a version bump).
 
-The cohort best-estimate band applies both one-sided lower bounds (+5%)
-and both upper bounds (+11%) to the measured level. Note: DECISIONS.md
-records the band as "~380–400B"; this module computes ≈381–402B from the
-same inputs — the recorded prose rounded the top of the band. The module
+The one-sided bounds are VERSION-KEYED in tly.methodology
+(VERSION_ONE_SIDED_TERMS): reproducing an archived print selects the
+band its version was governed by, never HEAD's. The cohort
+best-estimate band applies both one-sided lower bounds and both upper
+bounds to the measured level (v0.6.0: +5% / +12% -> ≈381-406B; the
+A-16-blessed 381-402B remains the correct v0.5.0 statement). The module
 emits COMPUTED values; it does not tune to match prose (RALPH §6).
 
 This budget retires at rung 4 when Monte Carlo intervals replace it
@@ -31,6 +35,7 @@ from dataclasses import dataclass
 from decimal import Decimal
 
 from tly.guard import assert_decimal
+from tly.methodology import METHODOLOGY_VERSION, one_sided_terms_for
 from tly.numeric import BILLION
 
 SYMMETRIC_TERMS: dict[str, Decimal] = {
@@ -39,10 +44,11 @@ SYMMETRIC_TERMS: dict[str, Decimal] = {
     "banding_interpolation_pct": Decimal("0.5"),
 }
 
-ONE_SIDED_TERMS: dict[str, tuple[Decimal, Decimal]] = {
-    "vintage_lag_pct": (Decimal("2"), Decimal("3")),
-    "period_vs_cohort_pct": (Decimal("3"), Decimal("8")),
-}
+
+def one_sided_terms(version: str | None = None) -> dict[str, tuple[Decimal, Decimal]]:
+    """The one-sided bounds for ``version`` (default: HEAD methodology)."""
+    raw = one_sided_terms_for(version or METHODOLOGY_VERSION)
+    return {name: (Decimal(lo), Decimal(hi)) for name, (lo, hi) in raw.items()}
 
 
 def quadrature_pct() -> Decimal:
@@ -89,24 +95,24 @@ class ErrorBudget:
         )
 
 
-def build_error_budget(s_life_years: Decimal) -> ErrorBudget:
+def build_error_budget(s_life_years: Decimal, version: str | None = None) -> ErrorBudget:
     assert_decimal(s_life_years, "s_life_years")
     if s_life_years <= 0:
         raise ValueError("S must be positive")
     return ErrorBudget(
         s_life_years=s_life_years,
         symmetric_pct=quadrature_pct(),
-        one_sided=dict(ONE_SIDED_TERMS),
+        one_sided=one_sided_terms(version),
     )
 
 
-def accuracy_block(s_life_years: Decimal) -> dict:
+def accuracy_block(s_life_years: Decimal, version: str | None = None) -> dict:
     """The print's accuracy block, module-produced end to end (B-uc2-09):
     the Part VIII statement plus a real interval from the symmetric
     quadrature; the one-sided terms ride along, listed never netted. Any
     hand-typed accuracy text in a print is a defect — prints must call
     this."""
-    budget = build_error_budget(s_life_years)
+    budget = build_error_budget(s_life_years, version)
     lo, hi = budget.interval
     return {
         "statement": budget.statement(),

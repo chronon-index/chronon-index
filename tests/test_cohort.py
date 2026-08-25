@@ -49,15 +49,19 @@ def test_cohort_s_pinned_and_inside_the_blessed_band():
 
 
 def test_period_vs_cohort_term_measured_finding():
-    """A FINDING, recorded as a test: the computed period-vs-cohort uplift
-    is +8.06% — 0.06pp ABOVE the error budget's recorded +3-8% upper
-    bound. Per computed-beats-prose (ruling D6) the budget term is due a
-    version-bump proposal; until then this test documents the exceedance
-    honestly instead of hiding it."""
+    """The FINDING and its RESOLUTION: the computed uplift is +8.06%,
+    which exceeded v0.5.0's +3-8% band by 0.06pp — per computed-beats-
+    prose (ruling D6) the band upper moved to 9 at v0.6.0, the registry's
+    first parameter change. The measurement must now sit INSIDE the
+    governed band; a future drift outside it reopens the proposal."""
+    from tly.error_budget import one_sided_terms
+
     surface, pop = _inputs()
     uplift_pct = (cohort_s(surface, pop, 2023) / B / PERIOD_S_2023 - 1) * 100
     assert D("7.9") < uplift_pct < D("8.2")  # regression pin
-    assert uplift_pct > D(8)  # the exceedance IS the finding
+    assert uplift_pct > D(8)  # the original exceedance, still on record
+    lo, hi = one_sided_terms()["period_vs_cohort_pct"]
+    assert lo < uplift_pct < hi  # v0.6.0 covers the measurement
 
 
 def test_informational_print_slots_into_dual_series():

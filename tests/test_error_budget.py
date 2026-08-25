@@ -7,7 +7,7 @@ from decimal import Decimal
 import pytest
 
 from tly.error_budget import (
-    ONE_SIDED_TERMS,
+    one_sided_terms,
     SYMMETRIC_TERMS,
     build_error_budget,
     quadrature_pct,
@@ -38,7 +38,17 @@ def test_cohort_band_applies_one_sided_bounds():
     budget = build_error_budget(S_V0)
     lo, hi = budget.cohort_band
     assert lo == S_V0 * D("1.05")  # +2% +3%
-    assert hi == S_V0 * D("1.11")  # +3% +8%
+    assert hi == S_V0 * D("1.12")  # +3% +9% (v0.6.0 band)
+
+
+def test_archived_version_reproduces_its_own_band():
+    """Version-keyed bounds: v0.5.0 prints must keep reproducing under
+    the +3-8% band that made them — never HEAD's widened band."""
+    budget = build_error_budget(S_V0, version="v0.5.0-reconstruction")
+    lo, hi = budget.cohort_band
+    assert hi == S_V0 * D("1.11")
+    text = budget.statement()
+    assert "381-402B" in text and "period_vs_cohort_pct +3-8%" in text
 
 
 def test_statement_is_computed_not_hand_typed():
@@ -46,17 +56,17 @@ def test_statement_is_computed_not_hand_typed():
     text = budget.statement()
     assert "362.4B" in text  # computed from S, quantized
     assert "1.9%" in text  # computed quadrature, quantized to 0.1
-    assert "381-402B" in text  # COMPUTED band (380.53 rounds to 381; DECISIONS prose said 380-400)
+    assert "381-406B" in text  # COMPUTED v0.6.0 band (the A-16-blessed 381-402B is v0.5.0's)
     assert "never netted" in text
     assert "vintage_lag_pct +2-3%" in text
-    assert "period_vs_cohort_pct +3-8%" in text
+    assert "period_vs_cohort_pct +3-9%" in text
 
 
 def test_one_sided_terms_never_enter_quadrature():
     """The structural terms are absent from the symmetric set — netting or
     quadrature-mixing them is the exact error Part VIII forbids."""
-    assert set(SYMMETRIC_TERMS) & set(ONE_SIDED_TERMS) == set()
-    assert all(lo <= hi for lo, hi in ONE_SIDED_TERMS.values())
+    assert set(SYMMETRIC_TERMS) & set(one_sided_terms()) == set()
+    assert all(lo <= hi for lo, hi in one_sided_terms().values())
     # quadrature depends only on the symmetric terms: 3 terms, √3.5
     assert len(SYMMETRIC_TERMS) == 3
 

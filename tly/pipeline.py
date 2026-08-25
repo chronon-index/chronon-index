@@ -34,7 +34,10 @@ COVERAGE_COUNTRIES = ("ALB", "DEU")
 COVERAGE_YEAR = 2021
 
 
-def build_settlement_print(epoch_utc: str) -> WeeklyPrint:
+def build_settlement_print(epoch_utc: str, methodology_version: str | None = None) -> WeeklyPrint:
+    """``methodology_version`` selects the GOVERNED parameter set for
+    version-keyed terms (outsider-sim reproduces archived epochs under
+    the version that produced them); None = HEAD."""
     snap = load_verified_snapshot(SNAP16)
     stock = compute_stock(snap.tables[2019], snap.bands, 2019)
     n = total_population(snap.bands)
@@ -53,7 +56,7 @@ def build_settlement_print(epoch_utc: str) -> WeeklyPrint:
         n_persons=n,
         burn_life_years=Decimal(0),
         coverage=coverage_block(records),
-        accuracy=accuracy_block(stock.s_life_years),
+        accuracy=accuracy_block(stock.s_life_years, methodology_version),
         provenance=stamp([SNAP16, SNAP17]),
     )
 

@@ -94,6 +94,7 @@ def test_report_stamp_carries_version_and_manifest_hashes():
         "p6_closure",
         "quanta",
         "excess_age_profile",
+        "error_budget_one_sided",
     }
     # every input file's sha256 is citable from the stamp, incl. uncommitted
     assert "gho_ex_global_btsx_2019_2021.json" in meta["snapshots"]["2026-08-16"]

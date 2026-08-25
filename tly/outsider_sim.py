@@ -64,9 +64,12 @@ def main() -> int:
 
     for link in chain:
         committed = (archive.root / link["file"]).read_text(encoding="utf-8")
-        recomputed = build_settlement_print(link["epoch_utc"]).render()
-
         c_body, c_prov = _split(committed)
+        # Version-keyed parameters (e.g. the one-sided error-budget band)
+        # must come from the version that PRODUCED the print, never HEAD.
+        recomputed = build_settlement_print(
+            link["epoch_utc"], methodology_version=c_prov.get("methodology_version")
+        ).render()
         r_body, _ = _split(recomputed)
         if c_body != r_body:
             print(f"DIVERGENCE at {link['epoch_utc']}: recomputed VALUES differ")

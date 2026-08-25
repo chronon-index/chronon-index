@@ -57,6 +57,7 @@ def test_output_metadata_stamp_shape():
         "p6_closure",
         "quanta",
         "excess_age_profile",
+        "error_budget_one_sided",
     }
 
 

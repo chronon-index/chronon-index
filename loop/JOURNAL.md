@@ -1666,3 +1666,21 @@ timestamps, before the loop existed.
   <ots>, upgrade later, Bitcoin-node caveat.
 - Verifier: 5 gate tests (3 block modes, pass mode, real repo passes its
   own gate); full suite green.
+
+## 2026-08-25T10:05-04:00 | methodology v0.6.0 | DONE — the cohort finding's version bump
+- The +8.06% period-vs-cohort measurement (E6 on the committed surface)
+  exceeded v0.5.0's +3-8% prose band by 0.06pp; per computed-beats-prose
+  (D6) the upper moves to 9. This is the registry's FIRST parameter
+  CHANGE (every prior bump only added policies), which forced the right
+  structure: one-sided bounds are now version-keyed
+  (VERSION_ONE_SIDED_TERMS, append-only), build_error_budget/
+  accuracy_block/build_settlement_print take an optional version, and
+  the outsider-sim recomputes each archived epoch under its ARCHIVED
+  version — v0.4.0 prints keep reproducing byte-exactly under the band
+  that made them while HEAD publishes 381-406B.
+- The A-16-blessed 381-402B is explicitly preserved as the correct
+  v0.5.0 statement (changelog + docstring + a dedicated reproduction
+  test); nothing ratified is silently rewritten.
+- The finding test now records BOTH the original exceedance (>8, on
+  record) and the resolution (inside the governed band).
+- Verifier: outsider-sim PASSED post-change; suite 324 green.

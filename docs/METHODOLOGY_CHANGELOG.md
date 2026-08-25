@@ -67,3 +67,20 @@ ratification (loop/BACKLOG.md A-16).
   (lo+hi+1)/2.
 - decimal: `Decimal prec 34, ROUND_HALF_EVEN` — floats never touch
   published numbers (G1).
+
+## v0.6.0-reconstruction (2026-08-25)
+
+**Changed** (the registry's FIRST parameter change, not an addition):
+the period-vs-cohort one-sided error-budget upper bound moves **+8% ->
++9%**. Driver: the E6 cohort computation on the committed 2010-2100 qx
+surface measured the uplift at **+8.06%** (tests/test_cohort.py), 0.06pp
+above the +3-8% literature-prose band — computed-beats-prose (ruling
+D6). The one-sided bounds are now GOVERNED, version-keyed parameters
+(`tly.methodology.VERSION_ONE_SIDED_TERMS`): reproducing an archived
+print selects the band its version was computed under, never HEAD's —
+the outsider-sim recomputes each epoch under its archived version.
+
+Effect on published text: the cohort best-estimate band becomes
+~381-406B (+5%/+12% applied to measured S). The A-16 packet's blessed
+**381-402B remains the correct v0.5.0 statement** and archived prints
+carrying it continue to reproduce byte-exactly.
