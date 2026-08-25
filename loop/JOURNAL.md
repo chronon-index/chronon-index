@@ -1724,3 +1724,20 @@ timestamps, before the loop existed.
 - This is the P4 trade quantified on our own panel machinery.
 - Verifier: 5 tests regenerate every report number from committed
   artifacts; full suite pending this commit's run.
+
+## 2026-08-25T11:45-04:00 | D-06b closed + D-15 drafts | DONE
+- D-06b was already complete (IOSCO PDF snapshotted+manifested
+  2026-08-18, sha 5f829961...; all 19 mapping rows filled from the
+  primary) — only the checkbox was never flipped. Verified against the
+  manifest, then flipped with a note. Lesson: a done-but-unchecked task
+  survives compactions as phantom work; always flip in the same
+  iteration.
+- D-15: four counsel-review DRAFTs in docs/legal/, every claim
+  anchored to a repo artifact (licensing gate, error budget, dispute
+  channel, outsider-sim, OTS stamps); jurisdiction/entity language left
+  explicitly open for D-13. COI statement leads with the RP Part XI
+  mandate: the builder holds the asset, disclosed from day one, with
+  the machine-checked mitigants and the honest P5 gaps.
+- Remaining unchecked backlog is now ALL human-gated or dep-blocked:
+  A-16 (READY.zip), A-19 (deploy key), B-uc1-13 (A-16), B-uc3-11/12,
+  D-12/13/14, E-05/07/08/09/10/12/14.
