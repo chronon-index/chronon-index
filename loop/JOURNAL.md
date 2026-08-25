@@ -1549,3 +1549,27 @@ timestamps, before the loop existed.
 - HMD is now fully replaced for the Lee-Carter chain: C-uc6-03/B-uc2-19
   unblocked with 35 years of self-built single-age tables per country.
 - Verifier: 4 tests; suite 300 passed.
+
+## 2026-08-25T22:45-04:00 | B-uc2-19 + C-uc6-03 | DONE — Lee-Carter lives
+- tly/leecarter.py: classic LC via POWER ITERATION on C^T C (stdlib —
+  LC needs only the leading singular triplet; converges to machine
+  precision on 101x35 grids; deterministic start+tolerance). sum(b)=1,
+  sum(k)=0 identification exact to 1e-9 (tested); centering shift
+  re-absorbed into ax; RW-with-drift forecast.
+- Three-country fits on our OWN life tables (D-01 chain): IT drift
+  -2.0574/sig 2.7027/expl 0.9123; DE -1.2572/3.9782/0.8694; SE
+  -1.7769/2.9082/0.5995 (SE's low first-component share is real — small
+  population, noisy rates).
+- Replication vs the ruling's verified IT targets (-2.0330/2.4981/
+  0.9270): |ddrift| 0.024, |dsigma| 0.205, |dexpl| 0.015 — journaled as
+  VINTAGE DRIFT (ruling pull 2026-08-20 vs ours 2026-08-25; Eurostat
+  revises continuously and 2024-provisional revisions hit the last kt
+  point, which drives sigma) plus minor graduation implementation deltas.
+  Per the D4 doctrine this is the reproduce-or-journal path: proximity
+  asserted with stated tolerances, OUR values pinned exactly as anchors.
+- numpy stays OUT: the model layer needed only a 2-parameter weighted
+  LSQ (Kannisto) and one singular triplet (power iteration). Dependency
+  surface unchanged (stdlib-only).
+- Verifier: 4 tests; suite 304 passed.
+- Next: C-uc6-04 (backtest harness — adapt the 1990-vintage protocol to
+  the Eurostat-era data honestly: fit 1990-2005, project 2006-2024).
