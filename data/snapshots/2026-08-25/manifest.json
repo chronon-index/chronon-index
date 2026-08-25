@@ -1,5 +1,29 @@
 {
   "files": {
+    "eurostat_demo_magec_it_de_se.json": {
+      "bytes": 130143,
+      "in_git": true,
+      "purpose": "D-01: deaths by single year of age, IT/DE/SE 1990+ \u2014 raw registry Dx for the keyless life-table build",
+      "retrieved_utc": "2026-08-25T00:32:10+00:00",
+      "sha256": "c4eb52546470d9b68c5932e195c3aa702b3d1f14f4833fb1d13741e3ec6bb182",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_magec?format=JSON&sex=T&geo=IT&geo=DE&geo=SE&sinceTimePeriod=1990"
+    },
+    "eurostat_demo_mlexpec_validation.json": {
+      "bytes": 4960,
+      "in_git": true,
+      "purpose": "D-01 validation target: Eurostat's independently published e0/e65 \u2014 our reconstructed tables must land inside its 1-dp rounding",
+      "retrieved_utc": "2026-08-25T00:32:10+00:00",
+      "sha256": "cf91f08d6110908212bae0a5d05d931d9a995d08f7d3c94b39657efb5ceaec88",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_mlexpec?format=JSON&sex=T&age=Y_LT1&age=Y65&geo=IT&geo=DE&geo=SE&sinceTimePeriod=2000"
+    },
+    "eurostat_demo_pjan_it_de_se.json": {
+      "bytes": 162233,
+      "in_git": true,
+      "purpose": "D-01: population 1 Jan by single year of age, IT/DE/SE 1990+ \u2014 mid-year exposures Ex",
+      "retrieved_utc": "2026-08-25T00:32:10+00:00",
+      "sha256": "6811ca86c30eb07ffe2b44e385452d5749e5c7fbb603edc39556d54e5bdb9712",
+      "source_url": "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/demo_pjan?format=JSON&sex=T&geo=IT&geo=DE&geo=SE&sinceTimePeriod=1990"
+    },
     "eurostat_demo_r_mwk_ts_full.json": {
       "bytes": 648219,
       "in_git": true,
