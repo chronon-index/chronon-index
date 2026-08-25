@@ -105,6 +105,18 @@ byte-identical to a host run on a DIFFERENT OS and Python version
 (Linux/CPython 3.12 container vs macOS/CPython 3.13 host) — the P5
 property holds across platforms, not just across runs.
 
+## 6c. Reproduction semantics across methodology versions
+
+Archived prints carry the methodology version THAT PRODUCED them. If
+governance has advanced since (the registry is append-only), your
+recomputation under HEAD will stamp a newer version — that is NOT a
+divergence. The contract (enforced by the public `outsider-sim` CI job,
+`tly/outsider_sim.py`): all VALUE fields byte-identical excluding
+`provenance`; the archived stamp must equal its version's immutable
+registry entry; every archived snapshot citation must resolve into the
+committed manifests (manifests grow append-only — the archived citation
+set is a valid subset). Compare values, verify stamps against history.
+
 ## 7. If your hash differs
 
 1. Re-run step 3 (is your tree intact?) and step 4 (is your run

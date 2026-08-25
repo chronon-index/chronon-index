@@ -1627,3 +1627,24 @@ timestamps, before the loop existed.
   and for future no-hindsight replays.
 - Verifier: 4 tests incl. a synthetic maturation triangle (20000 ->
   39000 -> 47500 across three pulls); suite 315 passed.
+
+## 2026-08-26T09:45-04:00 | C-uc7-07 + B-uc4-07 | DONE — the sim caught two real gaps
+- outsider-sim built (workflow weekly at Mon 14:00 UTC + dispatch;
+  tly/outsider_sim.py reproduces EVERY archived epoch). Its own first two
+  runs FAILED on the real archive — both times a wrong COMPARISON, not a
+  wrong VALUE, and both would have burned a real external recomputer:
+  (1) archived prints stamp the version that PRODUCED them (v0.4.0) while
+  HEAD recomputes under v0.5.0 — raw byte-identity breaks whenever
+  governance advances; (2) the stamp cites the WHOLE vintage manifest,
+  which grows append-only, so citation sets differ across time.
+- The honest contract now enforced + documented (REPRODUCE_FIXING 6c):
+  values byte-exact excluding provenance; archived stamp verified against
+  the IMMUTABLE registry entry for its version; archived citations
+  resolve into committed manifests (subset semantics). PASSED: both
+  epochs, 30+32 citations, fixing hash agreement.
+- Follow-up noted: stamp() citing entire manifests makes prints grow with
+  vintage evidence; a consumed-files-only stamp is a candidate
+  methodology refinement (version bump when taken).
+- B-uc4-07: same-epoch status flip + the full CARRY->STALE->DEFER walk +
+  recovery simulated through the real ladder, in the suite CI runs.
+- Verifier: 3 new tests; suite 318 passed.

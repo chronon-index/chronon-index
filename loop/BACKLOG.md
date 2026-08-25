@@ -103,7 +103,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] B-uc4-04 | deps: B-uc4-02, A-17 | refs: SPEC#4 AC-4.2, RP#VII | Wire the real pipeline into print.yml: Monday 12:00 UTC public CI computation, artifacts hashed + committed, placeholder removed; a print produced any other way is invalid (done 2026-08-17: placeholder removed; gates+compute+archive+commit wired; FIRST PRINT archived by the bot — epoch 2026-08-17T12:00, chain head 4533c2b1…, S equals golden exactly; research-series notice inline)
 - [x] B-uc4-05 | deps: B-uc4-01 | refs: SPEC#4 AC-4.6, SPEC#2 AC-2.4 | Publish gate: a print failing schema/label/accuracy-statement validation blocks publish; tests (done 2026-08-17)
 - [ ] B-uc4-06 | deps: E-02, B-uc4-04 | refs: SPEC#4 AC-4.3, RP#VII | CI verifies a .ots proof exists and matches the print hash before publish
-- [ ] B-uc4-07 | deps: E-04, B-uc4-04 | refs: SPEC#4 AC-4.5, RP#XII | Stale-print CI integration: simulate a missing source; status flag flips within the same epoch per the failure ladder
+- [x] B-uc4-07 | deps: E-04, B-uc4-04 | refs: SPEC#4 AC-4.5, RP#XII | Stale-print CI integration: simulate a missing source; status flag flips within the same epoch per the failure ladder (done 2026-08-26: same-epoch flag flip + full CARRY->STALE->DEFER->recovery walk simulated through the real ladder in the suite, which CI runs on every push)
 - [x] B-uc4-08 | deps: B-uc4-02 | refs: SPEC#4, DEC#9 | Immutable print storage layout: append-only per-epoch records + hash chain; mutation attempt raises (feeds SPEC#7) (done 2026-08-17)
 - [x] B-uc4-09 | deps: B-uc4-02, E-01 | refs: SPEC#4, RP#XI | Site pages rendered from live artifacts: methodology, data & licenses, changelog, correction ledger, vintage archive (done 2026-08-17: pages proven LIVE — an artifact edit appears on next build; no stale copies)
 - [x] B-uc4-10 | deps: B-uc4-03, B-uc4-05 | refs: SPEC#4 AC-4.1 | Negative tests: an orphan number, a missing provenance block, and a negative value each fail the lineage/publish checks (done 2026-08-17)
@@ -139,7 +139,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [x] C-uc7-04 | deps: C-uc7-01 | refs: SPEC#7 AC-7.3, DEC | Dispute log: 48 h window, append-only, log-only; a filed dispute alters nothing and delays nothing; test (done 2026-08-17)
 - [x] C-uc7-05 | deps: C-uc7-01, B-uc2-10 | refs: SPEC#7 AC-7.4, DEC | Settlement-series discipline: the cohort/INFORMATIONAL series can never be a settlement input; test (done 2026-08-17: closed a REAL gap — settle_from_archive had no label check)
 - [x] C-uc7-06 | deps: C-uc7-01 | refs: SPEC#7 AC-7.5 | docs/REPRODUCE_FIXING.md: outsider reproduction instructions, written as if the author will not be there (done 2026-08-17)
-- [ ] C-uc7-07 | deps: C-uc7-06, B-uc4-04 | refs: SPEC#7 AC-7.5, RP#IV-P5, RALPH#7 | Outsider-sim CI job: clean environment + public artifacts only reproduces a chosen fixing byte-identically
+- [x] C-uc7-07 | deps: C-uc7-06, B-uc4-04 | refs: SPEC#7 AC-7.5, RP#IV-P5, RALPH#7 | Outsider-sim CI job: clean environment + public artifacts only reproduces a chosen fixing byte-identically (done 2026-08-26: .github/workflows/outsider-sim.yml + tly/outsider_sim.py, weekly after the print + on demand, reproduces EVERY archived epoch not just one; its own first runs forced two honest semantics refinements — version-stamp-vs-HEAD and manifest growth — both wrong comparisons, not wrong values; contract documented in REPRODUCE_FIXING 6c; suite-guarded)
 
 ## Phase D — research artifacts
 

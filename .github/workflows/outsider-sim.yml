@@ -1,0 +1,34 @@
+# Outsider-simulation job (SPEC#7 AC-7.5; RP Part IV P5 gate; C-uc7-07).
+#
+# Simulates the external recomputer: a CLEAN environment, PUBLIC artifacts
+# only, no repository context beyond the checkout — following
+# docs/REPRODUCE_FIXING.md mechanically. It must:
+#   1. verify the tree's own integrity gates,
+#   2. recompute every ARCHIVED epoch's print from committed snapshots and
+#      diff it byte-for-byte against the committed archive record,
+#   3. settle a fixing for the newest archived epoch and confirm its hash
+#      derives from the recomputed (not stored) print.
+# Runs weekly after the print, and on demand. A failure here means an
+# outsider could not reproduce us — a P5-blocking defect.
+name: outsider-sim
+on:
+  schedule:
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC — after the 12:05 print
+  workflow_dispatch:
+jobs:
+  reproduce:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: install exactly like the doc says
+        run: pip install -e '.[dev]'
+      - name: step 3 — the tree's own integrity gates
+        run: >
+          pytest -q tests/test_manifest_schema.py
+          tests/test_snapshot_immutability.py
+          tests/test_p5_reproducibility.py
+      - name: steps 4+6 — recompute every archived epoch, diff, settle
+        run: python -m tly.outsider_sim
