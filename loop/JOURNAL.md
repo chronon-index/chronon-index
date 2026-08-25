@@ -1502,3 +1502,31 @@ timestamps, before the loop existed.
 - Verifier: 7 guard tests incl. the new coverage test; suite next.
 - Next: B-uc2-12 (backfill engine — the print series) then B-uc2-13
   (COVID-drag gate).
+
+## 2026-08-25T21:20-04:00 | B-uc2-12 + B-uc2-13 | DONE — AC-2.3 GATE PASSED
+- Methodology v0.5.0: excess-age-profile registered (0.7@75.5 + 0.3@85.5
+  on the structure-year table; implied mean e ~10.5-11.5y, the
+  conservative end of the DECISIONS 10.0-22.7y implied range). Committed
+  World annual fixture 2010-2023 extracted (66KB, manifested with dual
+  parent hashes).
+- tly/backfill.py: 570 consecutive weekly rows ending at the ARCHIVED
+  2026-08-24 epoch; structure year min(Y-1,2023) (real-time discipline);
+  E11-scheduled annual deltas, exact P6 closure at year ends (tested);
+  plateau weeks carried+flagged; burn overlay = measured WMD excess
+  x registered profile with residual-exposure semantics (no double
+  count vs annual deltas).
+- THE GATE: measured panel burn 2020+2021 = 63.4M life-years; panel
+  coverage 36.10% of world deaths (both sides measured, zero free
+  parameters); coverage-adjusted global estimate 175.5M — INSIDE the
+  120-360M band. NO TUNING: my first gate test asserted the measured
+  figure against the global band and FAILED (63.4 < 120); the resolution
+  was the data-derived coverage adjustment with the P7 measured/imputed
+  split published, not a profile tweak. Implied global excess ~19.5M vs
+  WHO 14.83M (uniform-rate scaling runs high; stated in the report).
+- Drag visibility both channels: S FALLS outright into 2020 (-4.24B) and
+  2021 (-6.02B) vs +3.7B/yr trend, rebounds +14.89B into 2022; worst
+  measured week 2021-W18 ~1.2M life-years. Report committed
+  (docs/reports/COVID_DRAG_BACKFILL.md, module-produced).
+- Verifier: 5 backfill tests + suite 296 passed.
+- SPEC#2 status: every AC now closed (2.1-2.6) — capability 2 COMPLETE
+  on the keyless source map.

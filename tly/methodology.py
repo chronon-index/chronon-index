@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from tly.numeric import PRECISION, ROUNDING
 
-METHODOLOGY_VERSION = "v0.4.0-reconstruction"
+METHODOLOGY_VERSION = "v0.5.0-reconstruction"
 
 INTERPOLATION_POLICY = "linear-on-anchors, flat-tail"
 BAND_MIDPOINT_POLICY = "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)"
@@ -21,6 +21,10 @@ DECIMAL_POLICY = f"Decimal prec {PRECISION}, {ROUNDING}"
 BASELINE_POLICY = "kk-linear: per-period linear trend fit on 2015-2019 (Karlinsky-Kobak)"
 P6_CLOSURE_POLICY = "exact-0: E11-scheduled weekly flows sum to the annual identity exactly"
 QUANTA_POLICY = "scheduling quantum 0.000001 life-years; attribution quantum 0.001"
+EXCESS_AGE_PROFILE_POLICY = (
+    "excess-age-profile: 0.7 at exact age 75.5 + 0.3 at 85.5 on the epoch "
+    "structure-year table (backfill burn conversion)"
+)
 
 # version -> the exact policy strings that version is defined by.
 # Append-only: past entries are history and must never be edited.
@@ -58,6 +62,21 @@ VERSION_POLICY_REGISTRY: dict[str, dict[str, str]] = {
         "p6_closure": "exact-0: E11-scheduled weekly flows sum to the annual identity exactly",
         "quanta": "scheduling quantum 0.000001 life-years; attribution quantum 0.001",
     },
+    # v0.5.0: ADDS the excess-age-profile policy (B-uc2-12/13) — the
+    # burn conversion assumption for backfill excess deaths. Prior
+    # policies unchanged. See docs/METHODOLOGY_CHANGELOG.md.
+    "v0.5.0-reconstruction": {
+        "interpolation": "linear-on-anchors, flat-tail",
+        "band_midpoint": "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)",
+        "decimal": "Decimal prec 34, ROUND_HALF_EVEN",
+        "baseline": "kk-linear: per-period linear trend fit on 2015-2019 (Karlinsky-Kobak)",
+        "p6_closure": "exact-0: E11-scheduled weekly flows sum to the annual identity exactly",
+        "quanta": "scheduling quantum 0.000001 life-years; attribution quantum 0.001",
+        "excess_age_profile": (
+            "excess-age-profile: 0.7 at exact age 75.5 + 0.3 at 85.5 on the epoch "
+            "structure-year table (backfill burn conversion)"
+        ),
+    },
 }
 
 
@@ -70,6 +89,7 @@ def current_policies() -> dict[str, str]:
         "baseline": BASELINE_POLICY,
         "p6_closure": P6_CLOSURE_POLICY,
         "quanta": QUANTA_POLICY,
+        "excess_age_profile": EXCESS_AGE_PROFILE_POLICY,
     }
 
 

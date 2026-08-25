@@ -56,6 +56,7 @@ def test_output_metadata_stamp_shape():
         "baseline",
         "p6_closure",
         "quanta",
+        "excess_age_profile",
     }
 
 

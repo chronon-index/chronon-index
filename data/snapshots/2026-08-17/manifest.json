@@ -197,6 +197,15 @@
       "rows": 606,
       "sha256": "12e0ec7f4ac04757021829d49ae0f3fcb26b1e69f468bba3451ee3949407c05e"
     },
+    "fixtures/wpp_world_annual_2010_2023.json": {
+      "bytes": 66670,
+      "derivation": "World rows, Time 2010-2023: PopTotal x1000 (exact persons) per single age from the population file, AND ex per single age from WPP2024_Life_Table_Complete_Medium_Both_1950-2023.csv.gz (sha256 7ad8748f4dec567d...); deterministic JSON",
+      "derived_from": "WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz",
+      "derived_from_sha256": "f84c75789ccbd385122ad19bac70026d6306878442afbaa24e8e50a23b4bee2f",
+      "in_git": true,
+      "rows": 2828,
+      "sha256": "05546d53c002ca07b9734bf52657f208bb1308f755411dea29592370edc6db64"
+    },
     "gho_ex_global_btsx_2000_2010_2015.json": {
       "bytes": 33699,
       "in_git": true,

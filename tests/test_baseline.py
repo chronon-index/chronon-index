@@ -73,7 +73,7 @@ def test_coverage_metadata_measured_vs_imputed():
 def test_baseline_policy_is_versioned():
     """The baseline method is a registered v0.2.0 policy — changing the fit
     window or model without a bump fails test_methodology."""
-    assert METHODOLOGY_VERSION == "v0.4.0-reconstruction"
+    assert METHODOLOGY_VERSION == "v0.5.0-reconstruction"
     assert "kk-linear" in current_policies()["baseline"]
     assert "2015-2019" in current_policies()["baseline"]
 
