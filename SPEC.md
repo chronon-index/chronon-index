@@ -1,4 +1,4 @@
-# SPEC.md — CHRONON / TLY build specification (the seven capabilities)
+# SPEC.md — SAECULUM / TLY build specification (the seven capabilities; token renamed from CHRONON 2026-09-04, D-14 ruling)
 
 **SPEC v1.0-draft** | 2026-08-16
 

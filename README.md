@@ -5,7 +5,7 @@
 A demographically-ruled monetary asset. **TLY** is the index: humanity's total
 remaining life-years, S(t) = Σ over (age, sex, country) of population ×
 remaining life expectancy. **Mirror** is the protocol whose token supply
-algorithmically mirrors S. **CHRONON** is the token. Price floats; the formula
+algorithmically mirrors S. **SAECULUM** (SAEC) is the token. Price floats; the formula
 governs supply only.
 
 Layered rollout (DECISIONS.md #1): v1 index → v2 cash-settled derivatives →

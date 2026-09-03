@@ -1,0 +1,22 @@
+# S-03: quarterly Zenodo deposit of the curated public record (DOI per
+# quarter). NOOPs cleanly until the ZENODO_TOKEN Actions secret is set
+# (the deploy-key pattern) — the GitHub auto-archive toggle stays OFF
+# because a repo-zip release would deposit license-excluded WHO files.
+name: quarterly-deposit
+on:
+  schedule:
+    - cron: "0 9 2 1,4,7,10 *" # 2nd of Jan/Apr/Jul/Oct, 09:00 UTC
+  workflow_dispatch:
+jobs:
+  deposit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e '.[dev]'
+      - name: curated deposit (NOOP without token)
+        env:
+          ZENODO_TOKEN: ${{ secrets.ZENODO_TOKEN }}
+        run: python -m tly.zenodo_deposit

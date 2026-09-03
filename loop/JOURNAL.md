@@ -2033,3 +2033,22 @@ timestamps, before the loop existed.
 - On-chain first-print-settles: rebase requires strictly increasing
   epoch + carries the archive record_hash, so anyone can tie every
   supply change to the public chain; oracle rotates to N-of-M at P6.
+
+## 2026-09-04T02:40+02:00 | S-02 + S-03 + S-06 | the Ben-directive queue is EMPTY
+- S-02: living docs renamed to SAECULUM (SAEC); history deliberately
+  untouched — journals/rulings/changelogs keep the names they were
+  written under.
+- S-03: curated Zenodo deposits, quarterly, DOI each; the curation
+  exclusion is pinned against the real repo (WHO files present in repo,
+  absent from deposit). Found+fixed: tarfile w:gz embeds filename+time
+  in the gzip header — determinism test caught it; tar-to-memory then
+  gzip(mtime=0). NOOPs until ZENODO_TOKEN exists (Bens 2-min task:
+  zenodo.org -> Applications -> personal access token with deposit
+  scopes -> gh secret set ZENODO_TOKEN).
+- S-06: monthly digest from committed artifacts only; August digest
+  generated (3 epochs, flat S, all OTS-stamped, 0 corrections) as the
+  first artifact; workflow commits via the deploy key monthly.
+- With S-01..S-08 done, ALL code for all three tiers exists. Remaining
+  human/world: Monday v0.7.0 print verification, ZENODO_TOKEN, domain
+  attach, Jan counsel/trademark/licenses, Feb recomputers, demand
+  conversations.
