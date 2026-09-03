@@ -1997,3 +1997,22 @@ timestamps, before the loop existed.
   exception, doubly fenced (content ban + CSP).
 - S-02 rename started: README + site titles now SAECULUM.
 - Suite 350 green.
+
+## 2026-09-04T01:55+02:00 | S-04 — P3 stochastic S | DONE (honest coverage)
+- Built the interval machinery: LC world fit + jump-diffusion
+  separation (using raw sigma would DOUBLE-COUNT covid between
+  diffusion and jumps — robust-MAD classification finds 2020-23 as
+  jumps by itself), Poisson overlay on the four named historical
+  shocks resampled as a 4-point empirical distribution, seeded LCG so
+  every recomputer gets identical paths.
+- Caught my own bug before it shipped: lee_carter takes {age:{year:}};
+  the transposed fit produced 9 "ages" and an insane fan — the dims
+  check exposed it.
+- THE GATE, honestly: coverage backtest (fit<=2018) = 60% over a window
+  CONTAINING covid; 100% on diffusion years; both covid years outside
+  the 90% band — which is what a jump model SHOULD do (the model gives
+  covid-years ~4%/yr; inflating sigma until covid fits would make
+  ordinary years dishonestly wide). Conditional-coverage framing
+  documented in the report, mirroring the covid-replay honesty.
+- Status: INFORMATIONAL; error-budget retirement bump deferred until
+  external recomputers (Feb) have reproduced the machinery.
