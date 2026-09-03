@@ -51,3 +51,21 @@ def test_headers_file_present_with_cors_on_api():
     text = (REPO / "site" / "_headers").read_text(encoding="utf-8")
     assert "/api/*" in text and "Access-Control-Allow-Origin: *" in text
     assert "X-Content-Type-Options: nosniff" in text
+
+
+def test_404_page_emitted_by_the_builder():
+    """Defect found by the 2026-09-03 deploy verification: without
+    404.html, Cloudflare Pages serves the HOME PAGE at 200 for every
+    path — a fabricated print date looks like a successful API hit."""
+    page = (REPO / "site" / "404.html").read_text(encoding="utf-8")
+    assert "404" in page and "api/v1/index.json" in page
+
+
+def test_governance_markdown_renders_not_leaks():
+    """Second deploy-verification defect: bold/tables/blockquotes leaked
+    as raw markdown — worst on the provenance notice doing legal work."""
+    home = (REPO / "site" / "index.html").read_text(encoding="utf-8")
+    assert "**" not in home  # no raw bold markers anywhere
+    assert "<blockquote>" in home  # the provenance notice
+    assert "<table>" in home and "|---|" not in home
+    assert "<strong>Radical verifiability.</strong>" in home

@@ -1823,3 +1823,22 @@ timestamps, before the loop existed.
   print so latest.json rolls forward with the bot commit.
 - Licensing position published, not hidden: research series until the
   G5 WPP switch; WHO path non-commercial, gate blocks it structurally.
+
+## 2026-09-03T15:15+02:00 | deploy-verification defects fixed | DONE
+- Bens Cloudflare agent verified the live deploy and found two real
+  defects. Both fixed IN THE BUILDER (hand-edits would break the
+  committed-tree-equals-fresh-build invariant):
+  (1) no site/404.html -> Pages served the HOME PAGE at 200 for every
+  path, so a fabricated print date looked like a successful API hit —
+  a correctness hazard for exactly the recompute-us audience. Builder
+  now emits 404.html (Pages serves it WITH status 404); its copy states
+  the principle: absence is an answer, index.json enumerates all that
+  exists.
+  (2) the minimal renderer leaked bold/tables/blockquotes as raw
+  markdown — worst on the A-16 provenance notice doing the legal work.
+  Renderer extended (escape-first, total): inline bold/code/links,
+  blockquotes, tables, bullet lists; everything else still renders
+  as-written. Verified on the built page: no raw ** anywhere,
+  blockquote + table markup present.
+- Both defects pinned as regression tests; 340 passed. Deploy is
+  automatic on push; the agent re-verifies the four status rows.

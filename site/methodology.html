@@ -10,13 +10,20 @@ body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
 nav { font-size: .9rem; margin-bottom: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
 </style>
 </head>
 <body>
 <nav><a href="index.html">TLY — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="vintage-archive.html">Vintage archive</a></nav>
 <h1>TLY Methodology v0.1</h1>
 <p>Principle: every published figure must be reproducible by anyone, from keyless
-public endpoints, by running open code. The script `tly_v0_calc.py` is the
+public endpoints, by running open code. The script <code>tly_v0_calc.py</code> is the
 methodology; this document explains it. No number without a source URL and a
 runnable path.</p>
 <h2>1. Definition</h2>
@@ -25,16 +32,11 @@ runnable path.</p>
 the band&#x27;s mean exact age. v0 is a single global aggregate; v1 (see SPEC.md)
 computes it per country and week.</p>
 <h2>2. Data sources (all keyless, all public)</h2>
-<p>- Population by 5-year age band, World, 2023 (8,091,734,933 people):
-  Our World in Data grapher CSV, underlying source UN World Population
-  Prospects 2024.
-  https://ourworldindata.org/grapher/population-by-five-year-age-group
-- Crude birth rate, World, 2023 (16.327 per 1,000):
-  https://ourworldindata.org/grapher/crude-birth-rate
-- Global abridged life table, both sexes, 2000-2021: WHO Global Health
-  Observatory OData API, indicator LIFE_0000000035 (ex, expectation of life
-  at exact age x), SpatialDim = GLOBAL.
-  https://ghoapi.azureedge.net/api/LIFE_0000000035</p>
+<ul>
+<li>Population by 5-year age band, World, 2023 (8,091,734,933 people): Our World in Data grapher CSV, underlying source UN World Population Prospects 2024. https://ourworldindata.org/grapher/population-by-five-year-age-group</li>
+<li>Crude birth rate, World, 2023 (16.327 per 1,000): https://ourworldindata.org/grapher/crude-birth-rate</li>
+<li>Global abridged life table, both sexes, 2000-2021: WHO Global Health Observatory OData API, indicator LIFE_0000000035 (ex, expectation of life at exact age x), SpatialDim = GLOBAL. https://ghoapi.azureedge.net/api/LIFE_0000000035</li>
+</ul>
 <h2>3. Estimator</h2>
 <p>Band mean age: uniform-within-band (0-4 -&gt; 2.5, ..., 80-84 -&gt; 82.5; open
 100+ band -&gt; 101). e at the mean age: piecewise-linear interpolation on the
@@ -43,26 +45,31 @@ WHO exact-age anchors {0, 1, 5, 10, ..., 85}; flat at e(85) beyond 85.</p>
 (e0 = 71.37). WPP 2024 reports world e0 recovered to 73.3 by 2024 - almost
 exactly the 2019 table (e0 = 73.12). The 2019 table is therefore primary and
 the 2021 table is reported as a lower bound.</p>
-<p>Result (population 2023, table 2019):
-- S = 362,412,641,743 = 362.4126 billion remaining life-years
-- lower bound (2021 table): 348.1905 billion
-- E-bar (average remaining years per living person) = 44.7880</p>
+<p>Result (population 2023, table 2019):</p>
+<ul>
+<li>S = 362,412,641,743 = 362.4126 billion remaining life-years</li>
+<li>lower bound (2021 table): 348.1905 billion</li>
+<li>E-bar (average remaining years per living person) = 44.7880</li>
+</ul>
 <h2>4. The issuance identity</h2>
 <p>With age density N(a, t), force of mortality mu(a), births B, and a fixed
 life table, two standard identities -</p>
 <p>  de/da = mu(a) e(a) - 1          (remaining expectancy along age)
   dN/dt + dN/da = -mu N           (population transport)</p>
-<p>- give, integrating by parts with boundary flux N(0) e(0) = B e(0):</p>
+<ul>
+<li>give, integrating by parts with boundary flux N(0) e(0) = B e(0):</li>
+</ul>
 <p>  dS/dt = B e(0) - N</p>
 <p>The mu terms cancel exactly: expected deaths do not change S because they are
 already priced into e(x). The full accounting is therefore</p>
 <p>  dS/dt = B e(0)  -  N  +  N dEbar/dt  -  (excess deaths) x e(age at death)
           [mint]   [spend] [table-revision drift]   [shocks only]</p>
-<p>- Mint: 132,113,756 births x 73.1234 = +9.6606 B/yr
-- Spend: every living person uses one year per year = -8.0917 B/yr
-- Drift: table revisions 2015 -&gt; 2019 (pre-COVID window, current population
-  weights held fixed) give dEbar/dt = +0.1285/yr -&gt; +1.0394 B/yr
-- Net organic growth: +2.6083 B/yr, g = +0.7197% per year</p>
+<ul>
+<li>Mint: 132,113,756 births x 73.1234 = +9.6606 B/yr</li>
+<li>Spend: every living person uses one year per year = -8.0917 B/yr</li>
+<li>Drift: table revisions 2015 -&gt; 2019 (pre-COVID window, current population weights held fixed) give dEbar/dt = +0.1285/yr -&gt; +1.0394 B/yr</li>
+<li>Net organic growth: +2.6083 B/yr, g = +0.7197% per year</li>
+</ul>
 <p>Correction log: an earlier working estimate of +2.9%/yr was wrong twice over -
 it omitted the spend term and subtracted GBD YLL (which uses an aspirational
 reference table and double-counts against our own e). The open recomputation
@@ -77,10 +84,12 @@ computation from the WPP projection variants.</p>
 excess deaths associated with COVID-19 across 2020-2021
 (https://www.who.int/news/item/05-05-2022-14.9-million-excess-deaths-were-associated-with-the-covid-19-pandemic-in-2020-and-2021).
 Burn = excess x mean e at age of death:</p>
-<p>- e at death 10 (older skew):  148.3M life-years = 0.0409% of S
-- e at death 12 (central):     178.0M            = 0.0491%
-- e at death 15 (younger skew): 222.4M           = 0.0614%
-- WHO YLL-paper implied 22.7:  336.6M            = 0.0929%</p>
+<ul>
+<li>e at death 10 (older skew):  148.3M life-years = 0.0409% of S</li>
+<li>e at death 12 (central):     178.0M            = 0.0491%</li>
+<li>e at death 15 (younger skew): 222.4M           = 0.0614%</li>
+<li>WHO YLL-paper implied 22.7:  336.6M            = 0.0929%</li>
+</ul>
 <p>A century-scale pandemic moves supply by less than a tenth of a percent.
 Supply is glacially smooth; essentially all price variance will be
 demand-side.</p>
@@ -115,50 +124,23 @@ ships first.</p>
    shock age-profile is parameterized (three-point sensitivity shown), not
    observed.</p>
 <h2>9. Versioning</h2>
-<p>- v0.1 = this document + `tly_v0_calc.py` + `results_v0.json`. First-print
-  discipline applies from v1.0 onward (see SPEC.md capabilities 3 and 7).
-- Changes land only as version bumps with a changelog entry; corrections are
-  forward-only. This file&#x27;s correction log (section 4) is the seed of that
-  ledger.</p>
+<ul>
+<li>v0.1 = this document + <code>tly_v0_calc.py</code> + <code>results_v0.json</code>. First-print discipline applies from v1.0 onward (see SPEC.md capabilities 3 and 7).</li>
+<li>Changes land only as version bumps with a changelog entry; corrections are forward-only. This file&#x27;s correction log (section 4) is the seed of that ledger.</li>
+</ul>
 <h2>10. Extension ladder: v0 to the ceiling</h2>
 <p>v0 is the minimal defensible estimator. Each rung below is a strict upgrade,
 ordered by impact; estimated level effects are working figures, to be
 computed when each rung lands.</p>
-<p>- Rung 1 (= SPEC v1). Country x sex x single year of age, weekly nowcast.
-  Population: WPP2024 single-age files, 237 locations; life tables: WHO GHO
-  per country (183), HMD full single-age tables 0-110 for ~40 countries.
-  Level correction est. +-1-3%; coverage from one aggregate to per-country
-  sub-indices with a reconciliation constraint (country deltas sum to global,
-  exactly, in Decimal).
-- Rung 2. Old-age closure: replace flat e(85+) with Kannisto/logistic
-  extension fit on HMD supercentenarian data. Est. +0.1-0.3%.
-- Rung 3. Period -&gt; cohort tables (the biggest single move). Period tables
-  freeze today&#x27;s mortality; cohort tables project each cohort&#x27;s future
-  improvement via Lee-Carter, Cairns-Blake-Dowd, or UN probabilistic
-  projections (actuarial practice: CMI model, SOA MP scales). Young cohorts
-  gain the most; est. +3-8% on S. From this rung on, the index is partly a
-  forecast, not a measurement - acceptable (CPI is also a model) but it must
-  enter through the versioned-methodology gate.
-- Rung 4. Stochastic S. Model mortality improvement as a stochastic factor
-  (Lee-Carter kappa as random walk with drift) plus a jump component for
-  pandemics/conflict: S becomes a jump-diffusion with published 80/95%
-  intervals and a forward term structure S(t,T) - forward life-years. No
-  level change; it creates the variance objects that make v2 derivatives
-  (vol, forwards) well-defined.
-- Rung 5. Shock nowcast mesh. HMD STMF weekly deaths (~40 countries) plus
-  conflict feeds (UCDP, ACLED), pandemic surveillance, famine early warning,
-  and ML excess-mortality models for unregistered regions, each with an
-  age-at-death distribution per shock type instead of a scalar. Latency for
-  covered regions drops from years to days; burn gets cause-attributed
-  sub-indices.
-- Rung 6. Heterogeneity. Frailty models, socioeconomic mortality gradients
-  (top-vs-bottom income percentile differ by ~10+ years in the US), and at
-  the limit personalized survival curves (insurer-grade covariates,
-  biomarker/epigenetic-clock inputs). Moves the aggregate barely at all;
-  transforms the v4 Ledger, where per-person issuance needs per-person e.
-- Rung 7. Quality weighting (HALE/QALY). Redefines the unit from life-years
-  to healthy-life-years. A governance decision about what the asset measures,
-  not an accuracy improvement.</p>
+<ul>
+<li>Rung 1 (= SPEC v1). Country x sex x single year of age, weekly nowcast. Population: WPP2024 single-age files, 237 locations; life tables: WHO GHO per country (183), HMD full single-age tables 0-110 for ~40 countries. Level correction est. +-1-3%; coverage from one aggregate to per-country sub-indices with a reconciliation constraint (country deltas sum to global, exactly, in Decimal).</li>
+<li>Rung 2. Old-age closure: replace flat e(85+) with Kannisto/logistic extension fit on HMD supercentenarian data. Est. +0.1-0.3%.</li>
+<li>Rung 3. Period -&gt; cohort tables (the biggest single move). Period tables freeze today&#x27;s mortality; cohort tables project each cohort&#x27;s future improvement via Lee-Carter, Cairns-Blake-Dowd, or UN probabilistic projections (actuarial practice: CMI model, SOA MP scales). Young cohorts gain the most; est. +3-8% on S. From this rung on, the index is partly a forecast, not a measurement - acceptable (CPI is also a model) but it must enter through the versioned-methodology gate.</li>
+<li>Rung 4. Stochastic S. Model mortality improvement as a stochastic factor (Lee-Carter kappa as random walk with drift) plus a jump component for pandemics/conflict: S becomes a jump-diffusion with published 80/95% intervals and a forward term structure S(t,T) - forward life-years. No level change; it creates the variance objects that make v2 derivatives (vol, forwards) well-defined.</li>
+<li>Rung 5. Shock nowcast mesh. HMD STMF weekly deaths (~40 countries) plus conflict feeds (UCDP, ACLED), pandemic surveillance, famine early warning, and ML excess-mortality models for unregistered regions, each with an age-at-death distribution per shock type instead of a scalar. Latency for covered regions drops from years to days; burn gets cause-attributed sub-indices.</li>
+<li>Rung 6. Heterogeneity. Frailty models, socioeconomic mortality gradients (top-vs-bottom income percentile differ by ~10+ years in the US), and at the limit personalized survival curves (insurer-grade covariates, biomarker/epigenetic-clock inputs). Moves the aggregate barely at all; transforms the v4 Ledger, where per-person issuance needs per-person e.</li>
+<li>Rung 7. Quality weighting (HALE/QALY). Redefines the unit from life-years to healthy-life-years. A governance decision about what the asset measures, not an accuracy improvement.</li>
+</ul>
 <h2>11. Hard ceilings no math removes</h2>
 <p>1. Registration coverage: a large share of world deaths (very roughly 4 in
    10) are never registered; below that floor, &quot;data&quot; is imputation. More

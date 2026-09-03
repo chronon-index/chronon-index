@@ -10,37 +10,45 @@ body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
 nav { font-size: .9rem; margin-bottom: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
 </style>
 </head>
 <body>
 <nav><a href="index.html">TLY — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="vintage-archive.html">Vintage archive</a></nav>
 <h1>Upstream licensing table</h1>
-<p>**P1 GATE (RESEARCH_PROGRAM Part VII): every row must reach status CLEARED
-before the first public print.** No row may be cleared from memory; each
+<p><strong>P1 GATE (RESEARCH_PROGRAM Part VII): every row must reach status CLEARED
+before the first public print.</strong> No row may be cleared from memory; each
 clearance requires reading the source&#x27;s current license text and recording
 URL + date. All rows start (verify).</p>
-<p>| Source | License (as recorded Aug 2026) | Commercial use | Role in TLY | Status |
-|---|---|---|---|---|
-| UN WPP 2024 | CC BY 3.0 IGO — the UN&#x27;s own WPP index states it verbatim (wpp_downloads_index.json, snapshotted 2026-08-17) and the CC deed (cc_by_30_igo_deed.html) confirms share/adapt &#x27;for any purpose, even commercially&#x27;, irrevocable, attribution required | OK, with attribution + citation per UN suggested form | Source of record: population + life tables | CLEARED 2026-08-17 |
-| Our World in Data grapher | CC BY for OWID&#x27;s own charts/articles/data (&#x27;unless stated otherwise&#x27; — owid_about.html, snapshotted 2026-08-17); third-party data subject to upstream licenses, which for our WPP series is UN CC BY 3.0 IGO (CLEARED above) | OK with attribution; cite both OWID processing and UN source (citation strings are in the snapshotted grapher metadata) | Clean CSV mirror of WPP series | CLEARED 2026-08-17 |
-| WHO GHO / GHE | CONFIRMED non-commercial: publications CC BY-NC-SA 3.0 IGO (who_copyright.html); data policy grants &#x27;non-commercial, not-for-profit use... for public health purposes&#x27; (who_data-policy.html); both snapshotted 2026-08-17 | NOT usable in a commercial index product — the reason WPP is source of record | Triangulation only — never source of record; v0 research use compatible | VERIFIED-RESTRICTED 2026-08-17 |
-| HMD | CC BY 4.0 for constructed data (exposure-to-risk, death rates, life tables); INPUT data &#x27;remain under each provider&#x27;s distribution license&#x27; — never redistribute inputs. Required: HMD acknowledgment, the specified citation form, and noting the download date (our manifest retrieved_utc satisfies this). Evidence: hmd_user_agreement.html | OK for constructed data with attribution + citation; inputs excluded | Research-grade life tables, exposures | CLEARED-CONSTRUCTED-ONLY 2026-08-17; access needs free account (HUMAN B-uc2-02) |
-| HMD STMF | CC BY 4.0 (STMF OUTPUTS are HMD-constructed; the agreement offers an STMF-specific citation form); STMF INPUT files (STMFinput.zip) remain under provider licenses — outputs only | OK with attribution + STMF citation | Weekly deaths nowcast | CLEARED-CONSTRUCTED-ONLY 2026-08-17; NOT keyless (302→Login; HUMAN B-uc2-02); G6 conflict logged |
-| World Mortality Dataset (Karlinsky &amp; Kobak) | MIT (LICENSE fetched+snapshotted 2026-08-17: wmd_LICENSE.txt) | OK | Broad excess-death compilation; keyless nowcast feed candidate | CLEARED 2026-08-17 (B-uc3-10 confirms the B-uc2-03a verification); observed data ends 2024-12 (staleness (verify)) |
-| Eurostat weekly deaths | EU Commission reuse policy: EU-owned content CC BY 4.0 unless otherwise indicated (eurostat_legal_notice.html, snapshotted 2026-08-17) | OK with attribution + change indication | EU nowcast | CLEARED 2026-08-17 |
-| CDC provisional deaths | Most CDC/ATSDR information public domain, freely usable (cdc_materials.html, snapshotted 2026-08-17; per-dataset exceptions possible — check dataset pages at ingestion) | OK | US nowcast | CLEARED 2026-08-17 |
-| UCDP GED | All datasets free of charge, CC BY 4.0, redistributable with citation (ucdp_downloads_page.html, snapshotted 2026-08-17). NOTE: the API is now token-authenticated (ucdp_apidocs.html) — use keyless BULK DOWNLOADS to preserve G6 | OK with citation | Conflict shock feed | CLEARED 2026-08-17 (bulk route) |
-| ACLED | Commercial license required (verify) | HUMAN: purchase license | Conflict shock feed | HUMAN |
-| EM-DAT | License needed for commercial use (verify) | HUMAN: obtain license | Disaster shock feed | HUMAN |
-| Economist excess-mortality model | Repo is MIT per the GitHub license API (economist_model_license_api.json, snapshotted 2026-08-17); outputs live in the MIT repo | OK with license notice | Imputation layer, labeled as model | CLEARED 2026-08-17 |
-| IHME GBD | Free-of-Charge NON-COMMERCIAL User Agreement CONFIRMED (ihme_terms.html, snapshotted 2026-08-17) | NOT usable commercially — triangulation only | Cause decomposition, YLL cross-check | VERIFIED-RESTRICTED 2026-08-17 |
-| UBS Global Wealth Report | Proprietary report; role limited to quoting headline figures with citation (no data redistribution; not in any compute path) | Citation only | Wealth denominator context (whitepaper only) | ROLE-LIMITED (verify on report terms if role ever expands) |</p>
+<table>
+<tr><th>Source</th><th>License (as recorded Aug 2026)</th><th>Commercial use</th><th>Role in TLY</th><th>Status</th></tr>
+<tr><td>UN WPP 2024</td><td>CC BY 3.0 IGO — the UN&#x27;s own WPP index states it verbatim (wpp_downloads_index.json, snapshotted 2026-08-17) and the CC deed (cc_by_30_igo_deed.html) confirms share/adapt &#x27;for any purpose, even commercially&#x27;, irrevocable, attribution required</td><td>OK, with attribution + citation per UN suggested form</td><td>Source of record: population + life tables</td><td>CLEARED 2026-08-17</td></tr>
+<tr><td>Our World in Data grapher</td><td>CC BY for OWID&#x27;s own charts/articles/data (&#x27;unless stated otherwise&#x27; — owid_about.html, snapshotted 2026-08-17); third-party data subject to upstream licenses, which for our WPP series is UN CC BY 3.0 IGO (CLEARED above)</td><td>OK with attribution; cite both OWID processing and UN source (citation strings are in the snapshotted grapher metadata)</td><td>Clean CSV mirror of WPP series</td><td>CLEARED 2026-08-17</td></tr>
+<tr><td>WHO GHO / GHE</td><td>CONFIRMED non-commercial: publications CC BY-NC-SA 3.0 IGO (who_copyright.html); data policy grants &#x27;non-commercial, not-for-profit use... for public health purposes&#x27; (who_data-policy.html); both snapshotted 2026-08-17</td><td>NOT usable in a commercial index product — the reason WPP is source of record</td><td>Triangulation only — never source of record; v0 research use compatible</td><td>VERIFIED-RESTRICTED 2026-08-17</td></tr>
+<tr><td>HMD</td><td>CC BY 4.0 for constructed data (exposure-to-risk, death rates, life tables); INPUT data &#x27;remain under each provider&#x27;s distribution license&#x27; — never redistribute inputs. Required: HMD acknowledgment, the specified citation form, and noting the download date (our manifest retrieved_utc satisfies this). Evidence: hmd_user_agreement.html</td><td>OK for constructed data with attribution + citation; inputs excluded</td><td>Research-grade life tables, exposures</td><td>CLEARED-CONSTRUCTED-ONLY 2026-08-17; access needs free account (HUMAN B-uc2-02)</td></tr>
+<tr><td>HMD STMF</td><td>CC BY 4.0 (STMF OUTPUTS are HMD-constructed; the agreement offers an STMF-specific citation form); STMF INPUT files (STMFinput.zip) remain under provider licenses — outputs only</td><td>OK with attribution + STMF citation</td><td>Weekly deaths nowcast</td><td>CLEARED-CONSTRUCTED-ONLY 2026-08-17; NOT keyless (302→Login; HUMAN B-uc2-02); G6 conflict logged</td></tr>
+<tr><td>World Mortality Dataset (Karlinsky &amp; Kobak)</td><td>MIT (LICENSE fetched+snapshotted 2026-08-17: wmd_LICENSE.txt)</td><td>OK</td><td>Broad excess-death compilation; keyless nowcast feed candidate</td><td>CLEARED 2026-08-17 (B-uc3-10 confirms the B-uc2-03a verification); observed data ends 2024-12 (staleness (verify))</td></tr>
+<tr><td>Eurostat weekly deaths</td><td>EU Commission reuse policy: EU-owned content CC BY 4.0 unless otherwise indicated (eurostat_legal_notice.html, snapshotted 2026-08-17)</td><td>OK with attribution + change indication</td><td>EU nowcast</td><td>CLEARED 2026-08-17</td></tr>
+<tr><td>CDC provisional deaths</td><td>Most CDC/ATSDR information public domain, freely usable (cdc_materials.html, snapshotted 2026-08-17; per-dataset exceptions possible — check dataset pages at ingestion)</td><td>OK</td><td>US nowcast</td><td>CLEARED 2026-08-17</td></tr>
+<tr><td>UCDP GED</td><td>All datasets free of charge, CC BY 4.0, redistributable with citation (ucdp_downloads_page.html, snapshotted 2026-08-17). NOTE: the API is now token-authenticated (ucdp_apidocs.html) — use keyless BULK DOWNLOADS to preserve G6</td><td>OK with citation</td><td>Conflict shock feed</td><td>CLEARED 2026-08-17 (bulk route)</td></tr>
+<tr><td>ACLED</td><td>Commercial license required (verify)</td><td>HUMAN: purchase license</td><td>Conflict shock feed</td><td>HUMAN</td></tr>
+<tr><td>EM-DAT</td><td>License needed for commercial use (verify)</td><td>HUMAN: obtain license</td><td>Disaster shock feed</td><td>HUMAN</td></tr>
+<tr><td>Economist excess-mortality model</td><td>Repo is MIT per the GitHub license API (economist_model_license_api.json, snapshotted 2026-08-17); outputs live in the MIT repo</td><td>OK with license notice</td><td>Imputation layer, labeled as model</td><td>CLEARED 2026-08-17</td></tr>
+<tr><td>IHME GBD</td><td>Free-of-Charge NON-COMMERCIAL User Agreement CONFIRMED (ihme_terms.html, snapshotted 2026-08-17)</td><td>NOT usable commercially — triangulation only</td><td>Cause decomposition, YLL cross-check</td><td>VERIFIED-RESTRICTED 2026-08-17</td></tr>
+<tr><td>UBS Global Wealth Report</td><td>Proprietary report; role limited to quoting headline figures with citation (no data redistribution; not in any compute path)</td><td>Citation only</td><td>Wealth denominator context (whitepaper only)</td><td>ROLE-LIMITED (verify on report terms if role ever expands)</td></tr>
+</table>
 <p>Change process: a row&#x27;s status changes only with a link to the license text
 and a retrieval date, committed in the same change.</p>
-<p>Status vocabulary: **(verify)** = recorded from memory, unconfirmed;
-**VERIFIED-RESTRICTED** = terms read, source unusable commercially (role
-limited accordingly); **CLEARED-CONSTRUCTED-ONLY** = cleared for the
-provider&#x27;s constructed outputs, inputs excluded; **CLEARED** = cleared for
+<p>Status vocabulary: <strong>(verify)</strong> = recorded from memory, unconfirmed;
+<strong>VERIFIED-RESTRICTED</strong> = terms read, source unusable commercially (role
+limited accordingly); <strong>CLEARED-CONSTRUCTED-ONLY</strong> = cleared for the
+provider&#x27;s constructed outputs, inputs excluded; <strong>CLEARED</strong> = cleared for
 the project&#x27;s intended use with attribution. HUMAN = license purchase or
 account action pending.</p>
 </body>

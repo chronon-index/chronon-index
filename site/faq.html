@@ -10,6 +10,13 @@ body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
 nav { font-size: .9rem; margin-bottom: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
 </style>
 </head>
 <body>
@@ -19,11 +26,11 @@ h1, h2, h3 { line-height: 1.25; }
 (loop/BACKLOG.md A-16) and pre-launch; no public prints exist yet. Every
 numeric claim below is reproducible from this repo.</p>
 <h2>One-pager</h2>
-<p>**TLY** measures humanity&#x27;s total remaining time: S(t) = Σ over age, sex
+<p><strong>TLY</strong> measures humanity&#x27;s total remaining time: S(t) = Σ over age, sex
 and country of population × remaining life expectancy — about 362 billion
 life-years on the v0 measurement (±~2%, see the error budget; the
 best-estimate cohort figure is higher and published alongside, labeled).
-**Mirror** is a monetary rule on that measurement: token supply M = κ·S,
+<strong>Mirror</strong> is a monetary rule on that measurement: token supply M = κ·S,
 so each CHRONON is a fixed fractional slice of humanity&#x27;s remaining time.
 Supply follows demography — glacially (+0.72%/yr organic; a COVID-scale
 pandemic moves it under a tenth of a percent). Price floats; there is no
@@ -52,32 +59,32 @@ what this repository is. Opacity is worse. (Argument per RESEARCH_PROGRAM
 Part V Q5; institutional specifics carry (verify) until the D9 sources are
 fetched and read.)</p>
 <h2>Questions</h2>
-<p>**Is this a stablecoin?** No. The formula governs supply only, never
+<p><strong>Is this a stablecoin?</strong> No. The formula governs supply only, never
 price. There is no peg, hence no reserves and no reflexive defense to
 attack (DECISIONS #5).</p>
-<p>**What happens in a pandemic?** A symmetric down-rebase: every balance
+<p><strong>What happens in a pandemic?</strong> A symmetric down-rebase: every balance
 shrinks by the same factor; nobody&#x27;s share grows because part of humanity
 died. This is machine-checked (mortality neutrality, test_e12_neutrality).
 COVID-scale magnitude: −0.04% to −0.09% of supply.</p>
-<p>**Who computes the number?** Open code in public CI; the computation IS
+<p><strong>Who computes the number?</strong> Open code in public CI; the computation IS
 the publication. Anyone can re-run it byte-for-byte and compare fixing
 hashes — see docs/REPRODUCE_FIXING.md. From P5, at least three
 independent parties recompute every fixing.</p>
-<p>**What if the data is wrong?** First print settles. Discovered errors go
+<p><strong>What if the data is wrong?</strong> First print settles. Discovered errors go
 to a public forward-only correction ledger and fold into the NEXT epoch;
 history is never rewritten. Upstream revisions create new vintages beside
 the old, never over them.</p>
-<p>**What if I disagree with a fixing?** File a dispute within 48 hours —
+<p><strong>What if I disagree with a fixing?</strong> File a dispute within 48 hours —
 it is logged forever, alters nothing, and delays nothing. Substantiated
 disputes resolve through the correction ledger, forward.</p>
-<p>**Is my personal data involved?** No. Individual-level data never enters
+<p><strong>Is my personal data involved?</strong> No. Individual-level data never enters
 the pipeline — only published aggregates from statistical agencies. There
 is nothing to leak.</p>
-<p>**Does longevity progress dilute me?** No. Rebases are wealth-neutral:
+<p><strong>Does longevity progress dilute me?</strong> No. Rebases are wealth-neutral:
 your share of supply changes only when you transfer, and your wallet&#x27;s
 value is share × market cap regardless of any rebase path (machine-checked
 share invariance).</p>
-<p>**Why should I trust the methodology?** Don&#x27;t trust it — check it. Every
+<p><strong>Why should I trust the methodology?</strong> Don&#x27;t trust it — check it. Every
 policy is versioned; changing one without a version bump and changelog
 entry fails the public build. The current methodology is a 2026
 reconstruction of lost originals and says so on its face, pending

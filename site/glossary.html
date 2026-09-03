@@ -10,6 +10,13 @@ body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
 nav { font-size: .9rem; margin-bottom: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
 </style>
 </head>
 <body>
@@ -18,55 +25,55 @@ h1, h2, h3 { line-height: 1.25; }
 <p>Definitions derive from DECISIONS.md, RESEARCH_PROGRAM.md and this repo&#x27;s
 modules — sources cited per entry. This is the docs-site glossary page
 (RP Part XI).</p>
-<p>**chronon** — one token: a fixed fractional slice of humanity&#x27;s aggregate
+<p><strong>chronon</strong> — one token: a fixed fractional slice of humanity&#x27;s aggregate
 remaining time. Physics borrowing: the hypothesized indivisible quantum of
 time. Pluralizes as a currency word (&quot;forty chronons&quot;). (DECISIONS,
 name resolution 2026-08-16.)</p>
-<p>**CHRONON** — the token&#x27;s name and full-word ticker (modern convention;
+<p><strong>CHRONON</strong> — the token&#x27;s name and full-word ticker (modern convention;
 maximizes distance from CRO/CHR). Trademark clearance pending (classes
 9/36/42; opposition risk from the Cronos/Chronos phonetic neighborhood).
 Reserve name if clearance fails: SAECULUM. (DECISIONS.)</p>
-<p>**TLY** — the index: S(t), humanity&#x27;s total remaining life-years,
+<p><strong>TLY</strong> — the index: S(t), humanity&#x27;s total remaining life-years,
 Σ over (age, sex, country) of population × remaining life expectancy.
 The data product of v1; the settlement underlying of v2. (DECISIONS #2;
-`tly/stock.py`.)</p>
-<p>**Mirror** — the protocol: token supply algorithmically mirrors S via
+<code>tly/stock.py</code>.)</p>
+<p><strong>Mirror</strong> — the protocol: token supply algorithmically mirrors S via
 M = κ·S; all balances rebase pro-rata; shares change only by transfer.
-(DECISIONS #3; `tly/gons.py`.)</p>
-<p>**saeculum** — the annual flagship vintage report (title use). Roman
+(DECISIONS #3; <code>tly/gons.py</code>.)</p>
+<p><strong>saeculum</strong> — the annual flagship vintage report (title use). Roman
 lineage: the span of a long human life (Censorinus, ludi saeculares —
 sources (verify), reading R7). Never the Strauss-Howe pop theory.</p>
-<p>**Ē (E-bar)** — mean remaining life expectancy per living person: S/N.
-v0 measured value 44.7880 years. (DECISIONS Key numbers; `tly/estimator.py`.)</p>
-<p>**mint** — the identity&#x27;s inflow term B·e(0): newborns enter carrying full
-expectancy. (RP Part IX E4/E5; `tly/decomposition.py`.)</p>
-<p>**spend** — the identity&#x27;s passage-of-time term −N: each living person
+<p><strong>Ē (E-bar)</strong> — mean remaining life expectancy per living person: S/N.
+v0 measured value 44.7880 years. (DECISIONS Key numbers; <code>tly/estimator.py</code>.)</p>
+<p><strong>mint</strong> — the identity&#x27;s inflow term B·e(0): newborns enter carrying full
+expectancy. (RP Part IX E4/E5; <code>tly/decomposition.py</code>.)</p>
+<p><strong>spend</strong> — the identity&#x27;s passage-of-time term −N: each living person
 spends one year per year. (Same sources.)</p>
-<p>**drift** — N·dĒ/dt|revision: the change in S from life-table revision at
+<p><strong>drift</strong> — N·dĒ/dt|revision: the change in S from life-table revision at
 fixed structure — the secular improvement trend. v0 convention: annualized
 WHO-vintage gain, recovered 2026-08-17, pending ratification.
-(`tly/decomposition.py`; CALC_REPORT addendum 8.)</p>
-<p>**burn** — life-years removed by excess deaths: Σ excess(a)·e(a+0.5).
+(<code>tly/decomposition.py</code>; CALC_REPORT addendum 8.)</p>
+<p><strong>burn</strong> — life-years removed by excess deaths: Σ excess(a)·e(a+0.5).
 Signed (a mortality deficit is negative burn). Shocks route through burn,
-never through drift. (`tly/burn.py`.)</p>
-<p>**epoch** — one settlement period: Mondays 12:00:00 UTC exactly, weekly.
+never through drift. (<code>tly/burn.py</code>.)</p>
+<p><strong>epoch</strong> — one settlement period: Mondays 12:00:00 UTC exactly, weekly.
 A year has 52 or 53 epochs — the calendar never pretends otherwise.
-(DECISIONS defaults; `tly/weekly.py`, `tly/prints.py`.)</p>
-<p>**print** — one epoch&#x27;s published figures: S, Ē, N, burn, coverage,
+(DECISIONS defaults; <code>tly/weekly.py</code>, <code>tly/prints.py</code>.)</p>
+<p><strong>print</strong> — one epoch&#x27;s published figures: S, Ē, N, burn, coverage,
 accuracy, provenance — immutable once constructed, deterministic bytes.
-(`tly/prints.py`.)</p>
-<p>**fixing** — the settlement-grade record derived from an epoch&#x27;s FIRST
+(<code>tly/prints.py</code>.)</p>
+<p><strong>fixing</strong> — the settlement-grade record derived from an epoch&#x27;s FIRST
 archived print (first print settles); provenance-complete by construction;
-DRAFT→FINAL one way. (`tly/fixings.py`; DECISIONS #7.)</p>
-<p>**vintage** — one dated, immutable snapshot generation of upstream data
-(`data/snapshots/&lt;date&gt;/` + manifest). Upstream revisions create new
+DRAFT→FINAL one way. (<code>tly/fixings.py</code>; DECISIONS #7.)</p>
+<p><strong>vintage</strong> — one dated, immutable snapshot generation of upstream data
+(<code>data/snapshots/&lt;date&gt;/</code> + manifest). Upstream revisions create new
 vintages; they never rewrite old ones. (RP Part VI/VII.)</p>
-<p>**measured vs cohort series** — the dual series: SETTLEMENT carries
+<p><strong>measured vs cohort series</strong> — the dual series: SETTLEMENT carries
 measured-period S (hard to dispute, small model content) and settles;
 INFORMATIONAL carries best-estimate cohort S (higher, model-based) and
 can never be a settlement input. Settle on measurement, inform with the
-model. (DECISIONS defaults; `tly/prints.py` DualSeries; `tly/fixings.py`.)</p>
-<p>**gons** — the ledger&#x27;s internal integer units (G = 10³⁰ constant);
-balance = gons/F; a rebase changes only the global factor F. (`tly/gons.py`.)</p>
+model. (DECISIONS defaults; <code>tly/prints.py</code> DualSeries; <code>tly/fixings.py</code>.)</p>
+<p><strong>gons</strong> — the ledger&#x27;s internal integer units (G = 10³⁰ constant);
+balance = gons/F; a rebase changes only the global factor F. (<code>tly/gons.py</code>.)</p>
 </body>
 </html>

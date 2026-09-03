@@ -10,6 +10,13 @@ body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
 nav { font-size: .9rem; margin-bottom: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
 </style>
 </head>
 <body>
@@ -20,43 +27,42 @@ Part XI; DECISIONS #6): ambition enters through versioning, never through
 silent edits. This document is the governing procedure; the mechanics that
 enforce it are code.</p>
 <h2>Scope</h2>
-<p>Any change to a **methodology-governed parameter** — the policy strings in
-`tly/methodology.py` (`current_policies()`): interpolation, band midpoint,
+<p>Any change to a <strong>methodology-governed parameter</strong> — the policy strings in
+<code>tly/methodology.py</code> (<code>current_policies()</code>): interpolation, band midpoint,
 Decimal context, nowcast baseline, closure tolerances, quanta — and, when
 they land, model-ensemble weights (RP Part V Q1; an executable reminder in
-`tests/test_version_bump_guard.py` fires when an ensemble policy appears).</p>
+<code>tests/test_version_bump_guard.py</code> fires when an ensemble policy appears).</p>
 <p>Bug fixes that change published numbers are NOT methodology changes — they
-go through the correction ledger (`ledger/CORRECTIONS.md`), forward-only.</p>
+go through the correction ledger (<code>ledger/CORRECTIONS.md</code>), forward-only.</p>
 <h2>Procedure</h2>
-<p>1. **Proposal.** A written proposal in the repo (issue or `docs/proposals/`)
+<p>1. <strong>Proposal.</strong> A written proposal in the repo (issue or <code>docs/proposals/</code>)
    stating: the policy being changed, old and new policy strings, the
    motivation, and the expected numerical impact on S (with magnitude).
-2. **Public comment window.** Minimum 14 days from proposal publication for
+2. <strong>Public comment window.</strong> Minimum 14 days from proposal publication for
    index-affecting changes; 7 days for additions that do not alter existing
    published series. The window is announced wherever prints are published.
    (Pre-P1, while no external consumers exist, the window may be satisfied
    by Ben&#x27;s explicit sign-off, recorded in the proposal — this shortcut
    expires at the first public print.)
-3. **Version bump.** On acceptance, in ONE commit:
-   - append the new version entry to `VERSION_POLICY_REGISTRY`
-     (never edit past entries — byte-pinned by tests),
-   - move `METHODOLOGY_VERSION` to it,
-   - update the live policy constants,
-   - add the changelog entry in `docs/METHODOLOGY_CHANGELOG.md`.
-4. **Effective date.** The new version applies from the next epoch&#x27;s print
+3. <strong>Version bump.</strong> On acceptance, in ONE commit:</p>
+<ul>
+<li>append the new version entry to <code>VERSION_POLICY_REGISTRY</code> (never edit past entries — byte-pinned by tests),</li>
+<li>move <code>METHODOLOGY_VERSION</code> to it,</li>
+<li>update the live policy constants,</li>
+<li>add the changelog entry in <code>docs/METHODOLOGY_CHANGELOG.md</code>.</li>
+</ul>
+<p>4. <strong>Effective date.</strong> The new version applies from the next epoch&#x27;s print
    onward. No historical print is recomputed (DECISIONS #7); if the change
    creates a level break, both series values at the boundary epoch are
    published side by side, labeled.</p>
 <h2>Enforcement (already live in CI)</h2>
-<p>- `test_policy_change_requires_version_bump` — live policies must equal the
-  current version&#x27;s registry pin; any drift fails.
-- `test_registry_is_append_only_v010_pin` + `test_registry_history_is_
-  append_only_ordered` — history cannot be rewritten; policy keys only grow.
-- `test_every_registry_version_is_in_changelog` — no undocumented version.
-- `test_governed_constants_are_registered` — governed code constants must
-  appear in the registered policy strings (signature-inspected).
-- `test_changelog_documents_current_version` — the changelog names the
-  current version.</p>
+<ul>
+<li><code>test_policy_change_requires_version_bump</code> — live policies must equal the current version&#x27;s registry pin; any drift fails.</li>
+<li><code>test_registry_is_append_only_v010_pin</code> + <code>test_registry_history_is_ append_only_ordered</code> — history cannot be rewritten; policy keys only grow.</li>
+<li><code>test_every_registry_version_is_in_changelog</code> — no undocumented version.</li>
+<li><code>test_governed_constants_are_registered</code> — governed code constants must appear in the registered policy strings (signature-inspected).</li>
+<li><code>test_changelog_documents_current_version</code> — the changelog names the current version.</li>
+</ul>
 <p>A change that skips any step above cannot merge with a green build; that is
 the wiring.</p>
 </body>

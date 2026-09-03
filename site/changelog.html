@@ -10,6 +10,13 @@ body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
 nav { font-size: .9rem; margin-bottom: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
 </style>
 </head>
 <body>
@@ -19,67 +26,50 @@ h1, h2, h3 { line-height: 1.25; }
 change a numerical policy (SPEC#1 AC-1.4). The full procedure — proposal →
 public comment window → version bump — is docs/METHODOLOGY_CHANGE_PROCESS.md.
 Each entry lists the policies that version is defined by; the registry in
-`tly/methodology.py` pins them and CI enforces the pairing.</p>
+<code>tly/methodology.py</code> pins them and CI enforces the pairing.</p>
 <h2>v0.5.0-reconstruction — 2026-08-25</h2>
 <p>Adds the excess-age-profile policy (B-uc2-12/13); prior policies unchanged.</p>
-<p>- excess_age_profile: `0.7 at exact age 75.5 + 0.3 at 85.5 on the epoch
-  structure-year table` — the age-at-death assumption converting measured
-  excess deaths to life-years in the backfill burn series. Implied mean
-  remaining expectancy ≈ 10.5-11.5y on the 2019-2023 World tables, inside
-  the DECISIONS anchor&#x27;s 10.0-22.7y implied range (14.83M excess -&gt;
-  148-337M life-years), at its conservative end (COVID excess skewed old).
-  Changing the profile is a version bump; per-feed profiles (RP Part II
-  D4) will supersede this single global profile with their own bump.</p>
+<ul>
+<li>excess_age_profile: <code>0.7 at exact age 75.5 + 0.3 at 85.5 on the epoch structure-year table</code> — the age-at-death assumption converting measured excess deaths to life-years in the backfill burn series. Implied mean remaining expectancy ≈ 10.5-11.5y on the 2019-2023 World tables, inside the DECISIONS anchor&#x27;s 10.0-22.7y implied range (14.83M excess -&gt; 148-337M life-years), at its conservative end (COVID excess skewed old). Changing the profile is a version bump; per-feed profiles (RP Part II D4) will supersede this single global profile with their own bump.</li>
+</ul>
 <h2>v0.4.0-reconstruction — 2026-08-17</h2>
 <p>Adds the quanta policy (B-uc3-04); prior policies unchanged.</p>
-<p>- quanta: `scheduling quantum 0.000001 life-years; attribution quantum
-  0.001` — the E11 quantum for weekly flow scheduling (tly/weekly.py) and
-  the default quantum for age attribution (tly/burn.py) were governed
-  numerical parameters living only as code constants; changing either now
-  requires a bump. Registry-completeness is tested: every governed code
-  constant must appear in the current version&#x27;s policy strings.</p>
+<ul>
+<li>quanta: <code>scheduling quantum 0.000001 life-years; attribution quantum 0.001</code> — the E11 quantum for weekly flow scheduling (tly/weekly.py) and the default quantum for age attribution (tly/burn.py) were governed numerical parameters living only as code constants; changing either now requires a bump. Registry-completeness is tested: every governed code constant must appear in the current version&#x27;s policy strings.</li>
+</ul>
 <h2>v0.3.0-reconstruction — 2026-08-17</h2>
 <p>Adds the P6 identity-closure tolerance policy (B-uc2-08); prior policies
 unchanged.</p>
-<p>- p6_closure: `exact-0: E11-scheduled weekly flows sum to the annual
-  identity exactly` — annual flows split across the year&#x27;s actual Mondays
-  (52 or 53) by equal quantum division with largest-remainder distribution;
-  closure is exact, no tolerance. Introducing any nonzero tolerance (e.g.
-  for mixed-source weekly burn) requires a bump.</p>
+<ul>
+<li>p6_closure: <code>exact-0: E11-scheduled weekly flows sum to the annual identity exactly</code> — annual flows split across the year&#x27;s actual Mondays (52 or 53) by equal quantum division with largest-remainder distribution; closure is exact, no tolerance. Introducing any nonzero tolerance (e.g. for mixed-source weekly burn) requires a bump.</li>
+</ul>
 <h2>v0.2.0-reconstruction — 2026-08-17</h2>
 <p>Adds the nowcast baseline policy (B-uc2-04); v0.1.0 policies unchanged.</p>
-<p>- baseline: `kk-linear: per-period linear trend fit on 2015-2019
-  (Karlinsky-Kobak)` — expected deaths for (country, period) extrapolate a
-  per-period straight line fit on the five pre-pandemic years, the World
-  Mortality Dataset&#x27;s own published method (chosen for comparability with
-  the feed&#x27;s literature; alternatives like 5-year means or Serfling
-  seasonal models would require a bump). Fit windows and the excess
-  definition (observed − expected) are part of this policy.</p>
+<ul>
+<li>baseline: <code>kk-linear: per-period linear trend fit on 2015-2019 (Karlinsky-Kobak)</code> — expected deaths for (country, period) extrapolate a per-period straight line fit on the five pre-pandemic years, the World Mortality Dataset&#x27;s own published method (chosen for comparability with the feed&#x27;s literature; alternatives like 5-year means or Serfling seasonal models would require a bump). Fit windows and the excess definition (observed − expected) are part of this policy.</li>
+</ul>
 <h2>v0.1.0-reconstruction — 2026-08-17</h2>
 <p>Initial packaged methodology, reconstructed 2026-08-16 from DECISIONS.md /
 RESEARCH_PROGRAM.md / RALPH_LOOP.md after loss of the originals; pending
 ratification (loop/BACKLOG.md A-16).</p>
-<p>- interpolation: `linear-on-anchors, flat-tail` — piecewise-linear e() on
-  exact-age anchors, flat beyond the last anchor (RP M5; monotone-Hermite
-  upgrade would require a bump).
-- band_midpoint: `uniform-within-band; open-band lo+2.5 (inert beyond last
-  anchor)` — band [lo, hi] covers exact ages [lo, hi+1), midpoint
-  (lo+hi+1)/2.
-- decimal: `Decimal prec 34, ROUND_HALF_EVEN` — floats never touch
-  published numbers (G1).</p>
+<ul>
+<li>interpolation: <code>linear-on-anchors, flat-tail</code> — piecewise-linear e() on exact-age anchors, flat beyond the last anchor (RP M5; monotone-Hermite upgrade would require a bump).</li>
+<li>band_midpoint: <code>uniform-within-band; open-band lo+2.5 (inert beyond last anchor)</code> — band [lo, hi] covers exact ages [lo, hi+1), midpoint (lo+hi+1)/2.</li>
+<li>decimal: <code>Decimal prec 34, ROUND_HALF_EVEN</code> — floats never touch published numbers (G1).</li>
+</ul>
 <h2>v0.6.0-reconstruction (2026-08-25)</h2>
-<p>**Changed** (the registry&#x27;s FIRST parameter change, not an addition):
-the period-vs-cohort one-sided error-budget upper bound moves **+8% -&gt;
-+9%**. Driver: the E6 cohort computation on the committed 2010-2100 qx
-surface measured the uplift at **+8.06%** (tests/test_cohort.py), 0.06pp
+<p><strong>Changed</strong> (the registry&#x27;s FIRST parameter change, not an addition):
+the period-vs-cohort one-sided error-budget upper bound moves <strong>+8% -&gt;
++9%</strong>. Driver: the E6 cohort computation on the committed 2010-2100 qx
+surface measured the uplift at <strong>+8.06%</strong> (tests/test_cohort.py), 0.06pp
 above the +3-8% literature-prose band — computed-beats-prose (ruling
 D6). The one-sided bounds are now GOVERNED, version-keyed parameters
-(`tly.methodology.VERSION_ONE_SIDED_TERMS`): reproducing an archived
+(<code>tly.methodology.VERSION_ONE_SIDED_TERMS</code>): reproducing an archived
 print selects the band its version was computed under, never HEAD&#x27;s —
 the outsider-sim recomputes each epoch under its archived version.</p>
 <p>Effect on published text: the cohort best-estimate band becomes
 ~381-406B (+5%/+12% applied to measured S). The A-16 packet&#x27;s blessed
-**381-402B remains the correct v0.5.0 statement** and archived prints
+<strong>381-402B remains the correct v0.5.0 statement</strong> and archived prints
 carrying it continue to reproduce byte-exactly.</p>
 </body>
 </html>

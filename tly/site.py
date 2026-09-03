@@ -45,6 +45,13 @@ body {{ max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre {{ background: #f6f6f6; padding: .8rem; overflow-x: auto; }}
 nav {{ font-size: .9rem; margin-bottom: 2rem; }}
 h1, h2, h3 {{ line-height: 1.25; }}
+blockquote {{ margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }}
+table {{ border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }}
+th, td {{ border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }}
+code {{ background: #f2f2f2; padding: 0 .25rem; }}
+pre code {{ background: none; padding: 0; }}
 </style>
 </head>
 <body>
@@ -55,35 +62,114 @@ h1, h2, h3 {{ line-height: 1.25; }}
 """
 
 
+def _inline(text: str) -> str:
+    """Escape, then render the three inline forms the governance docs use:
+    `code`, **bold**, [text](http…). Escape-first means nothing an author
+    writes can inject markup; unmatched syntax renders as-written."""
+    import re
+
+    s = html.escape(text)
+    s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
+    s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
+    s = re.sub(
+        r"\[([^\]]+)\]\((https?://[^)\s]+)\)",
+        r'<a href="\2">\1</a>',
+        s,
+    )
+    return s
+
+
+def _table(rows: list[str]) -> str:
+    def cells(line: str) -> list[str]:
+        return [c.strip() for c in line.strip().strip("|").split("|")]
+
+    head = cells(rows[0])
+    body = [cells(r) for r in rows[2:]]  # rows[1] is the |---| separator
+    out = ["<table>", "<tr>" + "".join(f"<th>{_inline(c)}</th>" for c in head) + "</tr>"]
+    for r in body:
+        out.append("<tr>" + "".join(f"<td>{_inline(c)}</td>" for c in r) + "</tr>")
+    out.append("</table>")
+    return "\n".join(out)
+
+
+def _is_table_start(lines: list[str], i: int) -> bool:
+    if not lines[i].lstrip().startswith("|") or i + 1 >= len(lines):
+        return False
+    sep = lines[i + 1].strip()
+    return sep.startswith("|") and set(sep) <= set("|-: ")
+
+
 def _render_markdown(text: str) -> str:
-    """Minimal, total, deterministic: headers, code fences, paragraphs.
-    All content is HTML-escaped — the generator cannot inject or mangle."""
+    """Minimal, total, deterministic rendering of the forms the governance
+    docs actually use: headings, fences, paragraphs, blockquotes, tables,
+    bullet lists, and the three inline forms (bold / code / links). All
+    content is escaped before any markup is added — the generator cannot
+    inject, and anything outside these forms renders as-written."""
     out: list[str] = []
     in_fence = False
     paragraph: list[str] = []
 
     def flush() -> None:
         if paragraph:
-            out.append("<p>" + html.escape("\n".join(paragraph)) + "</p>")
+            out.append("<p>" + _inline("\n".join(paragraph)) + "</p>")
             paragraph.clear()
 
-    for line in text.splitlines():
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines):
+        line = lines[i]
         if line.startswith("```"):
             flush()
             out.append("<pre>" if not in_fence else "</pre>")
             in_fence = not in_fence
+            i += 1
             continue
         if in_fence:
             out.append(html.escape(line))
+            i += 1
             continue
         if line.startswith("#"):
             flush()
             level = min(len(line) - len(line.lstrip("#")), 6)
-            out.append(f"<h{level}>{html.escape(line.lstrip('#').strip())}</h{level}>")
+            out.append(f"<h{level}>{_inline(line.lstrip('#').strip())}</h{level}>")
+            i += 1
+        elif line.startswith(">"):
+            flush()
+            quoted: list[str] = []
+            while i < len(lines) and lines[i].startswith(">"):
+                quoted.append(lines[i].lstrip(">").lstrip())
+                i += 1
+            inner = _render_markdown("\n".join(quoted))
+            out.append(f"<blockquote>\n{inner}\n</blockquote>")
+        elif _is_table_start(lines, i):
+            flush()
+            rows: list[str] = []
+            while i < len(lines) and lines[i].lstrip().startswith("|"):
+                rows.append(lines[i])
+                i += 1
+            out.append(_table(rows))
+        elif line.lstrip().startswith("- "):
+            flush()
+            out.append("<ul>")
+            while i < len(lines) and lines[i].lstrip().startswith("- "):
+                item = [lines[i].lstrip()[2:]]
+                i += 1
+                # continuation lines (indented, not a new bullet/blank)
+                while (
+                    i < len(lines)
+                    and lines[i].startswith("  ")
+                    and not lines[i].lstrip().startswith("- ")
+                ):
+                    item.append(lines[i].strip())
+                    i += 1
+                out.append(f"<li>{_inline(' '.join(item))}</li>")
+            out.append("</ul>")
         elif not line.strip():
             flush()
+            i += 1
         else:
             paragraph.append(line)
+            i += 1
     flush()
     if in_fence:
         out.append("</pre>")  # unterminated fence still yields valid HTML
@@ -146,3 +232,21 @@ def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
     (site / "vintage-archive.html").write_text(page, encoding="utf-8")
     written["vintage-archive"] = "site/vintage-archive.html"
     return written
+
+
+def not_found_page() -> str:
+    """The 404 page (served BY STATUS 404 on Cloudflare Pages — its
+    presence is what makes nonexistent paths say no; without it every
+    path returns the home page at 200, which for the API means a
+    fabricated print date looks like a success. Found live by the
+    2026-09-03 deploy verification)."""
+    body = (
+        "<h1>404 — no such artifact</h1>\n"
+        "<p>Nothing exists at this path. Prints that were never made do "
+        "not resolve — <em>first print settles</em> also means absence "
+        "is an answer.</p>\n"
+        "<p>Everything that exists is enumerated, with hashes, in "
+        '<a href="/api/v1/index.json">api/v1/index.json</a>; the pages '
+        'are linked from the <a href="/">home page</a>.</p>'
+    )
+    return _SHELL.format(title="404 — not found", nav='<a href="/">home</a>', body=body)

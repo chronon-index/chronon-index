@@ -15,7 +15,7 @@ import sys
 from pathlib import Path
 
 from tly.api import build_api_from_archive
-from tly.site import REPO_ROOT, build_site
+from tly.site import REPO_ROOT, build_site, not_found_page
 
 HEADERS = """\
 /*
@@ -35,6 +35,7 @@ def build_public(repo_root: Path = REPO_ROOT) -> Path:
         shutil.rmtree(out)  # full rebuild: no stale files can survive
     build_site(repo_root, repo_root)  # writes <repo_root>/site/*.html
     build_api_from_archive(repo_root / "archive", out)
+    (out / "404.html").write_text(not_found_page(), encoding="utf-8")
     (out / "_headers").write_text(HEADERS, encoding="utf-8")
     return out
 

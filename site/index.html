@@ -10,54 +10,57 @@ body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
 pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
 nav { font-size: .9rem; margin-bottom: 2rem; }
 h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
 </style>
 </head>
 <body>
 <nav><a href="index.html">TLY — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="vintage-archive.html">Vintage archive</a></nav>
 <h1>TLY / CHRONON</h1>
-<p>A demographically-ruled monetary asset. **TLY** is the index: humanity&#x27;s total
+<p>A demographically-ruled monetary asset. <strong>TLY</strong> is the index: humanity&#x27;s total
 remaining life-years, S(t) = Σ over (age, sex, country) of population ×
-remaining life expectancy. **Mirror** is the protocol whose token supply
-algorithmically mirrors S. **CHRONON** is the token. Price floats; the formula
+remaining life expectancy. <strong>Mirror</strong> is the protocol whose token supply
+algorithmically mirrors S. <strong>CHRONON</strong> is the token. Price floats; the formula
 governs supply only.</p>
 <p>Layered rollout (DECISIONS.md #1): v1 index → v2 cash-settled derivatives →
 v3 Mirror token → v4 Ledger.</p>
 <h2>Governing documents</h2>
-<p>| File | Role |
-|---|---|
-| `DECISIONS.md` | Locked design decisions. Never contradicted. |
-| `RESEARCH_PROGRAM.md` | The full map: math, data, phases, gates, governance. |
-| `SPEC.md` | The seven build capabilities with acceptance criteria. |
-| `METHODOLOGY_v0.md` | The v0 math: estimator, transport identity, error budget. |
-| `RALPH_LOOP.md` | The autonomous build loop protocol. |</p>
-<p>&gt; **Provenance notice (A-16 CLOSED 2026-09-03):** the 2026-08-16 loss was
-&gt; resolved by RESTORE, not ratification-of-reconstruction: `seed/` and
-&gt; `METHODOLOGY_v0.md` are the verbatim originals (delivered back in
-&gt; chronon-restore-A16.zip); the reconstructions remain archived under
-&gt; `ops/reconstruction/2026-08-16/`, still byte-runnable. AC-1.2 is strict:
-&gt; the v1 engine reproduces every original golden value to 4 dp on the
-&gt; frozen `data/snapshots/v0-original/` inputs.
-&gt;
-&gt; **Research series:** every published print is research-mode until the G5
-&gt; source-of-record switch to WPP — the current settlement path uses WHO GHO
-&gt; life tables, whose license is non-commercial; the commercial licensing
-&gt; gate (`tly/licensing_gate.py`) blocks that path by construction. Prints
-&gt; carry this in their accuracy/coverage blocks; nothing here is investment
-&gt; advice or a settlement-grade benchmark yet.</p>
+<table>
+<tr><th>File</th><th>Role</th></tr>
+<tr><td><code>DECISIONS.md</code></td><td>Locked design decisions. Never contradicted.</td></tr>
+<tr><td><code>RESEARCH_PROGRAM.md</code></td><td>The full map: math, data, phases, gates, governance.</td></tr>
+<tr><td><code>SPEC.md</code></td><td>The seven build capabilities with acceptance criteria.</td></tr>
+<tr><td><code>METHODOLOGY_v0.md</code></td><td>The v0 math: estimator, transport identity, error budget.</td></tr>
+<tr><td><code>RALPH_LOOP.md</code></td><td>The autonomous build loop protocol.</td></tr>
+</table>
+<blockquote>
+<p><strong>Provenance notice (A-16 CLOSED 2026-09-03):</strong> the 2026-08-16 loss was
+resolved by RESTORE, not ratification-of-reconstruction: <code>seed/</code> and
+<code>METHODOLOGY_v0.md</code> are the verbatim originals (delivered back in
+chronon-restore-A16.zip); the reconstructions remain archived under
+<code>ops/reconstruction/2026-08-16/</code>, still byte-runnable. AC-1.2 is strict:
+the v1 engine reproduces every original golden value to 4 dp on the
+frozen <code>data/snapshots/v0-original/</code> inputs.</p>
+<p><strong>Research series:</strong> every published print is research-mode until the G5
+source-of-record switch to WPP — the current settlement path uses WHO GHO
+life tables, whose license is non-commercial; the commercial licensing
+gate (<code>tly/licensing_gate.py</code>) blocks that path by construction. Prints
+carry this in their accuracy/coverage blocks; nothing here is investment
+advice or a settlement-grade benchmark yet.</p>
+</blockquote>
 <h2>Principles (non-negotiable)</h2>
-<p>- **Radical verifiability.** Every published figure is computed by open code
-  from keyless public endpoints, prints its source URLs, and is reproducible
-  by any third party. No number ships without a runnable path.
-- **First print settles.** Corrections are forward-only, in
-  `ledger/CORRECTIONS.md`. No historical value is ever restated.
-- **Decimal everywhere** supply- or index-adjacent (precision 34,
-  ROUND_HALF_EVEN). Floats never touch published numbers.
-- **Snapshot-first.** Fetch to `data/snapshots/&lt;date&gt;/` with a sha256
-  manifest, then compute offline. Small v0 snapshots are committed; large
-  snapshots move to object storage with manifests committed in-repo
-  (RESEARCH_PROGRAM Part VII).
-- **Licensing gate.** `docs/LICENSING.md` must be cleared before the first
-  public print.</p>
+<ul>
+<li><strong>Radical verifiability.</strong> Every published figure is computed by open code from keyless public endpoints, prints its source URLs, and is reproducible by any third party. No number ships without a runnable path.</li>
+<li><strong>First print settles.</strong> Corrections are forward-only, in <code>ledger/CORRECTIONS.md</code>. No historical value is ever restated.</li>
+<li><strong>Decimal everywhere</strong> supply- or index-adjacent (precision 34, ROUND_HALF_EVEN). Floats never touch published numbers.</li>
+<li><strong>Snapshot-first.</strong> Fetch to <code>data/snapshots/&lt;date&gt;/</code> with a sha256 manifest, then compute offline. Small v0 snapshots are committed; large snapshots move to object storage with manifests committed in-repo (RESEARCH_PROGRAM Part VII).</li>
+<li><strong>Licensing gate.</strong> <code>docs/LICENSING.md</code> must be cleared before the first public print.</li>
+</ul>
 <h2>Layout</h2>
 <pre>
 tly/              the package (index computation)
@@ -75,9 +78,9 @@ python3.12 -m venv .venv &amp;&amp; . .venv/bin/activate
 pip install -e &#x27;.[dev]&#x27;
 pytest
 </pre>
-<p>Autonomous build: `./ralph.sh` (see RALPH_LOOP.md).</p>
+<p>Autonomous build: <code>./ralph.sh</code> (see RALPH_LOOP.md).</p>
 <h2>Licensing</h2>
-<p>Code: Apache-2.0 (`LICENSE`). Documentation and published index data:
-CC BY 4.0. Upstream data licenses: `docs/LICENSING.md`.</p>
+<p>Code: Apache-2.0 (<code>LICENSE</code>). Documentation and published index data:
+CC BY 4.0. Upstream data licenses: <code>docs/LICENSING.md</code>.</p>
 </body>
 </html>
