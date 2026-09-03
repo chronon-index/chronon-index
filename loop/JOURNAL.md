@@ -1913,3 +1913,16 @@ timestamps, before the loop existed.
   URLs now population.un.org + world_mortality and ASSERT ghoapi absent,
   gate tests split pre-G5-blocked vs live-passes). 341 green.
 - First v0.7.0 print: epoch 2026-09-07. E-bar moves 44.7880 -> 44.9238.
+
+## 2026-09-04T00:15+02:00 | signing + enforcement flip + schedule rulings
+- Commit signing live: ed25519 SSH key generated, registered on GitHub
+  (id 1155973, scope granted via device flow), repo-local git config
+  (gpg.format ssh, sign-all), allowed-signers file; local verify = G.
+- Ruleset main-review-and-checks flipped ACTIVE (signatures + PR +
+  required check `test`, DeployKey bypass). This commit/PR is the proof.
+- Ben schedule rulings recorded: counsel D-13 + trademark D-14 + ACLED/
+  EM-DAT = January 2027; reading D-12 = Jan/Feb; recomputers E-14 =
+  February 2027. Naming: Ben leaning SAECULUM (my recommendation too —
+  Cronos/Chronos/Chrono.tech confusion field vs empty field + better
+  fit + domains held); formal D-14 clearance in January confirms before
+  public rename.
