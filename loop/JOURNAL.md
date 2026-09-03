@@ -1787,3 +1787,22 @@ timestamps, before the loop existed.
 - Commit unsigned: no signing key configured on this machine (E-12
   sigstore/signing still open) - ruling asked for a signed commit;
   recorded as a known gap, to re-sign or attest once keys exist.
+
+## 2026-09-03T14:35+02:00 | A-19 steps 1-4 + facts from Ben | DONE
+- Deploy key setup executed with Ben's explicit approval. Discovery: the
+  422 "Deploy keys are disabled for this repository" was the ORG setting
+  deploy_keys_enabled_for_repositories=false (found by probing the org
+  object for key/deploy fields, HaleMarshall is org admin) — flipped
+  true, then key id 162175081 (write) + secret PRINT_BOT_DEPLOY_KEY set,
+  local key material deleted immediately. Bypass DeployKey/always was
+  already staged at ruleset creation.
+- PROOF, not assumption: dispatched weekly-print — checkout took the
+  ssh-key path, todays three vintage pulls (eurostat/cdc/ons 2026-09-03,
+  the lag triangles SECOND column) committed and PUSHED as 39c475c by
+  tly-print-bot over the deploy key. Only the enforcement flip remains
+  (Bens one click; after it, main is PR+signed except the bot).
+- New facts recorded from Ben: domains saeculum.foundation and
+  saeculumfoundation.com held (GoDaddy) — the D-14 fallback name now has
+  its domains; CHRONON-vs-SAECULUM naming NOT yet ruled, trademark
+  search still open. ORCID 0009-0004-6118-8665 — the identity for
+  Zenodo/DOI deposits (E-05 still needs the Zenodo account itself).

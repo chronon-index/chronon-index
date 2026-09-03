@@ -7,60 +7,13 @@ judgment. Ordered by leverage — item 1 unblocks the most.
 
 ---
 
-## 1. A-16 — one file left: deliver chronon-index-READY.zip  ⭐
+## 1. A-16 — ✅ CLOSED 2026-09-03
 
-Your D1–D7 rulings (docs/rulings/A16_DECISIONS.md) are EXECUTED as of
-2026-08-24: reconstructions archived to ops/reconstruction/, drift
-convention confirmed against the original source (D2), the mint residual
-explained and ledgered as C-0002 (D3), SPEC AC-1.2 rewritten (D4), D5/D6
-doc corrections applied, D7 commendation journaled.
+You delivered chronon-restore-A16.zip; originals restored verbatim, v0-original inputs frozen, AC-1.2 strict golden green (all 13 original values reproduce at 4dp). The reconstruction stays archived and runnable. Nothing left here.
 
-**The only thing left:** `chronon-index-READY.zip` is not on this machine
-(searched disk, iCloud, the org, and both scaffold zips — only the
-pre-merge scaffolds exist here). Drop it in `~/Downloads` and the next
-session executes the restore: originals → live tree, D3b v0-original
-snapshot freeze, golden swap to full precision, A-16 box checked.
+## 2. A-19 — deploy key ✅ DONE; ONE CLICK left
 
-## 2. A-17 — DONE. Successor: A-19 deploy key (10 minutes)
-
-Done 2026-08-20: repo transferred to the **chronon-index** org, renamed, and
-flipped **public**. Canonical remote is now
-`github.com/chronon-index/chronon-index`; the old `HaleMarshall/tly` URL
-redirects. Ruleset `main-integrity` is ACTIVE on main — no force pushes, no
-deletions. Local clones keep working via the redirect, but retarget them:
-
-    git remote set-url origin git@github.com:chronon-index/chronon-index.git
-
-**What is left (A-19).** The second ruleset, `main-review-and-checks`
-(signed commits + PR + required `test` check), is created but **disabled**,
-because turning it on right now would break the weekly print: GitHub gives
-rulesets no GitHub-Actions bypass actor, so the print bot's push to `main`
-would be rejected. A write-enabled **deploy key** is the one bypass actor
-that works for a bot without handing humans a bypass:
-
-    ssh-keygen -t ed25519 -C "tly-print-bot" -f /tmp/print_bot -N ""
-
-1. `cat /tmp/print_bot.pub` -> Settings -> Deploy keys -> Add deploy key,
-   **tick "Allow write access"**.
-2. `cat /tmp/print_bot` -> Settings -> Secrets and variables -> Actions ->
-   New repository secret named `PRINT_BOT_DEPLOY_KEY`.
-3. Settings -> Rulesets -> `main-review-and-checks` -> Bypass list ->
-   Add bypass -> **Deploy keys**; set Enforcement to **Active**; save.
-4. Actions -> weekly-print -> Run workflow. Confirm the archive commit lands.
-5. `shred -u /tmp/print_bot /tmp/print_bot.pub`
-
-`print.yml` is already wired for step 2 and falls back to `GITHUB_TOKEN`
-if the secret is absent, so nothing breaks between now and then.
-
-**Note on the no-secrets principle.** G6/RALPH#6 is about *data sources*
-being keyless — no API keys in the fetch path. A repo-scoped deploy key is
-CI infrastructure, not a data credential, and it is strictly narrower than
-the `GITHUB_TOKEN` the job already holds. If you would rather hold the line
-absolutely, the alternative is to stop pushing prints to `main` and land
-them on a `prints` branch instead — cleaner cryptographically, but it
-splits the archive hash chain, which contradicts B-uc4-08.
-
----
+Key + secret + bypass are live and END-TO-END PROVEN (the print bot pushed commit 39c475c over the key on 2026-09-03). Your one click, whenever you want strict protection: repo Settings → Rules → main-review-and-checks → Enforcement: Active. After that, main accepts only signed PR commits with passing checks (the print bot bypasses via its key). Recommendation: flip after the build loop quiets down.
 
 ## 3. B-uc2-02 — RULED (c) and BUILT. Nothing left here.
 
@@ -142,6 +95,8 @@ for the full program; the whitepaper-gating subset (R3 + Becker) is ~2 weeks.
 per your plan.
 
 ---
+
+**Update 2026-09-03:** you hold saeculum.foundation and saeculumfoundation.com (GoDaddy) — the domain half of this is done if SAECULUM is the name. Still needed: the Cloudflare (or other) hosting account for the site + R2 storage, the Zenodo account (your ORCID 0009-0004-6118-8665 is recorded and links there), and a naming ruling: is the public name SAECULUM now, or does the CHRONON trademark search (item 5) still decide?
 
 ## 8. E-14 — Recruit external recomputers  (the P5 milestone)
 
