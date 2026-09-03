@@ -1943,3 +1943,20 @@ timestamps, before the loop existed.
   Ebar=44.9238 under the new source of record with consumed-only
   citations. If the push is rejected, the archive commit will sit in
   the runner and the run fails loudly — watch the weekly-print run.
+
+## 2026-09-04T00:30+02:00 | RULINGS: name = SAECULUM; Zenodo live; R2 dropped
+- Ben RULED the name: SAECULUM ("Decision its now Saeculum"). January
+  trademark clearance is confirmation. Rename pass through public
+  materials (README, site, BEN_TODO, docs headers) queued as next
+  build work; repo/org URL migration waits for the domain attach.
+- E-05 done: Zenodo account + GitHub auto-archive toggle ON for the
+  repo. CAUGHT before it bit: a GitHub release would auto-deposit the
+  WHOLE repo zip — including committed WHO GHO files — and LICENSING
+  excludes WHO/IHME from Zenodo deposits. Rule recorded: no releases
+  while the toggle is on; deposits go through the API with curated
+  file sets (Zenodo upload token = CI infrastructure like the deploy
+  key, NOT a data-source credential — G6 untouched).
+- Bens question "isnt R2 the same as Zenodo" was RIGHT: for cold
+  archival of oversized raw inputs, Zenodo (immutable + DOI + free) is
+  the better fit than R2 (mutable CDN). E-09 re-scoped to Zenodo;
+  one less account, zero cost.
