@@ -87,20 +87,33 @@ class StockReport:
         return {s.location: s for s in self.stocks}
 
 
-def stamp(snapshot_dirs: list[Path]) -> dict:
+def stamp(snapshot_dirs: list[Path], consumed: dict[str, list[str]] | None = None) -> dict:
     """Metadata block: methodology version + policies + manifest hashes.
 
     Manifests are re-verified here (hash gate) so a stamp can never cite a
-    snapshot that no longer matches its own manifest.
-    """
+    snapshot that no longer matches its own manifest. ``consumed``
+    ({snapshot-name: [file, ...]}) restricts the citation to the files the
+    computation actually read — v0.7.0's rule: cite what you consume, so
+    the licensing gate judges the real input set, not the whole snapshot
+    directory (and prints stop growing with unrelated evidence files). A
+    consumed name absent from its manifest raises — you cannot cite an
+    unmanifested input. None keeps the cite-everything behavior (the
+    pre-G5 stamp, which archived prints carry)."""
     meta = output_metadata()
-    meta["snapshots"] = {
-        d.name: {
-            name: entry["sha256"]
-            for name, entry in verify_manifest(d, require_all=False)["files"].items()
-        }
-        for d in snapshot_dirs
-    }
+    snapshots: dict[str, dict[str, str]] = {}
+    for d in snapshot_dirs:
+        rows = verify_manifest(d, require_all=False)["files"]
+        if consumed is not None:
+            names = consumed.get(d.name, [])
+            missing = [n for n in names if n not in rows]
+            if missing:
+                raise ValueError(f"{d.name}: consumed files not in manifest: {missing}")
+            if not names:
+                continue  # this snapshot contributed nothing — cite nothing
+            snapshots[d.name] = {n: rows[n]["sha256"] for n in names}
+        else:
+            snapshots[d.name] = {n: e["sha256"] for n, e in rows.items()}
+    meta["snapshots"] = snapshots
     return meta
 
 

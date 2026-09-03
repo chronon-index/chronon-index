@@ -13,7 +13,7 @@ from __future__ import annotations
 
 from tly.numeric import PRECISION, ROUNDING
 
-METHODOLOGY_VERSION = "v0.6.0-reconstruction"
+METHODOLOGY_VERSION = "v0.7.0"
 
 INTERPOLATION_POLICY = "linear-on-anchors, flat-tail"
 BAND_MIDPOINT_POLICY = "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)"
@@ -29,6 +29,11 @@ ERROR_BUDGET_ONE_SIDED_POLICY = (
     "one-sided terms: vintage-lag +2-3%; period-vs-cohort +3-9% "
     "(E6-computed +8.06% on the committed 2010-2100 surface supersedes "
     "the +3-8% literature prose; listed never netted)"
+)
+SOURCE_OF_RECORD_POLICY = (
+    "UN WPP 2024 (CC BY 3.0 IGO): complete life table + single-age "
+    "population, World, single-age estimator; WHO GHO demoted to "
+    "triangulation (non-commercial license)"
 )
 
 # version -> the exact policy strings that version is defined by.
@@ -105,6 +110,35 @@ VERSION_POLICY_REGISTRY: dict[str, dict[str, str]] = {
             "the +3-8% literature prose; listed never netted)"
         ),
     },
+    # v0.7.0: the G5 source-of-record switch (signed off by Ben
+    # 2026-09-04, proposal docs/proposals/2026-09-03-G5-source-of-record
+    # .md). ADDS source_of_record; the settlement mortality input moves
+    # WHO GHO 2019 banded -> WPP 2024 complete table 2023 single-age.
+    # Dual-run: +1.0991B = +0.3033% (table +1.1639B, resolution
+    # -0.0648B). Drops the "-reconstruction" suffix: A-16 closed by
+    # RESTORE, the series is no longer computing on reconstructed seeds.
+    "v0.7.0": {
+        "interpolation": "linear-on-anchors, flat-tail",
+        "band_midpoint": "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)",
+        "decimal": "Decimal prec 34, ROUND_HALF_EVEN",
+        "baseline": "kk-linear: per-period linear trend fit on 2015-2019 (Karlinsky-Kobak)",
+        "p6_closure": "exact-0: E11-scheduled weekly flows sum to the annual identity exactly",
+        "quanta": "scheduling quantum 0.000001 life-years; attribution quantum 0.001",
+        "excess_age_profile": (
+            "excess-age-profile: 0.7 at exact age 75.5 + 0.3 at 85.5 on the epoch "
+            "structure-year table (backfill burn conversion)"
+        ),
+        "error_budget_one_sided": (
+            "one-sided terms: vintage-lag +2-3%; period-vs-cohort +3-9% "
+            "(E6-computed +8.06% on the committed 2010-2100 surface supersedes "
+            "the +3-8% literature prose; listed never netted)"
+        ),
+        "source_of_record": (
+            "UN WPP 2024 (CC BY 3.0 IGO): complete life table + single-age "
+            "population, World, single-age estimator; WHO GHO demoted to "
+            "triangulation (non-commercial license)"
+        ),
+    },
 }
 
 # Version-keyed one-sided error-budget terms (percent bounds as strings;
@@ -121,6 +155,10 @@ VERSION_ONE_SIDED_TERMS: dict[str, dict[str, tuple[str, str]]] = {
     "v0.4.0-reconstruction": _PRE_V6_ONE_SIDED,
     "v0.5.0-reconstruction": _PRE_V6_ONE_SIDED,
     "v0.6.0-reconstruction": {
+        "vintage_lag_pct": ("2", "3"),
+        "period_vs_cohort_pct": ("3", "9"),
+    },
+    "v0.7.0": {
         "vintage_lag_pct": ("2", "3"),
         "period_vs_cohort_pct": ("3", "9"),
     },
@@ -147,6 +185,7 @@ def current_policies() -> dict[str, str]:
         "quanta": QUANTA_POLICY,
         "excess_age_profile": EXCESS_AGE_PROFILE_POLICY,
         "error_budget_one_sided": ERROR_BUDGET_ONE_SIDED_POLICY,
+        "source_of_record": SOURCE_OF_RECORD_POLICY,
     }
 
 

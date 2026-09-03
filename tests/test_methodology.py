@@ -58,6 +58,7 @@ def test_output_metadata_stamp_shape():
         "quanta",
         "excess_age_profile",
         "error_budget_one_sided",
+        "source_of_record",
     }
 
 

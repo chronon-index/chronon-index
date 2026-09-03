@@ -39,17 +39,29 @@ def test_table_parses_with_expected_statuses():
     assert len(rows) >= 13
 
 
-def test_p1_gate_blocks_current_who_based_commercial_print():
-    """THE P1 gate, honestly applied: today's pipeline cites WHO GHO files,
-    so a COMMERCIAL print must be blocked — this failing would mean the
-    gate stopped guarding the G5 migration."""
-    violations = check_gate(_pipeline_compute_files(), commercial=True)
-    assert violations, "gate should block the WHO-based pipeline in commercial mode"
+def _pre_g5_compute_files() -> list[str]:
+    p = build_settlement_print(
+        "2026-08-17T12:00:00+00:00", methodology_version="v0.4.0-reconstruction"
+    )
+    return [name for snap, files in p.provenance["snapshots"].items() for name in files]
+
+
+def test_gate_still_blocks_the_pre_g5_who_path_commercially():
+    """The gate that guarded the G5 migration keeps guarding history: the
+    pre-v0.7.0 WHO-based path remains commercially blocked."""
+    violations = check_gate(_pre_g5_compute_files(), commercial=True)
+    assert violations, "gate should block the WHO-based path in commercial mode"
     assert any("WHO GHO / GHE" in v and "VERIFIED-RESTRICTED" in v for v in violations)
 
 
+def test_v0_7_0_live_pipeline_passes_the_commercial_gate():
+    """G5 executed: the live settlement path cites only CLEARED sources
+    (WPP CC BY 3.0 IGO + WMD MIT) — zero commercial violations. THE
+    switch out of research mode, license-wise."""
+    assert check_gate(_pipeline_compute_files(), commercial=True) == []
+
+
 def test_research_mode_passes_current_pipeline():
-    """The v0 research posture: WHO triangulation tolerated, gate open."""
     assert check_gate(_pipeline_compute_files(), commercial=False) == []
 
 

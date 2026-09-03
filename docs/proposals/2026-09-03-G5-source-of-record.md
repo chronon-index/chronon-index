@@ -1,6 +1,6 @@
 # Proposal: G5 source-of-record switch (WHO → WPP) — methodology v0.7.0
 
-**Status: OPEN — awaiting sign-off (see "Comment window" below).**
+**Status: ACCEPTED — signed off by Ben 2026-09-04 00:02 CEST ("yes i sign off"), pre-P1 shortcut; posted through 2026-09-17 regardless. Implemented as methodology v0.7.0.**
 Proposed 2026-09-03 by the build loop. Refs: SPEC G5, DECISIONS 6,
 RP Part VII (licensing gate), `docs/METHODOLOGY_CHANGE_PROCESS.md`.
 
@@ -87,4 +87,4 @@ Ben's recorded sign-off, AND leave this proposal published on the site
 for the 14 days anyway — belt and braces; the effective epoch lands
 whenever the sign-off does.
 
-> **Sign-off (Ben):** _________________________ date: __________
+> **Sign-off (Ben):** RECORDED — "yes i sign off", 2026-09-04 00:02 CEST (session 01Qgyk1CmBzRsFSdjjU4Yhda).

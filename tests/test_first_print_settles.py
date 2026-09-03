@@ -50,8 +50,11 @@ def test_fixing_source_urls_are_real_manifest_urls(tmp_path):
     assert fixing.source_urls  # non-empty
     assert all(u.startswith("https://") for u in fixing.source_urls)
     joined = " ".join(fixing.source_urls)
-    assert "ghoapi.azureedge.net" in joined  # WHO GHO really cited
-    assert "ourworldindata.org" in joined  # OWID really cited
+    # v0.7.0 consumed-files citation: WPP (source of record) + WMD
+    assert "population.un.org" in joined
+    assert "world_mortality" in joined
+    # the demoted WHO source must NOT be cited by a v0.7.0 settlement
+    assert "ghoapi.azureedge.net" not in joined
 
 
 def test_fixing_cannot_precede_its_print(tmp_path):

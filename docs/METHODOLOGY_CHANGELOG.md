@@ -84,3 +84,31 @@ Effect on published text: the cohort best-estimate band becomes
 ~381-406B (+5%/+12% applied to measured S). The A-16 packet's blessed
 **381-402B remains the correct v0.5.0 statement** and archived prints
 carrying it continue to reproduce byte-exactly.
+
+## v0.7.0 (2026-09-04)
+
+**The G5 source-of-record switch** — proposal
+`docs/proposals/2026-09-03-G5-source-of-record.md`, signed off by Ben
+2026-09-04 under the pre-P1 shortcut (recorded in the proposal; the
+proposal stays published on the site through 2026-09-17 regardless).
+
+- Settlement mortality input: WHO GHO 2019 abridged (banded estimator)
+  → **UN WPP 2024 complete life table, 2023, single-age estimator**;
+  population single-age WPP (same N: 8,091,734,933). License basis:
+  CC BY 3.0 IGO (attribution now carried in print provenance) replacing
+  a non-commercial source — the commercial licensing gate passes the
+  new compute path with zero violations; the WHO path remains blocked.
+- Level change, dual-run on committed snapshots: S 362.4126B →
+  **363.5117B = +1.0991B (+0.3033%)**; decomposed +1.1639B table
+  (WPP 2023 e0 73.1694 vs WHO 2019 73.1234) − 0.0648B single-age vs
+  band-midpoint. Ē 44.7880 → 44.9238. Inside the published ±1.87%
+  interval. Applies from the first epoch after acceptance
+  (2026-09-07); archived prints stand as printed (P4).
+- **Cite-what-you-consume stamping**: v0.7.0 prints cite only the files
+  the computation read (the licensing gate judges the real input set;
+  prints stop growing with unrelated snapshot evidence). Pre-G5 prints
+  keep their cite-everything provenance and keep reproducing under
+  their own versions (the pipeline is version-keyed end to end).
+- Version string drops the `-reconstruction` suffix: A-16 closed by
+  restore 2026-09-03 — the series no longer computes on reconstructed
+  seeds.

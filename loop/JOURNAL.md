@@ -1891,3 +1891,25 @@ timestamps, before the loop existed.
   burn cap, 2.5% winsorized panel aggregation (COVID survives, single-
   country fabrication clips), cross-source divergence alarms off the
   lag triangle.
+
+## 2026-09-04T00:20+02:00 | G5 EXECUTED — methodology v0.7.0 | the switch out of research mode
+- Ben signed off 00:02 CEST ("yes i sign off"); recorded verbatim in the
+  proposal (stays posted through 09-17). One-commit bump per process:
+  registry v0.7.0 (+source_of_record; drops -reconstruction — we no
+  longer compute on reconstructed seeds), pipeline version-keyed END TO
+  END: pre-G5 versions compute the WHO-banded path with cite-everything
+  stamps (history keeps reproducing — outsider-sim PASSED post-switch),
+  v0.7.0 computes WPP 2024 complete-table single-age World 2023 from
+  the COMMITTED fixtures (verified byte-equal to the full-file dual-run
+  S: 363511706093.96010000).
+- The journaled consumed-files-stamp refinement became load-bearing:
+  the gate reads print provenance, and cite-everything would have cited
+  WHO files the path never touches. stamp() gained a consumed= filter
+  (unmanifested consumed name raises); v0.7.0 prints cite exactly
+  [wpp_pop fixture, wpp_lt fixture, wmd csv] -> commercial gate: ZERO
+  violations (WHO path still blocked, pinned by test). UN attribution
+  line now in provenance.
+- Five test pins updated honestly (version string, policy set, fixing
+  URLs now population.un.org + world_mortality and ASSERT ghoapi absent,
+  gate tests split pre-G5-blocked vs live-passes). 341 green.
+- First v0.7.0 print: epoch 2026-09-07. E-bar moves 44.7880 -> 44.9238.
