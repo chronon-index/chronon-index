@@ -40,10 +40,12 @@ jobs:
         run: python -m tly.ots_gate stamp
       - name: OTS publish gate — proof exists + matches, else block
         run: python -m tly.ots_gate verify
+      - name: rebuild the publication surface from the committed artifacts
+        run: python -m tly.build_public
       - name: commit the archived print
         run: |
           git config user.name "tly-print-bot"
           git config user.email "print-bot@users.noreply.github.com"
-          git add archive/ data/vintages/ stamps/
+          git add archive/ data/vintages/ stamps/ site/
           git diff --cached --quiet && echo "epoch already archived — no-op" || \
             git commit -m "print: archive epoch (weekly CI computation)" && git push

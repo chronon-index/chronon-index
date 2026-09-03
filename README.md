@@ -19,10 +19,20 @@ v3 Mirror token → v4 Ledger.
 | `METHODOLOGY_v0.md` | The v0 math: estimator, transport identity, error budget. |
 | `RALPH_LOOP.md` | The autonomous build loop protocol. |
 
-> **Reconstruction notice:** `SPEC.md`, `METHODOLOGY_v0.md` and everything in
-> `seed/` are 2026-08-16 reconstructions of lost originals, pending
-> ratification (`loop/BACKLOG.md` task A-16). Treat their numbers as
-> anchors-to-confirm, not truth. No public print before ratification.
+> **Provenance notice (A-16 CLOSED 2026-09-03):** the 2026-08-16 loss was
+> resolved by RESTORE, not ratification-of-reconstruction: `seed/` and
+> `METHODOLOGY_v0.md` are the verbatim originals (delivered back in
+> chronon-restore-A16.zip); the reconstructions remain archived under
+> `ops/reconstruction/2026-08-16/`, still byte-runnable. AC-1.2 is strict:
+> the v1 engine reproduces every original golden value to 4 dp on the
+> frozen `data/snapshots/v0-original/` inputs.
+>
+> **Research series:** every published print is research-mode until the G5
+> source-of-record switch to WPP — the current settlement path uses WHO GHO
+> life tables, whose license is non-commercial; the commercial licensing
+> gate (`tly/licensing_gate.py`) blocks that path by construction. Prints
+> carry this in their accuracy/coverage blocks; nothing here is investment
+> advice or a settlement-grade benchmark yet.
 
 ## Principles (non-negotiable)
 

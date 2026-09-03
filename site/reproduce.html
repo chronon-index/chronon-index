@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reproduce a fixing</title>
+<style>
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 16px/1.6 system-ui, sans-serif; color: #222; }
+pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
+nav { font-size: .9rem; margin-bottom: 2rem; }
+h1, h2, h3 { line-height: 1.25; }
+</style>
+</head>
+<body>
+<nav><a href="index.html">TLY — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="vintage-archive.html">Vintage archive</a></nav>
+<h1>Reproducing a TLY fixing from public artifacts alone</h1>
+<p>Audience: an outsider with no access to the authors. If any step below
+requires asking someone, that is a defect — file it as an issue (or a
+dispute, step 7). This document is the SPEC#7 AC-7.5 gate: the project is
+not settlement-grade until a stranger succeeds with nothing but this page.</p>
+<p>**Current-state caveats (honest):** the repository is not yet published to
+a public remote (backlog A-17) and no official Monday prints have been
+produced yet (the weekly CI job still runs the reproducibility gate only).
+Until then, this procedure verifies the committed reference computation —
+the same path official prints will use.</p>
+<h2>0. What you are verifying</h2>
+<p>A **fixing** is one epoch&#x27;s settlement value plus complete provenance
+(methodology version, snapshot sha256 hashes, source URLs), hashed over a
+canonical rendering. Two independent parties agree when their 64-hex
+**fixing hashes** are string-equal. Nothing else needs to be exchanged.</p>
+<h2>1. Prerequisites</h2>
+<p>- Python ≥ 3.12 (stdlib only for the compute path; `pytest` and `ruff`
+  for the gates: `pip install -e &#x27;.[dev]&#x27;`).
+- `git` and ~1 GB disk if you refetch the large snapshots.
+- No accounts, no keys. Every data source is keyless (the HMD/STMF feed,
+  which is not, is pending a governance decision and is NOT part of the
+  fixing path).</p>
+<h2>2. Get the exact tree</h2>
+<pre>
+git clone &lt;repo-url&gt; tly &amp;&amp; cd tly
+git log --oneline -1        # record the commit you verified
+</pre>
+<h2>3. Verify the repository&#x27;s own integrity gates</h2>
+<pre>
+python -m pytest tests/test_manifest_schema.py tests/test_snapshot_immutability.py -q
+</pre>
+<p>Both must pass: every snapshot file matches its manifest sha256, and
+history contains no rewrites. If this fails, STOP — the tree you have is
+not the tree that was published.</p>
+<h2>4. Reproduce the computation byte-for-byte</h2>
+<pre>
+python -m tly.pipeline 2026-08-17T12:00:00+00:00 &gt; my_print.json
+python -m tly.pipeline 2026-08-17T12:00:00+00:00 &gt; my_print_2.json
+diff my_print.json my_print_2.json        # must be empty (determinism)
+</pre>
+<p>The full P5 gate (two cold processes, different hash seeds):</p>
+<pre>
+python -m pytest tests/test_p5_reproducibility.py -q
+</pre>
+<h2>5. Verify the inputs against their upstreams (optional but complete)</h2>
+<p>Every input file&#x27;s `source_url`, `sha256`, and retrieval timestamp is in
+`data/snapshots/&lt;date&gt;/manifest.json`. Refetch any URL yourself and hash
+it. NOTE: upstreams revise; a hash mismatch against a **fresh** fetch
+proves revision, not tampering — tampering is a mismatch between the
+committed file and the committed manifest (step 3 catches that).
+Files marked `&quot;in_git&quot;: false` are large; their manifest rows are the
+committed record, and your own fetch lets you verify content
+independently.</p>
+<h2>6. Build the fixing and compare hashes</h2>
+<pre>
+from pathlib import Path
+from tly.archive import PrintArchive
+from tly.fixings import settle_from_archive
+from tly.pipeline import build_settlement_print
+
+archive = PrintArchive(Path(&quot;./my_archive&quot;))
+archive.append(build_settlement_print(&quot;2026-08-17T12:00:00+00:00&quot;))
+fixing = settle_from_archive(
+    archive, &quot;2026-08-17T12:00:00+00:00&quot;, Path(&quot;data/snapshots&quot;)
+)
+print(fixing.fixing_hash)
+</pre>
+<p>Compare your 64-hex hash with the published one (once official fixings
+publish, they live in the static API tree under `api/v1/` and in the
+archive&#x27;s `chain.json`). String-equal = agreement.</p>
+<h2>6b. One-command reproduction (Docker)</h2>
+<p>If you would rather not manage a Python environment:</p>
+<pre>
+docker build -t tly-recompute .
+docker run --rm --network=none tly-recompute &gt; my_print.json
+</pre>
+<p>`--network=none` enforces at the container level what the code enforces
+internally (offline compute over hash-verified snapshots). Verified at
+E-13: two container runs are byte-identical, and container output is
+byte-identical to a host run on a DIFFERENT OS and Python version
+(Linux/CPython 3.12 container vs macOS/CPython 3.13 host) — the P5
+property holds across platforms, not just across runs.</p>
+<h2>6c. Reproduction semantics across methodology versions</h2>
+<p>Archived prints carry the methodology version THAT PRODUCED them. If
+governance has advanced since (the registry is append-only), your
+recomputation under HEAD will stamp a newer version — that is NOT a
+divergence. The contract (enforced by the public `outsider-sim` CI job,
+`tly/outsider_sim.py`): all VALUE fields byte-identical excluding
+`provenance`; the archived stamp must equal its version&#x27;s immutable
+registry entry; every archived snapshot citation must resolve into the
+committed manifests (manifests grow append-only — the archived citation
+set is a valid subset). Compare values, verify stamps against history.</p>
+<h2>6d. Independent timestamp check (OpenTimestamps)</h2>
+<p>Each archived epoch&#x27;s chain `record_hash` is Bitcoin-timestamped:
+`stamps/&lt;epoch&gt;.hash` holds the record_hash (compare it to `chain.json`
+yourself), and `stamps/&lt;epoch&gt;.ots` is the proof over that hash file.
+To verify independently: `pip install opentimestamps-client`, then
+`ots verify -f stamps/&lt;epoch&gt;.hash stamps/&lt;epoch&gt;.ots`. A fresh proof is
+calendar-pending until aggregated into a Bitcoin block (hours); run
+`ots upgrade` on the proof after that, and note full verification wants
+a local Bitcoin node (the client offers a trusted-explorer fallback).
+CI blocks publish unless every epoch has a matching, existing proof
+(`python -m tly.ots_gate verify`).</p>
+<h2>7. If your hash differs</h2>
+<p>1. Re-run step 3 (is your tree intact?) and step 4 (is your run
+   deterministic on your machine?).
+2. Diff your `my_print.json` against the published per-epoch artifact —
+   the first differing field localizes the disagreement.
+3. File a dispute within 48 hours of the epoch (log-only; it alters
+   nothing and delays nothing, but it is permanently on the record):
+   claimant, claim, the epoch, the disputed fixing hash, and your
+   computed hash. Substantiated disputes are resolved through the
+   correction ledger (`ledger/CORRECTIONS.md`) in the NEXT epoch —
+   published history is never rewritten.</p>
+<h2>8. What you may NOT conclude</h2>
+<p>- Agreement does not prove the upstream data was *true* — it proves the
+  published number follows from the recorded inputs by the published
+  method (see the accuracy block inside every print for what is claimed).
+- A fresh-fetch mismatch (step 5) does not prove misconduct — sources
+  revise; the vintage archive exists precisely because of this.</p>
+</body>
+</html>

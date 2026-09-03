@@ -1,0 +1,14 @@
+{
+  "artifacts": {
+    "latest.json": "e2494bb584cbd31346b6aec6bc3a9bc249cfcc18d8b29e232d618d7abf5c62ef",
+    "prints/2026-08-17.json": "f032bc86e03ae4998f0b4134949415eb61af2d345710eb176f6af928cdd2a14d",
+    "prints/2026-08-24.json": "920749c205f760e5802ef7ead38eaeb2ea8bacbe6c1fe55fda018212773cb59c",
+    "prints/2026-08-31.json": "e2494bb584cbd31346b6aec6bc3a9bc249cfcc18d8b29e232d618d7abf5c62ef"
+  },
+  "epochs": [
+    "2026-08-17T12:00:00+00:00",
+    "2026-08-24T12:00:00+00:00",
+    "2026-08-31T12:00:00+00:00"
+  ],
+  "latest_epoch": "2026-08-31T12:00:00+00:00"
+}

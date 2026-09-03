@@ -1,0 +1,91 @@
+{
+  "accuracy": {
+    "one_sided_terms_pct": {
+      "period_vs_cohort_pct": [
+        "3",
+        "9"
+      ],
+      "vintage_lag_pct": [
+        "2",
+        "3"
+      ]
+    },
+    "produced_by": "tly.error_budget.accuracy_block",
+    "statement": "Measured-period S = 362.4B \u00b1 ~1.9% (symmetric terms in quadrature) on 2023 structure; best-estimate current cohort stock ~ 381-406B (one-sided terms listed, never netted: vintage_lag_pct +2-3%; period_vs_cohort_pct +3-9%).",
+    "uncertainty": {
+      "lower": "355632522053.2685018434657478338339",
+      "type": "interval",
+      "upper": "369192761433.6655157720342521661661"
+    }
+  },
+  "burn_life_years": "0",
+  "coverage": {
+    "by_country": {
+      "ALB": "1",
+      "DEU": "1"
+    },
+    "measured_share": "1",
+    "period_universe": {
+      "ALB": "monthly",
+      "DEU": "weekly"
+    }
+  },
+  "e_bar_years": "44.78800217064240910519084103072905",
+  "epoch_utc": "2026-08-31T12:00:00+00:00",
+  "n_persons": "8091734933",
+  "provenance": {
+    "methodology_version": "v0.6.0-reconstruction",
+    "policies": {
+      "band_midpoint": "uniform-within-band; open-band lo+2.5 (inert beyond last anchor)",
+      "baseline": "kk-linear: per-period linear trend fit on 2015-2019 (Karlinsky-Kobak)",
+      "decimal": "Decimal prec 34, ROUND_HALF_EVEN",
+      "error_budget_one_sided": "one-sided terms: vintage-lag +2-3%; period-vs-cohort +3-9% (E6-computed +8.06% on the committed 2010-2100 surface supersedes the +3-8% literature prose; listed never netted)",
+      "excess_age_profile": "excess-age-profile: 0.7 at exact age 75.5 + 0.3 at 85.5 on the epoch structure-year table (backfill burn conversion)",
+      "interpolation": "linear-on-anchors, flat-tail",
+      "p6_closure": "exact-0: E11-scheduled weekly flows sum to the annual identity exactly",
+      "quanta": "scheduling quantum 0.000001 life-years; attribution quantum 0.001"
+    },
+    "snapshots": {
+      "2026-08-16": {
+        "gho_ex_global_btsx_2019_2021.json": "ac38b0c45ef8186e314952accf782774b64893e38c9e5c9867a9988590e4b1d9",
+        "gho_lifetable_indicator_list.json": "a8b4f6c4850fe6bb71acc3eef0b45881cc6440f36e6fe91b303b64f664cc08e3",
+        "owid_births_deaths.metadata.json": "260b2bed72f9c02eeddb3d450cf9d4f7a1a32cd9cbcf1d8f7bfa888eb3319af1",
+        "owid_births_deaths_world.csv": "0939c742fe46b6e8bc266267bf4ec19708631215e99283967f72904bb4f4c426",
+        "owid_population_5yr.metadata.json": "517664451bb357c7a1ddac95c28a184d7f24686561fd23caebec891088120712",
+        "owid_population_5yr_world.csv": "3dcbe21320bc68f175f24afccf727e373890a403680ebec39c18f8d0dbd6b86c"
+      },
+      "2026-08-17": {
+        "WPP2024_Demographic_Indicators_Medium.csv.gz": "286ac36bb1415e2e1ade03acfef0a29f0e4c087e2f78e38c48f50c5df89082bc",
+        "WPP2024_Life_Table_Abridged_Medium_1950-2023.csv.gz": "3d6e82f23023b5f20e1c190752758f637599974fdcac02d38b94c80c4081f982",
+        "WPP2024_Life_Table_Complete_Medium_Both_1950-2023.csv.gz": "7ad8748f4dec567dcfd74fb7161a369e09f6501489c49bce1cd0572c16484058",
+        "WPP2024_PopulationBySingleAgeSex_Medium_1950-2023.csv.gz": "f84c75789ccbd385122ad19bac70026d6306878442afbaa24e8e50a23b4bee2f",
+        "cc_by_30_igo_deed.html": "134454c0802f8b7e84cb89b8173a123d4b06896ec82d91e380419a3f0ec73d57",
+        "cdc_materials.html": "ca28a73819be1e905cf9de29bfc76d5828fe1963a1ba0d5547802ffad4bb9173",
+        "economist_model_license_api.json": "1bd199c513f00e409b85a2be585a0d7be48b8e19778bd333de4bfd7833872086",
+        "eurostat_demo_r_mwk_ts.json": "27ab1ada25c487cf98b0a951225c1b087e22d1e3256181384386920fe3d6b8e4",
+        "eurostat_legal_notice.html": "7c067d9a38c377cf027aef87b143ac19ed4ea133c54d806cc5837873e2a85479",
+        "fixtures/wpp_demind_world_fixture.csv.gz": "0d791b44b6db6c30af3db909773204cd82b8690685f796e9bc0c4513290e75b4",
+        "fixtures/wpp_lt_abridged_fixture.csv.gz": "409702a168db88e7850f00a9c86479e398a6d71b2826406f1d7947111407e923",
+        "fixtures/wpp_lt_complete_fixture.csv.gz": "fbcbd9c9fe900408c241f87dbc0dd8a596fcbac02e748e0dc028b3344daeceb9",
+        "fixtures/wpp_pop_single_age_fixture.csv.gz": "12e0ec7f4ac04757021829d49ae0f3fcb26b1e69f468bba3451ee3949407c05e",
+        "fixtures/wpp_world_annual_2010_2023.json": "05546d53c002ca07b9734bf52657f208bb1308f755411dea29592370edc6db64",
+        "gho_ex_global_btsx_2000_2010_2015.json": "835d391b95dd9e769fe621322246f85b4551460b2956cb30eec465a4f1bd7082",
+        "gho_whosis_000001_global_btsx.json": "e0607c45a8b4eb0cd8822430deedbc5c9433ffa145aafcc58ea47566365bf171",
+        "hmd_user_agreement.html": "fe4ba484240894430523687aa67e06476e451003ebbc5e6ee075147a99a4404e",
+        "ihme_terms.html": "4068231b9e8ad8ed5be07bef07af251acf710ee7f94e4b4e3646978cf6aceea6",
+        "owid_about.html": "036201a48a1b36d8beccb90bd751aa888b3cb4745363c1d0a4c8b3ae15fe34f8",
+        "ucdp_apidocs.html": "e5e5698386af4246dea33841fdd854895f453f576f2d0626decef614b170e7bd",
+        "ucdp_downloads_page.html": "5b8c5d85582971fe6f30b161886704b38b241b12cd18fea29ea3d762f8e5ebc5",
+        "vaupel_2009_life_lived_and_left.pdf": "64641769a9b90a7b6091df1ddcfa2bd0c4fb4c48c36e3b86626d38cc7fe06d88",
+        "who_copyright.html": "5a3132bd0d13bd96c2504dbce779c2b1cb0e2e0021473b18ce17c326328cfe66",
+        "who_data-policy.html": "5b6df89c0882b43bc7e561502e9ee275426962726eddd98cd25357689536a4c8",
+        "wmd_LICENSE.txt": "8f647bdcb7b6e6f54c9f12b13382ff8cf743be305958ce6ad9fc95b3b7381182",
+        "wmd_world_mortality.csv": "4bf283d1491425d3d2d2f55b1c211e12d54bb5bbb7c5986fa11814614bd2fa6c",
+        "wpp_downloads_index.json": "5a088f7691f39ad5f1a7e11dccd149b481f88adf77705ffc907a31cada07df1a"
+      }
+    }
+  },
+  "s_life_years": "362412641743.467008807750",
+  "schema_version": "print-v1",
+  "series_label": "SETTLEMENT"
+}

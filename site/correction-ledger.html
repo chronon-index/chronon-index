@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Correction ledger</title>
+<style>
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 16px/1.6 system-ui, sans-serif; color: #222; }
+pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
+nav { font-size: .9rem; margin-bottom: 2rem; }
+h1, h2, h3 { line-height: 1.25; }
+</style>
+</head>
+<body>
+<nav><a href="index.html">TLY — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="vintage-archive.html">Vintage archive</a></nav>
+<h1>Correction ledger — forward-only</h1>
+<p>First print settles (DECISIONS.md #7). No historical value is ever restated.
+Every deviation between vintages, and every methodology error discovered
+after publication, gets an entry here and is folded into the NEXT epoch.
+Entries are append-only; editing or deleting an entry is forbidden.</p>
+<p>Format:</p>
+<pre>
+## C-NNNN | &lt;iso-date&gt; | &lt;scope&gt;
+- What was wrong, with the wrong value as printed
+- What is right, with evidence (source URL + hash, or derivation)
+- Forward treatment: which epoch absorbs it, and how
+</pre>
+<p>---</p>
+<h2>C-0001 | 2026-08-16 | pre-genesis (no prints affected)</h2>
+<p>- The early napkin estimate of organic issuance was g = +2.9%/yr. It omitted
+  the aging spend term and misused GBD YLL.
+- Corrected by open recomputation to g = +0.7197%/yr from the identity
+  dS/dt = B·e(0) − N + N·dĒ/dt (mint +9.6606B, spend −8.0917B, drift
+  +1.0394B). Recorded in DECISIONS.md (Key numbers).
+- Forward treatment: none needed — predates all prints. Logged for lineage
+  because the openness rule caught it, and that is the point of the rule.</p>
+<h2>C-0002 | 2026-08-24 | v0 calculator (original) — float intermediate</h2>
+<p>- The ORIGINAL tly_v0_calc.py computed births through a float intermediate
+  (line 144 per A-16 ruling D3): full-precision births 132,113,756.251091
+  x e0 73.123374469 -&gt; mint 9,660,603,670.8547 (9.6606B). The
+  reconstruction, working from 4-dp printed values and possibly revised
+  OWID data, landed at 9.6603B — the famous -0.0026% residual is
+  input-precision/vintage noise, not method.
+- Forward treatment: recorded as a v0 defect; the v1 engine&#x27;s float
+  quarantine (test_no_float_in_published_path, adopted per D3c) makes the
+  defect class unrepresentable. No published value restated.</p>
+</body>
+</html>

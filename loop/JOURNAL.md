@@ -1806,3 +1806,20 @@ timestamps, before the loop existed.
   its domains; CHRONON-vs-SAECULUM naming NOT yet ruled, trademark
   search still open. ORCID 0009-0004-6118-8665 — the identity for
   Zenodo/DOI deposits (E-05 still needs the Zenodo account itself).
+
+## 2026-09-03T14:40+02:00 | E-08 site/ committed | Ben's deploy agent unblocked
+- Ben's Cloudflare runbook agent stopped at "site/ does not exist" and
+  flagged the README's "no public print before ratification" notice.
+  Both resolved: A-16 closed TODAY, and the README notice now states
+  the restore + the research-series/G5 position explicitly.
+- Built the committed publication surface: tly/build_public.py = E-01
+  pages + NEW build_api_from_archive (prints emitted byte-verbatim from
+  archived records — the API serves what was PRINTED, never a
+  recomputation; latest.json == archive/2026-08-31.json verified) +
+  _headers (CORS on /api/* only, nosniff, default-src none CSP).
+- Invariants: deterministic full rebuild (rmtree first, no stale
+  survivors); suite test pins committed site/ == fresh build, API bytes
+  == archive bytes, headers shape. print.yml rebuilds site/ after every
+  print so latest.json rolls forward with the bot commit.
+- Licensing position published, not hidden: research series until the
+  G5 WPP switch; WHO path non-commercial, gate blocks it structurally.

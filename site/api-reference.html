@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API reference</title>
+<style>
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 16px/1.6 system-ui, sans-serif; color: #222; }
+pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
+nav { font-size: .9rem; margin-bottom: 2rem; }
+h1, h2, h3 { line-height: 1.25; }
+</style>
+</head>
+<body>
+<nav><a href="index.html">TLY — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="vintage-archive.html">Vintage archive</a></nav>
+<h1>API reference</h1>
+<p>The API is static JSON — committed files, no server, no keys (RP Part VII;
+`tly/api.py`). Any dumb host or mirror can serve it; `index.json` lets you
+verify a mirror byte-for-byte.</p>
+<h2>Layout</h2>
+<pre>
+api/v1/
+  latest.json          the newest epoch&#x27;s print
+  prints/&lt;date&gt;.json   one file per epoch (date = the Monday, UTC)
+  countries.json       per-country S / E-bar / N breakdown
+  index.json           every artifact above with its sha256
+</pre>
+<h2>The print object (`latest.json`, `prints/*.json`)</h2>
+<p>Fields (all numbers are Decimal-as-string; schema: `tly/prints.py`):</p>
+<p>- `schema_version` — currently `print-v1`.
+- `epoch_utc` — Monday 12:00:00 UTC exactly, explicit UTC offset.
+- `series_label` — `SETTLEMENT` (measured-period S; the series
+  derivatives settle on) or `INFORMATIONAL` (cohort best-estimate;
+  never a settlement input).
+- `s_life_years`, `e_bar_years`, `n_persons`, `burn_life_years`.
+- `coverage` — invariant P7: `measured_share` plus per-country shares;
+  a print without this block does not validate.
+- `accuracy` — RP Part VI rule 6: a statement plus typed uncertainty —
+  an `interval` whose bounds bracket the published S, or a `convention`
+  label with a reason. Produced by `tly.error_budget`, never hand-typed.
+- `provenance` — methodology version, policy strings, and the sha256 of
+  every input snapshot file (resolvable against the committed manifests;
+  invariant P9).</p>
+<h2>Integrity</h2>
+<p>1. Fetch `index.json`; hash every artifact you mirror; compare.
+2. Nothing may exist in the tree that `index.json` does not describe.
+3. Each print&#x27;s provenance hashes resolve into `data/snapshots/*/
+   manifest.json` in the repo — see the reproduction instructions
+   (`docs/REPRODUCE_FIXING.md`) to recompute the values themselves.</p>
+<h2>Stability</h2>
+<p>`print-v1` fields are append-only; removing or renaming a field is a
+schema version bump. Consumers should reject unknown `schema_version`
+values (the reference validator does).</p>
+</body>
+</html>

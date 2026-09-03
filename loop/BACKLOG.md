@@ -169,7 +169,7 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [ ] E-05 | deps: - | refs: RP#VII | HUMAN: Zenodo account (quarterly snapshot-set deposits, one DOI per vintage)
 - [x] E-06 | deps: B-uc3-02 | refs: RP#VII | Zenodo deposit script: package snapshot set + metadata for DOI deposit; dry-run testable without an account (live deposit needs E-05) (done 2026-08-17: license-aware dry-run; WHO extracts excluded with hash+URL)
 - [ ] E-07 | deps: - | refs: RP#VII | HUMAN: Cloudflare Pages account + custom domain (domain choice ties into the D-14 trademark sweep)
-- [ ] E-08 | deps: E-01, E-07 | refs: RP#VII | Deploy static site + JSON API to Cloudflare Pages; publish the URL in README
+- [x] E-08 | deps: E-01, E-07 | refs: RP#VII | Deploy static site + JSON API to Cloudflare Pages; publish the URL in README (2026-09-03: site/ COMMITTED at repo root — E-01 pages + JSON API emitted BYTE-VERBATIM from the archive (first-print-settles applies to the API too) + _headers (CORS on /api/*, nosniff, no-JS CSP); tly/build_public.py deterministic, suite asserts committed tree == fresh build; print.yml rebuilds weekly; Ben's Cloudflare agent deploys from site/ — URL goes in README once the pages.dev deploy lands)
 - [ ] E-09 | deps: - | refs: RP#VII | HUMAN: object-storage account (R2/S3) for raw snapshot sets too large for git
 - [ ] E-10 | deps: E-09 | refs: RP#VII | Snapshot object-storage uploader; sha256 manifests stay committed in-repo
 - [x] E-11 | deps: A-17 | refs: RP#XII | Dependency hash-pinning + CI supply-chain hardening (lockfile with hashes) (done 2026-08-17: requirements-dev.lock with sha256 hashes via uv; ruff band pinned + lint rules frozen after the CI drift incident)
