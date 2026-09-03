@@ -1873,3 +1873,21 @@ timestamps, before the loop existed.
   went live hours ago) — the proposal puts the regime question to Ben
   and recommends sign-off + leaving it posted 14 days anyway.
 - Proposal published as a site page (nav: OPEN PROPOSAL) + BEN_TODO.
+
+## 2026-09-03T19:40+02:00 | RP Part V #3 — the attack paper | DONE
+- docs/reports/MANIPULATION_ECONOMICS.md, every number recomputed from
+  committed artifacts (and re-verified before commit): burn channel is
+  economically dead — 9.0448 LY per fabricated excess death, so 100k
+  fabricated deaths (larger than most countries weekly mortality) move
+  S by 2.5 ppm; total fabrication of the largest weekly feed ~1.5 ppm/wk.
+- The REAL lever is the structure channel: +0.01y uniform e-shift =
+  223 ppm (90x the 100k-deaths move) — which is exactly where the
+  defenses already sit (single biennial source of record, frozen
+  vintages, versioned level changes, E11-scheduled deltas).
+- Honest weakest link named: infrastructure (CI/maintainer compromise),
+  mitigated by outsider-sim + OTS + staged ruleset, RESIDUAL until
+  E-14 recomputers are staffed — stated, not hidden.
+- Proposed hardening sized for future bumps: COVID-peak x1.5 per-epoch
+  burn cap, 2.5% winsorized panel aggregation (COVID survives, single-
+  country fabrication clips), cross-source divergence alarms off the
+  lag triangle.
