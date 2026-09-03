@@ -74,7 +74,10 @@ def test_worktree_manifests_extend_head():
     ]
     problems: list[str] = []
     for path in manifest_paths:
-        head = json.loads(_git("show", f"HEAD:{path}"))
+        try:
+            head = json.loads(_git("show", f"HEAD:{path}"))
+        except subprocess.CalledProcessError:
+            continue  # staged-but-new manifest: no committed rows to protect yet
         work = json.loads((REPO / path).read_text(encoding="utf-8"))
         for name, row in head.get("files", {}).items():
             work_row = work.get("files", {}).get(name)

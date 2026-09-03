@@ -18,7 +18,12 @@ from tly.parsers import parse_births, parse_gho_life_tables, parse_population_ba
 
 REPO = Path(__file__).resolve().parent.parent
 SNAPSHOT = REPO / "data" / "snapshots" / "2026-08-16"
-GOLDEN = json.loads((REPO / "seed" / "results_v0.json").read_text(encoding="utf-8"))
+# Full-precision pins target the ARCHIVED reconstruction (its schema carries
+# full-precision Decimals + band detail). The settlement golden is the RESTORED
+# ORIGINAL seed/results_v0.json, tested in test_golden.py (AC-1.2, A-16 D1/D3).
+GOLDEN = json.loads(
+    (REPO / "ops" / "reconstruction" / "2026-08-16" / "results_v0.json").read_text(encoding="utf-8")
+)
 A = GOLDEN["achieved"]
 
 

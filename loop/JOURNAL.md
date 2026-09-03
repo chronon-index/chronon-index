@@ -1756,3 +1756,34 @@ timestamps, before the loop existed.
   by the permission classifier on key-material generation — remains
   Bens gate, sequence unchanged in BEN_TODO. READY.zip still absent
   from ~/Downloads (A-16 restore still blocked).
+
+## 2026-09-03T14:10+02:00 | A-16 CLOSED + B-uc1-13 | the restore
+- Ben delivered chronon-restore-A16.zip. Executed per its README
+  precedence rules + the D1-D7 rulings:
+  D1 originals restored VERBATIM (seed/CALC_REPORT_v0.txt,
+  tly_v0_calc.py, results_v0.json, METHODOLOGY_v0.md); reconstructions
+  already byte-archived at ops/reconstruction/2026-08-16 (current repo
+  copies were identical - no re-archive needed).
+  D3b data/snapshots/v0-original/ frozen: WHO 2019/2021 + OWID from
+  SNAP16, WHO 2015 from SNAP17 (drift convention D2), provenance rows
+  copied verbatim; vintages.py taught REFERENCE_SETS (a frozen anchor
+  is not a vintage).
+  D4/AC-1.2 STRICT: verified BEFORE restoring - the v1 engine
+  reproduces ALL 13 original results_v0.json values at 4dp from the
+  frozen inputs, INCLUDING mint 9.6606 under the original cbr-derived
+  births convention (births = N x CBR/1000). The reconstruction-era
+  9.6603 came from reading OWID births directly - the -0.0026% story
+  resolves as a CONVENTION difference at 4dp, not just a float
+  intermediate; C-0002 stands as the full-precision record.
+  Precedence 2/3: repo SPEC kept (D4); DECISIONS + RESEARCH_PROGRAM
+  byte-identical to the restore set already.
+- Tests rewired honestly: test_golden.py is now the AC-1.2 strict test
+  (13 values, 4dp, no-orphan-numbers cover check) + the archived
+  reconstruction kept byte-runnable offline (harness-side REPO_ROOT
+  fix only, artifact untouched); full-precision pins repointed to the
+  archived reconstruction file.
+- B-uc1-13 closes per D3a: the golden IS the original, no regeneration.
+- Verifier: 335 passed; outsider-sim PASSED post-restore.
+- Commit unsigned: no signing key configured on this machine (E-12
+  sigstore/signing still open) - ruling asked for a signed commit;
+  recorded as a known gap, to re-sign or attest once keys exist.

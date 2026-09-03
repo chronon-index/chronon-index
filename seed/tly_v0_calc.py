@@ -1,432 +1,201 @@
-#!/usr/bin/env python3.12
-"""tly_v0_calc.py — v0 calculator for S, humanity's total remaining life-years.
-
-Reconstructed 2026-08-16 from DECISIONS.md, RESEARCH_PROGRAM.md and
-RALPH_LOOP.md after loss of the original; pending Ben's review.
-
-Estimator E2 (RESEARCH_PROGRAM Part IX):
-    S = sum over bands of N_band * e(mid(band))
-    - band midpoint by the uniform-within-band assumption
-    - e() by piecewise-linear interpolation on the exact-age anchors of the
-      abridged life table; flat beyond the last anchor (age 85)
-
-All arithmetic is Decimal (precision 34, ROUND_HALF_EVEN) from the moment
-values leave parsing. Floats never touch published numbers (JSON is parsed
-with parse_float=Decimal).
-
-Modes:
-    --fetch     fetch sources over the network, write a content-hashed
-                snapshot + manifest.json, then compute from that snapshot.
-    (default)   offline: read the committed snapshot, recompute, write results.
-
-Python 3.12, stdlib only. No secrets; all endpoints keyless.
+#!/usr/bin/env python3
 """
+TLY v0 open calculator - Total remaining human Life-Years and organic issuance.
 
-from __future__ import annotations
+Every input is fetched live from a public, keyless endpoint and printed with
+its source URL so any third party can re-run this file and reproduce every
+number. Full method in METHODOLOGY_v0.md.
 
-import argparse
-import csv
-import hashlib
-import io
-import json
-import random
-import sys
-import time
-import urllib.error
-import urllib.request
-from datetime import datetime, timezone
-from decimal import ROUND_HALF_EVEN, Decimal, getcontext
-from pathlib import Path
+Sources of record:
+  [OWID] Our World in Data grapher CSVs (underlying source: UN World
+         Population Prospects 2024) - world population by 5-year age group,
+         crude birth rate.
+         https://ourworldindata.org/grapher/population-by-five-year-age-group
+         https://ourworldindata.org/grapher/crude-birth-rate
+  [WHO]  WHO Global Health Observatory OData API, indicator LIFE_0000000035
+         (ex - expectation of life at age x), SpatialDim=GLOBAL, both sexes -
+         the global abridged life table, 2000-2021.
+         https://ghoapi.azureedge.net/api/LIFE_0000000035
+
+Method:
+  S(t)   = sum over age bands of N(band) * e(band mean age)
+  Mint   = births/yr * e(0)
+  Spend  = N_total * 1 year  (every living person uses one year per year)
+  Drift  = N_total * d(E-bar)/dt from life-table revisions (2015->2019,
+           pre-COVID window, holding current population weights fixed)
+  g      = (Mint - Spend + Drift) / S
+  Expected deaths do NOT enter: they are already priced into e(x).
+  Only EXCESS deaths versus the table burn stock (COVID scenario below).
+
+Life-table vintage: WHO's latest global table is 2021, a COVID-depressed
+anomaly year (e0=71.4). WPP 2024 puts 2023 e0 back near the 2019 level
+(~73.2), so the 2019 table is used as primary and the 2021 table shown as
+a lower bound.
+"""
+import csv, io, json, time, urllib.request
+from decimal import Decimal, getcontext, ROUND_HALF_EVEN
 
 getcontext().prec = 34
-getcontext().rounding = ROUND_HALF_EVEN
-
-REPO_ROOT = Path(__file__).resolve().parent.parent
-SNAPSHOTS_ROOT = REPO_ROOT / "data" / "snapshots"
-DEFAULT_RESULTS = REPO_ROOT / "seed" / "results_v0.json"
-
-USER_AGENT = (
-    "tly-research/0.1 (benjaminpauls.stocks@gmail.com; "
-    "open reproducible index research; github: pending)"
-)
-
-BILLION = Decimal(10) ** 9
 Q4 = Decimal("0.0001")
+UA = {"User-Agent": "TLY-v0-open-calculator (reproducibility script)"}
 
-# ---------------------------------------------------------------------------
-# Sources. Few-and-large requests; World Bank API deliberately NOT used
-# (WAF-blocked this project on 2026-08-16 — see RALPH_LOOP.md section 6).
-# GHO indicator LIFE_0000000035 = "ex - expectation of life at age x",
-# verified against https://ghoapi.azureedge.net/api/Indicator on 2026-08-16.
-# ---------------------------------------------------------------------------
-SOURCES = {
-    "gho_ex_global_btsx_2019_2021.json": (
-        "https://ghoapi.azureedge.net/api/LIFE_0000000035"
-        "?$filter=SpatialDim%20eq%20%27GLOBAL%27%20and%20Dim1%20eq%20%27SEX_BTSX%27"
-        "%20and%20(TimeDim%20eq%202019%20or%20TimeDim%20eq%202021)"
-    ),
-    "gho_lifetable_indicator_list.json": (
-        "https://ghoapi.azureedge.net/api/Indicator?$filter=contains(IndicatorCode,%20%27LIFE_%27)"
-    ),
-    "owid_population_5yr_world.csv": (
-        "https://ourworldindata.org/grapher/population-by-five-year-age-group.csv"
-        "?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
-    ),
-    "owid_population_5yr.metadata.json": (
-        "https://ourworldindata.org/grapher/population-by-five-year-age-group.metadata.json"
-        "?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
-    ),
-    "owid_births_deaths_world.csv": (
-        "https://ourworldindata.org/grapher/births-and-deaths-projected-to-2100.csv"
-        "?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
-    ),
-    "owid_births_deaths.metadata.json": (
-        "https://ourworldindata.org/grapher/births-and-deaths-projected-to-2100.metadata.json"
-        "?v=1&csvType=filtered&useColumnShortNames=true&country=~OWID_WRL"
-    ),
-}
+OWID_AGE = "https://ourworldindata.org/grapher/population-by-five-year-age-group.csv?csvType=full"
+OWID_CBR = "https://ourworldindata.org/grapher/crude-birth-rate.csv?csvType=full"
+WHO = ("https://ghoapi.azureedge.net/api/LIFE_0000000035"
+       "?$filter=SpatialDim%20eq%20%27GLOBAL%27%20and%20Dim1%20eq%20%27SEX_BTSX%27"
+       "&$select=TimeDim,Dim2,NumericValue")
 
-POPULATION_YEAR = 2023
-LIFE_TABLE_YEARS = (2019, 2021)
+WHO_AGE = {"AGEGROUP_YEARS00-01": 0, "AGEGROUP_YEARS01-04": 1,
+           "AGEGROUP_YEARS05-09": 5, "AGEGROUP_YEARS10-14": 10,
+           "AGEGROUP_YEARS15-19": 15, "AGEGROUP_YEARS20-24": 20,
+           "AGEGROUP_YEARS25-29": 25, "AGEGROUP_YEARS30-34": 30,
+           "AGEGROUP_YEARS35-39": 35, "AGEGROUP_YEARS40-44": 40,
+           "AGEGROUP_YEARS45-49": 45, "AGEGROUP_YEARS50-54": 50,
+           "AGEGROUP_YEARS55-59": 55, "AGEGROUP_YEARS60-64": 60,
+           "AGEGROUP_YEARS65-69": 65, "AGEGROUP_YEARS70-74": 70,
+           "AGEGROUP_YEARS75-79": 75, "AGEGROUP_YEARS80-84": 80,
+           "AGEGROUP_YEARS85PLUS": 85}
 
-# GHO abridged age-group codes -> exact-age anchor (start of interval).
-GHO_AGE_ANCHORS = {"AGEGROUP_YEARS00-01": 0, "AGEGROUP_YEARS01-04": 1}
-for _a in range(5, 85, 5):
-    GHO_AGE_ANCHORS[f"AGEGROUP_YEARS{_a:02d}-{_a + 4:02d}"] = _a
-GHO_AGE_ANCHORS["AGEGROUP_YEARS85PLUS"] = 85
-
-TARGETS_FROM_DECISIONS = {
-    "S_2019_billions": "362.4126",
-    "S_2021_billions": "348.1905",
-    "E_bar_years": "44.7880",
-    "N_billions": "8.0917",
-    "mint_B_times_e0_billions": "9.6606",
-    "spend_minus_N_billions": "-8.0917",
-    "drift_billions": "1.0394",
-    "g_pct_per_yr": "0.7197",
-}
-
-
-# ---------------------------------------------------------------------------
-# Fetch (snapshot-first)
-# ---------------------------------------------------------------------------
-def _fetch_url(url: str, attempts: int = 4) -> bytes:
-    last_err: Exception | None = None
-    for attempt in range(attempts):
-        if attempt:
-            delay = (2**attempt) + random.uniform(0.0, 1.5)  # backoff with jitter
-            time.sleep(delay)
+def fetch_bytes(url, tries=4):
+    for i in range(tries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
-            with urllib.request.urlopen(req, timeout=120) as resp:
-                return resp.read()
-        except (urllib.error.URLError, TimeoutError, OSError) as err:
-            last_err = err
-            print(f"  attempt {attempt + 1}/{attempts} failed: {err}", file=sys.stderr)
-    raise RuntimeError(f"fetch failed after {attempts} attempts: {url}") from last_err
+            req = urllib.request.Request(url, headers=UA)
+            with urllib.request.urlopen(req, timeout=60) as r:
+                return r.read()
+        except Exception:
+            if i == tries - 1:
+                raise
+            time.sleep(1.5 * (i + 1))
 
+def band_mean_age(label):
+    """Mean exact age of a population band, uniform-within-band assumption."""
+    if label.startswith("100"):
+        return 101.0
+    lo, hi = label.replace(" years", "").split("-")
+    return (int(lo) + int(hi) + 1) / 2.0   # e.g. 0-4 -> 2.5, 80-84 -> 82.5
 
-def fetch_snapshot(snapshot_dir: Path) -> Path:
-    snapshot_dir.mkdir(parents=True, exist_ok=True)
-    manifest: dict = {
-        "snapshot_date": snapshot_dir.name,
-        "note": (
-            "Reconstructed 2026-08-16 from DECISIONS.md, RESEARCH_PROGRAM.md and "
-            "RALPH_LOOP.md after loss of the original; pending Ben's review."
-        ),
-        "network_policy": (
-            "User-Agent sent; few-and-large requests; exponential backoff with "
-            "jitter; World Bank API not used (WAF-blocked 2026-08-16)."
-        ),
-        "files": {},
-    }
-    for name, url in SOURCES.items():
-        print(f"FETCH {url}")
-        body = _fetch_url(url)
-        (snapshot_dir / name).write_bytes(body)
-        manifest["files"][name] = {
-            "source_url": url,
-            "retrieved_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-            "sha256": hashlib.sha256(body).hexdigest(),
-            "bytes": len(body),
-        }
-    (snapshot_dir / "manifest.json").write_text(
-        json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-    )
-    print(f"snapshot written: {snapshot_dir}")
-    return snapshot_dir
+def e_at(age, table):
+    """Piecewise-linear interpolation of ex on exact-age anchors; flat >= 85."""
+    xs = sorted(table)
+    if age >= xs[-1]:
+        return table[xs[-1]]
+    for lo, hi in zip(xs, xs[1:]):
+        if lo <= age <= hi:
+            w = (age - lo) / (hi - lo)
+            return table[lo] * (1 - w) + table[hi] * w
+    return table[xs[0]]
 
+def main():
+    print("=" * 76)
+    print("TLY v0 - Total remaining human Life-Years (all inputs fetched live)")
+    print("=" * 76)
 
-# ---------------------------------------------------------------------------
-# Load (offline; everything Decimal from the moment it leaves parsing)
-# ---------------------------------------------------------------------------
-def load_snapshot(snapshot_dir: Path) -> dict:
-    manifest = json.loads((snapshot_dir / "manifest.json").read_text(encoding="utf-8"))
+    # ---- population by age band [OWID <- UN WPP 2024] ------------------------
+    rows = list(csv.DictReader(io.StringIO(fetch_bytes(OWID_AGE).decode())))
+    world = [r for r in rows if r["Entity"] == "World"]
+    latest_pop_year = max(int(r["Year"]) for r in world)
+    wrow = next(r for r in world if int(r["Year"]) == latest_pop_year)
+    bands = {k: float(v) for k, v in wrow.items()
+             if k not in ("Entity", "Code", "Year") and v}
+    pop = sum(bands.values())
+    print(f"\n[OWID/WPP2024] World population by 5y band, {latest_pop_year}: "
+          f"total {pop:,.0f}")
+    print(f"  {OWID_AGE}")
 
-    # WHO GHO ex — parse_float=Decimal keeps floats out entirely.
-    gho = json.loads(
-        (snapshot_dir / "gho_ex_global_btsx_2019_2021.json").read_text(encoding="utf-8"),
-        parse_float=Decimal,
-    )
-    tables: dict[int, dict[int, Decimal]] = {}
-    for row in gho["value"]:
-        year = int(row["TimeDim"])
-        if year not in LIFE_TABLE_YEARS:
-            continue
-        if row["SpatialDim"] != "GLOBAL" or row["Dim1"] != "SEX_BTSX":
-            raise ValueError(f"unexpected GHO row scope: {row['SpatialDim']}/{row['Dim1']}")
-        age = GHO_AGE_ANCHORS[row["Dim2"]]
-        val = row["NumericValue"]
-        if not isinstance(val, Decimal):  # ints arrive as int; never float
-            val = Decimal(val)
-        tables.setdefault(year, {})[age] = val
-    for year in LIFE_TABLE_YEARS:
-        if sorted(tables.get(year, {})) != sorted(GHO_AGE_ANCHORS.values()):
-            raise ValueError(f"incomplete GHO life table for {year}")
+    # ---- global life tables [WHO GHO] ----------------------------------------
+    who = json.loads(fetch_bytes(WHO).decode())["value"]
+    tables = {}
+    for r in who:
+        tables.setdefault(int(r["TimeDim"]), {})[WHO_AGE[r["Dim2"]]] = float(r["NumericValue"])
+    t19, t21 = tables[2019], tables[2021]
+    print(f"\n[WHO GHO] Global abridged life table, both sexes")
+    print(f"  2019: e(0)={t19[0]:.4f}  e(30)={t19[30]:.4f}  e(65)={t19[65]:.4f}  e(85+)={t19[85]:.4f}")
+    print(f"  2021: e(0)={t21[0]:.4f}  (COVID-depressed; shown as lower bound)")
+    print(f"  {WHO}")
 
-    # OWID population by 5-year band, World, both sexes, WPP 2024 estimates.
-    pop_text = (snapshot_dir / "owid_population_5yr_world.csv").read_text(encoding="utf-8")
-    rows = list(csv.reader(io.StringIO(pop_text)))
-    header, data = rows[0], rows[1:]
-    world_row = None
-    for r in data:
-        if r[1] == "OWID_WRL" and int(r[2]) == POPULATION_YEAR:
-            world_row = r
-            break
-    if world_row is None:
-        raise ValueError(f"no OWID_WRL row for {POPULATION_YEAR} in population snapshot")
-    bands: list[tuple[str, Decimal, Decimal]] = []  # (label, midpoint, N_band)
-    for col, val in zip(header[3:], world_row[3:]):
-        # column form: population__sex_all__age_0_4__variant_estimates
-        agepart = col.split("__age_")[1].split("__")[0]
-        if agepart.endswith("plus"):
-            lo = Decimal(agepart[:-4])
-            # Open-ended band: no width, so uniform-within-band gives no
-            # midpoint. Convention: lo + 2.5. Inert here — e() is flat beyond
-            # the last anchor (85), so any midpoint >= 85 yields e(85+).
-            mid = lo + Decimal("2.5")
-            label = f"{agepart[:-4]}+"
-        else:
-            lo_s, hi_s = agepart.split("_")
-            lo = Decimal(lo_s)
-            # Band [lo, hi] of integer ages covers exact ages [lo, hi+1);
-            # uniform-within-band midpoint = (lo + hi + 1) / 2.
-            mid = (lo + Decimal(hi_s) + 1) / 2
-            label = f"{lo_s}-{hi_s}"
-        bands.append((label, mid, Decimal(val)))
-
-    # OWID births (WPP 2024 estimates), World.
-    births_text = (snapshot_dir / "owid_births_deaths_world.csv").read_text(encoding="utf-8")
-    brows = list(csv.reader(io.StringIO(births_text)))
-    bheader = brows[0]
-    births_col = bheader.index("births__sex_all__age_all__variant_estimates")
-    births: Decimal | None = None
-    for r in brows[1:]:
-        if r[1] == "OWID_WRL" and int(r[2]) == POPULATION_YEAR and r[births_col]:
-            births = Decimal(r[births_col])
-            break
-
-    return {
-        "manifest": manifest,
-        "tables": tables,
-        "bands": bands,
-        "births": births,
-        "snapshot_dir": snapshot_dir.resolve(),
-    }
-
-
-# ---------------------------------------------------------------------------
-# Estimator E2
-# ---------------------------------------------------------------------------
-def e_interp(table: dict[int, Decimal], age: Decimal) -> Decimal:
-    """Piecewise-linear e() on exact-age anchors; flat beyond the last anchor."""
-    anchors = sorted(table)
-    if age >= anchors[-1]:
-        return table[anchors[-1]]
-    if age < anchors[0]:
-        raise ValueError(f"age {age} below first anchor")
-    for lo, hi in zip(anchors, anchors[1:]):
-        if Decimal(lo) <= age <= Decimal(hi):
-            frac = (age - Decimal(lo)) / (Decimal(hi) - Decimal(lo))
-            return table[lo] + (table[hi] - table[lo]) * frac
-    raise AssertionError("unreachable")
-
-
-def compute(snapshot: dict) -> dict:
-    tables = snapshot["tables"]
-    bands = snapshot["bands"]
-    births = snapshot["births"]
-
-    n_total = sum(n for _, _, n in bands)
-    s_by_year: dict[int, Decimal] = {}
-    band_detail: dict[int, list] = {}
-    for year in LIFE_TABLE_YEARS:
-        t = tables[year]
+    # ---- the stock ------------------------------------------------------------
+    def stock(table):
+        S = Decimal(0)
         detail = []
-        s = Decimal(0)
-        for label, mid, n in bands:
-            e_mid = e_interp(t, mid)
-            term = n * e_mid
-            s += term
-            detail.append((label, str(mid), str(n), str(e_mid), str(term)))
-        s_by_year[year] = s
-        band_detail[year] = detail
+        for label, n in bands.items():
+            m = band_mean_age(label)
+            e = e_at(m, table)
+            ly = Decimal(n) * Decimal(e)
+            S += ly
+            detail.append((label, n, m, e, float(ly)))
+        return S.quantize(Q4, rounding=ROUND_HALF_EVEN), detail
 
-    s2019, s2021 = s_by_year[2019], s_by_year[2021]
-    e_bar = s2019 / n_total
-    e0_2019 = tables[2019][0]
-    e0_2021 = tables[2021][0]
-    mint = births * e0_2019 if births is not None else None
-    spend = -n_total
+    S19, detail = stock(t19)
+    S21, _ = stock(t21)
+    print(f"\n{'band':>12} {'population':>16} {'mean age':>9} {'e(mean)':>9} {'life-years':>18}")
+    for label, n, m, e, ly in detail:
+        print(f"{label:>12} {n:>16,.0f} {m:>9.1f} {e:>9.3f} {ly:>18,.0f}")
+    print(f"\n  S (2019 table, PRIMARY) = {float(S19):,.0f}  = {float(S19)/1e9:.4f}B life-years")
+    print(f"  S (2021 table, lower bound) = {float(S21)/1e9:.4f}B life-years")
+    print(f"  E-bar (avg remaining years per living person) = {float(S19/Decimal(pop)):.4f}")
+    print(f"  Note: flat e for 90+ bands overstates their e by ~1-2y; those bands")
+    print(f"  are {sum(n for l,n,_,_,_ in [(d[0],d[1],0,0,0) for d in detail] if l.startswith(('90','95','100')))/pop*100:.3f}% of population -> bias on S < +0.05%.")
 
-    def dev_pct(achieved: Decimal, target_key: str) -> str:
-        target = Decimal(TARGETS_FROM_DECISIONS[target_key])
-        return str(((achieved - target) / target * 100).quantize(Q4))
+    # ---- organic issuance ------------------------------------------------------
+    cbr_rows = list(csv.DictReader(io.StringIO(fetch_bytes(OWID_CBR).decode())))
+    wcbr = [r for r in cbr_rows if r["Entity"] == "World" and r.get("Birth rate")]
+    cbr_year = max(int(r["Year"]) for r in wcbr)
+    cbr = float(next(r for r in wcbr if int(r["Year"]) == cbr_year)["Birth rate"])
+    births = cbr / 1000.0 * pop
+    mint = Decimal(births) * Decimal(t19[0])
+    spend = Decimal(pop)
 
-    achieved = {
-        "S_2019_life_years": str(s2019),
-        "S_2019_billions": str((s2019 / BILLION).quantize(Q4)),
-        "S_2021_life_years": str(s2021),
-        "S_2021_billions": str((s2021 / BILLION).quantize(Q4)),
-        "N_persons": str(n_total),
-        "N_billions": str((n_total / BILLION).quantize(Q4)),
-        "E_bar_years_full": str(e_bar),
-        "E_bar_years": str(e_bar.quantize(Q4)),
-        "E_bar_2021_years": str((s2021 / n_total).quantize(Q4)),
-        "e0_2019": str(e0_2019),
-        "e0_2021": str(e0_2021),
-        "births_2023": str(births) if births is not None else None,
-        "mint_B_times_e0_life_years": str(mint) if mint is not None else None,
-        "mint_B_times_e0_billions": (
-            str((mint / BILLION).quantize(Q4)) if mint is not None else None
-        ),
-        "spend_minus_N_life_years": str(spend),
-        "spend_minus_N_billions": str((spend / BILLION).quantize(Q4)),
-    }
-    deviations = {
-        "S_2019_billions_pct": dev_pct(s2019 / BILLION, "S_2019_billions"),
-        "S_2021_billions_pct": dev_pct(s2021 / BILLION, "S_2021_billions"),
-        "E_bar_years_pct": dev_pct(e_bar, "E_bar_years"),
-        "N_billions_pct": dev_pct(n_total / BILLION, "N_billions"),
-        "spend_minus_N_billions_pct": dev_pct(spend / BILLION, "spend_minus_N_billions"),
-    }
-    if mint is not None:
-        deviations["mint_B_times_e0_billions_pct"] = dev_pct(
-            mint / BILLION, "mint_B_times_e0_billions"
-        )
+    def ebar_for(table):
+        return sum(n * e_at(band_mean_age(l), table) for l, n in bands.items()) / pop
+    d_ebar = (ebar_for(tables[2019]) - ebar_for(tables[2015])) / 4.0
+    drift = Decimal(pop) * Decimal(d_ebar)
+    net = mint - spend + drift
+    g = net / S19
 
-    manifest = snapshot["manifest"]
-    return {
-        "_note": (
-            "Reconstructed 2026-08-16 from DECISIONS.md, RESEARCH_PROGRAM.md and "
-            "RALPH_LOOP.md after loss of the original; pending Ben's review."
-        ),
-        "_method": (
-            "Estimator E2 (RESEARCH_PROGRAM Part IX): S = sum over bands of "
-            "N_band * e(mid(band)); midpoint by uniform-within-band; e() "
-            "piecewise-linear on exact-age anchors of the WHO abridged global "
-            "life table; flat beyond age 85. Decimal prec 34 ROUND_HALF_EVEN."
-        ),
-        "_precision": "Decimal precision 34, ROUND_HALF_EVEN; no floats",
-        "snapshot_dir": str(snapshot["snapshot_dir"].relative_to(REPO_ROOT)),
-        "sources": {
-            name: {
-                "source_url": meta["source_url"],
-                "retrieved_utc": meta["retrieved_utc"],
-                "sha256": meta["sha256"],
-            }
-            for name, meta in sorted(manifest["files"].items())
-        },
-        "population_year": POPULATION_YEAR,
-        "life_table_years": list(LIFE_TABLE_YEARS),
-        "achieved": achieved,
-        "not_reproduced": {
-            "drift_billions": (
-                "NOT REPRODUCED in this pass: requires dE-bar/dt across "
-                "successive population/life-table vintages, not fetched here."
-            ),
-            "g_pct_per_yr": (
-                "NOT REPRODUCED in this pass: g depends on the drift term "
-                "above; mint and spend alone do not determine it."
-            ),
-        },
-        "targets_from_DECISIONS": TARGETS_FROM_DECISIONS,
-        "deviation_pct": deviations,
-        "band_detail": {str(y): band_detail[y] for y in LIFE_TABLE_YEARS},
-    }
+    print(f"\nOrganic issuance decomposition (per year):")
+    print(f"  Mint   = births x e(0) = {births:,.0f} x {t19[0]:.4f} = +{float(mint)/1e9:.4f}B")
+    print(f"           [OWID/WPP crude birth rate {cbr:.3f}/1000, {cbr_year}]")
+    print(f"  Spend  = every living person uses 1 year        = -{float(spend)/1e9:.4f}B")
+    print(f"  Drift  = N x d(E-bar)/dt = {pop:,.0f} x {d_ebar:+.4f} = {float(drift)/1e9:+.4f}B")
+    print(f"           [WHO tables 2015 -> 2019, current weights held fixed]")
+    print(f"  Net    = {float(net)/1e9:+.4f}B per year")
+    print(f"  g      = {float(g)*100:+.4f}% per year")
+    print(f"  Expected deaths do not appear - they are already inside e(x).")
+    print(f"  Only EXCESS deaths versus the table burn stock.")
 
+    # ---- COVID-scale shock ------------------------------------------------------
+    # WHO: 14.83M excess deaths associated with COVID-19 across 2020-2021.
+    # https://www.who.int/news/item/05-05-2022-14.9-million-excess-deaths-were-associated-with-the-covid-19-pandemic-in-2020-and-2021
+    excess = 14.83e6
+    print(f"\nCOVID-scale shock (WHO excess deaths 2020-21 = {excess/1e6:.2f}M):")
+    for ed, label in ((10.0, "our-table, older skew"), (12.0, "our-table, central"),
+                      (15.0, "our-table, younger skew"), (22.7, "WHO YLL-paper implied")):
+        burn = Decimal(excess) * Decimal(ed)
+        print(f"  mean e at death = {ed:>5.1f} -> burn {float(burn)/1e6:>7.1f}M life-years"
+              f" = {float(burn/S19)*100:.4f}% of S   ({label})")
 
-def render_json(results: dict) -> str:
-    """Deterministic rendering — byte-identical across runs (invariant P5)."""
-    return json.dumps(results, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    # ---- vision-consistent asymptote ---------------------------------------------
+    usd_hr = Decimal("6.00") / (Decimal(15) / Decimal(60))
+    usd_yr = usd_hr * Decimal("8766")
+    cap = usd_yr * S19
+    # Global personal wealth: UBS GWR base USD 454.4T end-2022, grown by the
+    # published rates +4.2% (2023), +4.6% (2024), +10.8% (2025) -> ~USD 549T.
+    # https://www.ubs.com/global/en/media/display-page-ndp/en-20260630-gwr-2026.html
+    wealth = Decimal("454.4e12") * Decimal("1.042") * Decimal("1.046") * Decimal("1.108")
+    print(f"\nVision-consistent asymptote (burger = 15 minutes):")
+    print(f"  $6.00 / 15 min -> ${float(usd_hr):.4f}/h -> ${float(usd_yr):,.2f} per life-year")
+    print(f"  implied cap = ${float(cap)/1e15:,.4f} quadrillion "
+          f"= {float(cap/wealth):.1f}x global personal wealth (~$549T, UBS GWR chain)")
 
-
-# ---------------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------------
-def latest_snapshot_dir() -> Path:
-    dirs = sorted(p for p in SNAPSHOTS_ROOT.iterdir() if p.is_dir())
-    if not dirs:
-        raise SystemExit(f"no snapshot under {SNAPSHOTS_ROOT}; run with --fetch first")
-    return dirs[-1]
-
-
-def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description=__doc__)
-    ap.add_argument("--fetch", action="store_true", help="fetch sources, write snapshot")
-    ap.add_argument("--snapshot-dir", type=Path, default=None)
-    ap.add_argument("--out", type=Path, default=DEFAULT_RESULTS)
-    args = ap.parse_args(argv)
-
-    if args.fetch:
-        snap_dir = args.snapshot_dir or (
-            SNAPSHOTS_ROOT / datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        )
-        fetch_snapshot(snap_dir)
-    else:
-        snap_dir = args.snapshot_dir or latest_snapshot_dir()
-
-    snapshot = load_snapshot(snap_dir)
-    results = compute(snapshot)
-    args.out.write_text(render_json(results), encoding="utf-8")
-
-    a = results["achieved"]
-    print("TLY v0 calculator — estimator E2 — Decimal(34, ROUND_HALF_EVEN)")
-    print(f"snapshot: {results['snapshot_dir']}")
-    print("sources (radical verifiability):")
-    for name, meta in results["sources"].items():
-        print(f"  {name}")
-        print(f"    {meta['source_url']}")
-        print(f"    sha256 {meta['sha256']}  retrieved {meta['retrieved_utc']}")
-    print(
-        f"S  (2019 table) = {a['S_2019_billions']}B life-years "
-        f"(target {TARGETS_FROM_DECISIONS['S_2019_billions']}B)"
-    )
-    print(
-        f"S  (2021 table) = {a['S_2021_billions']}B life-years "
-        f"(target {TARGETS_FROM_DECISIONS['S_2021_billions']}B)"
-    )
-    print(
-        f"E-bar           = {a['E_bar_years']} years "
-        f"(target {TARGETS_FROM_DECISIONS['E_bar_years']})"
-    )
-    print(
-        f"N               = {a['N_billions']}B persons "
-        f"(target {TARGETS_FROM_DECISIONS['N_billions']}B)"
-    )
-    if a["mint_B_times_e0_billions"] is not None:
-        print(
-            f"mint B*e(0)     = {a['mint_B_times_e0_billions']}B "
-            f"(target {TARGETS_FROM_DECISIONS['mint_B_times_e0_billions']}B)"
-        )
-    print(
-        f"spend -N        = {a['spend_minus_N_billions']}B "
-        f"(target {TARGETS_FROM_DECISIONS['spend_minus_N_billions']}B)"
-    )
-    print("drift, g        = NOT REPRODUCED in this pass (see results file)")
-    print(f"results written: {args.out}")
-    return 0
-
+    json.dump({"S_2019_table": float(S19), "S_2021_table": float(S21),
+               "pop": pop, "pop_year": latest_pop_year, "e0_2019": t19[0],
+               "births": births, "cbr": cbr, "cbr_year": cbr_year,
+               "mint": float(mint), "spend": float(spend), "drift": float(drift),
+               "d_ebar_per_yr": d_ebar, "net": float(net), "g_pct": float(g)*100,
+               "asymptote_usd_per_lifeyear": float(usd_yr),
+               "asymptote_cap_usd": float(cap)},
+              open("results_v0.json", "w"), indent=2)
+    print(f"\nresults_v0.json written. Re-run this file anywhere to reproduce.")
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

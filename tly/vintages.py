@@ -27,11 +27,20 @@ class VintageError(ValueError):
     pass
 
 
+# Frozen REFERENCE sets living beside the dated vintages. "v0-original" is
+# the D3b golden-input freeze (A-16 ruling): it pins AC-1.2, it is not a
+# point on the vintage timeline and never resolves from an as-of query.
+REFERENCE_SETS = frozenset({"v0-original"})
+
+
 def list_vintages(root: Path = SNAPSHOTS_ROOT) -> list[date]:
     """All vintage dates, ascending. A directory without a manifest is not
-    a vintage (and the manifest-schema gate would fail the build anyway)."""
+    a vintage (and the manifest-schema gate would fail the build anyway);
+    named REFERENCE_SETS are frozen anchors, not vintages."""
     out = []
     for d in sorted(p for p in root.iterdir() if p.is_dir()):
+        if d.name in REFERENCE_SETS:
+            continue
         if (d / "manifest.json").is_file():
             try:
                 out.append(date.fromisoformat(d.name))
