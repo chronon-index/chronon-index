@@ -9,7 +9,7 @@ remaining time. Physics borrowing: the hypothesized indivisible quantum of
 time. Pluralizes as a currency word ("forty chronons"). (DECISIONS,
 name resolution 2026-08-16.)
 
-**CHRONON** — the token's name and full-word ticker (modern convention;
+**SAECULUM** — the token's name (ticker SAEC; ruled 2026-09-04, formerly CHRONON;
 maximizes distance from CRO/CHR). Trademark clearance pending (classes
 9/36/42; opposition risk from the Cronos/Chronos phonetic neighborhood).
 Reserve name if clearance fails: SAECULUM. (DECISIONS.)

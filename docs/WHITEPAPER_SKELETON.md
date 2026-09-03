@@ -1,4 +1,4 @@
-# CHRONON whitepaper — skeleton (D-07)
+# SAECULUM whitepaper — skeleton (D-07; renamed from CHRONON 2026-09-04)
 
 Structure per RESEARCH_PROGRAM Part XI, pointers only. NO section contains
 drafted prose: each lists what it must argue, which repo artifacts already
