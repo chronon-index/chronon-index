@@ -32,7 +32,11 @@ def test_personal_page_is_client_side_only():
     assert "Private by architecture" in me
     assert "not a prophecy" in me and "not medical advice" in me
     headers = (REPO / "site" / "_headers").read_text(encoding="utf-8")
-    assert "connect-src 'none'" in headers  # no-network ENFORCED by CSP
+    # the CSP must cover BOTH URLs Pages serves the page at (found live:
+    # /me.html 308s to the pretty URL /me, which got the global no-script
+    # CSP and silently blocked the calculator)
+    assert "\n/me\n" in headers and "/me.html" in headers
+    assert headers.count("connect-src 'none'") >= 2
 
 
 def test_personal_math_matches_the_page_js():
