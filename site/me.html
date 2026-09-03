@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your time — SAECULUM</title>
+<style>
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 16px/1.6 system-ui, sans-serif; color: #222; }
+pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
+nav { font-size: .9rem; margin-bottom: 2rem; }
+h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
+</style>
+</head>
+<body>
+<nav><a href="dashboard.html">The index</a> · <a href="index.html">SAECULUM — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="proposal-g5.html">OPEN PROPOSAL: G5 source of record</a> · <a href="vintage-archive.html">Vintage archive</a> · <a href="me.html">Your time</a></nav>
+
+<h1>Your time</h1>
+<blockquote>
+<p><strong>Private by architecture:</strong> everything on this page is
+computed inside your browser. Nothing you enter is sent, stored, or
+logged — the page makes no network requests. Close the tab and it is
+gone.</p>
+</blockquote>
+<blockquote>
+<p><strong>What this is and is not:</strong> population statistics
+applied to one person. It cannot know your genome, your luck, or your
+future. The honest reading of the result is a <em>central estimate with
+a wide range</em> — not a prophecy, and not medical advice.</p>
+</blockquote>
+
+<form id="f" onsubmit="return false">
+<p><label>Your age: <input id="age" type="number" min="0" max="100" value="30" style="width:5rem"></label>
+&nbsp; <label>Sex:
+<select id="sex">
+<option value="unspecified">prefer not to say</option>
+<option value="female">female</option>
+<option value="male">male</option>
+</select></label></p>
+<div id="qs"></div>
+<p><button id="go" style="font-size:1.1rem;padding:.4rem 1.2rem">Estimate my remaining time</button></p>
+</form>
+
+<div id="out" hidden>
+<h2 id="headline"></h2>
+<p id="range"></p>
+<p id="share"></p>
+<h2>The math, step by step</h2>
+<div id="steps"></div>
+</div>
+
+<h2>How the estimate works</h2>
+<p>1. The base is the <strong>UN WPP 2024 World life table</strong> (2023,
+single ages) — the same committed, hash-manifested input the index
+settles on (fixture sha256 <code>fbcbd9c9fe900408…</code>). It gives q(a):
+the probability of dying within a year at each age a.</p>
+<p>2. Your answers each carry a published <strong>relative risk</strong> —
+a hazard multiplier from the epidemiology literature (source noted on
+every option). They multiply into one composite m, clamped to
+[0.35, 4.0] because questionnaire risks multiply badly at
+the extremes and honesty beats false precision. Sex uses the typical
+published mortality ratio (male ×1.28, female
+×0.76) against the both-sexes table — an approximation,
+labeled as one.</p>
+<p>3. Your adjusted hazard is q'(a) = min(1, m·q(a)). Walking it forward
+from your age gives your survival curve; summing survivors (a death
+counts half a year — the trapezoid rule) gives expected remaining
+years. The 10th and 90th percentiles are read off the same curve —
+that spread is the honest headline, not the single number.</p>
+<p>4. Multiplying your remaining years by nothing gives your stake in
+the index: S is simply this number summed over every living person on
+earth. One token = one life-year of that total.</p>
+
+<script>
+const QX = [0.027271, 0.003482, 0.002385, 0.001888, 0.001586, 0.001352, 0.001153, 0.00099, 0.00085, 0.000737, 0.000663, 0.00063, 0.000632, 0.000669, 0.000736, 0.000831, 0.00094, 0.001054, 0.001164, 0.001253, 0.001323, 0.001376, 0.00141, 0.00144, 0.00147, 0.001493, 0.001518, 0.001544, 0.00157, 0.0016, 0.001638, 0.001674, 0.001704, 0.001746, 0.001816, 0.00189, 0.001975, 0.002086, 0.002217, 0.002367, 0.002517, 0.002667, 0.002865, 0.003063, 0.003273, 0.003487, 0.003677, 0.003882, 0.004112, 0.004388, 0.004749, 0.00517, 0.005645, 0.006174, 0.006738, 0.007361, 0.008008, 0.008604, 0.009266, 0.010033, 0.010968, 0.012184, 0.013411, 0.014533, 0.015685, 0.016869, 0.01824, 0.019702, 0.021285, 0.023164, 0.025154, 0.027314, 0.029693, 0.03214, 0.035494, 0.038372, 0.041747, 0.046179, 0.051, 0.055882, 0.061491, 0.067913, 0.074681, 0.081953, 0.090338, 0.098967, 0.108248, 0.118735, 0.130108, 0.142792, 0.155991, 0.170029, 0.18589, 0.202969, 0.220642, 0.238245, 0.256651, 0.276027, 0.296154, 0.316212, 1.0];
+const SEXM = {"female": 0.76, "male": 1.28, "unspecified": 1.0};
+const FACTORS = [{"id": "smoke", "q": "Smoking", "opts": [{"l": "Never smoked", "m": 1.0, "s": "reference"}, {"l": "Former smoker (quit 5+ years)", "m": 1.15, "s": "quitting recovers most excess risk"}, {"l": "Former smoker (quit recently)", "m": 1.35, "s": "excess risk decays over ~10y"}, {"l": "Current smoker", "m": 2.0, "s": "Doll & Peto cohorts: ~10y expectancy loss"}]}, {"id": "activity", "q": "Physical activity", "opts": [{"l": "Regular vigorous exercise", "m": 0.8, "s": "meta-analyses: 20-30% mortality reduction"}, {"l": "Moderately active", "m": 0.9, "s": "dose-response is steep at the low end"}, {"l": "Mostly sedentary", "m": 1.15, "s": "reference-ish modern baseline"}]}, {"id": "bmi", "q": "Body-mass index", "opts": [{"l": "18.5-25 (normal)", "m": 0.95, "s": "GBD pooled cohorts"}, {"l": "25-30 (overweight)", "m": 1.0, "s": "near-flat risk in pooled data"}, {"l": "30-35 (obese I)", "m": 1.25, "s": "hazard rises non-linearly"}, {"l": "35+ (obese II+)", "m": 1.6, "s": "strong excess, cardiometabolic pathway"}, {"l": "Under 18.5", "m": 1.3, "s": "underweight carries excess risk too"}]}, {"id": "alcohol", "q": "Alcohol", "opts": [{"l": "None or occasional", "m": 1.0, "s": "reference"}, {"l": "Moderate (within guidelines)", "m": 1.05, "s": "no protective effect in modern MR studies"}, {"l": "Heavy", "m": 1.5, "s": "GBD alcohol-attributable mortality"}]}, {"id": "diabetes", "q": "Diabetes", "opts": [{"l": "No", "m": 1.0, "s": "reference"}, {"l": "Type 2, well controlled", "m": 1.4, "s": "ERFC pooled hazard ~1.8 uncontrolled"}, {"l": "Type 2, poorly controlled / Type 1", "m": 1.8, "s": "Emerging Risk Factors Collaboration"}]}, {"id": "bp", "q": "Blood pressure", "opts": [{"l": "Normal", "m": 1.0, "s": "reference"}, {"l": "Elevated / treated hypertension", "m": 1.2, "s": "treated risk sits between"}, {"l": "Untreated hypertension", "m": 1.45, "s": "Lancet pooled cohorts"}]}, {"id": "income", "q": "Relative income / education (your country)", "opts": [{"l": "Top third", "m": 0.85, "s": "Chetty et al.: rich-poor gap is years wide"}, {"l": "Middle third", "m": 1.0, "s": "reference"}, {"l": "Bottom third", "m": 1.25, "s": "socioeconomic mortality gradient"}]}, {"id": "family", "q": "Parents' longevity", "opts": [{"l": "Both lived / living past 80", "m": 0.88, "s": "heritability of lifespan is modest but real"}, {"l": "Mixed or unknown", "m": 1.0, "s": "reference"}, {"l": "Both died before 70 (not accidents)", "m": 1.15, "s": "familial cardiometabolic loading"}]}, {"id": "social", "q": "Social connection", "opts": [{"l": "Strong ties, partnered or close community", "m": 0.9, "s": "Holt-Lunstad meta-analysis"}, {"l": "Average", "m": 1.0, "s": "reference"}, {"l": "Isolated", "m": 1.2, "s": "isolation hazard comparable to light smoking"}]}];
+const CLAMP = [0.35, 4.0];
+const qs = document.getElementById("qs");
+for (const f of FACTORS) {
+  const p = document.createElement("p");
+  let h = "<label>" + f.q + ": <select id='" + f.id + "'>";
+  for (let i = 0; i < f.opts.length; i++)
+    h += "<option value='" + i + "'>" + f.opts[i].l + "</option>";
+  h += "</select></label>";
+  p.innerHTML = h;
+  qs.appendChild(p);
+}
+document.getElementById("go").onclick = () => {
+  const age = Math.max(0, Math.min(100, +document.getElementById("age").value || 0));
+  const sex = document.getElementById("sex").value;
+  let m = SEXM[sex];
+  const steps = [["Sex adjustment (" + sex + ")", SEXM[sex], "published sex mortality ratio"]];
+  for (const f of FACTORS) {
+    const o = f.opts[+document.getElementById(f.id).value];
+    m *= o.m;
+    if (o.m !== 1.0) steps.push([f.q + ": " + o.l, o.m, o.s]);
+  }
+  const raw = m;
+  m = Math.max(CLAMP[0], Math.min(CLAMP[1], m));
+  let alive = 1.0, years = 0.0, p10 = null, p90 = null;
+  for (let a = age; a <= 100 && alive > 1e-9; a++) {
+    const q = Math.min(1, m * QX[a]);
+    years += alive * (1 - q) + alive * q * 0.5;
+    const next = alive * (1 - q);
+    if (p90 === null && next <= 0.9) p90 = a - age;
+    if (p10 === null && next <= 0.1) p10 = a - age;
+    alive = next;
+  }
+  if (p10 === null) p10 = 100 - age;
+  if (p90 === null) p90 = 0;
+  document.getElementById("out").hidden = false;
+  document.getElementById("headline").textContent =
+    "Central estimate: " + years.toFixed(1) + " remaining years";
+  document.getElementById("range").innerHTML =
+    "<strong>The honest range:</strong> a 10% chance of fewer than <strong>" + p90 +
+    "</strong> years and a 10% chance of more than <strong>" + p10 +
+    "</strong> — the spread is the truth; the single number is just its middle.";
+  document.getElementById("share").innerHTML =
+    "That is your personal stake in the index: humanity's S is exactly this " +
+    "quantity summed over all ~8.09 billion of us. One token = one life-year.";
+  let sh = "<p>Composite hazard multiplier m = <strong>" + raw.toFixed(3) + "</strong>" +
+    (raw !== m ? " (clamped to " + m.toFixed(2) + ")" : "") +
+    ", applied as q'(a) = min(1, m·q(a)) to the WPP table from age " + age + ":</p><ul>";
+  for (const [label, mult, src] of steps)
+    sh += "<li>" + label + " → ×" + mult + " <em>(" + src + ")</em></li>";
+  document.getElementById("steps").innerHTML = sh + "</ul>";
+};
+</script>
+
+</body>
+</html>

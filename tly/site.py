@@ -21,7 +21,7 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 
 # page name -> (title, source file relative to repo root)
 PAGES: dict[str, tuple[str, str]] = {
-    "index": ("TLY — humanity's remaining time, measured", "README.md"),
+    "index": ("SAECULUM — humanity's remaining time, measured", "README.md"),
     "methodology": ("Methodology v0", "METHODOLOGY_v0.md"),
     "data-licenses": ("Data & licenses", "docs/LICENSING.md"),
     "changelog": ("Methodology changelog", "docs/METHODOLOGY_CHANGELOG.md"),
@@ -180,6 +180,71 @@ def _render_markdown(text: str) -> str:
     return "\n".join(out)
 
 
+def _dashboard_markdown(repo_root: Path) -> str:
+    """S-08: the index dashboard, synthesized STATICALLY from the committed
+    archive at build time (print.yml rebuilds weekly) — settlement surfaces
+    stay JavaScript-free. The price panel is honest: no market exists."""
+    import json
+    from decimal import Decimal
+
+    chain = json.loads((repo_root / "archive" / "chain.json").read_text(encoding="utf-8"))
+    rows = []
+    prev_s = None
+    latest = None
+    B = Decimal(10) ** 9
+    for link in chain:
+        rec = json.loads((repo_root / "archive" / link["file"]).read_text(encoding="utf-8"))
+        s = Decimal(rec["s_life_years"])
+        g = "" if prev_s is None else f"{((s / prev_s - 1) * 100):+.4f}%"
+        rows.append(
+            f"| {rec['epoch_utc'][:10]} | {(s / B):.4f}B | "
+            f"{Decimal(rec['e_bar_years']):.4f} | {int(Decimal(rec['n_persons'])):,} | {g} | "
+            f"{rec['provenance']['methodology_version']} |"
+        )
+        prev_s = s
+        latest = rec
+    s = Decimal(latest["s_life_years"])
+    lines = [
+        "# The index",
+        "",
+        f"**S = {(s / B):.4f} billion life-years** — humanity's total remaining",
+        f"time as of epoch {latest['epoch_utc'][:10]} (measured-period,",
+        "settlement series). Average remaining time per living person:",
+        f"**{Decimal(latest['e_bar_years']):.2f} years** across",
+        f"{int(Decimal(latest['n_persons'])):,} people.",
+        "",
+        "One token = one life-year; supply mirrors S, so a holder's SHARE of",
+        "humanity's remaining time never changes — only the size of the pie",
+        "does. Every number below recomputes from public artifacts",
+        "([reproduce it](reproduce.html)).",
+        "",
+        "## Price",
+        "",
+        "**No market exists yet.** The index is live and settling weekly; the",
+        "token has not launched (counsel, entity and audits come first — the",
+        "process is public in the repo). When a market exists, this panel",
+        "shows the traded price of one life-year. The vision anchor: at",
+        "burger parity ($6 per 15 minutes), one life-year is $210,384.",
+        "",
+        "## Weekly prints (from the immutable archive)",
+        "",
+        "| epoch | S | E-bar | N | dS | methodology |",
+        "|---|---|---|---|---|---|",
+        *rows,
+        "",
+        "Prints are FINAL when archived (first-print-settles): corrections",
+        "are forward-only via the public [correction ledger](correction-ledger.html).",
+        "Each record hash is Bitcoin-timestamped (stamps/ in the repo).",
+        "",
+        "## Your own time",
+        "",
+        "The [personal page](me.html) estimates YOUR remaining time from an",
+        "in-depth questionnaire — computed entirely in your browser (nothing",
+        "you enter ever leaves it), with the math explained line by line.",
+    ]
+    return "\n".join(lines)
+
+
 def _vintage_archive_markdown(repo_root: Path) -> str:
     """Synthesize the vintage-archive page from the committed manifests —
     the page IS the manifest record, restated; nothing is invented."""
@@ -220,9 +285,11 @@ def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
     """Render every registered page + the synthesized vintage archive."""
     site = out_dir / "site"
     site.mkdir(parents=True, exist_ok=True)
-    all_names = list(PAGES) + ["vintage-archive"]
+    all_names = ["dashboard"] + list(PAGES) + ["vintage-archive", "me"]
     titles = {name: PAGES[name][0] for name in PAGES}
+    titles["dashboard"] = "The index"
     titles["vintage-archive"] = "Vintage archive"
+    titles["me"] = "Your time"
     nav = " · ".join(f'<a href="{name}.html">{html.escape(titles[name])}</a>' for name in all_names)
     written: dict[str, str] = {}
     for name, (title, source_rel) in PAGES.items():
@@ -235,6 +302,14 @@ def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
     page = _SHELL.format(title="Vintage archive", nav=nav, body=body)
     (site / "vintage-archive.html").write_text(page, encoding="utf-8")
     written["vintage-archive"] = "site/vintage-archive.html"
+    body = _render_markdown(_dashboard_markdown(repo_root))
+    page = _SHELL.format(title="The index — SAECULUM", nav=nav, body=body)
+    (site / "dashboard.html").write_text(page, encoding="utf-8")
+    written["dashboard"] = "site/dashboard.html"
+    from tly.personal_page import build_personal_page
+
+    (site / "me.html").write_text(build_personal_page(repo_root, nav), encoding="utf-8")
+    written["me"] = "site/me.html"
     return written
 
 
