@@ -1926,3 +1926,20 @@ timestamps, before the loop existed.
   Cronos/Chronos/Chrono.tech confusion field vs empty field + better
   fit + domains held); formal D-14 clearance in January confirms before
   public rename.
+
+## 2026-09-04T00:25+02:00 | enforcement ACTIVE — flow proven, one residual
+- Ruleset main-review-and-checks ACTIVE. Proven end to end: signed
+  commit (initially unknown_key — committer email was not on the
+  HaleMarshall account; fixed by switching the repo to the accounts
+  noreply email and re-signing -> verified:true), PR #1 with passing
+  required check, squash-merged (merge commit GitHub-verified). Repo
+  workflow from now on: BRANCH + SIGNED COMMITS + PR — no direct main
+  pushes from this machine.
+- RESIDUAL, stated: the print bots bypass push has only been exercised
+  BEFORE enforcement went active (39c475c this morning). Tonights
+  dispatch was a no-op (vintages + epoch already stored). VERIFY
+  MONDAY 2026-09-07: the first v0.7.0 print must (a) push via the
+  deploy-key bypass under active enforcement, (b) print S=363.5117B /
+  Ebar=44.9238 under the new source of record with consumed-only
+  citations. If the push is rejected, the archive commit will sit in
+  the runner and the run fails loudly — watch the weekly-print run.
