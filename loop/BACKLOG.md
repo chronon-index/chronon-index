@@ -176,3 +176,11 @@ Priority rule: lowest unchecked non-HUMAN task with satisfied deps.
 - [ ] E-12 | deps: A-17 | refs: RP#XII | HUMAN: signing keys (sigstore/cosign), branch protection + signed commits on the org repo (PARTIAL 2026-08-20: branch protection layer 1 live via A-18; signed commits + required checks staged and blocked on A-19's deploy-key step. Sigstore/cosign artifact signing still untouched)
 - [x] E-13 | deps: B-uc3-03 | refs: RP#VII, RP#IV-P5 | One-command Docker image for independent recomputation; byte-identical output documented for outsiders (done 2026-08-17: built + run; container==host byte-identical across OS/Python versions)
 - [ ] E-14 | deps: E-13 | refs: RP#VII, RP#XII | HUMAN: recruit ≥ 2 external recomputers (university demography group, actuarial society student chapter); N-of-M starts at 3-of-3 matching (SCHEDULED February 2027 per Ben 2026-09-04)
+
+## Ben directives 2026-09-04 (finish all three tiers)
+- [x] S-01 | Scenario engine + 1000-event 20y stress grid + report (done 2026-09-04: tly/scenario_engine.py + scenario_catalog.py, exactly 1000 deterministic events across 12 categories; COVID anchor reproduces -4.4% vs real ~-4%; findings: upward asymmetry, wars barely move world S, sustained broad-age mortality is what hurts, fertility is the slow master-variable, supply orderly outside civilization tail; docs/reports/SCENARIO_SIMULATIONS.md + scenario_results.json; 6 tests incl. regeneration spot-checks; PRICE paths out of scope — no demand model exists, stated)
+- [ ] S-02 | Saeculum rename pass through public materials (README, site shell, BEN_TODO, docs headers); repo/org URL migration waits for domain attach
+- [ ] S-03 | Zenodo deposit automation via API with curated file sets (WHO/IHME excluded); token = Actions secret, CI infra like the deploy key
+- [ ] S-04 | P3 stochastic S: Lee-Carter residual bootstrap -> interval fan on S(t); interval-coverage backtest vs the vintage store (Part VIII rung 4 successor)
+- [ ] S-05 | Token contract form: reference ERC-20 rebase implementation of the gons engine + share-invariance/mortality-neutrality property tests (P6 pre-audit artifact)
+- [ ] S-06 | Reporting automation: weekly print summary auto-rendered to the site (human-readable epoch page) + monthly digest
