@@ -50,6 +50,15 @@ v3 Mirror token → v4 Ledger.
 - **Licensing gate.** `docs/LICENSING.md` must be cleared before the first
   public print.
 
+## Live site + API
+
+**https://chronon-index.pages.dev** — the rendered governance pages and the
+static JSON API (`/api/v1/latest.json`, `/api/v1/prints/<date>.json`,
+`/api/v1/index.json` with sha256s). The API serves the archived prints
+byte-verbatim; a path that was never printed returns 404 — absence is an
+answer. The tree is committed under `site/` and rebuilt by CI after every
+print; the suite asserts the committed tree equals a fresh build.
+
 ## Layout
 
 ```

@@ -1842,3 +1842,17 @@ timestamps, before the loop existed.
   blockquote + table markup present.
 - Both defects pinned as regression tests; 340 passed. Deploy is
   automatic on push; the agent re-verifies the four status rows.
+
+## 2026-09-03T19:00+02:00 | E-08 CLOSED — live deploy verified end to end
+- Bens agent deployed https://chronon-index.pages.dev (build green,
+  _headers applying: json content-type + ACAO:* + nosniff verified by
+  its network trace). Its two defects fixed last iteration; I verified
+  the LIVE site after the auto-deploy: /nonexistent-page and
+  /api/v1/prints/2026-09-07.json now 404; latest.json + index.json 200
+  application/json; home page has zero raw ** markers, blockquote +
+  table + 10 strong tags render. All four report rows correct.
+- README now publishes the URL (the last clause of E-08). Site tree
+  rebuilt (README is the home page source) and recommitted.
+- Cloudflare app scope note from the agent (also covers a placeholder
+  repo) recorded for Ben; domain attachment still waits on the
+  SAECULUM-vs-CHRONON naming ruling.

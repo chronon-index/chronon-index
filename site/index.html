@@ -61,6 +61,13 @@ advice or a settlement-grade benchmark yet.</p>
 <li><strong>Snapshot-first.</strong> Fetch to <code>data/snapshots/&lt;date&gt;/</code> with a sha256 manifest, then compute offline. Small v0 snapshots are committed; large snapshots move to object storage with manifests committed in-repo (RESEARCH_PROGRAM Part VII).</li>
 <li><strong>Licensing gate.</strong> <code>docs/LICENSING.md</code> must be cleared before the first public print.</li>
 </ul>
+<h2>Live site + API</h2>
+<p><strong>https://chronon-index.pages.dev</strong> — the rendered governance pages and the
+static JSON API (<code>/api/v1/latest.json</code>, <code>/api/v1/prints/&lt;date&gt;.json</code>,
+<code>/api/v1/index.json</code> with sha256s). The API serves the archived prints
+byte-verbatim; a path that was never printed returns 404 — absence is an
+answer. The tree is committed under <code>site/</code> and rebuilt by CI after every
+print; the suite asserts the committed tree equals a fresh build.</p>
 <h2>Layout</h2>
 <pre>
 tly/              the package (index computation)
