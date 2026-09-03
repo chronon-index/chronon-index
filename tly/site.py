@@ -31,6 +31,10 @@ PAGES: dict[str, tuple[str, str]] = {
     "glossary": ("Glossary", "docs/GLOSSARY.md"),
     "faq": ("FAQ", "docs/FAQ.md"),
     "api-reference": ("API reference", "docs/API_REFERENCE.md"),
+    "proposal-g5": (
+        "OPEN PROPOSAL: G5 source of record",
+        "docs/proposals/2026-09-03-G5-source-of-record.md",
+    ),
 }
 
 _SHELL = """<!DOCTYPE html>

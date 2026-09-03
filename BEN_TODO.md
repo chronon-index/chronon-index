@@ -114,6 +114,17 @@ entity/oversight work, not computation.
 
 ---
 
+## NEW (2026-09-03): G5 sign-off — the switch out of research mode
+
+The source-of-record switch (WHO -> WPP) is fully computed and proposed:
+docs/proposals/2026-09-03-G5-source-of-record.md (also on the live site).
+Level change +1.0991B = +0.3033%, decomposed (table +1.1639B, resolution
+-0.0648B), archived prints untouched, v0 golden untouched. Your part:
+read it, and either sign off (pre-P1 shortcut) or rule that the 14-day
+public window applies now that the site is live. On sign-off I execute
+the one-commit v0.7.0 bump and the settlement series leaves research
+mode at the next epoch.
+
 ## Suggested order
 
 1. **A-16 ratification** (one evening — unblocks the anchor + banners)

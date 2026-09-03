@@ -1856,3 +1856,20 @@ timestamps, before the loop existed.
 - Cloudflare app scope note from the agent (also covers a placeholder
   repo) recorded for Ben; domain attachment still waits on the
   SAECULUM-vs-CHRONON naming ruling.
+
+## 2026-09-03T19:20+02:00 | G5 proposal computed + published | AWAITING SIGN-OFF
+- The last build-side step out of research mode, prepared per the
+  governed process (proposal BEFORE implementation — the one-commit
+  v0.7.0 bump waits for acceptance).
+- Dual-run on committed snapshots: WHO-banded 362.4126B vs WPP
+  single-age 363.5117B; +1.0991B = +0.3033% net, DECOMPOSED: +1.1639B
+  table (WHO2019 -> WPP2023; WPP World e0 2023 = 73.1694, ABOVE WHO
+  2019 73.1234 — post-COVID recovery; the recorded same-year 0.5y gap
+  was a different comparison) and -0.0648B single-age-vs-banding.
+  N identical on both paths (8,091,734,933 — the mirror is faithful).
+- Change is inside the published +/-1.87% interval; archived prints and
+  the v0 golden are explicitly untouched (P4; AC-1.2 pins v0-original).
+- Process honesty: today sits ON the pre-P1-shortcut boundary (site
+  went live hours ago) — the proposal puts the regime question to Ben
+  and recommends sign-off + leaving it posted 14 days anyway.
+- Proposal published as a site page (nav: OPEN PROPOSAL) + BEN_TODO.

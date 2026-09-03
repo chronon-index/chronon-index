@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPEN PROPOSAL: G5 source of record</title>
+<style>
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 16px/1.6 system-ui, sans-serif; color: #222; }
+pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
+nav { font-size: .9rem; margin-bottom: 2rem; }
+h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
+</style>
+</head>
+<body>
+<nav><a href="index.html">TLY — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="proposal-g5.html">OPEN PROPOSAL: G5 source of record</a> · <a href="vintage-archive.html">Vintage archive</a></nav>
+<h1>Proposal: G5 source-of-record switch (WHO → WPP) — methodology v0.7.0</h1>
+<p><strong>Status: OPEN — awaiting sign-off (see &quot;Comment window&quot; below).</strong>
+Proposed 2026-09-03 by the build loop. Refs: SPEC G5, DECISIONS 6,
+RP Part VII (licensing gate), <code>docs/METHODOLOGY_CHANGE_PROCESS.md</code>.</p>
+<h2>What changes</h2>
+<p>The settlement series&#x27; mortality input switches from the WHO GHO global
+abridged life table (2019 vintage, 19 band anchors) to the <strong>UN WPP 2024
+complete life table</strong> (2023 vintage, single ages 0–100), and the stock
+estimator runs at <strong>single-age resolution</strong> instead of band midpoints.
+Population stays WPP-derived (it already reconciles person-for-person:
+N = 8,091,734,933 on both paths).</p>
+<h2>Why</h2>
+<p>Licensing, not taste. WHO GHO&#x27;s data policy is <strong>non-commercial</strong> —
+<code>docs/LICENSING.md</code> row 3, VERIFIED-RESTRICTED — which is why the
+commercial licensing gate (<code>tly/licensing_gate.py</code>) blocks the current
+path by construction and every print carries the research-series
+notice. WPP 2024 is <strong>CC BY 3.0 IGO</strong> (CLEARED 2026-08-17): share and
+adapt, any purpose, commercial included, attribution required. G5 has
+recorded WPP as the intended licensed source of record since DECISIONS;
+A-16&#x27;s closure (2026-09-03) removed the last gate in front of it.</p>
+<h2>The level change, computed and decomposed</h2>
+<p>Dual-run on committed snapshots (2026-08-17 WPP files; v0-original WHO
+inputs), Decimal-34, structure year 2023 on both sides:</p>
+<table>
+<tr><th>leg</th><th>S (billions)</th><th>Ē (years)</th></tr>
+<tr><td>WHO 2019 table, banded estimator (current settlement)</td><td>362.4126</td><td>44.7880</td></tr>
+<tr><td>WPP 2023 table, banded estimator</td><td>363.5765</td><td>—</td></tr>
+<tr><td>WPP 2023 table, single-age estimator (proposed)</td><td><strong>363.5117</strong></td><td><strong>44.9238</strong></td></tr>
+</table>
+<ul>
+<li><strong>Table effect: +1.1639B</strong> — WHO 2019 → WPP 2023. WPP&#x27;s World e0 for 2023 is 73.1694 vs the WHO 2019 table&#x27;s 73.1234: the 2023 table reflects post-COVID recovery beyond the 2019 level. (The previously recorded same-year gap — WPP 2019 e0 72.6093 vs WHO 73.1234, snapshot note 2026-08-17 — is a different-estimators discrepancy, recorded per RP Part VI r4; switching vintage 2019→2023 and source in one governed step is exactly what that note anticipated.)</li>
+<li><strong>Resolution effect: −0.0648B</strong> — single-age exactness vs band-midpoint interpolation, comfortably inside the error budget&#x27;s ±0.5% banding term.</li>
+<li><strong>Net: +1.0991B = +0.3033%</strong> — inside the budget&#x27;s ±1.87% symmetric measurement interval; the series level moves, its stated uncertainty already covered it.</li>
+</ul>
+<h2>What does NOT change</h2>
+<ul>
+<li><strong>Archived prints.</strong> First-print-settles: every archived epoch stands as printed. The new version applies from the first epoch after acceptance, forward only.</li>
+<li><strong>The v0 golden.</strong> AC-1.2 pins the RESTORED original values on the frozen <code>data/snapshots/v0-original/</code> inputs — a historical anchor, not a live-series constraint. It stays green untouched.</li>
+<li><strong>The keyless rule (G6).</strong> WPP files are keyless public downloads, already snapshotted and hash-manifested.</li>
+</ul>
+<h2>Implementation (the one-commit bump, after acceptance)</h2>
+<p>1. <code>VERSION_POLICY_REGISTRY[&quot;v0.7.0&quot;]</code>: adds policy
+   <code>source_of_record: &quot;UN WPP 2024 (CC BY 3.0 IGO): complete life table
+   + single-age population, single-age estimator; WHO GHO demoted to
+   triangulation&quot;</code> — prior policies unchanged.
+2. <code>build_settlement_print</code> computes S/Ē from the WPP path
+   (<code>tly.wpp</code> + <code>tly.stock</code>, the machinery the reconciliation and P6
+   tests already exercise at full scale).
+3. Changelog entry; dual-run table published; licensing-gate mode
+   check flips for the WPP path (WHO path remains blocked commercially).
+4. Attribution line (UN suggested form) added to prints&#x27; provenance.</p>
+<h2>Comment window (the decision this document requests)</h2>
+<p>The change process offers two regimes and TODAY sits exactly on their
+boundary: the pre-P1 shortcut (&quot;Ben&#x27;s explicit sign-off, recorded in
+the proposal — expires at the first public print&quot;) versus the 14-day
+public window (&quot;announced wherever prints are published&quot;). The site
+went live 2026-09-03 serving the research-series prints.</p>
+<p><strong>Recommendation:</strong> treat the research series as pre-P1 for process
+purposes (no settlement consumers exist; the site is hours old), take
+Ben&#x27;s recorded sign-off, AND leave this proposal published on the site
+for the 14 days anyway — belt and braces; the effective epoch lands
+whenever the sign-off does.</p>
+<blockquote>
+<p><strong>Sign-off (Ben):</strong> _________________________ date: __________</p>
+</blockquote>
+</body>
+</html>

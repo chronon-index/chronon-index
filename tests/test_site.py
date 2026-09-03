@@ -88,19 +88,14 @@ def test_b4_09_pages_render_from_live_artifacts(tmp_path):
     import shutil
 
     stage = tmp_path / "repo"
-    for rel in ("README.md", "METHODOLOGY_v0.md"):
+    # stage every registered page source (derived from PAGES so a page
+    # added to the site can never silently miss this liveness proof)
+    from tly.site import PAGES
+
+    for _, rel in PAGES.values():
         (stage / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO / rel, stage / rel)
-    for rel in (
-        "docs/LICENSING.md",
-        "docs/METHODOLOGY_CHANGELOG.md",
-        "docs/METHODOLOGY_CHANGE_PROCESS.md",
-        "docs/REPRODUCE_FIXING.md",
-        "docs/GLOSSARY.md",
-        "docs/FAQ.md",
-        "docs/API_REFERENCE.md",
-        "ledger/CORRECTIONS.md",
-    ):
+    for rel in ("ledger/CORRECTIONS.md",):
         (stage / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO / rel, stage / rel)
     snap_dir = stage / "data" / "snapshots" / "2026-08-16"
