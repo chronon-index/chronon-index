@@ -7,5 +7,11 @@
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300
 
+# me is served at BOTH /me (Pages pretty-URL canonical) and /me.html —
+# the calculator's inline script needs this CSP on each; connect-src
+# 'none' keeps the no-network privacy guarantee enforced by the browser.
+/me
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'
+
 /me.html
   Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'
