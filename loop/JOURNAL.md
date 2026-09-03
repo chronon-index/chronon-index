@@ -2016,3 +2016,20 @@ timestamps, before the loop existed.
   documented in the report, mirroring the covid-replay honesty.
 - Status: INFORMATIONAL; error-budget retirement bump deferred until
   external recomputers (Feb) have reproduced the machinery.
+
+## 2026-09-04T02:15+02:00 | S-05 — reference token contract | DONE (property tests earned their keep)
+- contracts/Saeculum.sol (106 lines, NOT DEPLOYED NOT AUDITED) + the
+  normative Python mirror tly/token_model.py. The conservation property
+  IMMEDIATELY caught a real defect in my first draft: the AMPL-style
+  floored gons-per-fragment lets sum(balances) exceed totalSupply
+  (observed +26 tokens on realistic S) — exactly the class of bug an
+  audit would bill five figures to find. Fixed: balance = gons*supply/
+  TOTAL_GONS (mul-then-div, sum<=supply provable), transfers CEIL the
+  gon debit so the sender absorbs rounding and a transfer can never
+  mint. Second lesson tonight: python str.replace silently no-ops on
+  mismatch — the .sol "fix" didn't land until the structural-diff test
+  refused to pass; that test now pins the mul-then-div form in the
+  source text itself.
+- On-chain first-print-settles: rebase requires strictly increasing
+  epoch + carries the archive record_hash, so anyone can tie every
+  supply change to the public chain; oracle rotates to N-of-M at P6.
