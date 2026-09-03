@@ -1741,3 +1741,18 @@ timestamps, before the loop existed.
 - Remaining unchecked backlog is now ALL human-gated or dep-blocked:
   A-16 (READY.zip), A-19 (deploy key), B-uc1-13 (A-16), B-uc3-11/12,
   D-12/13/14, E-05/07/08/09/10/12/14.
+
+## 2026-09-03T12:55+02:00 | proof lifecycle + cron verification | DONE
+- Verified the 2026-08-31 Monday cycle ran UNATTENDED end to end: print
+  archived (3rd chain epoch), OTS-stamped in CI, all three vintage pulls
+  landed (eurostat json, cdc json, ons csv via the new suffix path);
+  outsider-sim scheduled run PASSED; local suite 334 green over the
+  grown archive after pull.
+- Upgraded all three OTS proofs to Bitcoin attestations: 2026-08-17 +
+  2026-08-24 anchored in block 964013, 2026-08-31 in block 964946.
+  Full ots verify requires a Bitcoin node (documented caveat); gate
+  passes 3/3.
+- A-19 attempt: steps 1-4 (keypair, deploy key, secret, bypass) blocked
+  by the permission classifier on key-material generation — remains
+  Bens gate, sequence unchanged in BEN_TODO. READY.zip still absent
+  from ~/Downloads (A-16 restore still blocked).
