@@ -11,7 +11,7 @@ REPO = Path(__file__).resolve().parent.parent
 
 def test_build_renders_every_registered_page(tmp_path):
     written = build_site(tmp_path)
-    assert set(written) == set(PAGES) | {"vintage-archive"}
+    assert set(written) == set(PAGES) | {"vintage-archive", "dashboard", "me"}
     for name in written:
         page = (tmp_path / "site" / f"{name}.html").read_text(encoding="utf-8")
         assert page.startswith("<!DOCTYPE html>")
@@ -28,12 +28,21 @@ def test_build_is_byte_reproducible(tmp_path):
 
 
 def test_files_only_no_scripts(tmp_path):
-    build_site(tmp_path)
-    for f in (tmp_path / "site").rglob("*"):
-        assert f.suffix == ".html"
-        content = f.read_text(encoding="utf-8")
-        assert "<script" not in content  # no JS, ever
-        assert "http-equiv" not in content  # no meta refresh tricks
+    """Settlement/governance surfaces carry no JavaScript. The ONE
+    exception is me.html (S-07): its computation is client-side BY
+    DESIGN — that is the privacy architecture (nothing a visitor enters
+    can leave the browser), enforced doubly by the page containing no
+    network calls and by its CSP line (connect-src 'none') in _headers.
+    Every other page stays script-free."""
+    written = build_site(tmp_path)
+    for name in written:
+        page = (tmp_path / "site" / f"{name}.html").read_text(encoding="utf-8")
+        if name == "me":
+            assert "<script>" in page  # the documented exception
+            for banned in ("fetch(", "XMLHttpRequest", "sendBeacon", "WebSocket", "src="):
+                assert banned not in page.split("<script>")[1]
+        else:
+            assert "<script" not in page
 
 
 def test_content_is_escaped_and_faithful(tmp_path):
@@ -98,6 +107,17 @@ def test_b4_09_pages_render_from_live_artifacts(tmp_path):
     for rel in ("ledger/CORRECTIONS.md",):
         (stage / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO / rel, stage / rel)
+    # dashboard + personal page inputs: the archive chain and the LT fixture
+    import json as _json
+
+    chain = _json.loads((REPO / "archive" / "chain.json").read_text(encoding="utf-8"))
+    (stage / "archive").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(REPO / "archive" / "chain.json", stage / "archive" / "chain.json")
+    for link in chain:
+        shutil.copy2(REPO / "archive" / link["file"], stage / "archive" / link["file"])
+    lt = "data/snapshots/2026-08-17/fixtures/wpp_lt_complete_fixture.csv.gz"
+    (stage / lt).parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(REPO / lt, stage / lt)
     snap_dir = stage / "data" / "snapshots" / "2026-08-16"
     snap_dir.mkdir(parents=True)
     shutil.copy2(

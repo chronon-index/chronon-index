@@ -26,6 +26,9 @@ HEADERS = """\
 /api/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=300
+
+/me.html
+  Content-Security-Policy: default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'
 """
 
 

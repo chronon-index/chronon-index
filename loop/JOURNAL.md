@@ -1976,3 +1976,24 @@ timestamps, before the loop existed.
 - Honest limits: index paths not P&L (no demand model), stress grid
   not probability distribution, world-closed, CBR path documented.
 - Remaining tier work queued S-02..S-06.
+
+## 2026-09-04T01:35+02:00 | S-02 partial + S-07 + S-08 | the Saeculum site grows
+- Ben vision recorded: 20-40y horizon where time IS the money; the
+  index being boringly safe is the entry ticket — the 1000-event grid
+  is the evidence artifact for that safety claim.
+- S-08 dashboard: STATIC page from the ARCHIVE (renders what was
+  PRINTED — 362.4126B until Mondays v0.7.0 print archives 363.5117B;
+  first-print-settles applies to display too); honest price panel (no
+  market yet); epoch history table; weekly rebuild via print.yml.
+- S-07 personal page: in-depth questionnaire -> personalized remaining
+  time. Privacy BY ARCHITECTURE: WPP qx embedded at build time with
+  fixture sha; all computation inline JS; zero network calls AND
+  connect-src none CSP — the no-personal-data pipeline guarantee stays
+  literally true. Math explained on-page (RR sources per option,
+  composite hazard clamped [0.35,4.0], survival walk, p10/p90 range
+  headlined over the point estimate); not-a-prophecy/not-medical-advice
+  above the result. RP P7 ethics memo noted as governing deeper work.
+- Site no-JS invariant updated honestly: me.html is the ONE documented
+  exception, doubly fenced (content ban + CSP).
+- S-02 rename started: README + site titles now SAECULUM.
+- Suite 350 green.
