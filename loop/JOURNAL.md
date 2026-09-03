@@ -1960,3 +1960,19 @@ timestamps, before the loop existed.
   archival of oversized raw inputs, Zenodo (immutable + DOI + free) is
   the better fit than R2 (mutable CDN). E-09 re-scoped to Zenodo;
   one less account, zero cost.
+
+## 2026-09-04T01:05+02:00 | S-01 — 1000-event stress grid | DONE
+- Ben directive executed: scenario engine (model layer, floats; three
+  levers = transient mortality, persistent trend, fertility) + exactly
+  1000 deterministic events, 12 categories, tails included on purpose
+  (200x engineered pathogen, full nuclear exchange) — creative but
+  mechanistic. Whole grid runs in <1s.
+- ANCHOR: COVID-shaped event -> -4.4% drawdown vs real ~-4%. Findings
+  in the report: (1) payoff asymmetry runs UP (mortality one-shot,
+  fertility/breakthroughs compound; best events +21..+43%), (2) wars
+  barely dent world S, (3) the danger shape is broad-age + sustained,
+  (4) 20y fertility collapse out-damages most pandemics silently,
+  (5) supply growth stays orderly in every world where money matters.
+- Honest limits: index paths not P&L (no demand model), stress grid
+  not probability distribution, world-closed, CBR path documented.
+- Remaining tier work queued S-02..S-06.
