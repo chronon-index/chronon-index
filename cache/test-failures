@@ -1,1 +1,1 @@
-{"version":1,"failures":[{"contract":"contracts/test/Saeculum.t.sol:SaeculumTest","test":"test_ParityWithNormativeModel"}]}
+{"version":1,"failures":[{"contract":"contracts/test/SaeculumOracle.t.sol:SaeculumOracleTest","test":"testFuzz_threshold_boundary"}]}

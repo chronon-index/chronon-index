@@ -12,6 +12,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: write
+  id-token: write # sigstore keyless signing (E-12)
 jobs:
   print:
     runs-on: ubuntu-latest
@@ -40,12 +41,23 @@ jobs:
         run: python -m tly.ots_gate stamp
       - name: OTS publish gate — proof exists + matches, else block
         run: python -m tly.ots_gate verify
+      - name: sigstore-sign the newest archive record (E-12; keyless via OIDC)
+        uses: sigstore/cosign-installer@v3
+      - run: |
+          LATEST=$(python -c "import json;print(json.load(open('archive/chain.json'))[-1]['file'])")
+          cosign sign-blob --yes "archive/$LATEST" \
+            --bundle "sigstore/$LATEST.sigstore.json"
+          # verify what we just produced — a signature we can't verify is not a signature
+          cosign verify-blob "archive/$LATEST" \
+            --bundle "sigstore/$LATEST.sigstore.json" \
+            --certificate-identity-regexp "https://github.com/chronon-index/chronon-index/" \
+            --certificate-oidc-issuer https://token.actions.githubusercontent.com
       - name: rebuild the publication surface from the committed artifacts
         run: python -m tly.build_public
       - name: commit the archived print
         run: |
           git config user.name "tly-print-bot"
           git config user.email "print-bot@users.noreply.github.com"
-          git add archive/ data/vintages/ stamps/ site/
+          git add archive/ data/vintages/ stamps/ sigstore/ site/
           git diff --cached --quiet && echo "epoch already archived — no-op" || \
             git commit -m "print: archive epoch (weekly CI computation)" && git push
