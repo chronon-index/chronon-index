@@ -48,7 +48,9 @@ Not an email campaign — one engagement, bookable via web intake forms:
    shops (search "token launch legal opinion flat fee"); extract
    pricing/scope into a comparison; prefill intake forms with: US-only
    token launch, four AI-drafted memos need review-and-signature not
-   drafting, fixed-fee quote requested. STOP before submitting.
+   drafting, fixed-fee quote requested; the launch oracle is a founder-controlled
+   3-key set (disclosed) — include it explicitly in the Howey
+   managerial-efforts analysis. STOP before submitting.
 2. [YOU] Pick one, hit submit, take the intro call. Send them
    `docs/legal/drafts/US_MEMO_PACK.md` from the repo.
 3. [YOU] On the call, insist on two things: Memo C gets a real answer
@@ -58,12 +60,15 @@ Not an email campaign — one engagement, bookable via web intake forms:
    (which LLC clauses to elect) goes to whoever finalizes the
    operating agreement.
 
-## Duty 3 — USPTO trademark (~$1.1–2k · after the entity exists)
+## Duty 3 — USPTO trademark (~$1–2.1k · 2 classes · after the entity exists)
 
-1. [AGENT] Open 2–3 flat-fee US trademark services; extract pricing
-   into a comparison; prefill: mark SAECULUM, classes 9/36/42,
-   applicant = the new entity, foreign-domiciled owner (US attorney
-   required, 37 CFR 2.11(a)). Attach text from
+1. [AGENT] Open 2–3 flat-fee US trademark services; extract pricing;
+   prefill: mark SAECULUM, **classes 9 and 42 ONLY** (§1(b)) — Class 36
+   is HELD: `SAECULA WEALTH` ser. 99428273 is live-pending there with an
+   unresolved SOU action (agent finding 2026-09-05; if the SOU fails,
+   36 files clean later; if it registers, attorney assesses first).
+   Applicant = the new entity; US attorney required (37 CFR 2.11(a));
+   prefer ID-Manual wording (free-form ~$550/class vs ~$350). Attach
    `docs/legal/drafts/USPTO_TRADEMARK_DRAFT.md`. STOP before payment.
 2. [YOU] Pay and submit with your pick. They handle the office actions.
 

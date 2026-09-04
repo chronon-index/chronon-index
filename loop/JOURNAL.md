@@ -2131,3 +2131,16 @@ timestamps, before the loop existed.
   browser-agent safety rules). Ben ruling recorded: recomputer
   outreach + demand conversations -> POST-launch+traction; honest
   consequence stated once (centralized oracle at launch, disclosed).
+
+## 2026-09-05T01:40+02:00 | browser-agent findings — completion note
+- PR #18 carried the README de-claim ("no clearance is claimed" now on
+  the rebuilt page), the USPTO 2-class strategy + SAECULA WEALTH
+  99428273 watch + fee correction, and the Howey oracle-centralization
+  scope line. This follow-up lands the matching BEN_TODO edits (my
+  heredoc aborted on a whitespace mismatch pre-write — caught by the
+  AssertionError, fixed against the file's real text).
+- Timing note for the record: the agents "italics still broken" and
+  "patch not landed" observations predated the deploy — verified live
+  with curl before editing. Its two substantive findings were real and
+  are absorbed; its demand-signal caveat is recorded once in the
+  journal, not relitigated (Bens ruling stands).
