@@ -1,0 +1,8 @@
+[profile.default]
+src = "contracts"
+test = "contracts/test"
+out = "contracts/out"
+libs = ["contracts/lib"]
+solc = "0.8.24"
+fuzz = { runs = 2000 }
+invariant = { runs = 64, depth = 64 }

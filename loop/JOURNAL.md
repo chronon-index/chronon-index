@@ -2052,3 +2052,19 @@ timestamps, before the loop existed.
   human/world: Monday v0.7.0 print verification, ZENODO_TOKEN, domain
   attach, Jan counsel/trademark/licenses, Feb recomputers, demand
   conversations.
+
+## 2026-09-04T05:05+02:00 | S-09/10/11 — the cost-compression artifacts | DONE
+- Ben rulings executed: US-only offering (MiCA dropped; Memo C records
+  the one EU question that SURVIVES geo-restriction — the founder LIVES
+  in Germany: BaFin/BMR publication scope, activity attribution, and
+  s23 EStG founder-token tax. Flagged rather than hidden: "US-only"
+  shrinks counsel to review-and-sign, it does not zero it). USPTO-only
+  trademark (US-attorney requirement for foreign applicants noted).
+- S-10 is REAL, not paper: installed Foundry locally, 5/5 green at
+  2000 fuzz runs — share invariance, path independence, never-mints,
+  on-chain first-print-settles, and a BYTE-EXACT parity vector between
+  Saeculum.sol and tly/token_model.py (first run failed on my GUESSED
+  vector; pinned from the model — evidence the parity test actually
+  binds). contracts.yml runs forge in CI.
+- Compressed cost line: counsel $3-8k + USPTO ~$1.5k + entity <$1k +
+  solo audit $3-8k = ~$8-18k all-in to launch.
