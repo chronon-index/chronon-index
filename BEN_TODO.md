@@ -1,139 +1,138 @@
-# Ben's action list — everything only you can do
+# Ben's action list — everything that is YOURS to do
 
-State as of 2026-08-18: 284 tests green, CI live, first print archived
-(epoch 2026-08-17, research series). Every task an autonomous session can
-execute is done; each item below needs your identity, money, signature, or
-judgment. Ordered by leverage — item 1 unblocks the most.
+*(Fully rewritten 2026-09-04 evening. All code for all three tiers is
+finished; the index prints, signs, and verifies itself weekly. What
+remains: your bookings, clicks, decisions, readings, and conversations.
+Shareable page version: the "Saeculum Launch Duties" artifact.)*
 
----
+## This week — the four bookings (the whole critical path; fire in parallel)
 
-## 1. A-16 — ✅ CLOSED 2026-09-03
+### 1. Form the Wyoming entity (FIRST — everything attaches to it) — ~$500–1k, 1–2h + EIN wait
+- Pick a registered-agent service (compare Northwest Registered Agent,
+  Wyoming Registered Agent; ~$50–125/yr). They file the Articles
+  (state fee ~$100, same-day online). Name idea: Saeculum Foundation LLC.
+- EIN immediately after: non-US owner files IRS SS-4 by fax/phone
+  (1–4 weeks — the slow leg, start day one).
+- Tell me when formed → I draft the operating agreement for counsel.
+- Ongoing: IRS 5472 annually (~$500/yr preparer).
+- Unblocks: trademark applicant, counsel client, deployer identity.
 
-You delivered chronon-restore-A16.zip; originals restored verbatim, v0-original inputs frozen, AC-1.2 strict golden green (all 13 original values reproduce at 4dp). The reconstruction stays archived and runnable. Nothing left here.
+### 2. Book the reviewing attorney — ~$3–8k, 2–4 wk turnaround
+- US crypto/securities attorney (flat-fee boutiques exist; ask any
+  founder you know for their referral).
+- Send `docs/legal/drafts/US_MEMO_PACK.md` framed as: "four drafted
+  memos for REVIEW-AND-SIGNATURE, not drafting; US-only offering,
+  EU/UK geo-restricted; fixed-fee quote please."
+- Insist Memo C is answered (German residence + §23 EStG founder-token
+  tax — the one question geo-restriction does not remove). If they
+  can't do German tax, add a one-hour Steuerberater consult.
+- The only genuinely reckless thing to skip. The signature is the product.
 
-## 2. A-19 — deploy key ✅ DONE; ONE CLICK left
+### 3. Book the USPTO trademark filer — ~$1.1–2k all-in, after the entity
+- Flat-fee US trademark service ($300–1k; required — 37 CFR 2.11(a)
+  makes a US attorney mandatory for foreign-domiciled applicants).
+- Hand them `docs/legal/drafts/USPTO_TRADEMARK_DRAFT.md` (SAECULUM,
+  classes 9/36/42, wording done). Applicant = the entity. Fees ~$750–1,050 on top.
+- EUIPO deferred by your ruling (accepted risk: EU squatters until expansion).
 
-Key + secret + bypass are live and END-TO-END PROVEN (the print bot pushed commit 39c475c over the key on 2026-09-03). Your one click, whenever you want strict protection: repo Settings → Rules → main-review-and-checks → Enforcement: Active. After that, main accepts only signed PR commits with passing checks (the print bot bypasses via its key). Recommendation: flip after the build loop quiets down.
+### 4. Book the solo contract auditor — ~$3–8k, 1–2 wk engagement
+- One strong solo senior auditor (Cantina/Spearbit marketplaces, or a
+  well-reviewed independent). Scope is tiny: 2 contracts, ~160 lines.
+- Send the repo + `docs/audit/SECURITY_PROPERTIES.md` +
+  `docs/audit/SLITHER_REPORT.md` (that pair IS the brief; fuzz suite
+  11/11, parity model, Slither triaged to zero unaccepted).
+- Ask for: attacks on the five stated properties, oracle-compromise
+  blast radius, supply-extreme edge cases.
+- Mainnet is hard-gated on this in the runbook. (My own first contract
+  draft had a real minting bug the property tests caught — that's why
+  this line never goes to zero.)
 
-## 3. B-uc2-02 — RULED (c) and BUILT. Nothing left here.
+## This week — the two clicks
 
-Your keyless-only ruling (docs/rulings/B-uc2-02_RULING.md) is executed:
-HMD removed everywhere, no account needed ever. CDC r8kw-7aab feed live
-with 8-week censoring; EU panel-edge guard live; Eurostat magec/pjan
-life-table build + Lee-Carter integration queued as loop tasks
-(D-01, B-uc2-19). The Lee-Carter chain is no longer human-gated.
+### 5. Zenodo token — free, 2 min
+- zenodo.org → avatar → Applications → Personal access tokens → New →
+  scopes `deposit:write` + `deposit:actions`.
+- Terminal (never paste the token into chat):
+  `gh secret set ZENODO_TOKEN --repo chronon-index/chronon-index`
+- Unblocks the quarterly DOI deposits (workflow live, currently NOOPs;
+  your ORCID 0009-0004-6118-8665 already in the metadata).
 
-## 4. Commercial data licenses — ACLED + EM-DAT
+### 6. Attach the domain — free, 5 min
+- Cloudflare → Workers & Pages → chronon-index → Custom domains → add
+  `saeculum.foundation`; add the CNAME it shows in GoDaddy DNS (or
+  move nameservers to Cloudflare — cleaner).
+- Tell me when it resolves → I update every committed URL, re-verify
+  the API rows on the new domain, plan the repo/org rename.
 
-Both confirmed to require licenses for commercial use; both are shock-mesh
-feeds (rung 5), not needed for the v1 index itself.
+## Decisions only you can rule (say yes/no/otherwise; I execute)
 
-- [ ] ACLED commercial license (B-uc3-11) — contact via acleddata.com.
-- [ ] EM-DAT commercial-use license (B-uc3-12) — CRED / UCLouvain.
+- **D1 Launch chain:** mainnet vs L2. Rec: **Base**; let counsel see it.
+- **D2 Distribution:** how people get SAEC at launch — must be settled
+  BEFORE the attorney finishes (it shapes Howey). Rec: **no public
+  sale** — deploy, small entity-seeded LP, airdrop slice to
+  attestors/recomputers as work compensation, disclose everything.
+- **D3 Founder allocation + lock:** COI statement promises day-one
+  disclosure. Rec: modest single-digit %, 2–4yr on-chain vest.
+- **D4 Testnet attestor keys:** generate 3 keys you control (runbook
+  shows where); real attestors replace them in February.
+- **D5 Counsel timing:** your schedule said January; drafts are done
+  now. Rec: **pull forward** — it's the longest external clock.
+- **D6 EUIPO expansion timing:** revisit when the US registration publishes.
 
-**Effort/cost:** inquiry emails; pricing unknown until you ask. Can wait
-until the shock mesh is actually being built.
+## January
+- Counsel signature lands (if D5 stays January).
+- ACLED: contact form, ask small-commercial/startup tier (attribution
+  layer only — deferring again is fine). EM-DAT: free research tier;
+  commercial = ask CRED.
+- Trademark filing completes via the filer.
 
----
+## February — the credibility milestone
+- Send the drafted recomputer outreach email (repo + your
+  chronon-unblock.zip) to 2–3 targets: MPIDR Rostock, a university
+  demography department, DAV/SOA actuarial student chapters.
+- Their weekly job is one command. When two say yes → tell me → I wire
+  attestor onboarding; the N-of-M oracle set becomes real.
+- While talking to them: note 1–2 possible oversight-committee names
+  (IOSCO Principle 5 — only humans fill it).
 
-## 5. Counsel + formal trademark search (D-13, D-14)
+## Reading list (yours alone; gates whitepaper §§1/4/6)
+- Preston/Keyfitz/Wachter — the math behind e(x).
+- Vaupel 2009 "Life lived and left" — gates §1.
+- Blake et al. "The New Life Market" + LifeMetrics docs — gates §4
+  (the perfect-math-no-demand postmortem).
+- Becker 1965 — gates §6.
+- IOSCO/BMR summaries — so governance conversations are yours.
 
-- [ ] **Trademark:** formal EUIPO + USPTO searches for CHRONON in Nice
-      classes 9/36/42, likelihood-of-confusion analysis vs Cronos (CRO —
-      Crypto.com, market rank 36, the live opposition risk) and the
-      CHR-symbol projects. My preliminary sweep is in
-      `docs/TRADEMARK_PRELIM.md`: exact "chronon" still has zero coins;
-      chronon.xyz and tly.finance looked unregistered; chronon.io is on
-      the Afternic aftermarket. Reserve name if blocked: SAECULUM.
-- [ ] **Counsel memos:** MiCA classification (SAEC has no redemption
-      claim/peg — likely "other crypto-asset"), SEC/Howey analysis,
-      jurisdiction choice (FINMA Zug vs Cayman vs UK).
-- [ ] After counsel exists: D-15 terms-of-use / disclaimer / privacy /
-      conflict-of-interest drafts get their review.
+## The demand conversations (worth more than any code)
+2–3 informal chats: a pension fund (structurally short longevity), a
+life insurer (natural opposite side), a macro-minded crypto fund. One
+question, not a pitch: "If a clean, manipulation-resistant index of
+humanity's remaining life-years existed, would you ever hedge or take
+exposure on it — and what would it need first?"
 
-**Budget anchor (your own plan):** counsel €10–30k at P5/P6.
-**Timing:** before any settlement product or token step — not needed for
-running the research index.
+## Standing rules — NEVER do these
+- **Never create a GitHub release** on the repo (Zenodo toggle stays
+  OFF; a release would deposit license-restricted WHO files under a
+  permanent DOI). Deposits go through the curated workflow only.
+- **Never push directly to main** (branch protection: signed + PR + checks).
+- **Never delete** the deploy key, PRINT_BOT_DEPLOY_KEY, or the
+  signing key (~/.ssh/tly_signing_ed25519). Rotate fine; delete never.
+- **Keep `chronon-restore-A16 (1).zip` archived safely** — the
+  provenance record; never secret, never lost again.
 
----
+## Money, complete
+| Item | Amount | When |
+|---|---|---|
+| Attorney review-and-sign | $3–8k | on booking |
+| USPTO filing + flat-fee attorney | $1.1–2k | after entity |
+| Wyoming entity | $0.5–1k | this week |
+| Solo contract audit | $3–8k | pre-mainnet |
+| **Total to launch** | **≈ $8–18k** | |
+| Ongoing (agent + 5472 preparer + domains) | ≈ $650/yr | annual |
+| Infrastructure | $0 | forever |
 
-## 6. The reading program (D-12)
-
-Two are already done for you (notes in `docs/notes/READING_NOTES.md`):
-Vaupel 2009 and the IOSCO Principles — both read from primary sources,
-summarized, with TLY-specific consequences.
-
-Still yours (books + paywalled papers):
-- [ ] R1: Preston/Heuveline/Guillot; Keyfitz & Caswell; Wachter
-- [ ] R2: Lee-Carter 1992; CBD 2006; Renshaw-Haberman; Plat; Cairns 2009
-      (its backtest protocol gates C-uc6-04); Raftery PNAS; Barbi 2018
-- [ ] R3: Blake et al. "The New Life Market"; Loeys 2007; Wang 2000 —
-      gate the whitepaper's LifeMetrics-postmortem section
-- [ ] R4 remainder: EU BMR text; the Wheatley Review
-- [ ] R6: Ampleforth docs/audits; Basis/Terra postmortems; Worldcoin PoP
-- [ ] R7: Becker 1965 — gates whitepaper §6
-
-Each finished reading: fill its entry in READING_NOTES (format is at the
-top of the file). **Effort:** your plan estimates ~9–12 weeks part-time
-for the full program; the whitepaper-gating subset (R3 + Becker) is ~2 weeks.
-
----
-
-## 7. Hosting + infrastructure accounts
-
-- [ ] **Zenodo** (E-05) — free; then the prepared deposit dry-run
-      (`tly/zenodo.py`) goes live: one DOI per vintage.
-- [ ] **Cloudflare Pages** (E-07) — free tier; domain choice ties into
-      the trademark decision above. Unblocks E-08 (deploy the site + API;
-      the static tree is already built and tested).
-- [ ] **Object storage** (E-09) — R2 or S3, for the >60MB snapshots that
-      are manifest-only in git. Unblocks E-10 (uploader).
-- [ ] **Signing keys** (E-12) — sigstore/cosign + signed commits + branch
-      protection on the org repo. After A-17.
-
-**Effort:** ~an hour total for accounts; costs ≈ free tier / < €200/yr
-per your plan.
-
----
-
-**Update 2026-09-03:** you hold saeculum.foundation and saeculumfoundation.com (GoDaddy) — the domain half of this is done if SAECULUM is the name. Still needed: the Cloudflare (or other) hosting account for the site + R2 storage, the Zenodo account (your ORCID 0009-0004-6118-8665 is recorded and links there), and a naming ruling: is the public name SAECULUM now, or does the CHRONON trademark search (item 5) still decide?
-
-## 8. E-14 — Recruit external recomputers  (the P5 milestone)
-
-At least 2 independent parties who run `docs/REPRODUCE_FIXING.md` (or the
-one-command Docker image — proven byte-identical cross-platform) and
-publish their fixing hashes. N-of-M starts at 3-of-3 matching.
-
-Your plan's natural candidates: a university demography group and an
-actuarial society student chapter. This is the gate that makes the index
-settlement-grade — and per the IOSCO mapping just completed
-(`docs/IOSCO_MAPPING.md`), every remaining IOSCO gap is exactly this
-entity/oversight work, not computation.
-
-**Effort:** outreach emails once the repo is public (item 2 first).
-
----
-
-## NEW (2026-09-03): G5 sign-off — the switch out of research mode
-
-The source-of-record switch (WHO -> WPP) is fully computed and proposed:
-docs/proposals/2026-09-03-G5-source-of-record.md (also on the live site).
-Level change +1.0991B = +0.3033%, decomposed (table +1.1639B, resolution
--0.0648B), archived prints untouched, v0 golden untouched. Your part:
-read it, and either sign off (pre-P1 shortcut) or rule that the 14-day
-public window applies now that the site is live. On sign-off I execute
-the one-commit v0.7.0 bump and the settlement series leaves research
-mode at the next epoch.
-
-## Suggested order
-
-1. **A-16 ratification** (one evening — unblocks the anchor + banners)
-2. **A-17 flip + org** (15 min — makes the computation genuinely public)
-3. **B-uc2-02 HMD + ruling** (10 min + one decision — unblocks the
-   backfill and Lee-Carter chains)
-4. **Accounts batch** (Zenodo/Cloudflare/R2/keys — one hour)
-5. **E-14 outreach** (after the repo is public)
-6. Readings in parallel; counsel/trademark/licenses when you approach P5.
-
-When any box above is checked, restart the loop (`./ralph.sh`) — the
-backlog knows exactly which tasks each gate unblocks.
+## What happens with zero action from you
+Every Monday: pulls → print → hash chain → Bitcoin timestamp → Rekor
+signature → site/API update → full historical re-verification. Monthly
+digest writes itself; quarterly deposit fires once #5 is done. I verify
+the first v0.7.0 print this Monday (S → 363.5117B, Ē → 44.9238).
