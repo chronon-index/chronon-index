@@ -9,3 +9,5 @@ dist/
 .claude/
 data/snapshots/**/*.gz
 !data/snapshots/**/fixtures/*.gz
+contracts/out/
+contracts/cache/
