@@ -2112,3 +2112,22 @@ timestamps, before the loop existed.
   governance, 9 honest risk factors); 1/4/6 stay gated skeletons —
   the reading gates are Bens, and the skeleton's anti-authority rule
   is honored, not bypassed.
+
+## 2026-09-05T01:25+02:00 | Ben-delivered patch + OA draft + todo rewrite
+- Italic-fix patch applied (tly/site.py hunk only; site/ regenerates
+  from source): *italic* now renders — was raw asterisks on the LIVE
+  index page including the provenance line. Test added; my first test
+  expectation was wrong about same-line semantics, fixed to pin the
+  patch's actual behavior (never crosses lines). 363 green.
+- Operating-agreement draft (external Claude via Google Docs) landed in
+  docs/legal/drafts/ — carries TWO corrections to our plan: (1) Wyoming
+  W.S. 17-29-108 bars "Foundation" in LLC names — my earlier name
+  suggestion was wrong; alternatives put to Ben as D-name. (2) The five
+  [CLASSIFICATION-SENSITIVE] clauses decide the German
+  Rechtstypenvergleich — do-not-sign-before-Steuerberater warning
+  surfaced into BEN_TODO Duty 1.
+- BEN_TODO fully rewritten as Claude-in-Chrome runbooks ([AGENT] vs
+  [YOU] steps — account/payment/submission steps marked [YOU] per
+  browser-agent safety rules). Ben ruling recorded: recomputer
+  outreach + demand conversations -> POST-launch+traction; honest
+  consequence stated once (centralized oracle at launch, disclosed).
