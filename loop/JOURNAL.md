@@ -2068,3 +2068,24 @@ timestamps, before the loop existed.
   binds). contracts.yml runs forge in CI.
 - Compressed cost line: counsel $3-8k + USPTO ~$1.5k + entity <$1k +
   solo audit $3-8k = ~$8-18k all-in to launch.
+
+## 2026-09-04T18:20+02:00 | S-12 oracle + S-13 deploy kit + E-12 closed
+- SaeculumOracle: N-of-M attestation IS the settlement — agreement of
+  independent recomputers fires the rebase; divergence stalls it
+  (DEFER on-chain), self-correction allowed pre-settlement, missed
+  epochs stay missed. Token<->oracle circularity solved by nonce-
+  predicted deploy (tested). Forge fuzzer earned its keep AGAIN:
+  caught my test looping attestors past settlement (contract right,
+  test expectation wrong).
+- E-12 CLOSED: keyless sigstore signing of every new archive record in
+  the print workflow (OIDC, sign+verify in the same job, bundles
+  committed, Rekor-logged). Honest note in sigstore/README: pre-09-04
+  epochs are NOT backfilled — keyless signatures cannot be backdated.
+- Testnet kit ready: deploy script + runbook + attest_feed. The chain
+  starts where the paper record stands (last archived S), first
+  on-chain rebase = next attested epoch. Mainnet gated on audit,
+  counsel, real attestors — in writing, in the runbook.
+- ALL launch-side code now exists: index, site, personal page, token,
+  oracle, deploy kit, audit stack, memo pack, deposit+digest
+  automation. Monday 09-07: first v0.7.0 print + bot-under-enforcement
+  + first sigstore bundle, in one run.
