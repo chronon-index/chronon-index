@@ -1,6 +1,6 @@
 # SAECULUM
 
-*(ruled 2026-09-04; formerly CHRONON — January trademark clearance confirms. Repo/org URLs migrate when the saeculum.foundation domain attaches.)*
+*(ruled 2026-09-04; formerly CHRONON. USPTO filing is PREPARED, not yet made — no clearance is claimed. Repo/org URLs migrate when the saeculum.foundation domain attaches.)*
 
 A demographically-ruled monetary asset. **TLY** is the index: humanity's total
 remaining life-years, S(t) = Σ over (age, sex, country) of population ×

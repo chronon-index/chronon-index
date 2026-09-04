@@ -39,7 +39,14 @@ Counterpoint counsel must weigh: any tradable asset invites price-
 appreciation expectation; marketing discipline (below) is load-bearing.
 
 **Factor 4 — from the efforts of others:** the strongest defense
-factor. Post-launch, the number that drives supply is produced by the
+factor — WITH one launch-state caveat counsel must address explicitly,
+not in a footnote: by the 2026-09-05 ruling, the launch oracle is a
+3-key attestor set the founder controls (independent recomputers are
+deferred to post-traction). A founder-controlled settlement oracle is
+squarely the managerial-efforts prong; the memo must state whether
+disclosure + the public-recomputability of every value (anyone can
+verify a rebase against the archive) sufficiently blunts it at launch,
+or whether launch should wait for at least one independent attestor. Post-launch, the number that drives supply is produced by the
 UN Population Division and national statistical agencies, not by the
 promoter; the pipeline is deterministic, open-source, and
 independently recomputed (outsider-sim weekly; external recomputers at
