@@ -2089,3 +2089,13 @@ timestamps, before the loop existed.
   oracle, deploy kit, audit stack, memo pack, deposit+digest
   automation. Monday 09-07: first v0.7.0 print + bot-under-enforcement
   + first sigstore bundle, in one run.
+
+## 2026-09-04T18:35+02:00 | slither pass + oracle succession | DONE
+- Slither (scoped) found 4: two zero-checks FIXED (zero oracle bricks
+  rebases); immutable-oracle hint REJECTED but it exposed the real gap
+  — no succession path, attestor set frozen forever. Built attested
+  handover: only the current oracle can setOracle, and the N-of-M
+  contract requires threshold attestation of the successor; old oracle
+  proven inert post-handover in tests. 11/11 forge green; slither now
+  2 findings, both reviewed-benign (events-after-call to our own
+  immutable token), triaged in docs/audit/SLITHER_REPORT.md.

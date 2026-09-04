@@ -85,6 +85,28 @@ contract SaeculumOracleTest is Test {
         oracle.attest(1, S1, 0);
     }
 
+    function test_attested_handover_rotates_oracle() public {
+        address successor = address(0x5EED);
+        vm.prank(a1);
+        oracle.attestHandover(successor);
+        assertEq(token.oracle(), address(oracle)); // 1 of 2 — not yet
+        vm.prank(a1);
+        oracle.attestHandover(successor); // idempotent, no double count
+        assertEq(oracle.handoverTally(successor), 1);
+        vm.prank(a3);
+        oracle.attestHandover(successor);
+        assertEq(token.oracle(), successor); // rotated
+        // the old oracle is now inert: its rebase path reverts at the token
+        vm.prank(a1);
+        oracle.attest(5, S1, 0);
+        vm.prank(a2);
+        vm.expectRevert(Saeculum.NotOracle.selector);
+        oracle.attest(5, S1, 0);
+        // and nobody else can grab the oracle slot
+        vm.expectRevert(Saeculum.NotOracle.selector);
+        token.setOracle(address(this));
+    }
+
     function testFuzz_threshold_boundary(uint8 nAgree) public {
         uint256 agree = bound(uint256(nAgree), 0, 3);
         address[3] memory att = [a1, a2, a3];

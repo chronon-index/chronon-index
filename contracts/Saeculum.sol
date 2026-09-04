@@ -31,20 +31,27 @@ contract Saeculum {
     mapping(address => mapping(address => uint256)) private _allowedFragments;
 
     // --- oracle state ---
-    address public oracle; // rotates to the N-of-M attestor contract at P6
+    // Mutable BY DESIGN (slither immutable-states finding reviewed and
+    // rejected): succession must be possible — only the CURRENT oracle
+    // can hand over, and the N-of-M oracle contract requires threshold
+    // attestation of the successor address (SaeculumOracle.attestHandover).
+    address public oracle;
     bytes32 public lastRecordHash; // archive chain record_hash of the last rebase
     uint64 public lastEpoch; // unix time of the Monday 12:00 UTC epoch
 
     event Transfer(address indexed from, address indexed to, uint256 value);
     event Approval(address indexed owner, address indexed spender, uint256 value);
     event Rebase(uint64 indexed epoch, uint256 oldSupply, uint256 newSupply, bytes32 recordHash);
+    event OracleHandover(address indexed oldOracle, address indexed newOracle);
 
     error NotOracle();
     error EpochNotMonotonic();
     error ZeroSupply();
+    error ZeroAddress();
 
     constructor(uint256 initialSupply, address oracle_) {
         if (initialSupply == 0) revert ZeroSupply();
+        if (oracle_ == address(0)) revert ZeroAddress(); // a zero oracle bricks rebases forever
         totalSupply = initialSupply;
         oracle = oracle_;
         _gons[msg.sender] = TOTAL_GONS;
@@ -76,6 +83,16 @@ contract Saeculum {
         lastEpoch = epoch;
         lastRecordHash = recordHash;
         emit Rebase(epoch, old, newSupply, recordHash);
+    }
+
+    /// @notice Oracle succession — callable only by the current oracle
+    ///   (which, being the N-of-M contract, itself requires threshold
+    ///   attestation to invoke this).
+    function setOracle(address newOracle) external {
+        if (msg.sender != oracle) revert NotOracle();
+        if (newOracle == address(0)) revert ZeroAddress();
+        emit OracleHandover(oracle, newOracle);
+        oracle = newOracle;
     }
 
     function transfer(address to, uint256 value) external returns (bool) {

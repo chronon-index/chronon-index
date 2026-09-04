@@ -1,1 +1,0 @@
-{"version":1,"failures":[{"contract":"contracts/test/SaeculumOracle.t.sol:SaeculumOracleTest","test":"testFuzz_threshold_boundary"}]}

@@ -32,6 +32,8 @@ contract SaeculumOracle {
 
     event Attested(uint64 indexed epoch, address indexed attestor, bytes32 tupleHash);
     event Settled(uint64 indexed epoch, uint256 supply, bytes32 recordHash, uint256 tally);
+    event HandoverAttested(address indexed attestor, address indexed successor);
+    event HandedOver(address indexed successor, uint256 tally);
 
     error NotAttestor();
     error BadThreshold();
@@ -65,6 +67,26 @@ contract SaeculumOracle {
         if (tallies[epoch][tupleHash] >= threshold) {
             token.rebase(epoch, supply, recordHash);
             emit Settled(epoch, supply, recordHash, tallies[epoch][tupleHash]);
+        }
+    }
+
+    // successor => attestor => attested?
+    mapping(address => mapping(address => bool)) public handoverAttested;
+    mapping(address => uint256) public handoverTally;
+
+    /// @notice Attest a SUCCESSOR oracle contract (attestor-set rotation
+    ///   happens by deploying a new oracle and migrating via threshold
+    ///   agreement here). Reaching threshold calls token.setOracle —
+    ///   after which THIS contract is inert.
+    function attestHandover(address successor) external {
+        if (!isAttestor[msg.sender]) revert NotAttestor();
+        if (handoverAttested[successor][msg.sender]) return; // idempotent
+        handoverAttested[successor][msg.sender] = true;
+        handoverTally[successor] += 1;
+        emit HandoverAttested(msg.sender, successor);
+        if (handoverTally[successor] >= threshold) {
+            token.setOracle(successor);
+            emit HandedOver(successor, handoverTally[successor]);
         }
     }
 
