@@ -139,3 +139,14 @@ def test_b4_09_pages_render_from_live_artifacts(tmp_path):
     archive = (tmp_path / "v2" / "site" / "vintage-archive.html").read_text()
     assert "Vintage 2026-08-16" in archive
     assert "Vintage 2026-08-17" not in archive  # staged repo has only one vintage
+
+
+def test_inline_italics_render(tmp_path):
+    """Italic-fix patch (Ben-delivered 2026-09-05): *italic* renders as
+    <em>; unmatched or markup-straddling asterisks stay literal."""
+    from tly.site import _inline
+
+    assert _inline("*(ruled 2026-09-04)*") == "<em>(ruled 2026-09-04)</em>"
+    assert _inline("**bold** and *em*") == "<strong>bold</strong> and <em>em</em>"
+    assert "<em>" not in _inline("a *unclosed\nnext line* b")  # never crosses lines
+    assert _inline("2 * 3") == "2 * 3"  # arithmetic untouched

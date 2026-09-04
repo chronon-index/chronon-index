@@ -67,14 +67,18 @@ pre code {{ background: none; padding: 0; }}
 
 
 def _inline(text: str) -> str:
-    """Escape, then render the three inline forms the governance docs use:
-    `code`, **bold**, [text](http…). Escape-first means nothing an author
-    writes can inject markup; unmatched syntax renders as-written."""
+    """Escape, then render the four inline forms the governance docs use:
+    `code`, **bold**, *italic*, [text](http…). Escape-first means nothing an
+    author writes can inject markup; unmatched syntax renders as-written."""
     import re
 
     s = html.escape(text)
     s = re.sub(r"`([^`]+)`", r"<code>\1</code>", s)
     s = re.sub(r"\*\*([^*]+)\*\*", r"<strong>\1</strong>", s)
+    # Italics run AFTER bold so ** is already consumed; excluding < and >
+    # keeps a match from straddling markup emitted above, and excluding
+    # newlines keeps an unmatched * from swallowing the rest of a paragraph.
+    s = re.sub(r"\*([^*<>\n]+)\*", r"<em>\1</em>", s)
     s = re.sub(
         r"\[([^\]]+)\]\((https?://[^)\s]+)\)",
         r'<a href="\2">\1</a>',
@@ -106,7 +110,7 @@ def _is_table_start(lines: list[str], i: int) -> bool:
 def _render_markdown(text: str) -> str:
     """Minimal, total, deterministic rendering of the forms the governance
     docs actually use: headings, fences, paragraphs, blockquotes, tables,
-    bullet lists, and the three inline forms (bold / code / links). All
+    bullet lists, and the four inline forms (bold / italic / code / links). All
     content is escaped before any markup is added — the generator cannot
     inject, and anything outside these forms renders as-written."""
     out: list[str] = []
