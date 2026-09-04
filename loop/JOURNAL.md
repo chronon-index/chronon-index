@@ -2099,3 +2099,16 @@ timestamps, before the loop existed.
   proven inert post-handover in tests. 11/11 forge green; slither now
   2 findings, both reviewed-benign (events-after-call to our own
   immutable token), triaged in docs/audit/SLITHER_REPORT.md.
+
+## 2026-09-04T18:50+02:00 | early proof of Monday's firsts + whitepaper draft
+- The dispatched print run PROVED two of Monday's three firsts early:
+  bot commit 9836200 pushed via deploy-key bypass UNDER ACTIVE
+  ENFORCEMENT (A-19 residual closed for real), and the FIRST sigstore
+  bundle exists — sigstore/2026-08-31.json.sigstore.json, Rekor tlog
+  index 2713300883, Verified OK in-job. Monday now only shows the
+  v0.7.0 numbers.
+- Whitepaper working draft: 3/2/5/7 assembled from artifacts (Mirror
+  rule + fuzzed neutrality theorems, the identity, mechanical
+  governance, 9 honest risk factors); 1/4/6 stay gated skeletons —
+  the reading gates are Bens, and the skeleton's anti-authority rule
+  is honored, not bypassed.
