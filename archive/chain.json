@@ -16,5 +16,11 @@
     "file": "2026-08-31.json",
     "prev_hash": "d5c9d308ba722955653619e7206037252ddc7723ff5a33cf49ffd72b15ca339a",
     "record_hash": "05a9ea45b69764090e2c993ae58b272fa6910bcbb796155a448afc3270afd74f"
+  },
+  {
+    "epoch_utc": "2026-09-07T12:00:00+00:00",
+    "file": "2026-09-07.json",
+    "prev_hash": "05a9ea45b69764090e2c993ae58b272fa6910bcbb796155a448afc3270afd74f",
+    "record_hash": "4e7b9e050408ef8d958f28c8ba5660cd968a8f7618f24fd5a4121ec4abe8a316"
   }
 ]
