@@ -1,0 +1,15 @@
+# The stale-print alarm: red on Tuesdays if Monday's epoch never archived.
+name: print-freshness
+on:
+  schedule:
+    - cron: "0 6 * * 2" # Tuesdays 06:00 UTC
+  workflow_dispatch:
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m tly.freshness_check
