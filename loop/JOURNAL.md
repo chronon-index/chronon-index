@@ -2144,3 +2144,19 @@ timestamps, before the loop existed.
   with curl before editing. Its two substantive findings were real and
   are absorbed; its demand-signal caveat is recorded once in the
   journal, not relitigated (Bens ruling stands).
+
+## 2026-09-09T22:20-04:00 | Monday verified + Part V Q1/Q5 closed
+- FIRST v0.7.0 PRINT VERIFIED end to end: epoch 2026-09-07 archived
+  S=363511706093.9... under v0.7.0 (dual-run prediction exact), bot
+  pushed under active enforcement, OTS + sigstore bundle present,
+  scheduled outsider-sim green, LIVE dashboard + latest.json serving
+  the new epoch. All three "firsts" now production facts.
+- Part V open questions now: Q1 CLOSED by proposal (ensemble rule —
+  discretion removed from model choice the way the monetary rule
+  removed it from supply; settlement stays forecast-free forever),
+  Q5 CLOSED by memo (the pre-written answer to "you priced life"),
+  Q3 closed earlier (attack paper), Q2 lives in counsel scope,
+  Q4 deferred with the demand ruling, Q6 gated on Bens Rawls reading,
+  Q7 (WPP 2026 revision) is handled machinery (vintages + versioned
+  level changes). The honest hard part is now fully mapped.
+- Attestor guide written and parked for the post-launch phase.
