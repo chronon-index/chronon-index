@@ -8,7 +8,13 @@
 name: weekly-print
 on:
   schedule:
+    # GitHub fires repo crons HOURS late under load (observed: +1h, +5.6h,
+    # +7h on consecutive Mondays). The job is idempotent (an archived epoch
+    # no-ops), so we schedule THREE Monday slots and take whichever fires
+    # first; the rest are cheap no-ops.
     - cron: "5 12 * * 1" # Mondays 12:05 UTC (compute the 12:00 epoch)
+    - cron: "35 13 * * 1" # catch-up slot
+    - cron: "5 16 * * 1" # last-resort slot
   workflow_dispatch:
 permissions:
   contents: write

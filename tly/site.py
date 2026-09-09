@@ -295,10 +295,26 @@ def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
     titles["vintage-archive"] = "Vintage archive"
     titles["me"] = "Your time"
     nav = " · ".join(f'<a href="{name}.html">{html.escape(titles[name])}</a>' for name in all_names)
+    # the home page leads with the LATEST ARCHIVED PRINT (external
+    # verifier note 2026-09-07: "/" served docs with no index value)
+    import json as _json
+
+    chain = _json.loads((repo_root / "archive" / "chain.json").read_text(encoding="utf-8"))
+    latest = _json.loads((repo_root / "archive" / chain[-1]["file"]).read_text(encoding="utf-8"))
+    from decimal import Decimal as _D
+
+    strip = (
+        f'<p style="border:1px solid #999;padding:.6rem .9rem">'
+        f"<strong>S = {(_D(latest['s_life_years']) / 10**9):.4f} billion life-years</strong>"
+        f" — epoch {latest['epoch_utc'][:10]}, Ē {_D(latest['e_bar_years']):.2f} years. "
+        f'<a href="dashboard.html">The index →</a></p>'
+    )
     written: dict[str, str] = {}
     for name, (title, source_rel) in PAGES.items():
         source = repo_root / source_rel
         body = _render_markdown(source.read_text(encoding="utf-8"))
+        if name == "index":
+            body = strip + body
         page = _SHELL.format(title=html.escape(title), nav=nav, body=body)
         (site / f"{name}.html").write_text(page, encoding="utf-8")
         written[name] = f"site/{name}.html"

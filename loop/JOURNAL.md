@@ -2160,3 +2160,23 @@ timestamps, before the loop existed.
   Q7 (WPP 2026 revision) is handled machinery (vintages + versioned
   level changes). The honest hard part is now fully mapped.
 - Attestor guide written and parked for the post-launch phase.
+
+## 2026-09-09T22:40-04:00 | external verifier caught real fragility | FIXED
+- Bens scheduled verifier (claude.ai task, Mon 14:15 UTC) reported FAIL:
+  latest.json still 08-31 two hours after the nominal 12:05 job. It was
+  RIGHT AT THAT MOMENT — evidence from run timestamps: the schedule
+  event fired 17:42 UTC (5h37m late); prior Mondays +7h and +1h.
+  GitHub cron lateness is chronic; the print landed same evening and
+  todays surfaces are current — but a 12:00 settlement epoch landing at
+  ~18:00 weekly is an operational deficiency, now fixed three ways:
+  (1) print.yml runs THREE Monday slots (12:05/13:35/16:05; idempotent
+  no-ops after first success), (2) outsider-sim gets a 21:00 second
+  slot so it verifies AFTER the last print slot, (3) NEW stale-print
+  alarm: tly/freshness_check.py + Tuesday 06:00 workflow goes RED if
+  Mondays epoch never archived — the in-repo alarm the verifier had to
+  be, plus the same check runs in the suite on every push.
+- Verifier note absorbed: / had no index value — home page now leads
+  with the latest ARCHIVED print (S, epoch, Ē + dashboard link).
+- Its two access gaps are Bens side: recreate the scheduled task from
+  the desktop app for Cloudflare access; its api.github 403 is
+  unauthenticated fetch (my run list above supplies the timestamps).

@@ -13,7 +13,8 @@
 name: outsider-sim
 on:
   schedule:
-    - cron: "0 14 * * 1" # Mondays 14:00 UTC — after the 12:05 print
+    - cron: "0 14 * * 1" # Mondays 14:00 UTC — after the nominal print slot
+    - cron: "0 21 * * 1" # and again after the last catch-up slot (cron lateness)
   workflow_dispatch:
 jobs:
   reproduce:
