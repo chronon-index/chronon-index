@@ -28,5 +28,11 @@
     "file": "2026-09-14.json",
     "prev_hash": "4e7b9e050408ef8d958f28c8ba5660cd968a8f7618f24fd5a4121ec4abe8a316",
     "record_hash": "c356d9f40fa71920dfb87b4ae3a5e7eff77f8b1582d055a1c62545fa93b371c7"
+  },
+  {
+    "epoch_utc": "2026-09-21T12:00:00+00:00",
+    "file": "2026-09-21.json",
+    "prev_hash": "c356d9f40fa71920dfb87b4ae3a5e7eff77f8b1582d055a1c62545fa93b371c7",
+    "record_hash": "11cb0c798d1bcf3352e53e8ec83a227d3a55e6dcdc26539fa82ff9676c011336"
   }
 ]
