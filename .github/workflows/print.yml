@@ -14,7 +14,10 @@ on:
     # first; the rest are cheap no-ops.
     - cron: "5 12 * * 1" # Mondays 12:05 UTC (compute the 12:00 epoch)
     - cron: "35 13 * * 1" # catch-up slot
-    - cron: "5 16 * * 1" # last-resort slot
+    - cron: "5 16 * * 1" # catch-up slot 2
+    - cron: "5 17 * * 1" # last-resort slot (added 2026-10-01: the 28 Sep
+      # Monday saw NO slot fire by 17:00 UTC and needed a manual dispatch;
+      # four idempotent slots make the manual path the exception again)
   workflow_dispatch:
 permissions:
   contents: write
