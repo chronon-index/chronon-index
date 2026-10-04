@@ -2214,3 +2214,25 @@ timestamps, before the loop existed.
 - Module + json + md committed; 2 regeneration tests. Report goes to
   coordinator-60 for the fresh-context refutation pass BEFORE any
   proposal text reaches Ben (his process ruling).
+
+## 2026-10-03T21:20-04:00 | dual run v2 — refutation pass 1 absorbed
+- Pass 1 (fresh-context agent, coordinators side) BROKE v1 properly:
+  (1) the sign finding was baseline-window drift, not 2026 news — my
+  own stated doubt, now DECISIVE: verified myself to the decimal
+  (-8.14 current / +16.04 mean / +23.84 2017-19 / -70.45 2016-19 /
+  -21.11 2015-18; 2024 -20.28, 2025 -5.07); (2) the W27 composition
+  story was FALSE — same-26-set W26 +5,634 vs W27 +15,465; the real
+  mechanism is DEUs slope poisoned by the 2015 heat wave (kk-expected
+  12,510 vs own mean 17,016 vs 2023-25 actuals 17.2-18.1k) plus a real
+  heat spike; (3) coverage must be the per-week REPORTING SET
+  (7.22-8.31%, 4 geos have no 2026 data) — v1 magnitudes 17-32% low;
+  (4) sign rule needs a risk statement each way.
+- v2 rebuilt around those: sensitivity table is the headline (range
+  -87..+28 ppm across defensible policies, prior years negative too),
+  reporting-set coverage per week, corrected W27 narrative, risk-each-
+  way framing, proxies/provisional flags stated, and the test that
+  pinned cum<0 as an invariant REMOVED (it hard-coded the artefact —
+  the refuters sharpest meta-catch). v2 numbers match the refuters
+  recomputation exactly (-9.88 / -15.35).
+- Decision order for the eventual card: baseline policy FIRST (its own
+  governed bump), then the sign rule. To pass 2.

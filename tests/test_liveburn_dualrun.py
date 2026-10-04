@@ -1,4 +1,4 @@
-"""Item 3: the dual run regenerates from committed artifacts."""
+"""Dual run v2: regeneration + the findings that survived refutation."""
 
 from __future__ import annotations
 
@@ -16,17 +16,17 @@ def test_dualrun_matches_committed_json():
         (REPO / "docs/reports/liveburn_dualrun.json").read_text(encoding="utf-8")
     )
     fresh = run()
-    assert fresh["cumulative_ppm_of_s"] == committed["cumulative_ppm_of_s"]
+    assert fresh["baseline_sensitivity_cum_ppm"] == committed["baseline_sensitivity_cum_ppm"]
     assert fresh["panel_edge"] == committed["panel_edge"] == "2026-W27"
-    assert fresh["coverage_share"] == committed["coverage_share"]
-    assert len(fresh["weeks"]) == len(committed["weeks"])
+    assert fresh["negative_weeks"] == committed["negative_weeks"]
 
 
-def test_findings_hold():
+def test_findings_that_survived():
     r = run()
-    # magnitude: every week within +-5 ppm of S
-    assert all(abs(Decimal(w["ppb_of_s"])) < 5000 for w in r["weeks"])
-    # the sign finding: 2026 cumulative is NEGATIVE (below-baseline mortality)
-    assert Decimal(r["cumulative_ppm_of_s"]) < 0
-    # amplification factor stated honestly
-    assert Decimal(r["noise_amplification"]) > 10
+    # magnitude: every week within +-6 ppm of S under reporting-set coverage
+    assert all(abs(Decimal(w["ppb_of_s"])) < 6000 for w in r["weeks"])
+    # baseline dominance: defensible windows DISAGREE on sign — the point
+    signs = {Decimal(v["cum_ppm"]) > 0 for v in r["baseline_sensitivity_cum_ppm"].values()}
+    assert signs == {True, False}
+    # reporting-set coverage is per-week and below the static 9.52%
+    assert all(Decimal(w["reporting_set_coverage"]) < Decimal("9.52") for w in r["weeks"])
