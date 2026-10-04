@@ -2180,3 +2180,21 @@ timestamps, before the loop existed.
 - Its two access gaps are Bens side: recreate the scheduled task from
   the desktop app for Cloudflare access; its api.github 403 is
   unauthenticated fetch (my run list above supplies the timestamps).
+
+## 2026-10-03T20:45-04:00 | chain rehearsal + Q7 watchdog | DONE
+- Ben: run all sessions on (via coordinator-60). Item 1 DONE same hour:
+  the launch stack ran as ONE JOB on real inputs for the first time —
+  local EVM (anvil public dev accounts, zero secrets), deploy script
+  with nonce-predicted circular wiring VERIFIED live, initial supply =
+  archived 09-21 print, then the real 09-28 epoch settled through the
+  2-of-3 oracle: first attestation held (no settle), second emitted
+  Attested+Rebase+Settled, and on-chain lastRecordHash == the public
+  archives record hash byte-for-byte. Evidence: CHAIN_REHEARSAL.md
+  (PR #23). Sepolia pass = 5-min Ben faucet card, offered.
+- Item 2 DONE: WPP-2026 revision watchdog (Q7) — tly/wpp_watch.py
+  scans the LIVE UN downloads index weekly for any revision tag newer
+  than WPP2024; red run = alarm with the G5 playbook printed; network
+  outage is explicitly not an alarm. First live run: quiet (no 2026
+  files yet). 3 tests pin the detector.
+- Item 3 next: live-burn activation dual-run + proposal (sign-off will
+  go to Ben as a card).
