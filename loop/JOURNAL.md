@@ -2236,3 +2236,24 @@ timestamps, before the loop existed.
   recomputation exactly (-9.88 / -15.35).
 - Decision order for the eventual card: baseline policy FIRST (its own
   governed bump), then the sign rule. To pass 2.
+
+## 2026-10-03T22:05-04:00 | dual run v3 — refutation pass 2 absorbed
+- Pass 2 found: (1) prior-year rows were NOT like-for-like (edge_wk=52
+  vs W27) — fixed to W1-W27: 2024 -23.05, 2025 -5.75; (2) demographer
+  policies absent — added mean 2016-19 (Eurostat's own, +22.41),
+  mean/fit 2023-25 (+5.04/-4.03), fit 2022-25 (+23.19), two ONS-style
+  hybrids (-11.34/-0.08); every post-pandemic-anchored rule lands in
+  -4..+23 ppm; (3) ageing-bias direction now computed and stated:
+  +3.53% over 9 stretched years, so mean policies read ~that much HIGH;
+  (4) W26/W27 rewritten: under mean 2023-25 the spike is W26 +15,498 >
+  W27 +8,966 — W26 IS the event; the kk line only makes W27 look like
+  the peak (W26 drawn high, W27 low, DEU 2015-heat slope); (5) minors:
+  17 negative weeks, positives +13.82 (+8.35 excl edge), excl-edge
+  column for every row, age-standardisation impossible on this feed
+  (totals-only), plain words for Ben throughout.
+- Two v3 bugs caught by self-verification against the refuter's
+  numbers before commit: prior-year loop used 52 not edge[1]; ageing
+  trend sign inverted. Both fixed; all numbers match to the decimal.
+- Tests now pin like-for-like prior years, the policy-table findings
+  (sign disagreement, post-2022 band, excl-edge presence, ageing>3),
+  and W26>W27 under the modern baseline. 4 passed. To pass 3.

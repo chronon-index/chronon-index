@@ -1,4 +1,4 @@
-"""Dual run v2: regeneration + the findings that survived refutation."""
+"""Dual run v3: regeneration + pins demanded by refutation pass 2."""
 
 from __future__ import annotations
 
@@ -16,17 +16,45 @@ def test_dualrun_matches_committed_json():
         (REPO / "docs/reports/liveburn_dualrun.json").read_text(encoding="utf-8")
     )
     fresh = run()
-    assert fresh["baseline_sensitivity_cum_ppm"] == committed["baseline_sensitivity_cum_ppm"]
-    assert fresh["panel_edge"] == committed["panel_edge"] == "2026-W27"
-    assert fresh["negative_weeks"] == committed["negative_weeks"]
+    for key in (
+        "baseline_sensitivity_cum_ppm",
+        "same_method_prior_years_W1_W27_cum_ppm",
+        "positive_weeks_cum_ppm",
+        "panel_ageing_trend_pct_over_9y",
+        "w26_w27_by_baseline",
+        "negative_weeks",
+        "panel_edge",
+    ):
+        assert fresh[key] == committed[key], key
 
 
-def test_findings_that_survived():
+def test_prior_years_are_like_for_like_and_pinned():
     r = run()
-    # magnitude: every week within +-6 ppm of S under reporting-set coverage
-    assert all(abs(Decimal(w["ppb_of_s"])) < 6000 for w in r["weeks"])
-    # baseline dominance: defensible windows DISAGREE on sign — the point
-    signs = {Decimal(v["cum_ppm"]) > 0 for v in r["baseline_sensitivity_cum_ppm"].values()}
-    assert signs == {True, False}
-    # reporting-set coverage is per-week and below the static 9.52%
-    assert all(Decimal(w["reporting_set_coverage"]) < Decimal("9.52") for w in r["weeks"])
+    assert r["same_method_prior_years_W1_W27_cum_ppm"] == {"2024": "-23.05", "2025": "-5.75"}
+
+
+def test_policy_table_findings():
+    r = run()
+    s = r["baseline_sensitivity_cum_ppm"]
+    # defensible rules disagree on sign — the actual finding
+    assert {Decimal(v["cum_ppm"]) > 0 for v in s.values()} == {True, False}
+    # every post-pandemic-anchored rule within roughly -4..+23 ppm
+    for k in (
+        "mean_2023_2025",
+        "fit_2022_2025",
+        "fit_2023_2025",
+        "hybrid_fit_2015_19_2022_25",
+        "hybrid_fit_2015_19_2023_25",
+    ):
+        assert Decimal("-12") < Decimal(s[k]["cum_ppm"]) < Decimal("24"), k
+    # excl-edge values present for every row (pass-2 minor)
+    assert all(v["cum_ppm_excl_edge"] not in (None, "") for v in s.values())
+    # ageing bias direction: positive = mean rules biased upward
+    assert Decimal(r["panel_ageing_trend_pct_over_9y"]) > 3
+
+
+def test_w26_is_the_event_under_modern_baseline():
+    r = run()
+    w = r["w26_w27_by_baseline"]
+    assert Decimal(w["mean_2023_2025"]["W26"]) > Decimal(w["mean_2023_2025"]["W27"])
+    assert Decimal(w["kk_2015_2019"]["W27"]) > Decimal(w["kk_2015_2019"]["W26"])

@@ -47,12 +47,22 @@ LT_FIX = REPO_ROOT / "data/snapshots/2026-08-17/fixtures/wpp_lt_complete_fixture
 OWID_BD = REPO_ROOT / "data/snapshots/2026-08-16/owid_births_deaths_world.csv"
 S_LIVE = Decimal("363511706093.96010")  # the archived 2026-09-28 print
 
+# (years, mean_only). Pass 2 added the policies a demographer insists on:
+# Eurostat's own excess baseline (mean 2016-2019), post-pandemic anchors,
+# and ONS-style pooled fits spanning the gap. Age-STANDARDISED expectations
+# are impossible on this feed: demo_r_mwk_ts is totals-only.
 WINDOWS = {
     "fit_2015_2019": ((2015, 2016, 2017, 2018, 2019), False),
     "mean_2015_2019": ((2015, 2016, 2017, 2018, 2019), True),
+    "mean_2016_2019": ((2016, 2017, 2018, 2019), True),
     "fit_2017_2019": ((2017, 2018, 2019), False),
     "fit_2016_2019": ((2016, 2017, 2018, 2019), False),
     "fit_2015_2018": ((2015, 2016, 2017, 2018), False),
+    "mean_2023_2025": ((2023, 2024, 2025), True),
+    "fit_2022_2025": ((2022, 2023, 2024, 2025), False),
+    "fit_2023_2025": ((2023, 2024, 2025), False),
+    "hybrid_fit_2015_19_2022_25": ((2015, 2016, 2017, 2018, 2019, 2022, 2023, 2024, 2025), False),
+    "hybrid_fit_2015_19_2023_25": ((2015, 2016, 2017, 2018, 2019, 2023, 2024, 2025), False),
 }
 
 
@@ -128,7 +138,7 @@ def run(year: int = 2026) -> dict:
         sensitivity[name] = {"cum_ppm": ppm(we, rep), "cum_ppm_excl_edge": ppm(we, rep, True)}
     same_method_prior = {}
     for y in (2024, 2025):
-        we, rep = _weekly_excess(cells, geos, 52, (2015, 2016, 2017, 2018, 2019), False, y)
+        we, rep = _weekly_excess(cells, geos, edge[1], (2015, 2016, 2017, 2018, 2019), False, y)
         same_method_prior[str(y)] = ppm(we, rep)
 
     we, rep = _weekly_excess(cells, geos, edge[1], (2015, 2016, 2017, 2018, 2019), False, year)
@@ -147,17 +157,68 @@ def run(year: int = 2026) -> dict:
             }
         )
     neg = sum(1 for w in weeks if Decimal(w["ppb_of_s"]) < 0)
+    pos_ppm = str(
+        (
+            sum(
+                (Decimal(w["world_burn_ly"]) for w in weeks if Decimal(w["world_burn_ly"]) > 0),
+                Decimal(0),
+            )
+            / S_LIVE
+            * 10**6
+        ).quantize(Decimal("0.01"))
+    )
+
+    # Ageing-bias direction (pass 2): the panel's fitted expected-death
+    # trend over the 9 extrapolated years — a mean baseline ignores it,
+    # so mean policies are biased UPWARD by about this share.
+    fit_we = we
+    mean_we, _ = _weekly_excess(cells, geos, edge[1], (2015, 2016, 2017, 2018, 2019), True, year)
+    obs_minus_fit = sum(fit_we.values(), Decimal(0))
+    obs_minus_mean = sum(mean_we.values(), Decimal(0))
+    # expected_mean - expected_fit = (obs-fit) - (obs-mean); relative to expected_fit-ish scale
+    exp_gap = obs_minus_fit - obs_minus_mean
+    panel_2026_obs = sum(
+        (c.deaths for c in cells if c.year == year and c.time <= edge[1]), Decimal(0)
+    )
+    exp_fit_total = panel_2026_obs - obs_minus_fit
+    # positive = the fitted line sits ABOVE the mean (ageing/growth trend),
+    # so MEAN policies are biased UPWARD by about this share.
+    ageing_trend_pct = str((-exp_gap / exp_fit_total * 100).quantize(Decimal("0.01")))
+
+    # W26/W27 against a modern baseline (pass 2, finding 3): on identical
+    # reporters the spike STARTS IN W26 under mean 2023-2025; W27 only
+    # looks like the peak because the 2015-19 line is inflated for W26
+    # and deflated for W27.
+    modern_we, modern_rep = _weekly_excess(cells, geos, edge[1], (2023, 2024, 2025), True, year)
+    w2627 = {
+        "kk_2015_2019": {
+            "W26": str(fit_we.get(26, Decimal(0)).quantize(Decimal("1"))),
+            "W27": str(fit_we.get(27, Decimal(0)).quantize(Decimal("1"))),
+        },
+        "mean_2023_2025": {
+            "W26": str(modern_we.get(26, Decimal(0)).quantize(Decimal("1"))),
+            "W27": str(modern_we.get(27, Decimal(0)).quantize(Decimal("1"))),
+        },
+    }
     return {
         "generated": "2026-10-03",
-        "version": 2,
-        "corrected_by": "refutation pass 1 (saeculum-liveburn-20261003-2044-pass1)",
+        "version": 3,
+        "corrected_by": "refutation passes 1+2 (saeculum-liveburn-20261003-2044/2059)",
         "panel_edge": f"{edge[0]}-W{edge[1]:02d}",
         "ly_per_excess_death_world_table": str(conv.quantize(Decimal("0.0001"))),
-        "europe_profile_proxy_note": "pass-1 estimate ~10.26 on a Europe table; world table used, proxy stated",
+        "europe_profile_proxy_note": (
+            "world-table profile applied to an older-than-world panel; a "
+            "Europe-table figure is not computable from committed fixtures, "
+            "so the bias direction is stated, not quantified"
+        ),
         "weeks": weeks,
         "negative_weeks": neg,
         "baseline_sensitivity_cum_ppm": sensitivity,
-        "same_method_prior_years_cum_ppm": same_method_prior,
+        "same_method_prior_years_W1_W27_cum_ppm": same_method_prior,
+        "positive_weeks_cum_ppm": pos_ppm,
+        "panel_ageing_trend_pct_over_9y": ageing_trend_pct,
+        "age_standardisation_note": "impossible on this feed: demo_r_mwk_ts is totals-only",
+        "w26_w27_by_baseline": w2627,
         "provisional_flag_note": "all 2026 cells Eurostat 'p'; pass 1 measured net revisions of -44 deaths on 2,560 cells",
     }
 
@@ -168,7 +229,7 @@ if __name__ == "__main__":
     path.write_text(json.dumps(out, indent=1) + "\n", encoding="utf-8")
     cur = out["baseline_sensitivity_cum_ppm"]["fit_2015_2019"]
     print(
-        f"v2 written: current-policy cum {cur['cum_ppm']} ppm "
+        f"v3 written: current-policy cum {cur['cum_ppm']} ppm "
         f"({cur['cum_ppm_excl_edge']} excl edge); sensitivity range across windows: "
         + ", ".join(f"{k}={v['cum_ppm']}" for k, v in out["baseline_sensitivity_cum_ppm"].items())
     )
