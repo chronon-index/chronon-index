@@ -1,4 +1,4 @@
-"""Live-burn dual run v2 (2026-10-03; v1 corrected by refutation pass 1,
+"""Live-burn dual run v3 (2026-10-03; v1 corrected by refutation pass 1,
 ~/coordinator/data/refutations/saeculum-liveburn-20261003-2044-pass1.md).
 
 What pass 1 established, now built in:
@@ -203,7 +203,7 @@ def run(year: int = 2026) -> dict:
     return {
         "generated": "2026-10-03",
         "version": 3,
-        "corrected_by": "refutation passes 1+2 (saeculum-liveburn-20261003-2044/2059)",
+        "corrected_by": "refutation passes 1+2+3 (saeculum-liveburn-20261003-2044/2059/2115)",
         "panel_edge": f"{edge[0]}-W{edge[1]:02d}",
         "ly_per_excess_death_world_table": str(conv.quantize(Decimal("0.0001"))),
         "europe_profile_proxy_note": (

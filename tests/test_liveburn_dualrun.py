@@ -17,6 +17,8 @@ def test_dualrun_matches_committed_json():
     )
     fresh = run()
     for key in (
+        "weeks",
+        "ly_per_excess_death_world_table",
         "baseline_sensitivity_cum_ppm",
         "same_method_prior_years_W1_W27_cum_ppm",
         "positive_weeks_cum_ppm",
