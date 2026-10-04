@@ -1,200 +1,254 @@
 {
  "generated": "2026-10-03",
+ "version": 2,
+ "corrected_by": "refutation pass 1 (saeculum-liveburn-20261003-2044-pass1)",
  "panel_edge": "2026-W27",
- "ly_per_excess_death": "9.2890",
- "coverage_share": "0.0952",
- "noise_amplification": "10.5",
+ "ly_per_excess_death_world_table": "9.2890",
+ "europe_profile_proxy_note": "pass-1 estimate ~10.26 on a Europe table; world table used, proxy stated",
  "weeks": [
   {
    "week": "2026-W01",
    "panel_excess_deaths": "-3682.2",
-   "countries": 32,
-   "world_burn_ly": "-359178",
-   "ppb_of_s": "-988.08"
+   "reporters": 32,
+   "reporting_set_coverage": "8.31",
+   "world_burn_ly": "-411832",
+   "ppb_of_s": "-1132.93"
   },
   {
    "week": "2026-W02",
    "panel_excess_deaths": "5832.7",
-   "countries": 30,
-   "world_burn_ly": "568948",
-   "ppb_of_s": "1565.14"
+   "reporters": 30,
+   "reporting_set_coverage": "7.67",
+   "world_burn_ly": "706245",
+   "ppb_of_s": "1942.84"
   },
   {
    "week": "2026-W03",
    "panel_excess_deaths": "1970.3",
-   "countries": 30,
-   "world_burn_ly": "192192",
-   "ppb_of_s": "528.71"
+   "reporters": 30,
+   "reporting_set_coverage": "7.67",
+   "world_burn_ly": "238571",
+   "ppb_of_s": "656.30"
   },
   {
    "week": "2026-W04",
    "panel_excess_deaths": "-4439.9",
-   "countries": 30,
-   "world_burn_ly": "-433088",
-   "ppb_of_s": "-1191.40"
+   "reporters": 30,
+   "reporting_set_coverage": "7.67",
+   "world_burn_ly": "-537600",
+   "ppb_of_s": "-1478.91"
   },
   {
    "week": "2026-W05",
    "panel_excess_deaths": "-8458.8",
-   "countries": 30,
-   "world_burn_ly": "-825109",
-   "ppb_of_s": "-2269.83"
+   "reporters": 30,
+   "reporting_set_coverage": "7.67",
+   "world_burn_ly": "-1024223",
+   "ppb_of_s": "-2817.58"
   },
   {
    "week": "2026-W06",
    "panel_excess_deaths": "-2756.8",
-   "countries": 30,
-   "world_burn_ly": "-268911",
-   "ppb_of_s": "-739.76"
+   "reporters": 30,
+   "reporting_set_coverage": "7.67",
+   "world_burn_ly": "-333804",
+   "ppb_of_s": "-918.28"
   },
   {
    "week": "2026-W07",
    "panel_excess_deaths": "674.6",
-   "countries": 30,
-   "world_burn_ly": "65804",
-   "ppb_of_s": "181.02"
+   "reporters": 30,
+   "reporting_set_coverage": "7.67",
+   "world_burn_ly": "81683",
+   "ppb_of_s": "224.71"
   },
   {
    "week": "2026-W08",
    "panel_excess_deaths": "-1239.5",
-   "countries": 30,
-   "world_burn_ly": "-120906",
-   "ppb_of_s": "-332.61"
+   "reporters": 30,
+   "reporting_set_coverage": "7.67",
+   "world_burn_ly": "-150083",
+   "ppb_of_s": "-412.87"
   },
   {
    "week": "2026-W09",
    "panel_excess_deaths": "-8070.6",
-   "countries": 29,
-   "world_burn_ly": "-787242",
-   "ppb_of_s": "-2165.66"
+   "reporters": 29,
+   "reporting_set_coverage": "7.50",
+   "world_burn_ly": "-999749",
+   "ppb_of_s": "-2750.25"
   },
   {
    "week": "2026-W10",
    "panel_excess_deaths": "-14945.2",
-   "countries": 29,
-   "world_burn_ly": "-1457822",
-   "ppb_of_s": "-4010.38"
+   "reporters": 29,
+   "reporting_set_coverage": "7.50",
+   "world_burn_ly": "-1851344",
+   "ppb_of_s": "-5092.94"
   },
   {
    "week": "2026-W11",
    "panel_excess_deaths": "-7868.9",
-   "countries": 29,
-   "world_burn_ly": "-767568",
-   "ppb_of_s": "-2111.54"
+   "reporters": 29,
+   "reporting_set_coverage": "7.50",
+   "world_burn_ly": "-974764",
+   "ppb_of_s": "-2681.52"
   },
   {
    "week": "2026-W12",
    "panel_excess_deaths": "-1514.0",
-   "countries": 29,
-   "world_burn_ly": "-147682",
-   "ppb_of_s": "-406.27"
+   "reporters": 29,
+   "reporting_set_coverage": "7.50",
+   "world_burn_ly": "-187547",
+   "ppb_of_s": "-515.93"
   },
   {
    "week": "2026-W13",
    "panel_excess_deaths": "990.9",
-   "countries": 29,
-   "world_burn_ly": "96657",
-   "ppb_of_s": "265.90"
+   "reporters": 29,
+   "reporting_set_coverage": "7.50",
+   "world_burn_ly": "122748",
+   "ppb_of_s": "337.67"
   },
   {
    "week": "2026-W14",
    "panel_excess_deaths": "-1513.0",
-   "countries": 33,
-   "world_burn_ly": "-147585",
-   "ppb_of_s": "-406.00"
+   "reporters": 33,
+   "reporting_set_coverage": "8.17",
+   "world_burn_ly": "-172123",
+   "ppb_of_s": "-473.50"
   },
   {
    "week": "2026-W15",
    "panel_excess_deaths": "2588.1",
-   "countries": 31,
-   "world_burn_ly": "252455",
-   "ppb_of_s": "694.49"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "296116",
+   "ppb_of_s": "814.60"
   },
   {
    "week": "2026-W16",
    "panel_excess_deaths": "3236.6",
-   "countries": 31,
-   "world_burn_ly": "315712",
-   "ppb_of_s": "868.51"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "370313",
+   "ppb_of_s": "1018.71"
   },
   {
    "week": "2026-W17",
    "panel_excess_deaths": "-831.1",
-   "countries": 31,
-   "world_burn_ly": "-81069",
-   "ppb_of_s": "-223.02"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "-95090",
+   "ppb_of_s": "-261.59"
   },
   {
    "week": "2026-W18",
    "panel_excess_deaths": "2652.3",
-   "countries": 31,
-   "world_burn_ly": "258717",
-   "ppb_of_s": "711.72"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "303461",
+   "ppb_of_s": "834.80"
   },
   {
    "week": "2026-W19",
    "panel_excess_deaths": "3404.4",
-   "countries": 31,
-   "world_burn_ly": "332080",
-   "ppb_of_s": "913.53"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "389512",
+   "ppb_of_s": "1071.52"
   },
   {
    "week": "2026-W20",
    "panel_excess_deaths": "-1026.2",
-   "countries": 31,
-   "world_burn_ly": "-100100",
-   "ppb_of_s": "-275.37"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "-117412",
+   "ppb_of_s": "-322.99"
   },
   {
    "week": "2026-W21",
    "panel_excess_deaths": "-1608.7",
-   "countries": 31,
-   "world_burn_ly": "-156920",
-   "ppb_of_s": "-431.68"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "-184058",
+   "ppb_of_s": "-506.33"
   },
   {
    "week": "2026-W22",
    "panel_excess_deaths": "-2815.4",
-   "countries": 31,
-   "world_burn_ly": "-274627",
-   "ppb_of_s": "-755.48"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "-322122",
+   "ppb_of_s": "-886.14"
   },
   {
    "week": "2026-W23",
    "panel_excess_deaths": "-3991.1",
-   "countries": 31,
-   "world_burn_ly": "-389310",
-   "ppb_of_s": "-1070.97"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "-456639",
+   "ppb_of_s": "-1256.19"
   },
   {
    "week": "2026-W24",
    "panel_excess_deaths": "-4924.3",
-   "countries": 31,
-   "world_burn_ly": "-480338",
-   "ppb_of_s": "-1321.38"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "-563410",
+   "ppb_of_s": "-1549.91"
   },
   {
    "week": "2026-W25",
    "panel_excess_deaths": "-2043.4",
-   "countries": 31,
-   "world_burn_ly": "-199322",
-   "ppb_of_s": "-548.32"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "-233794",
+   "ppb_of_s": "-643.15"
   },
   {
    "week": "2026-W26",
    "panel_excess_deaths": "4596.2",
-   "countries": 31,
-   "world_burn_ly": "448334",
-   "ppb_of_s": "1233.34"
+   "reporters": 31,
+   "reporting_set_coverage": "8.12",
+   "world_burn_ly": "525871",
+   "ppb_of_s": "1446.64"
   },
   {
    "week": "2026-W27",
    "panel_excess_deaths": "15465.4",
-   "countries": 26,
-   "world_burn_ly": "1508564",
-   "ppb_of_s": "4149.97"
+   "reporters": 26,
+   "reporting_set_coverage": "7.22",
+   "world_burn_ly": "1990666",
+   "ppb_of_s": "5476.21"
   }
  ],
- "cumulative_ppm_of_s": "-8.135",
- "cumulative_ppm_excl_edge_week": "-12.285"
+ "negative_weeks": 17,
+ "baseline_sensitivity_cum_ppm": {
+  "fit_2015_2019": {
+   "cum_ppm": "-9.88",
+   "cum_ppm_excl_edge": "-15.35"
+  },
+  "mean_2015_2019": {
+   "cum_ppm": "19.18",
+   "cum_ppm_excl_edge": "15.47"
+  },
+  "fit_2017_2019": {
+   "cum_ppm": "28.45",
+   "cum_ppm_excl_edge": "29.04"
+  },
+  "fit_2016_2019": {
+   "cum_ppm": "-87.38",
+   "cum_ppm_excl_edge": "-87.75"
+  },
+  "fit_2015_2018": {
+   "cum_ppm": "-26.63",
+   "cum_ppm_excl_edge": "-35.83"
+  }
+ },
+ "same_method_prior_years_cum_ppm": {
+  "2024": "-1.49",
+  "2025": "-5.65"
+ },
+ "provisional_flag_note": "all 2026 cells Eurostat 'p'; pass 1 measured net revisions of -44 deaths on 2,560 cells"
 }
