@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live-burn baseline sensitivity</title>
+<style>
+body { max-width: 46rem; margin: 2rem auto; padding: 0 1rem;
+       font: 16px/1.6 system-ui, sans-serif; color: #222; }
+pre { background: #f6f6f6; padding: .8rem; overflow-x: auto; }
+nav { font-size: .9rem; margin-bottom: 2rem; }
+h1, h2, h3 { line-height: 1.25; }
+blockquote { margin: 1rem 0; padding: .4rem 1rem; border-left: 4px solid #999;
+              background: #f9f9f4; }
+table { border-collapse: collapse; margin: 1rem 0; display: block;
+         overflow-x: auto; }
+th, td { border: 1px solid #ccc; padding: .3rem .6rem; text-align: left; }
+code { background: #f2f2f2; padding: 0 .25rem; }
+pre code { background: none; padding: 0; }
+</style>
+</head>
+<body>
+<nav><a href="dashboard.html">The index</a> · <a href="index.html">SAECULUM — humanity&#x27;s remaining time, measured</a> · <a href="methodology.html">Methodology v0</a> · <a href="data-licenses.html">Data &amp; licenses</a> · <a href="changelog.html">Methodology changelog</a> · <a href="correction-ledger.html">Correction ledger</a> · <a href="governance.html">Methodology change process</a> · <a href="reproduce.html">Reproduce a fixing</a> · <a href="glossary.html">Glossary</a> · <a href="faq.html">FAQ</a> · <a href="api-reference.html">API reference</a> · <a href="proposal-g5.html">OPEN PROPOSAL: G5 source of record</a> · <a href="liveburn-sensitivity.html">Live-burn sensitivity</a> · <a href="vintage-archive.html">Vintage archive</a> · <a href="me.html">Your time</a></nav>
+<h1>Live-burn baseline sensitivity</h1>
+<blockquote>
+<p><strong>INFORMATIONAL.</strong> The weekly live burn is <strong>not active</strong>: the
+settlement series remains measured-period arithmetic on published
+statistics and nothing on this page feeds it. This table is
+published so the baseline-policy decision is made in the open.</p>
+</blockquote>
+<p>Weekly excess mortality only exists relative to a rule for
+&quot;expected deaths&quot;, and defensible rules disagree on the SIGN of
+the year. Cumulative excess through 2026-W27, converted
+to parts per million of S, per-week reporting-set coverage:</p>
+<table>
+<tr><th>expected-deaths rule</th><th>cum ppm of S</th><th>excl. edge week</th></tr>
+<tr><td>straight line 2015–2019 (current registered policy)</td><td>-9.88</td><td>-15.35</td></tr>
+<tr><td>average 2015–2019</td><td>19.18</td><td>15.47</td></tr>
+<tr><td>average 2016–2019 (Eurostat&#x27;s own excess baseline)</td><td>22.41</td><td>18.28</td></tr>
+<tr><td>straight line 2017–2019</td><td>28.45</td><td>29.04</td></tr>
+<tr><td>straight line 2016–2019</td><td>-87.38</td><td>-87.75</td></tr>
+<tr><td>straight line 2015–2018</td><td>-26.63</td><td>-35.83</td></tr>
+<tr><td>average 2023–2025</td><td>5.04</td><td>1.86</td></tr>
+<tr><td>straight line 2022–2025</td><td>23.19</td><td>20.04</td></tr>
+<tr><td>straight line 2023–2025</td><td>-4.03</td><td>-5.02</td></tr>
+<tr><td>pooled line 2015–19 + 2022–25</td><td>-11.34</td><td>-13.88</td></tr>
+<tr><td>pooled line 2015–19 + 2023–25</td><td>-0.08</td><td>-3.14</td></tr>
+</table>
+<p>The current registered policy applied to prior years over the same
+weeks (2024: -23.05 ppm, 2025: -5.75 ppm) reads below normal every year — the mark of
+a drawing artefact, not of mortality news.</p>
+<p>Notes: expected deaths in this panel trend upward by
+3.53% of expected deaths over the
+nine extrapolated years, so plain averages read high by about that
+much. Age standardisation: impossible on this feed: demo_r_mwk_ts is totals-only.
+Provisional data: all 2026 cells Eurostat &#x27;p&#x27;; pass 1 measured net revisions of -44 deaths on 2,560 cells.</p>
+<p>Generated 2026-10-03 from the committed dual-run analysis
+(version 3; refutation passes 1+2+3 (saeculum-liveburn-20261003-2044/2059/2115)). Reproduce:
+<code>python -m tly.liveburn_dualrun</code> against the committed snapshots.</p>
+</body>
+</html>

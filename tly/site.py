@@ -249,6 +249,76 @@ def _dashboard_markdown(repo_root: Path) -> str:
     return "\n".join(lines)
 
 
+# plain-language labels for the dual run's baseline policies; a policy in
+# the JSON with no label here still renders (under its raw key) so the page
+# can never silently drop a row the module added.
+_LIVEBURN_POLICY_LABELS = {
+    "fit_2015_2019": "straight line 2015–2019 (current registered policy)",
+    "mean_2015_2019": "average 2015–2019",
+    "mean_2016_2019": "average 2016–2019 (Eurostat's own excess baseline)",
+    "fit_2017_2019": "straight line 2017–2019",
+    "fit_2016_2019": "straight line 2016–2019",
+    "fit_2015_2018": "straight line 2015–2018",
+    "mean_2023_2025": "average 2023–2025",
+    "fit_2022_2025": "straight line 2022–2025",
+    "fit_2023_2025": "straight line 2023–2025",
+    "hybrid_fit_2015_19_2022_25": "pooled line 2015–19 + 2022–25",
+    "hybrid_fit_2015_19_2023_25": "pooled line 2015–19 + 2023–25",
+}
+
+
+def _liveburn_markdown(repo_root: Path) -> str:
+    """Synthesize the live-burn sensitivity page from the committed dual-run
+    JSON (docs/reports/liveburn_dualrun.json) — every figure comes from the
+    module output, never from hand-written prose. INFORMATIONAL only: the
+    live burn is NOT active and nothing here feeds settlement."""
+    import json
+
+    d = json.loads(
+        (repo_root / "docs" / "reports" / "liveburn_dualrun.json").read_text(encoding="utf-8")
+    )
+    sens = d["baseline_sensitivity_cum_ppm"]
+    prior = d["same_method_prior_years_W1_W27_cum_ppm"]
+    lines = [
+        "# Live-burn baseline sensitivity",
+        "",
+        "> **INFORMATIONAL.** The weekly live burn is **not active**: the",
+        "> settlement series remains measured-period arithmetic on published",
+        "> statistics and nothing on this page feeds it. This table is",
+        "> published so the baseline-policy decision is made in the open.",
+        "",
+        "Weekly excess mortality only exists relative to a rule for",
+        '"expected deaths", and defensible rules disagree on the SIGN of',
+        f"the year. Cumulative excess through {d['panel_edge']}, converted",
+        "to parts per million of S, per-week reporting-set coverage:",
+        "",
+        "| expected-deaths rule | cum ppm of S | excl. edge week |",
+        "|---|---|---|",
+    ]
+    for key, row in sens.items():
+        label = _LIVEBURN_POLICY_LABELS.get(key, key)
+        lines.append(f"| {label} | {row['cum_ppm']} | {row['cum_ppm_excl_edge']} |")
+    prior_cells = ", ".join(f"{y}: {v} ppm" for y, v in sorted(prior.items()))
+    lines += [
+        "",
+        "The current registered policy applied to prior years over the same",
+        f"weeks ({prior_cells}) reads below normal every year — the mark of",
+        "a drawing artefact, not of mortality news.",
+        "",
+        "Notes: expected deaths in this panel trend upward by",
+        f"{d['panel_ageing_trend_pct_over_9y']}% of expected deaths over the",
+        "nine extrapolated years, so plain averages read high by about that",
+        f"much. Age standardisation: {d['age_standardisation_note']}.",
+        f"Provisional data: {d['provisional_flag_note']}.",
+        "",
+        f"Generated {d['generated']} from the committed dual-run analysis",
+        f"(version {d['version']}; {d['corrected_by']}). Reproduce:",
+        "`python -m tly.liveburn_dualrun` against the committed snapshots.",
+        "",
+    ]
+    return "\n".join(lines)
+
+
 def _vintage_archive_markdown(repo_root: Path) -> str:
     """Synthesize the vintage-archive page from the committed manifests —
     the page IS the manifest record, restated; nothing is invented."""
@@ -289,9 +359,10 @@ def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
     """Render every registered page + the synthesized vintage archive."""
     site = out_dir / "site"
     site.mkdir(parents=True, exist_ok=True)
-    all_names = ["dashboard"] + list(PAGES) + ["vintage-archive", "me"]
+    all_names = ["dashboard"] + list(PAGES) + ["liveburn-sensitivity", "vintage-archive", "me"]
     titles = {name: PAGES[name][0] for name in PAGES}
     titles["dashboard"] = "The index"
+    titles["liveburn-sensitivity"] = "Live-burn sensitivity"
     titles["vintage-archive"] = "Vintage archive"
     titles["me"] = "Your time"
     nav = " · ".join(f'<a href="{name}.html">{html.escape(titles[name])}</a>' for name in all_names)
@@ -318,6 +389,10 @@ def build_site(out_dir: Path, repo_root: Path = REPO_ROOT) -> dict[str, str]:
         page = _SHELL.format(title=html.escape(title), nav=nav, body=body)
         (site / f"{name}.html").write_text(page, encoding="utf-8")
         written[name] = f"site/{name}.html"
+    body = _render_markdown(_liveburn_markdown(repo_root))
+    page = _SHELL.format(title="Live-burn baseline sensitivity", nav=nav, body=body)
+    (site / "liveburn-sensitivity.html").write_text(page, encoding="utf-8")
+    written["liveburn-sensitivity"] = "site/liveburn-sensitivity.html"
     body = _render_markdown(_vintage_archive_markdown(repo_root))
     page = _SHELL.format(title="Vintage archive", nav=nav, body=body)
     (site / "vintage-archive.html").write_text(page, encoding="utf-8")
