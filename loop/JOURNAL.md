@@ -2198,3 +2198,19 @@ timestamps, before the loop existed.
   files yet). 3 tests pin the detector.
 - Item 3 next: live-burn activation dual-run + proposal (sign-off will
   go to Ben as a card).
+
+## 2026-10-03T21:00-04:00 | item 3 — live-burn dual run | DONE, to refutation
+- Computed what weekly prints would do with the burn active, from
+  committed snapshots only. Four findings: (1) magnitude single-digit
+  ppm/week, cumulative 2026 = -8.1 ppm (-12.3 excl edge week); (2) the
+  SIGN question is live — 2026 panel mortality runs BELOW baseline, so
+  symmetric-vs-burn-only is the decision that matters, identity argues
+  symmetric, ruling is Bens; (3) burns post 8-13 weeks in arrears by
+  reporting-lag construction — forward-only maturity postings, never
+  restatement; (4) two fences required: coverage amplification (9.52%
+  panel -> 10.5x noise; widen panel via CDC+ONS) and edge-week
+  composition (W27 swings 4 ppm on a 31->26 country change — maturity
+  must be per-country, not aggregate >=20).
+- Module + json + md committed; 2 regeneration tests. Report goes to
+  coordinator-60 for the fresh-context refutation pass BEFORE any
+  proposal text reaches Ben (his process ruling).
