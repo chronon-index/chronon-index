@@ -1,7 +1,7 @@
 {
  "generated": "2026-10-03",
  "version": 3,
- "corrected_by": "refutation passes 1+2 (saeculum-liveburn-20261003-2044/2059)",
+ "corrected_by": "refutation passes 1+2+3 (saeculum-liveburn-20261003-2044/2059/2115)",
  "panel_edge": "2026-W27",
  "ly_per_excess_death_world_table": "9.2890",
  "europe_profile_proxy_note": "world-table profile applied to an older-than-world panel; a Europe-table figure is not computable from committed fixtures, so the bias direction is stated, not quantified",

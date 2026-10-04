@@ -2257,3 +2257,19 @@ timestamps, before the loop existed.
 - Tests now pin like-for-like prior years, the policy-table findings
   (sign disagreement, post-2022 band, excl-edge presence, ageing>3),
   and W26>W27 under the modern baseline. 4 passed. To pass 3.
+
+## 2026-10-03T21:25-04:00 | dual run — refutation pass 3 absorbed (artefact reproduced)
+- Pass 3 reproduced every number by independent arithmetic. One
+  material survived: the summary/Decision-1 sentence claimed "every
+  post-pandemic rule says 2-22 ppm ABOVE" while my own table has 3 of
+  5 post-2022 rules at or below zero (-4.03, -11.34, -0.08). The
+  honest sentence now stands: under defensible rules 2026 lands
+  anywhere from 11 below to 23 above — the SIGN is not knowable from
+  this panel; the registered line (-9.88) sits inside the band. Test
+  comment matched to its own assertion (+count of non-positive rules).
+- Minors fixed: "identical reporters" on W26/W27 was false (31 vs 26;
+  same-26-set W26 15,469, verified myself, conclusion unchanged);
+  3.53% stated as % of expected deaths (~29 ppm of S = fit-vs-mean
+  gap); 8-13wk lag + panel-widening marked as estimates not module
+  outputs; docstring v2->v3; regeneration test now covers weeks + the
+  conversion table; corrected_by carries all three passes.
