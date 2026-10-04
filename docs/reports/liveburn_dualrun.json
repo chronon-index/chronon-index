@@ -1,0 +1,200 @@
+{
+ "generated": "2026-10-03",
+ "panel_edge": "2026-W27",
+ "ly_per_excess_death": "9.2890",
+ "coverage_share": "0.0952",
+ "noise_amplification": "10.5",
+ "weeks": [
+  {
+   "week": "2026-W01",
+   "panel_excess_deaths": "-3682.2",
+   "countries": 32,
+   "world_burn_ly": "-359178",
+   "ppb_of_s": "-988.08"
+  },
+  {
+   "week": "2026-W02",
+   "panel_excess_deaths": "5832.7",
+   "countries": 30,
+   "world_burn_ly": "568948",
+   "ppb_of_s": "1565.14"
+  },
+  {
+   "week": "2026-W03",
+   "panel_excess_deaths": "1970.3",
+   "countries": 30,
+   "world_burn_ly": "192192",
+   "ppb_of_s": "528.71"
+  },
+  {
+   "week": "2026-W04",
+   "panel_excess_deaths": "-4439.9",
+   "countries": 30,
+   "world_burn_ly": "-433088",
+   "ppb_of_s": "-1191.40"
+  },
+  {
+   "week": "2026-W05",
+   "panel_excess_deaths": "-8458.8",
+   "countries": 30,
+   "world_burn_ly": "-825109",
+   "ppb_of_s": "-2269.83"
+  },
+  {
+   "week": "2026-W06",
+   "panel_excess_deaths": "-2756.8",
+   "countries": 30,
+   "world_burn_ly": "-268911",
+   "ppb_of_s": "-739.76"
+  },
+  {
+   "week": "2026-W07",
+   "panel_excess_deaths": "674.6",
+   "countries": 30,
+   "world_burn_ly": "65804",
+   "ppb_of_s": "181.02"
+  },
+  {
+   "week": "2026-W08",
+   "panel_excess_deaths": "-1239.5",
+   "countries": 30,
+   "world_burn_ly": "-120906",
+   "ppb_of_s": "-332.61"
+  },
+  {
+   "week": "2026-W09",
+   "panel_excess_deaths": "-8070.6",
+   "countries": 29,
+   "world_burn_ly": "-787242",
+   "ppb_of_s": "-2165.66"
+  },
+  {
+   "week": "2026-W10",
+   "panel_excess_deaths": "-14945.2",
+   "countries": 29,
+   "world_burn_ly": "-1457822",
+   "ppb_of_s": "-4010.38"
+  },
+  {
+   "week": "2026-W11",
+   "panel_excess_deaths": "-7868.9",
+   "countries": 29,
+   "world_burn_ly": "-767568",
+   "ppb_of_s": "-2111.54"
+  },
+  {
+   "week": "2026-W12",
+   "panel_excess_deaths": "-1514.0",
+   "countries": 29,
+   "world_burn_ly": "-147682",
+   "ppb_of_s": "-406.27"
+  },
+  {
+   "week": "2026-W13",
+   "panel_excess_deaths": "990.9",
+   "countries": 29,
+   "world_burn_ly": "96657",
+   "ppb_of_s": "265.90"
+  },
+  {
+   "week": "2026-W14",
+   "panel_excess_deaths": "-1513.0",
+   "countries": 33,
+   "world_burn_ly": "-147585",
+   "ppb_of_s": "-406.00"
+  },
+  {
+   "week": "2026-W15",
+   "panel_excess_deaths": "2588.1",
+   "countries": 31,
+   "world_burn_ly": "252455",
+   "ppb_of_s": "694.49"
+  },
+  {
+   "week": "2026-W16",
+   "panel_excess_deaths": "3236.6",
+   "countries": 31,
+   "world_burn_ly": "315712",
+   "ppb_of_s": "868.51"
+  },
+  {
+   "week": "2026-W17",
+   "panel_excess_deaths": "-831.1",
+   "countries": 31,
+   "world_burn_ly": "-81069",
+   "ppb_of_s": "-223.02"
+  },
+  {
+   "week": "2026-W18",
+   "panel_excess_deaths": "2652.3",
+   "countries": 31,
+   "world_burn_ly": "258717",
+   "ppb_of_s": "711.72"
+  },
+  {
+   "week": "2026-W19",
+   "panel_excess_deaths": "3404.4",
+   "countries": 31,
+   "world_burn_ly": "332080",
+   "ppb_of_s": "913.53"
+  },
+  {
+   "week": "2026-W20",
+   "panel_excess_deaths": "-1026.2",
+   "countries": 31,
+   "world_burn_ly": "-100100",
+   "ppb_of_s": "-275.37"
+  },
+  {
+   "week": "2026-W21",
+   "panel_excess_deaths": "-1608.7",
+   "countries": 31,
+   "world_burn_ly": "-156920",
+   "ppb_of_s": "-431.68"
+  },
+  {
+   "week": "2026-W22",
+   "panel_excess_deaths": "-2815.4",
+   "countries": 31,
+   "world_burn_ly": "-274627",
+   "ppb_of_s": "-755.48"
+  },
+  {
+   "week": "2026-W23",
+   "panel_excess_deaths": "-3991.1",
+   "countries": 31,
+   "world_burn_ly": "-389310",
+   "ppb_of_s": "-1070.97"
+  },
+  {
+   "week": "2026-W24",
+   "panel_excess_deaths": "-4924.3",
+   "countries": 31,
+   "world_burn_ly": "-480338",
+   "ppb_of_s": "-1321.38"
+  },
+  {
+   "week": "2026-W25",
+   "panel_excess_deaths": "-2043.4",
+   "countries": 31,
+   "world_burn_ly": "-199322",
+   "ppb_of_s": "-548.32"
+  },
+  {
+   "week": "2026-W26",
+   "panel_excess_deaths": "4596.2",
+   "countries": 31,
+   "world_burn_ly": "448334",
+   "ppb_of_s": "1233.34"
+  },
+  {
+   "week": "2026-W27",
+   "panel_excess_deaths": "15465.4",
+   "countries": 26,
+   "world_burn_ly": "1508564",
+   "ppb_of_s": "4149.97"
+  }
+ ],
+ "cumulative_ppm_of_s": "-8.135",
+ "cumulative_ppm_excl_edge_week": "-12.285"
+}
