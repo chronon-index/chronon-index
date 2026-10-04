@@ -1,10 +1,10 @@
 {
  "generated": "2026-10-03",
- "version": 2,
- "corrected_by": "refutation pass 1 (saeculum-liveburn-20261003-2044-pass1)",
+ "version": 3,
+ "corrected_by": "refutation passes 1+2 (saeculum-liveburn-20261003-2044/2059)",
  "panel_edge": "2026-W27",
  "ly_per_excess_death_world_table": "9.2890",
- "europe_profile_proxy_note": "pass-1 estimate ~10.26 on a Europe table; world table used, proxy stated",
+ "europe_profile_proxy_note": "world-table profile applied to an older-than-world panel; a Europe-table figure is not computable from committed fixtures, so the bias direction is stated, not quantified",
  "weeks": [
   {
    "week": "2026-W01",
@@ -233,6 +233,10 @@
    "cum_ppm": "19.18",
    "cum_ppm_excl_edge": "15.47"
   },
+  "mean_2016_2019": {
+   "cum_ppm": "22.41",
+   "cum_ppm_excl_edge": "18.28"
+  },
   "fit_2017_2019": {
    "cum_ppm": "28.45",
    "cum_ppm_excl_edge": "29.04"
@@ -244,11 +248,44 @@
   "fit_2015_2018": {
    "cum_ppm": "-26.63",
    "cum_ppm_excl_edge": "-35.83"
+  },
+  "mean_2023_2025": {
+   "cum_ppm": "5.04",
+   "cum_ppm_excl_edge": "1.86"
+  },
+  "fit_2022_2025": {
+   "cum_ppm": "23.19",
+   "cum_ppm_excl_edge": "20.04"
+  },
+  "fit_2023_2025": {
+   "cum_ppm": "-4.03",
+   "cum_ppm_excl_edge": "-5.02"
+  },
+  "hybrid_fit_2015_19_2022_25": {
+   "cum_ppm": "-11.34",
+   "cum_ppm_excl_edge": "-13.88"
+  },
+  "hybrid_fit_2015_19_2023_25": {
+   "cum_ppm": "-0.08",
+   "cum_ppm_excl_edge": "-3.14"
   }
  },
- "same_method_prior_years_cum_ppm": {
-  "2024": "-1.49",
-  "2025": "-5.65"
+ "same_method_prior_years_W1_W27_cum_ppm": {
+  "2024": "-23.05",
+  "2025": "-5.75"
+ },
+ "positive_weeks_cum_ppm": "13.82",
+ "panel_ageing_trend_pct_over_9y": "3.53",
+ "age_standardisation_note": "impossible on this feed: demo_r_mwk_ts is totals-only",
+ "w26_w27_by_baseline": {
+  "kk_2015_2019": {
+   "W26": "4596",
+   "W27": "15465"
+  },
+  "mean_2023_2025": {
+   "W26": "15498",
+   "W27": "8966"
+  }
  },
  "provisional_flag_note": "all 2026 cells Eurostat 'p'; pass 1 measured net revisions of -44 deaths on 2,560 cells"
 }
