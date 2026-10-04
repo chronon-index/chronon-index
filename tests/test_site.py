@@ -4,14 +4,19 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from tly.site import PAGES, build_site
+from tly.site import PAGES, REPO_ROOT, build_site
 
 REPO = Path(__file__).resolve().parent.parent
 
 
 def test_build_renders_every_registered_page(tmp_path):
     written = build_site(tmp_path)
-    assert set(written) == set(PAGES) | {"vintage-archive", "dashboard", "me"}
+    assert set(written) == set(PAGES) | {
+        "vintage-archive",
+        "dashboard",
+        "me",
+        "liveburn-sensitivity",
+    }
     for name in written:
         page = (tmp_path / "site" / f"{name}.html").read_text(encoding="utf-8")
         assert page.startswith("<!DOCTYPE html>")
@@ -104,7 +109,7 @@ def test_b4_09_pages_render_from_live_artifacts(tmp_path):
     for _, rel in PAGES.values():
         (stage / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO / rel, stage / rel)
-    for rel in ("ledger/CORRECTIONS.md",):
+    for rel in ("ledger/CORRECTIONS.md", "docs/reports/liveburn_dualrun.json"):
         (stage / rel).parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(REPO / rel, stage / rel)
     # dashboard + personal page inputs: the archive chain and the LT fixture
@@ -150,3 +155,30 @@ def test_inline_italics_render(tmp_path):
     assert _inline("**bold** and *em*") == "<strong>bold</strong> and <em>em</em>"
     assert "<em>" not in _inline("a *unclosed\nnext line* b")  # never crosses lines
     assert _inline("2 * 3") == "2 * 3"  # arithmetic untouched
+
+
+def test_liveburn_sensitivity_page_renders_from_committed_json(tmp_path):
+    """The live-burn page is synthesized from docs/reports/liveburn_dualrun.json:
+    every policy row and both its values must appear, the INFORMATIONAL wall
+    must be explicit, and a policy the module adds without a label still
+    renders under its raw key (no silent row drop)."""
+    import html
+    import json
+
+    from tly.site import _LIVEBURN_POLICY_LABELS
+
+    build_site(tmp_path)
+    page = (tmp_path / "site" / "liveburn-sensitivity.html").read_text(encoding="utf-8")
+    assert "INFORMATIONAL" in page
+    assert "not active" in page
+    d = json.loads(
+        (REPO_ROOT / "docs" / "reports" / "liveburn_dualrun.json").read_text(encoding="utf-8")
+    )
+    for key, row in d["baseline_sensitivity_cum_ppm"].items():
+        label = _LIVEBURN_POLICY_LABELS.get(key, key)
+        assert html.escape(label) in page, key
+        assert row["cum_ppm"] in page, key
+        assert row["cum_ppm_excl_edge"] in page, key
+    for year, val in d["same_method_prior_years_W1_W27_cum_ppm"].items():
+        assert f"{year}: {val} ppm" in page
+    assert d["panel_edge"] in page
